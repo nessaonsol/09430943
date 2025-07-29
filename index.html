@@ -97,7 +97,7 @@
         .main-container {
             margin-top: 60px;
             display: grid;
-            grid-template-columns: 1fr 1fr 400px;
+            grid-template-columns: 1fr 1fr 1fr 400px;
             grid-template-rows: 1fr 1fr;
             gap: 0;
             height: calc(100vh - 60px);
@@ -115,11 +115,16 @@
 
         .claude-window {
             grid-column: 2;
-            grid-row: span 2;
+            grid-row: 1;
+        }
+
+        .claude-window-2 {
+            grid-column: 2;
+            grid-row: 2;
         }
 
         .chat-section {
-            grid-column: 3;
+            grid-column: 4;
             grid-row: span 2;
         }
 
@@ -143,7 +148,13 @@
         }
 
         .claude-window {
+            border-bottom: 0;
             border-right: 0;
+        }
+
+        .claude-window-2 {
+            border-right: 0;
+            border-top: 0;
         }
 
         .agent-window:hover {
@@ -452,6 +463,18 @@
             color: #666;
             font-size: 0.9rem;
         }
+
+        .empty-panel {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-right: 0;
+            border-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -549,6 +572,10 @@
                 <source src="claude-workspace.mp4" type="video/mp4">
                 <div class="no-video-placeholder">Claude Workspace Video</div>
             </video>
+        </div>
+
+        <div class="empty-panel claude-window-2">
+            <div style="color: #444; font-size: 0.8rem;">Additional workspace area</div>
         </div>
 
         <div class="chat-section">
