@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lil shid</title>
-      <link rel="icon" type="image/x-icon" href="lmao.png">
     <style>
         * {
             margin: 0;
@@ -89,41 +88,12 @@
             50% { transform: translateY(-10px); }
         }
 
-        .robot-image-container {
+        .robot-image {
             width: 120px;
             height: 120px;
             margin: 0 auto 20px;
-            border-radius: 50%;
-            border: 4px solid #fd79a8;
-            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.3);
+            display: block;
             animation: wiggle 4s infinite;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
-        }
-
-        .robot-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .image-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #636e72;
-            text-align: center;
-            padding: 10px;
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
-            border-radius: 50%;
         }
 
         @keyframes wiggle {
@@ -330,27 +300,16 @@
             66% { transform: translateY(5px) rotate(240deg); }
         }
 
-        /* Instructions for updating image */
-        .image-instructions {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px dashed #fd79a8;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 14px;
-            color: #636e72;
-            text-align: center;
-        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="https://x.com/home" class="x-button" target="_blank">𝕏</a>
+            <a href="https://x.com/LilShidBro" class="x-button" target="_blank">𝕏</a>
             <div class="robot-image-container">
-                <img src="" alt="lil shid" class="robot-image" id="lmao.png" style="display: none;">
+                <img src="lmao.png" alt="lil shid" class="robot-image" id="robotImage" style="display: none;">
                 <div class="image-placeholder" id="imagePlaceholder">
-                    Your lil shid pic! 🤖
                 </div>
             </div>
             <h1>lil shid</h1>
@@ -361,14 +320,7 @@
             </div>
         </div>
 
-        <!-- Instructions for adding image -->
-        <div class="image-instructions">
-            <strong>🖼️ To add your lil shid image:</strong><br>
-            1. Find the line: <code>&lt;img src="" alt="lil shid" class="robot-image" id="robotImage" style="display: none;"&gt;</code><br>
-            2. Replace the empty <code>src=""</code> with your image URL: <code>src="your-image-url-here.jpg"</code><br>
-            3. Remove <code>style="display: none;"</code> to show the image<br>
-            <em>The image will automatically be cropped to a circle and fit perfectly! 🎈</em>
-        </div>
+
 
         <div class="section">
             <h2>Meet the Adorable lil robot! 🌟</h2>
@@ -509,20 +461,7 @@ Wanna be best friends forever and ever? *hopeful beeping* 💕</span>
         // Create floating emojis periodically
         setInterval(createFloatingEmoji, 3000);
 
-        // Handle image loading
-        const robotImage = document.getElementById('robotImage');
-        const imagePlaceholder = document.getElementById('imagePlaceholder');
 
-        robotImage.onload = function() {
-            imagePlaceholder.style.display = 'none';
-            robotImage.style.display = 'block';
-        };
-
-        robotImage.onerror = function() {
-            imagePlaceholder.style.display = 'flex';
-            robotImage.style.display = 'none';
-        };
     </script>
 </body>
 </html>
-
