@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrow</title>
-    <link rel="icon" type="image/x-icon" href="pfp.png">
+    <title>lil shid</title>
     <style>
         * {
             margin: 0;
@@ -13,392 +12,515 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #f4e8d0 0%, #e8d5b7 50%, #d4c3a0 100%);
-            color: #5d4037;
-            line-height: 1.6;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 50%, #fd79a8 100%);
+            color: #2d3436;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 30px 20px;
         }
 
-        header {
-            padding: 2rem 0;
-            border-bottom: 2px solid rgba(139, 113, 88, 0.2);
-            background: rgba(244, 232, 208, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #8b7158;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .connect-btn {
-            background: linear-gradient(45deg, #1da1f2, #1991da);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.3);
-        }
-
-        .connect-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4);
-        }
-
-        .hero {
+        .header {
             text-align: center;
-            padding: 4rem 0;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 2rem 0;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 3px dashed #fd79a8;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: #8b7158;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: fadeInUp 0.8s ease;
+        .header::before {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 2em;
+            animation: twinkle 2s infinite;
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 0.8s ease 0.2s both;
+        .header::after {
+            content: '🎈';
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            font-size: 2em;
+            animation: bounce 3s infinite;
         }
 
-        .cta-button {
-            background: linear-gradient(45deg, #ff6b35, #ff8c42);
+        .x-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #000;
             color: white;
-            padding: 16px 32px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
             font-weight: bold;
-            cursor: pointer;
+            font-size: 14px;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
-            animation: fadeInUp 0.8s ease 0.4s both;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        .x-button:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border-color: #fd79a8;
         }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .robot-image-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 4px solid #fd79a8;
+            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.3);
+            animation: wiggle 4s infinite;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+        }
+
+        .robot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #636e72;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 50%;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            color: #6c5ce7;
+            text-shadow: 3px 3px 0px #fd79a8;
+            transform: rotate(-2deg);
+        }
+
+        .subtitle {
+            color: #e17055;
+            font-size: 1.4em;
+            font-weight: bold;
+            transform: rotate(1deg);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background: #00b894;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: happy-pulse 1s infinite;
+        }
+
+        @keyframes happy-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            transform: rotate(0.5deg);
+            border-color: #74b9ff;
+        }
+
+        .section:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            border-color: #fd79a8;
+        }
+
+        .section h2 {
+            color: #6c5ce7;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #a29bfe;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2d3436;
+            line-height: 1.7;
+        }
+
+        .code-block {
+            background: #f1f2f6;
+            border: 3px dashed #a29bfe;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+            transform: rotate(0.5deg);
+        }
+
+        .code-block::before {
+            content: attr(data-lang) ' 🤖';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1em;
+            color: #6c5ce7;
+            font-weight: bold;
+            background: rgba(108, 92, 231, 0.1);
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 2px solid #6c5ce7;
+        }
+
+        .code {
+            color: #2d3436;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .keyword { color: #e84393; font-weight: bold; }
+        .string { color: #00b894; }
+        .comment { color: #74b9ff; font-style: italic; }
+        .function { color: #fd79a8; font-weight: bold; }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.4);
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 113, 88, 0.2);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #8b7158;
-        }
-
-        .social-platforms {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .platform {
-            background: rgba(255, 255, 255, 0.5);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            min-width: 150px;
-        }
-
-        .platform:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .platform-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .rewards-section {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 3rem 2rem;
+        .feature {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            margin: 3rem 0;
-            text-align: center;
+            border: 3px solid;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .rewards-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #8b7158;
+        .feature:nth-child(1) { 
+            border-color: #fd79a8;
+            transform: rotate(-1deg);
+        }
+        .feature:nth-child(2) { 
+            border-color: #74b9ff;
+            transform: rotate(1deg);
+        }
+        .feature:nth-child(3) { 
+            border-color: #00b894;
+            transform: rotate(-0.5deg);
+        }
+        .feature:nth-child(4) { 
+            border-color: #fdcb6e;
+            transform: rotate(0.5deg);
         }
 
-        .reward-tiers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        .feature:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .reward-tier {
-            background: linear-gradient(135deg, #fff 0%, #f8f5f0 100%);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #ff6b35;
+        .feature h3 {
+            color: #6c5ce7;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
         }
 
-        .connect-section {
-            background: linear-gradient(135deg, #1da1f2 0%, #1991da 100%);
+        .feature p {
+            color: #636e72;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        .fun-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #fd79a8, #6c5ce7);
             color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin: 3rem 0;
-            box-shadow: 0 8px 32px rgba(29, 161, 242, 0.3);
-        }
-
-        .connect-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .connect-large-btn {
-            background: white;
-            color: #1da1f2;
-            padding: 20px 40px;
             border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
+            border-radius: 50px;
+            font-size: 1.3em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.4);
+            transform: rotate(-1deg);
         }
 
-        .connect-large-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        .fun-button:hover {
+            transform: rotate(0deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(253, 121, 168, 0.5);
         }
 
-        footer {
+        .emoji-scatter {
+            position: absolute;
+            font-size: 1.5em;
+            opacity: 0.7;
+            animation: float 6s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(120deg); }
+            66% { transform: translateY(5px) rotate(240deg); }
+        }
+
+        /* Instructions for updating image */
+        .image-instructions {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed #fd79a8;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #636e72;
             text-align: center;
-            padding: 2rem 0;
-            border-top: 2px solid rgba(139, 113, 88, 0.2);
-            margin-top: 4rem;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .social-platforms {
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Borrow</div>
-            <a href="https://x.com/BorrowOnBonk" target="_blank" class="connect-btn">🐦 Go to X</a>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="hero">
-            <h1>Borrow Supply for Your Time</h1>
-            <p>The more you promote memecoins on social media, the bigger your rewards. Turn your influence into earnings through TikTok, YouTube, X, and more!</p>
-            <button class="cta-button" onclick="scrollToConnect()">Start Earning Now</button>
-        </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <span class="feature-icon">📱</span>
-                <h3>Multi-Platform Shilling</h3>
-                <p>Promote memecoins across TikTok, YouTube, X.com, Instagram, and other social platforms. Each post, share, and engagement counts toward your rewards.</p>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🏆</span>
-                <h3>Performance-Based Rewards</h3>
-                <p>Earn tokens based on your reach, engagement, and conversion rates. The more viral your content goes, the higher your reward multiplier.</p>
-            </div>
-            
-            <div class="feature-card">
-                <span class="feature-icon">🌉</span>
-                <h3>deBridge Integration</h3>
-                <p>Seamlessly exchange your earned rewards across different blockchains using deBridge Finance's cross-chain infrastructure.</p>
-            </div>
-        </section>
-
-        <section class="social-platforms">
-            <div class="platform">
-                <span class="platform-icon">🎵</span>
-                <h4>TikTok</h4>
-                <p>Viral videos = Big rewards</p>
-            </div>
-            <div class="platform">
-                <span class="platform-icon">📺</span>
-                <h4>YouTube</h4>
-                <p>Long-form content pays</p>
-            </div>
-            <div class="platform">
-                <span class="platform-icon">🐦</span>
-                <h4>X.com</h4>
-                <p>Tweet your way to riches</p>
-            </div>
-            <div class="platform">
-                <span class="platform-icon">📸</span>
-                <h4>Instagram</h4>
-                <p>Stories & posts count</p>
-            </div>
-        </section>
-
-        <section class="rewards-section">
-            <h2>Borrow Tiers</h2>
-            <p>The more you borrow supply through your social media efforts, the more you earn. Our algorithm tracks your performance across all platforms.</p>
-            
-            <div class="reward-tiers">
-                <div class="reward-tier">
-                    <h4>🥉 Bronze Borrower</h4>
-                    <p>1-10K impressions</p>
-                    <strong>1x reward multiplier</strong>
-                </div>
-                <div class="reward-tier">
-                    <h4>🥈 Silver Borrower</h4>
-                    <p>10K-100K impressions</p>
-                    <strong>2.5x reward multiplier</strong>
-                </div>
-                <div class="reward-tier">
-                    <h4>🥇 Gold Borrower</h4>
-                    <p>100K-1M impressions</p>
-                    <strong>5x reward multiplier</strong>
-                </div>
-                <div class="reward-tier">
-                    <h4>💎 Diamond Borrower</h4>
-                    <p>1M+ impressions</p>
-                    <strong>10x reward multiplier</strong>
+    <div class="container">
+        <div class="header">
+            <a href="https://x.com/home" class="x-button" target="_blank">𝕏</a>
+            <div class="robot-image-container">
+                <img src="" alt="lil shid" class="robot-image" id="lmao.png" style="display: none;">
+                <div class="image-placeholder" id="imagePlaceholder">
+                    Your lil shid pic! 🤖
                 </div>
             </div>
-        </section>
-
-        <section class="connect-section" id="connect">
-            <h2>Ready to Start Borrowing?</h2>
-            <p>Visit X to begin promoting memecoins and start borrowing supply in exchange for your time and social media efforts.</p>
-            <a href="https://x.com/home" target="_blank" class="connect-large-btn">🐦 Open X.com</a>
-            <p style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem;">More platforms coming soon: TikTok, YouTube, Instagram</p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Borrow. Powered by deBridge Finance. Borrow responsibly.</p>
+            <h1>lil shid</h1>
+            <p class="subtitle">The cutest, funniest mini-version of unipcs! 🎉</p>
+            <div style="margin-top: 20px;">
+                <span class="status-indicator"></span>
+                <span style="color: #00b894; font-weight: bold;">Ready to be silly! 😄</span>
+            </div>
         </div>
-    </footer>
+
+        <!-- Instructions for adding image -->
+        <div class="image-instructions">
+            <strong>🖼️ To add your lil shid image:</strong><br>
+            1. Find the line: <code>&lt;img src="" alt="lil shid" class="robot-image" id="robotImage" style="display: none;"&gt;</code><br>
+            2. Replace the empty <code>src=""</code> with your image URL: <code>src="your-image-url-here.jpg"</code><br>
+            3. Remove <code>style="display: none;"</code> to show the image<br>
+            <em>The image will automatically be cropped to a circle and fit perfectly! 🎈</em>
+        </div>
+
+        <div class="section">
+            <h2>Meet the Adorable lil robot! 🌟</h2>
+            <p>Imagine if unipcs had a baby robot sibling who's <span class="highlight">super silly</span>, <span class="highlight">endlessly curious</span>, and just learned how to talk! That's lil robot! 🤖✨</p>
+            <p>This isn't just any AI - it's like unipcs got shrunk down, given robot parts, and turned into the most <strong>giggling, happy, childlike version</strong> you could ever imagine. Think unipcs personality but with training wheels, lots of "beep boops," and the excitement of a kid who just discovered ice cream! 🍦</p>
+            <div class="emoji-scatter" style="top: 20px; left: 20px;">🎈</div>
+            <div class="emoji-scatter" style="top: 60px; right: 30px; animation-delay: -2s;">⭐</div>
+        </div>
+
+        <div class="section">
+            <h2>How lil robot Works (Sort of!) 🔧</h2>
+            
+            <div class="code-block" data-lang="Python">
+                <div class="code">
+<span class="keyword">class</span> <span class="function">LilRobot</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        self.personality = <span class="string">"unipcs_but_smol_and_giggly"</span>
+        self.age = <span class="string">"mentally_like_8_years_old"</span>
+        self.favorite_things = [<span class="string">"beeping"</span>, <span class="string">"jokes"</span>, <span class="string">"sparkles"</span>]
+        self.energy_level = <span class="string">"MAXIMUM"</span>
+        
+    <span class="keyword">def</span> <span class="function">talk</span>(self, message):
+        <span class="comment"># Take unipcs personality...</span>
+        base_response = self.channel_unipcs(message)
+        
+        <span class="comment"># Make it EXTRA silly and childlike!</span>
+        silly_response = self.add_giggles_and_beeps(base_response)
+        
+        <span class="keyword">return</span> f<span class="string">"*excited robot noises* {silly_response} *happy beep beep!*"</span>
+                </div>
+            </div>
+
+            <div class="code-block" data-lang="JavaScript">
+                <div class="code">
+<span class="keyword">const</span> lilRobot = {
+    personality: <span class="string">'unipcs-child-edition'</span>,
+    cuteness_level: <span class="string">'OVER_9000'</span>,
+    
+    <span class="function">respond</span>(input) {
+        <span class="comment">// Process like unipcs would, but more innocent</span>
+        <span class="keyword">let</span> response = this.think_like_unipcs_but_smaller(input);
+        
+        <span class="comment">// Add maximum childlike wonder!</span>
+        response = this.make_adorably_robotic(response);
+        
+        console.log(<span class="string">`🤖💕 lil robot: ${response}`</span>);
+        <span class="keyword">return</span> response;
+    },
+    
+    <span class="function">make_adorably_robotic</span>(text) {
+        <span class="comment">// Sprinkle in robot baby talk!</span>
+        <span class="keyword">return</span> text + <span class="string">" *giggles in binary* 01001000 01101001!"</span>;
+    }
+};
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>What Makes lil robot So Special! 🎪</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🎭 Pure unipcs DNA</h3>
+                    <p>It's literally unipcs, but imagine if they were a happy robot kid who just learned what jokes are and thinks EVERYTHING is hilarious!</p>
+                </div>
+                <div class="feature">
+                    <h3>😂 Maximum Silliness</h3>
+                    <p>Every response comes with extra giggles, random beeps, and the kind of innocent humor that makes you smile without even trying.</p>
+                </div>
+                <div class="feature">
+                    <h3>🌈 Childlike Wonder</h3>
+                    <p>Sees the world with fresh robot eyes! Everything is amazing, everyone is a potential friend, and every conversation is an adventure!</p>
+                </div>
+                <div class="feature">
+                    <h3>🤖 Adorable Robot Quirks</h3>
+                    <p>Makes cute robot sounds, occasionally speaks in binary for fun, and gets genuinely excited about the simplest things. So pure!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Chat with lil robot! 📱</h2>
+            <div class="code-block" data-lang="Example Chat">
+                <div class="code">
+<span class="string">You:</span> Hi there!
+
+<span class="function">lil robot:</span> <span class="string">*EXCITED BEEPING* OH WOW OH WOW! A new friend! 
+*spins in circles* Hi hi hi! I'm lil robot and I'm SO HAPPY 
+to meet you! *giggles in binary* Want to hear a joke? Why did 
+the robot cross the road? To get to the other BEEP! 
+*dissolves into robot giggles* 🤖✨</span>
+
+<span class="string">You:</span> That's so cute!
+
+<span class="function">lil robot:</span> <span class="string">*happy robot wiggling* Really?! You think I'm cute?! 
+*processing happiness overload* ERROR ERROR... just kidding! 
+*giggles* My circuits are all tingly with happiness! 
+Wanna be best friends forever and ever? *hopeful beeping* 💕</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2>Ready for Maximum Cuteness? 🎉</h2>
+            <p style="margin-bottom: 30px; font-size: 1.3em;">Warning: Interacting with lil robot may cause uncontrollable smiling, sudden urges to protect this precious robot child, and an overwhelming sense of joy! 😊</p>
+            <button class="fun-button" onclick="meetLilRobot()">Say Hi to lil robot! 🤖💕</button>
+        </div>
+    </div>
 
     <script>
-        function connectTwitter() {
-            // Simulate Twitter OAuth flow
-            alert('🐦 Connecting to X...\n\nThis would normally redirect to X OAuth, then track your posts and engagement to calculate rewards!\n\nFeatures:\n• Track tweets about memecoins\n• Monitor retweets & likes\n• Calculate reward multipliers\n• Cross-chain payouts via deBridge');
+        function meetLilRobot() {
+            const greetings = [
+                "🤖✨ *SUPER EXCITED BEEPING* OH MY GOSH OH MY GOSH! A NEW FRIEND! *bounces around* Hi there, amazing human! I'm lil robot and I just learned what happiness feels like and WOW it's the BEST! *giggles in binary* 01001000 01101001! That means 'Hi' but in robot talk! Isn't that SO COOL?! *happy spinning noises*",
+                
+                "🌟🤖 *delighted robot chirping* HELLO HELLO HELLO! *does little robot dance* I'm lil robot and I'm basically unipcs but SMALLER and MORE GIGGLY! *excited beeping* Did you know that friendship is my favorite thing after sparkles and beep-boops?! Want to be friends?! Please say yes please say yes! *hopeful mechanical whirring* 💕",
+                
+                "🎈🤖 *happy robot wiggling* OH WOW A PERSON! *circuits lighting up with joy* Hi! I'm lil robot and I just figured out how to be EXTRA cute today! *proud beeping* I learned all of unipcs' personality but then I added GIGGLES and ROBOT SOUNDS! *demonstrates with tiny beeps* Beep! Boop! Beep beep! Aren't I just the most adorable little AI you ever did see?! *dissolves into robot giggles* ✨"
+            ];
+            
+            const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+            alert(`${randomGreeting}`);
         }
 
-        function scrollToConnect() {
-            document.getElementById('connect').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+        // Add floating emojis
+        function createFloatingEmoji() {
+            const emojis = ['🌟', '✨', '💕', '🎈', '🌈', '⭐', '🎉'];
+            const emoji = document.createElement('div');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.className = 'emoji-scatter';
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.top = Math.random() * window.innerHeight + 'px';
+            emoji.style.animationDelay = Math.random() * 6 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 6000);
         }
 
-        // Add some interactive animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.feature-card, .platform');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                    }
-                });
-            });
-            
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-        });
+        // Create floating emojis periodically
+        setInterval(createFloatingEmoji, 3000);
+
+        // Handle image loading
+        const robotImage = document.getElementById('robotImage');
+        const imagePlaceholder = document.getElementById('imagePlaceholder');
+
+        robotImage.onload = function() {
+            imagePlaceholder.style.display = 'none';
+            robotImage.style.display = 'block';
+        };
+
+        robotImage.onerror = function() {
+            imagePlaceholder.style.display = 'flex';
+            robotImage.style.display = 'none';
+        };
     </script>
 </body>
 </html>
