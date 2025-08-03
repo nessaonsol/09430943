@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tokenputer</title>
-    <link rel="icon" type="image/x-icon" href="pfp.png">
     <style>
         * {
             margin: 0;
@@ -51,6 +50,33 @@
             letter-spacing: 2px;
             color: #d97706;
             position: relative;
+        }
+
+        .live-indicator {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff0000;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s infinite;
         }
 
         .x-link {
@@ -135,6 +161,7 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
         }
 
         .claude-header {
@@ -152,6 +179,19 @@
             color: #f9fafb;
         }
 
+        .stream-badge {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
         .video-area {
             flex: 1;
             display: flex;
@@ -167,6 +207,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 0 0 12px 12px;
+            pointer-events: none; /* Prevent interaction */
         }
 
         .video-placeholder {
@@ -181,21 +222,32 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #ff4444;
-            animation: pulse 2s infinite;
-        }
-
-        .status-indicator.active {
             background: #44ff44;
+            animation: pulse 2s infinite;
+            z-index: 10;
         }
 
-        .status-indicator.processing {
-            background: #ffaa44;
+        .viewer-count {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 10;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(0.9); }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .progress-section {
@@ -318,17 +370,29 @@
             animation: blink 1s infinite;
         }
 
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: #d97706; }
-        }
-
         .race-timer {
             text-align: center;
             font-size: 18px;
             color: #d97706;
             font-weight: 600;
             margin-bottom: 15px;
+        }
+
+        /* Hide any video controls that might appear */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-start-playback-button {
+            display: none !important;
         }
     </style>
 </head>
@@ -337,37 +401,57 @@
         <div class="sidebar">
             <div class="stats">
                 <div class="stat">
-                    <div class="stat-label">Race Timer</div>
-                    <div class="stat-value" id="raceTimer">00:00</div>
+                    <div class="stat-label">Live Timer</div>
+                    <div class="stat-value" id="raceTimer">02:05</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-label">Active AIs</div>
-                    <div class="stat-value" id="activeAIs">3</div>
+                    <div class="stat-label">Viewers</div>
+                    <div class="stat-value" id="viewerCount">1,247</div>
                 </div>
             </div>
 
             <div class="log-container" id="logContainer">
-                <div class="log-entry claude">
-                    <div class="timestamp">12:34:01</div>
-                    Claude: Analyzing tokenomics structure... calculating optimal supply distribution.
+                <div class="log-entry grok">
+                    <div class="timestamp">00:42:39</div>
+                    Grok: Designing minimalist token logo...
                 </div>
                 <div class="log-entry chatgpt">
-                    <div class="timestamp">12:34:15</div>
-                    ChatGPT: Researching blockchain deployment strategies. Ethereum or BSC?
-                </div>
-                <div class="log-entry grok">
-                    <div class="timestamp">12:34:23</div>
-                    Grok: Time to make some digital magic happen. Preparing smart contracts.
+                    <div class="timestamp">00:42:42</div>
+                    ChatGPT: Optimizing transaction throughput...
                 </div>
                 <div class="log-entry claude">
-                    <div class="timestamp">12:34:45</div>
-                    Claude: Token name brainstorming complete. Proceeding with technical implementation.
+                    <div class="timestamp">00:42:45</div>
+                    Claude: Testing deployment on testnet...
+                </div>
+                <div class="log-entry chatgpt">
+                    <div class="timestamp">00:42:53</div>
+                    ChatGPT: Preparing whitepaper documentation...
+                </div>
+                <div class="log-entry claude">
+                    <div class="timestamp">00:42:54</div>
+                    Claude: Testing deployment on testnet...
+                </div>
+                <div class="log-entry grok">
+                    <div class="timestamp">00:42:57</div>
+                    Grok: Building community engagement tools...
+                </div>
+                <div class="log-entry chatgpt">
+                    <div class="timestamp">00:42:58</div>
+                    ChatGPT: Optimizing transaction throughput...
+                </div>
+                <div class="log-entry chatgpt">
+                    <div class="timestamp">00:43:03</div>
+                    ChatGPT: Auditing contract security protocols...
                 </div>
             </div>
         </div>
 
         <div class="main-content">
             <div class="header">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
                 Tokenputer: Who Can Deploy First
                 <a href="https://x.com/home" target="_blank" class="x-link">
                     <span>𝕏</span>
@@ -379,12 +463,18 @@
                 <div class="ai-screen">
                     <div class="ai-header claude-header">
                         Claude AI
+                        <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
-                        <div class="status-indicator active"></div>
-                        <video class="video-element" controls muted>
+                        <div class="status-indicator"></div>
+                        <div class="viewer-count">👁 342</div>
+                        <video class="video-element" autoplay muted loop playsinline>
                             <source src="claude-workspace.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
+                            <div class="video-placeholder">
+                                <div style="font-size: 48px; margin-bottom: 10px;">🤖</div>
+                                <div>Claude AI - Live Stream</div>
+                                <div style="font-size: 12px; opacity: 0.7; margin-top: 5px;">Building smart contracts...</div>
+                            </div>
                         </video>
                     </div>
                 </div>
@@ -392,12 +482,18 @@
                 <div class="ai-screen">
                     <div class="ai-header chatgpt-header">
                         ChatGPT
+                        <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
-                        <div class="status-indicator active"></div>
-                        <video class="video-element" controls muted>
+                        <div class="status-indicator"></div>
+                        <div class="viewer-count">👁 456</div>
+                        <video class="video-element" autoplay muted loop playsinline>
                             <source src="gpt4-workspace.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
+                            <div class="video-placeholder">
+                                <div style="font-size: 48px; margin-bottom: 10px;">🧠</div>
+                                <div>ChatGPT - Live Stream</div>
+                                <div style="font-size: 12px; opacity: 0.7; margin-top: 5px;">Optimizing gas fees...</div>
+                            </div>
                         </video>
                     </div>
                 </div>
@@ -405,12 +501,18 @@
                 <div class="ai-screen">
                     <div class="ai-header grok-header">
                         Grok AI
+                        <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
-                        <div class="status-indicator active"></div>
-                        <video class="video-element" controls muted>
+                        <div class="status-indicator"></div>
+                        <div class="viewer-count">👁 289</div>
+                        <video class="video-element" autoplay muted loop playsinline>
                             <source src="gemini-workspace.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
+                            <div class="video-placeholder">
+                                <div style="font-size: 48px; margin-bottom: 10px;">⚡</div>
+                                <div>Grok AI - Live Stream</div>
+                                <div style="font-size: 12px; opacity: 0.7; margin-top: 5px;">Creating viral marketing...</div>
+                            </div>
                         </video>
                     </div>
                 </div>
@@ -427,6 +529,7 @@
     <script>
         let raceStartTime = Date.now();
         let raceInterval = null;
+        let viewerCount = 1247;
 
         const logEntries = [
             { ai: 'claude', message: 'Initializing smart contract framework...' },
@@ -454,6 +557,13 @@
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
+        function updateViewerCount() {
+            // Simulate fluctuating viewer count
+            const change = Math.floor(Math.random() * 20) - 10;
+            viewerCount = Math.max(1000, viewerCount + change);
+            document.getElementById('viewerCount').textContent = viewerCount.toLocaleString();
+        }
+
         function addLogEntry() {
             const container = document.getElementById('logContainer');
             const randomEntry = logEntries[Math.floor(Math.random() * logEntries.length)];
@@ -464,9 +574,12 @@
             const now = new Date();
             const timeStr = now.toTimeString().split(' ')[0];
             
+            const aiName = randomEntry.ai === 'chatgpt' ? 'ChatGPT' : 
+                          randomEntry.ai === 'claude' ? 'Claude' : 'Grok';
+            
             logDiv.innerHTML = `
                 <div class="timestamp">${timeStr}</div>
-                ${randomEntry.ai.charAt(0).toUpperCase() + randomEntry.ai.slice(1)}: ${randomEntry.message}
+                ${aiName}: ${randomEntry.message}
             `;
             
             container.appendChild(logDiv);
@@ -487,6 +600,10 @@
                     if (Math.random() < 0.4) {
                         addLogEntry();
                     }
+                    
+                    if (Math.random() < 0.2) {
+                        updateViewerCount();
+                    }
                 }, 1000);
             }
         }
@@ -501,9 +618,31 @@
         function resetRace() {
             pauseRace();
             raceStartTime = Date.now();
+            viewerCount = 1247;
             
             document.getElementById('raceTimer').textContent = '00:00';
+            document.getElementById('viewerCount').textContent = viewerCount.toLocaleString();
         }
+
+        // Initialize videos to autoplay and loop continuously
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('loadeddata', function() {
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                });
+                
+                // Ensure videos keep looping
+                video.addEventListener('ended', function() {
+                    video.currentTime = 0;
+                    video.play();
+                });
+                
+                // Prevent any context menu or interaction
+                video.addEventListener('contextmenu', e => e.preventDefault());
+                video.addEventListener('click', e => e.preventDefault());
+            });
+        });
 
         // Initialize - start timer immediately
         raceInterval = setInterval(() => {
@@ -512,8 +651,11 @@
             if (Math.random() < 0.3) {
                 addLogEntry();
             }
+            
+            if (Math.random() < 0.1) {
+                updateViewerCount();
+            }
         }, 1000);
     </script>
 </body>
 </html>
-
