@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tokenputer</title>
-    <link rel="icon" type="image/x-icon" href="ChatGPT Image Aug 4, 2025, 12_45_51 AM.png">
+    <link rel="icon" type="image/x-icon" href="ChatGPT Image Aug 4, 2025, 12_44_37 AM.png">
     <style>
         * {
             margin: 0;
@@ -142,6 +142,7 @@
             grid-template-columns: 1fr 1fr 1fr;
             gap: 15px;
             padding: 15px;
+            align-items: center;
         }
 
         .ai-screen {
@@ -153,6 +154,14 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-screen:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
         .ai-header {
@@ -208,7 +217,6 @@
             height: 100%;
             object-fit: cover;
             border-radius: 0 0 12px 12px;
-            pointer-events: none; /* Prevent interaction */
         }
 
         .video-placeholder {
@@ -228,17 +236,119 @@
             z-index: 10;
         }
 
-        .viewer-count {
+        /* Fullscreen Modal Styles */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+        }
+
+        .fullscreen-header {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            text-align: center;
             font-weight: bold;
-            z-index: 10;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1002;
+        }
+
+        .fullscreen-header.claude {
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+            color: #1a1611;
+        }
+
+        .fullscreen-header.chatgpt {
+            background: linear-gradient(90deg, #059669, #10b981);
+            color: #fff;
+        }
+
+        .fullscreen-header.grok {
+            background: linear-gradient(90deg, #374151, #4b5563);
+            color: #f9fafb;
+        }
+
+        .fullscreen-video {
+            width: 90vw;
+            height: 90vh;
+            max-width: 95vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1003;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-fullscreen:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1003;
+        }
+
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
         @keyframes pulse {
@@ -259,39 +369,17 @@
             color: #d97706;
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             text-align: center;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 6px;
-            background: #3f3a2f;
-            margin-bottom: 15px;
-            border-radius: 3px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #d97706, #f59e0b);
-            width: 0%;
-            transition: width 1s ease;
-        }
-
-        @keyframes glow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
         }
 
         .ai-progress {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            font-size: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
         }
 
         .ai-name {
@@ -300,6 +388,35 @@
 
         .ai-percentage {
             color: #d97706;
+            font-weight: 600;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: #3f3a2f;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+
+        .progress-bar.claude {
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+        }
+
+        .progress-bar.chatgpt {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+
+        .progress-bar.grok {
+            background: linear-gradient(90deg, #374151, #6b7280);
         }
 
         .log-container {
@@ -307,17 +424,18 @@
             border: 1px solid #3f3a2f;
             border-radius: 8px;
             padding: 15px;
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: auto;
-            font-size: 12px;
-            line-height: 1.4;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         .log-entry {
-            margin-bottom: 8px;
-            padding: 5px;
+            margin-bottom: 10px;
+            padding: 8px;
             border-left: 3px solid #3f3a2f;
-            padding-left: 10px;
+            padding-left: 12px;
         }
 
         .log-entry.claude {
@@ -334,52 +452,10 @@
 
         .timestamp {
             color: #9ca3af;
-            font-size: 10px;
+            font-size: 11px;
         }
 
-        .controls {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .control-btn {
-            background: rgba(26,22,17,0.9);
-            border: 1px solid #3f3a2f;
-            color: #d97706;
-            width: 35px;
-            height: 35px;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            background: rgba(217,119,6,0.1);
-            border-color: #d97706;
-            transform: scale(1.05);
-        }
-
-        .typing {
-            border-right: 2px solid #d97706;
-            animation: blink 1s infinite;
-        }
-
-        .race-timer {
-            text-align: center;
-            font-size: 18px;
-            color: #d97706;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        /* Hide any video controls that might appear */
+        /* Hide video controls */
         video::-webkit-media-controls {
             display: none !important;
         }
@@ -406,8 +482,8 @@
                     <div class="stat-value" id="raceTimer">02:05</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-label">Viewers</div>
-                    <div class="stat-value" id="viewerCount">1,247</div>
+                    <div class="stat-label">Competition</div>
+                    <div class="stat-value">LIVE</div>
                 </div>
             </div>
 
@@ -445,6 +521,34 @@
                     ChatGPT: Auditing contract security protocols...
                 </div>
             </div>
+
+            <div class="progress-section">
+                <div class="progress-label">Token Deployment Progress</div>
+                
+                <div class="ai-progress">
+                    <div class="ai-name">Claude AI</div>
+                    <div class="ai-percentage" id="claudeProgress">3%</div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-bar claude" id="claudeBar" style="width: 3%;"></div>
+                </div>
+
+                <div class="ai-progress">
+                    <div class="ai-name">ChatGPT</div>
+                    <div class="ai-percentage" id="chatgptProgress">2%</div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-bar chatgpt" id="chatgptBar" style="width: 2%;"></div>
+                </div>
+
+                <div class="ai-progress">
+                    <div class="ai-name">Grok AI</div>
+                    <div class="ai-percentage" id="grokProgress">4%</div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-bar grok" id="grokBar" style="width: 4%;"></div>
+                </div>
+            </div>
         </div>
 
         <div class="main-content">
@@ -454,22 +558,21 @@
                     LIVE
                 </div>
                 Tokenputer: Who Can Deploy First
-                <a href="https://x.com/home" target="_blank" class="x-link">
+                <a href="https://x.com/tokenputer" target="_blank" class="x-link">
                     <span>𝕏</span>
                     Follow on X
                 </a>
             </div>
             
             <div class="screens-container">
-                <div class="ai-screen">
+                <div class="ai-screen" onclick="openFullscreen('claude')">
                     <div class="ai-header claude-header">
                         Claude AI
                         <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
                         <div class="status-indicator"></div>
-                        <div class="viewer-count">👁 342</div>
-                        <video class="video-element" autoplay muted loop playsinline>
+                        <video class="video-element" id="claudeVideo" autoplay muted loop playsinline>
                             <source src="claude-workspace.mp4" type="video/mp4">
                             <div class="video-placeholder">
                                 <div style="font-size: 48px; margin-bottom: 10px;">🤖</div>
@@ -480,15 +583,14 @@
                     </div>
                 </div>
 
-                <div class="ai-screen">
+                <div class="ai-screen" onclick="openFullscreen('chatgpt')">
                     <div class="ai-header chatgpt-header">
                         ChatGPT
                         <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
                         <div class="status-indicator"></div>
-                        <div class="viewer-count">👁 456</div>
-                        <video class="video-element" autoplay muted loop playsinline>
+                        <video class="video-element" id="chatgptVideo" autoplay muted loop playsinline>
                             <source src="gpt4-workspace.mp4" type="video/mp4">
                             <div class="video-placeholder">
                                 <div style="font-size: 48px; margin-bottom: 10px;">🧠</div>
@@ -499,15 +601,14 @@
                     </div>
                 </div>
 
-                <div class="ai-screen">
+                <div class="ai-screen" onclick="openFullscreen('grok')">
                     <div class="ai-header grok-header">
                         Grok AI
                         <div class="stream-badge">LIVE</div>
                     </div>
                     <div class="video-area">
                         <div class="status-indicator"></div>
-                        <div class="viewer-count">👁 289</div>
-                        <video class="video-element" autoplay muted loop playsinline>
+                        <video class="video-element" id="grokVideo" autoplay muted loop playsinline>
                             <source src="gemini-workspace.mp4" type="video/mp4">
                             <div class="video-placeholder">
                                 <div style="font-size: 48px; margin-bottom: 10px;">⚡</div>
@@ -518,19 +619,29 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="controls">
-                <div class="control-btn" onclick="startRace()" title="Start Race">▶</div>
-                <div class="control-btn" onclick="pauseRace()" title="Pause">⏸</div>
-                <div class="control-btn" onclick="resetRace()" title="Reset">⏹</div>
-            </div>
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <div class="fullscreen-header" id="fullscreenHeader">
+            AI Name - Live Stream
+        </div>
+        <button class="close-fullscreen" onclick="closeFullscreen()">×</button>
+        <video class="fullscreen-video" id="fullscreenVideo" autoplay muted loop playsinline controls>
+            Your browser does not support the video tag.
+        </video>
+        <div class="fullscreen-controls">
+            <button class="fullscreen-btn" onclick="toggleMute()">🔊 Toggle Sound</button>
+            <button class="fullscreen-btn" onclick="enterBrowserFullscreen()">⛶ Browser Fullscreen</button>
         </div>
     </div>
 
     <script>
         let raceStartTime = Date.now();
         let raceInterval = null;
-        let viewerCount = 1247;
+        let progress = { claude: 3, chatgpt: 2, grok: 4 };
+        let currentFullscreenAI = null;
 
         const logEntries = [
             { ai: 'claude', message: 'Initializing smart contract framework...' },
@@ -547,6 +658,92 @@
             { ai: 'grok', message: 'Building community engagement tools...' }
         ];
 
+        const aiNames = {
+            claude: 'Claude AI',
+            chatgpt: 'ChatGPT',
+            grok: 'Grok AI'
+        };
+
+        const videoSources = {
+            claude: 'claude-workspace.mp4',
+            chatgpt: 'gpt4-workspace.mp4',
+            grok: 'gemini-workspace.mp4'
+        };
+
+        function openFullscreen(aiType) {
+            const modal = document.getElementById('fullscreenModal');
+            const header = document.getElementById('fullscreenHeader');
+            const video = document.getElementById('fullscreenVideo');
+            
+            currentFullscreenAI = aiType;
+            
+            // Set header style and text
+            header.className = `fullscreen-header ${aiType}`;
+            header.textContent = `${aiNames[aiType]} - Live Stream`;
+            
+            // Set video source
+            video.innerHTML = `<source src="${videoSources[aiType]}" type="video/mp4">`;
+            video.load();
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Play video
+            video.play().catch(e => console.log('Fullscreen video autoplay prevented:', e));
+        }
+
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreenModal');
+            const video = document.getElementById('fullscreenVideo');
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            currentFullscreenAI = null;
+            
+            // Pause fullscreen video
+            video.pause();
+            
+            // Exit browser fullscreen if active
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleMute() {
+            const video = document.getElementById('fullscreenVideo');
+            video.muted = !video.muted;
+            
+            const btn = event.target;
+            btn.innerHTML = video.muted ? '🔇 Toggle Sound' : '🔊 Toggle Sound';
+        }
+
+        function enterBrowserFullscreen() {
+            const modal = document.getElementById('fullscreenModal');
+            
+            if (modal.requestFullscreen) {
+                modal.requestFullscreen();
+            } else if (modal.webkitRequestFullscreen) {
+                modal.webkitRequestFullscreen();
+            } else if (modal.msRequestFullscreen) {
+                modal.msRequestFullscreen();
+            }
+        }
+
+        // Close fullscreen with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && currentFullscreenAI) {
+                closeFullscreen();
+            }
+        });
+
+        // Handle browser fullscreen exit
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement && currentFullscreenAI) {
+                // Optionally do something when exiting browser fullscreen
+            }
+        });
+
         function updateTimer() {
             if (!raceStartTime) return;
             
@@ -558,11 +755,16 @@
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        function updateViewerCount() {
-            // Simulate fluctuating viewer count
-            const change = Math.floor(Math.random() * 20) - 10;
-            viewerCount = Math.max(1000, viewerCount + change);
-            document.getElementById('viewerCount').textContent = viewerCount.toLocaleString();
+        function updateProgress() {
+            Object.keys(progress).forEach(ai => {
+                if (Math.random() < 0.3) {
+                    progress[ai] = Math.min(100, progress[ai] + (Math.random() * 0.5));
+                    
+                    const percentage = Math.floor(progress[ai]);
+                    document.getElementById(`${ai}Progress`).textContent = `${percentage}%`;
+                    document.getElementById(`${ai}Bar`).style.width = `${percentage}%`;
+                }
+            });
         }
 
         function addLogEntry() {
@@ -585,79 +787,47 @@
             
             container.appendChild(logDiv);
             
-            // Keep only last 8 entries
-            while (container.children.length > 8) {
+            while (container.children.length > 10) {
                 container.removeChild(container.firstChild);
             }
             
             container.scrollTop = container.scrollHeight;
         }
 
-        function startRace() {
-            if (!raceInterval) {
-                raceInterval = setInterval(() => {
-                    updateTimer();
-                    
-                    if (Math.random() < 0.4) {
-                        addLogEntry();
-                    }
-                    
-                    if (Math.random() < 0.2) {
-                        updateViewerCount();
-                    }
-                }, 1000);
-            }
-        }
-
-        function pauseRace() {
-            if (raceInterval) {
-                clearInterval(raceInterval);
-                raceInterval = null;
-            }
-        }
-
-        function resetRace() {
-            pauseRace();
-            raceStartTime = Date.now();
-            viewerCount = 1247;
-            
-            document.getElementById('raceTimer').textContent = '00:00';
-            document.getElementById('viewerCount').textContent = viewerCount.toLocaleString();
-        }
-
-        // Initialize videos to autoplay and loop continuously
+        // Initialize videos
         document.addEventListener('DOMContentLoaded', function() {
-            const videos = document.querySelectorAll('video');
+            const videos = document.querySelectorAll('.video-element');
             videos.forEach(video => {
                 video.addEventListener('loadeddata', function() {
                     video.play().catch(e => console.log('Autoplay prevented:', e));
                 });
                 
-                // Ensure videos keep looping
                 video.addEventListener('ended', function() {
                     video.currentTime = 0;
                     video.play();
                 });
-                
-                // Prevent any context menu or interaction
-                video.addEventListener('contextmenu', e => e.preventDefault());
-                video.addEventListener('click', e => e.preventDefault());
+            });
+
+            // Handle fullscreen video
+            const fullscreenVideo = document.getElementById('fullscreenVideo');
+            fullscreenVideo.addEventListener('ended', function() {
+                fullscreenVideo.currentTime = 0;
+                fullscreenVideo.play();
             });
         });
 
-        // Initialize - start timer immediately
+        // Start the race timer and updates
         raceInterval = setInterval(() => {
             updateTimer();
             
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.4) {
                 addLogEntry();
             }
             
-            if (Math.random() < 0.1) {
-                updateViewerCount();
+            if (Math.random() < 0.2) {
+                updateProgress();
             }
-        }, 1000);
+        }, 2000);
     </script>
 </body>
 </html>
-
