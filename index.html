@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Everyone</title>
-    <link rel="icon" type="image/x-icon" href="tree.png">
+    <title>The Bird Experiment</title>
     <style>
         * {
             margin: 0;
@@ -13,582 +12,151 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
-            color: #2d3748;
-            overflow: hidden;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: #333;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 40px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            padding: 40px 20px;
         }
 
-        .main-content {
-            background: #f8fffe;
-            padding: 80px 60px;
-            border-radius: 24px;
-            border: 2px solid #e6fffa;
-            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.08);
-            max-width: 600px;
-            width: 100%;
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid black;
+            padding-bottom: 20px;
             position: relative;
         }
 
         .x-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: #000000;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 0;
+            right: 0;
+            background: black;
+            color: white;
+            padding: 8px 12px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
         }
 
         .x-button:hover {
-            background: #1a1a1a;
-            transform: translateY(-1px);
+            background: #333;
         }
 
-        .x-button svg {
-            width: 18px;
-            height: 18px;
-            fill: white;
-        }
-
-        .logo {
-            font-size: 48px;
-            font-weight: 600;
-            color: #0d9488;
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
-
-        .description {
-            font-size: 20px;
-            color: #4a5568;
-            margin-bottom: 48px;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
-        .check-fees-button {
-            display: inline-block;
-            padding: 18px 36px;
-            background: #0d9488;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
-        }
-
-        .check-fees-button:hover {
-            background: #0f766e;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
-        }
-
-        .fee-checker {
-            display: none;
-        }
-
-        .fee-checker.active {
-            display: block;
-        }
-
-        .connect-button {
-            display: inline-block;
-            padding: 18px 36px;
-            background: #0d9488;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
-            margin-bottom: 20px;
-        }
-
-        .connect-button:hover {
-            background: #0f766e;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
-        }
-
-        .back-button {
-            display: inline-block;
-            padding: 14px 28px;
-            background: transparent;
-            color: #0d9488;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border: 2px solid #e6fffa;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .back-button:hover {
-            background: #e6fffa;
-        }
-
-        .wallet-info {
-            display: none;
-            margin-top: 32px;
-        }
-
-        .wallet-info.show {
-            display: block;
-        }
-
-        .wallet-address {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 24px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            background: #f7fafc;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .fees-section {
-            background: #f0fdfa;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #a7f3d0;
-            margin-bottom: 24px;
-        }
-
-        .fee-amount {
-            font-size: 36px;
-            font-weight: 600;
-            color: #0d9488;
-            margin-bottom: 8px;
-        }
-
-        .fee-label {
-            font-size: 16px;
-            color: #4a5568;
-            margin-bottom: 16px;
-        }
-
-        .collect-button {
-            display: inline-block;
-            padding: 14px 28px;
-            background: #d1d5db;
-            color: #9ca3af;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .requirement-text {
-            font-size: 14px;
-            color: #ef4444;
-            margin-top: 16px;
-            font-weight: 500;
-        }
-
-        .timer-section {
-            background: #fef3c7;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #f59e0b;
-            margin-bottom: 20px;
-        }
-
-        .timer-title {
-            font-size: 16px;
-            color: #92400e;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .timer-display {
-            font-size: 32px;
-            font-weight: 600;
-            color: #f59e0b;
-            font-family: 'Monaco', 'Menlo', monospace;
-            margin-bottom: 8px;
-        }
-
-        .timer-subtitle {
-            font-size: 14px;
-            color: #92400e;
-            font-style: italic;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin: 40px 0;
-        }
-
-        .info-card {
-            background: white;
-            padding: 20px 16px;
-            border-radius: 12px;
-            border: 1px solid #e6fffa;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
-        }
-
-        .info-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .info-title {
-            font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 4px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-value {
-            font-size: 16px;
-            color: #0d9488;
-            font-weight: 600;
-        }
-
-        .additional-info {
-            margin-top: 32px;
-            background: #f0fdfa;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #a7f3d0;
-        }
-
-        .info-section {
-            margin-bottom: 20px;
-        }
-
-        .info-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-section-title {
-            font-size: 14px;
-            color: #0d9488;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .info-section-text {
-            font-size: 13px;
-            color: #4a5568;
-            line-height: 1.5;
+        h1 {
+            font-size: 2.5rem;
+            color: black;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #6b7280;
-            margin-bottom: 32px;
-            font-weight: 400;
+            font-size: 1rem;
+            color: #666;
         }
 
-        .disconnect-button {
+        .stream-section {
+            margin-bottom: 40px;
+        }
+
+        .stream-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: 15px;
+            border: 2px solid black;
+        }
+
+        .stream-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .live-indicator {
             display: inline-block;
-            padding: 10px 20px;
-            background: transparent;
-            color: #6b7280;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 400;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            margin-top: 16px;
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .disconnect-button:hover {
-            background: #f7fafc;
+        .info-section {
+            border-top: 2px solid black;
+            padding-top: 30px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: black;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: black;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px;
+                padding: 20px 15px;
             }
             
-            .main-content {
-                padding: 60px 40px;
-            }
-            
-            .logo {
-                font-size: 36px;
-            }
-            
-            .description {
-                font-size: 18px;
+            h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="main-content">
-            <!-- X.com Button -->
-            <a href="https://x.com/EveryoneFee" target="_blank" class="x-button" title="Follow us on X">
-                <svg viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-            </a>
+        <header>
+            <a href="https://x.com/home" target="_blank" class="x-button">𝕏</a>
+            <h1>The Bird Experiment</h1>
+            <p class="subtitle">Real-time bird tracking via blockchain</p>
+        </header>
+
+        <div class="stream-section">
+            <div class="live-indicator">LIVE</div>
+            <div class="stream-container">
+                <iframe src="https://player.twitch.tv/?channel=lockedwithgrok&parent=claude.ai&autoplay=false&muted=false" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>The Project</h2>
             
-            <!-- Main Page -->
-            <div id="mainPage">
-                <div class="logo">Everyone</div>
-                <div class="subtitle">Trade memecoins and earn fees</div>
-                <p class="description">
-                    Collect a percentage of trading fees directly through airdrops by simply trading our memecoin. 
-                    Every trade earns you rewards automatically.
-                </p>
-                
-                <div class="info-grid">
-                    <div class="info-card">
-                        <div class="info-icon">⏰</div>
-                        <div class="info-title">Payment Schedule</div>
-                        <div class="info-value">Every 5 minutes</div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-icon">💰</div>
-                        <div class="info-title">Fee Share</div>
-                        <div class="info-value">2.5% of trades</div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-icon">🚀</div>
-                        <div class="info-title">Min. Holding</div>
-                        <div class="info-value">100 $EVERYONE</div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-icon">📊</div>
-                        <div class="info-title">Total Distributed</div>
-                        <div class="info-value">$2.1M+</div>
-                    </div>
-                </div>
-                
-                <button class="check-fees-button" onclick="showFeeChecker()">Check Your Fees</button>
+            <div class="description">
+                We've attached a tracking device to a bird and are following its journey in real-time.
             </div>
 
-            <!-- Fee Checker Page -->
-            <div id="feeChecker" class="fee-checker">
-                <div class="logo">Fee Checker</div>
-                <p class="description">Connect your Phantom wallet to check your collected fees</p>
-                
-                <button class="connect-button" onclick="connectWallet()">Connect Phantom Wallet</button>
+            <div class="description">
+                As the bird flies, our developer continuously <span class="highlight">updates the token image</span> on DexScreener to reflect the bird's current flight path.
+            </div>
 
-                <!-- Wallet Connected State -->
-                <div id="walletInfo" class="wallet-info">
-                    <div class="wallet-address" id="walletAddress"></div>
-                    
-                    <div class="timer-section">
-                        <div class="timer-title">Next Fee Collection</div>
-                        <div class="timer-display" id="timerDisplay">05:00</div>
-                        <div class="timer-subtitle">Time until fees are distributed</div>
-                    </div>
-                    
-                    <div class="fees-section">
-                        <div class="fee-amount">$0.00</div>
-                        <div class="fee-label">Available Fees</div>
-                        
-                        <button class="collect-button" disabled>Collect Fees</button>
-                        <div class="requirement-text">
-                            You need to buy or trade $EVERYONE to start earning fees
-                        </div>
-                    </div>
-
-                    <div class="additional-info">
-                        <div class="info-section">
-                            <div class="info-section-title">How It Works</div>
-                            <div class="info-section-text">
-                                Hold at least 100 $EVERYONE tokens to receive 2.5% of all trading fees. Fees are automatically distributed every 5 minutes to eligible wallets.
-                            </div>
-                        </div>
-                        
-                        <div class="info-section">
-                            <div class="info-section-title">Payment Schedule</div>
-                            <div class="info-section-text">
-                                Automated airdrops occur every 5 minutes at :00, :05, :10, :15, etc. Your share depends on your token holdings relative to the total supply.
-                            </div>
-                        </div>
-                        
-                        <div class="info-section">
-                            <div class="info-section-title">Eligibility</div>
-                            <div class="info-section-text">
-                                Must hold minimum 100 $EVERYONE tokens in your wallet at the time of distribution. No staking or locking required - just hold and earn.
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="disconnect-button" onclick="disconnectWallet()">Disconnect</button>
-                </div>
-
-                <button class="back-button" onclick="showMainPage()">Back</button>
+            <div class="description">
+                This creates a living digital record of the bird's movements, stored permanently on the blockchain through token metadata updates.
             </div>
         </div>
     </div>
-
-    <script>
-        let isConnected = false;
-        let walletAddress = '';
-        let timerInterval = null;
-        let timeRemaining = 300; // 5 minutes in seconds
-
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                if (timeRemaining > 0) {
-                    timeRemaining--;
-                    updateTimerDisplay();
-                } else {
-                    // Reset timer to 5 minutes
-                    timeRemaining = 300;
-                    updateTimerDisplay();
-                }
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            document.getElementById('timerDisplay').textContent = display;
-        }
-
-        function stopTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-        }
-
-        function showFeeChecker() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('feeChecker').classList.add('active');
-        }
-
-        function showMainPage() {
-            document.getElementById('feeChecker').classList.remove('active');
-            document.getElementById('mainPage').style.display = 'block';
-            // Reset wallet state when going back
-            if (isConnected) {
-                disconnectWallet();
-            }
-            // Stop timer if running
-            stopTimer();
-            timeRemaining = 300; // Reset timer
-        }
-
-        async function connectWallet() {
-            try {
-                // Check if Phantom wallet is installed
-                if (!window.solana || !window.solana.isPhantom) {
-                    alert('Phantom wallet not found. Please install Phantom wallet extension.');
-                    window.open('https://phantom.app/', '_blank');
-                    return;
-                }
-
-                // Connect to Phantom
-                const response = await window.solana.connect();
-                walletAddress = response.publicKey.toString();
-                
-                // Show connected state
-                isConnected = true;
-                showWalletInfo();
-                
-            } catch (error) {
-                console.error('Error connecting wallet:', error);
-                alert('Failed to connect wallet. Please try again.');
-            }
-        }
-
-        function showWalletInfo() {
-            // Hide connect button
-            document.querySelector('.connect-button').style.display = 'none';
-            
-            // Show wallet address (truncated)
-            const truncatedAddress = `${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`;
-            document.getElementById('walletAddress').textContent = `Connected: ${truncatedAddress}`;
-            
-            // Show wallet info section
-            document.getElementById('walletInfo').classList.add('show');
-            
-            // Start the timer
-            startTimer();
-        }
-
-        function disconnectWallet() {
-            try {
-                // Stop the timer
-                stopTimer();
-                
-                // Disconnect from Phantom
-                if (window.solana && window.solana.disconnect) {
-                    window.solana.disconnect();
-                }
-                
-                // Reset state
-                isConnected = false;
-                walletAddress = '';
-                timeRemaining = 300; // Reset timer
-                
-                // Show connect button again
-                document.querySelector('.connect-button').style.display = 'inline-block';
-                document.getElementById('walletInfo').classList.remove('show');
-                
-            } catch (error) {
-                console.error('Error disconnecting wallet:', error);
-            }
-        }
-
-        // Listen for wallet events
-        if (window.solana) {
-            window.solana.on('disconnect', () => {
-                disconnectWallet();
-            });
-        }
-    </script>
 </body>
 </html>
-
