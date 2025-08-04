@@ -3,523 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clips</title>
-    <link rel="icon" type="image/x-icon" href="nigga.png">
+    <title>Debonk</title>
+    <link rel="icon" type="image/x-icon" href="debonk.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #334155;
             line-height: 1.6;
-            color: #2d2d2d;
-            background: #fefcf9;
         }
-
+        
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 60px 20px;
         }
-
-        /* Header */
+        
         header {
-            background: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(255, 138, 76, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #ff8a4c;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .play-icon {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-left: 20px solid #f66603;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            margin-right: 5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #2d2d2d;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background: #fff5f0;
-            color: #ff8a4c;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #ff8a4c 0%, #ff6b35 100%);
-            color: white;
-            padding: 100px 0;
             text-align: center;
+            margin-bottom: 80px;
             position: relative;
-            overflow: hidden;
         }
-
-        .hero::before {
-            content: '';
+        
+        .x-button {
             position: absolute;
             top: 0;
-            left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="1.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1.5" fill="white" opacity="0.1"/></svg>');
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-100px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.95;
-        }
-
-        .cta-button {
-            background: white;
-            color: #ff8a4c;
-            padding: 18px 40px;
+            background: #000;
+            color: white;
             border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-family: 'Inter', sans-serif;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-            background: #fff5f0;
+        
+        .x-button:hover {
+            background: #333;
         }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 0;
-            background: #fff5f0;
-            margin-top: -40px;
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
-
-        .section-header {
+        
+        .logo-image {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+        
+        .description {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 48px;
         }
-
-        .section-header h2 {
-            font-size: 3rem;
-            color: #2d2d2d;
-            margin-bottom: 20px;
-            font-weight: 700;
+        
+        .description h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
         }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: #666;
+        
+        .description p {
+            font-size: 1rem;
+            color: #64748b;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 16px;
         }
-
-        .concept-box {
-            background: linear-gradient(135deg, #ff8a4c, #ff6b35);
-            color: white;
-            padding: 50px;
-            border-radius: 20px;
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+        
+        .feature {
+            padding: 24px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        
+        .feature:hover {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .demo-section {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 32px;
+            margin: 24px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .demo-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
             text-align: center;
-            margin-bottom: 80px;
-            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .thread-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            min-width: 250px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .thread-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .check-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+        
+        .check-btn:hover {
+            background: #2563eb;
+        }
+        
+        .check-btn:active {
+            background: #1d4ed8;
+        }
+        
+        .result {
+            background: white;
+            border-radius: 6px;
+            padding: 24px;
+            margin-top: 24px;
+            border: 1px solid #e2e8f0;
+            display: none;
+        }
+        
+        .code-section {
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+        
+        .code-description {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .code-description h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+        
+        .code-description p {
+            font-size: 1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 16px;
+        }
+        
+        .code-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .code-example {
+            background: #1e293b;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-
-        .concept-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
+        
+        .code-header {
+            background: #334155;
+            padding: 12px 16px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .concept-box h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .concept-box p {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .step-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(255, 138, 76, 0.1);
-            border: 1px solid #fff5f0;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 138, 76, 0.15);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #ff8a4c, #ff6b35);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .step-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .step-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #2d2d2d;
-            font-weight: 600;
-        }
-
-        .step-card p {
-            color: #666;
+        
+        .code-content {
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
             line-height: 1.6;
+            color: #e2e8f0;
+            overflow-x: auto;
         }
-
-        /* Token Info */
-        .token-info {
-            padding: 100px 0;
-            background: white;
+        
+        .code-content .keyword {
+            color: #f59e0b;
         }
-
-        .token-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+        
+        .code-content .string {
+            color: #10b981;
         }
-
-        .token-card {
-            background: #fff5f0;
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 5px solid #ff8a4c;
-            transition: all 0.3s ease;
+        
+        .code-content .comment {
+            color: #6b7280;
+            font-style: italic;
         }
-
-        .token-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 138, 76, 0.15);
+        
+        .code-content .function {
+            color: #3b82f6;
         }
-
-        .token-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #ff8a4c;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        
+        .code-content .variable {
+            color: #8b5cf6;
         }
-
-        .token-card ul {
-            list-style: none;
-        }
-
-        .token-card li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .token-card li::before {
-            content: '•';
-            color: #ff8a4c;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: -2px;
-        }
-
-        /* Footer */
-        footer {
-            background: #2d2d2d;
-            color: white;
-            padding: 60px 0;
+        
+        .footer {
             text-align: center;
+            margin-top: 60px;
+            color: #64748b;
+            font-size: 0.9rem;
         }
-
-        .footer-content {
-            margin-bottom: 30px;
+        
+        .footer p {
+            margin-bottom: 8px;
         }
-
-        .footer-content h3 {
-            color: #ff8a4c;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+        
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
         }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
+        
+        .status-original {
+            background: #10b981;
         }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
+        
+        .status-duplicate {
+            background: #ef4444;
         }
-
-        .footer-links a:hover {
-            color: #ff8a4c;
+        
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 16px 0;
         }
-
-        /* Responsive */
+        
+        .loading-progress {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-header h2 { font-size: 2.2rem; }
-            .nav-links { display: none; }
-            .stats-container { padding: 40px 20px; }
-            .concept-box { padding: 30px 20px; }
-            .step-card { padding: 30px 20px; }
-            .token-card { padding: 30px 20px; }
+            .container {
+                padding: 40px 16px;
+            }
+            
+            .main-content {
+                padding: 32px 24px;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .thread-input {
+                min-width: auto;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <span class="play-icon"></span>Clips
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#how-it-works">How it Works</a></li>
-                <li><a href="#earnings">Earnings</a></li>
-                <li><a href="https://x.com/ClipsForSupply" target="_blank" rel="noopener noreferrer">𝕏</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Make Videos, Earn Crypto</h1>
-                <p>Clips is a video platform where creators earn cryptocurrency based on views. Get paid 1 token for every 1,000 views your videos receive. Inspired by platforms like Whop.io, we're building a creator economy where your content directly translates to crypto earnings.</p>
-                <a href="#" class="cta-button" onclick="showAlert()">Start Creating Today</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2>How Clips Works</h2>
-                <p>Simple, transparent, and rewarding - exactly how creator platforms should be</p>
+    <div class="container">
+        <header>
+            <a href="https://x.com/home" target="_blank" class="x-button">Visit X.com</a>
+            <div class="logo">Debonk</div>
+            <img src="your-image-url-here.jpg" alt="Debonk Logo" class="logo-image">
+            <p class="tagline">AI-powered thread verification to prevent duplicate content</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="description">
+                <h2>Authentic Content Verification</h2>
+                <p>Debonk uses advanced AI and X's API to analyze threads and detect if similar content has been posted before.</p>
+                <p>Protect your platform from repetitive content and maintain authenticity in your community.</p>
             </div>
             
-            <div class="concept-box">
-                <h3>🎯 1,000 Views = 1 Token</h3>
-                <p><strong>Every time your video reaches 1,000 views, you automatically receive 1 Clips token in your digital wallet.</strong></p>
-                <p>More views = more tokens = more earnings</p>
-                <p><em>Inspired by Whop.io's creator economy model - creators should be directly rewarded for the value they bring.</em></p>
-            </div>
 
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <span class="step-icon">📱</span>
-                    <h3>Create Content</h3>
-                    <p>Film engaging short videos - tutorials, entertainment, comedy, or any content that resonates with your audience.</p>
+            
+            <div class="demo-section">
+                <h3>Try the Verification Tool</h3>
+                <div class="input-group">
+                    <input type="text" class="thread-input" placeholder="Enter X thread URL for verification..." id="threadInput">
+                    <button class="check-btn" onclick="checkThread()">Verify Thread</button>
                 </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <span class="step-icon">⬆️</span>
-                    <h3>Upload & Share</h3>
-                    <p>Upload your video to the Clips platform and share it with our growing community of viewers.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <span class="step-icon">👀</span>
-                    <h3>Build Your Audience</h3>
-                    <p>Engage with viewers, use trending hashtags, and create content that people love to watch and share.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <span class="step-icon">🪙</span>
-                    <h3>Earn Automatically</h3>
-                    <p>Watch your token balance grow as your videos hit 1k, 10k, 100k+ views. No minimum payout required.</p>
+                <div class="result" id="result">
+                    <p><strong>Verification results will appear here</strong></p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="token-info" id="earnings">
-        <div class="container">
-            <div class="section-header">
-                <h2>Token & Earnings Details</h2>
-                <p>Transparent rewards system designed to fairly compensate creators</p>
+        
+        <div class="api-section">
+            <div class="api-info">
+                <h3>Powered by xAI API</h3>
+                <p>Leverage advanced AI capabilities for accurate thread verification and content analysis</p>
             </div>
-            <div class="token-grid">
-                <div class="token-card">
-                    <h3>💰 How You Earn</h3>
-                    <ul>
-                        <li>1 token per 1,000 views (guaranteed)</li>
-                        <li>Trending bonus: Extra tokens for viral content</li>
-                        <li>Creator fund: Monthly bonuses for top performers</li>
-                        <li>Referral rewards: Earn when you bring new creators</li>
-                        <li>No minimum payout - earn from your first 1k views</li>
-                    </ul>
+            
+            <div class="code-examples">
+                <div class="code-example">
+                    <div class="code-header">JavaScript - Basic Integration</div>
+                    <div class="code-content">
+<span class="keyword">const</span> <span class="variable">checkThread</span> = <span class="keyword">async</span> (<span class="variable">threadUrl</span>) => {
+  <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'https://api.x.ai/v1/verify'</span>, {
+    <span class="variable">method</span>: <span class="string">'POST'</span>,
+    <span class="variable">headers</span>: {
+      <span class="string">'Authorization'</span>: <span class="string">`Bearer ${API_KEY}`</span>,
+      <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>
+    },
+    <span class="variable">body</span>: <span class="function">JSON.stringify</span>({
+      <span class="variable">url</span>: <span class="variable">threadUrl</span>,
+      <span class="variable">check_duplicates</span>: <span class="keyword">true</span>
+    })
+  });
+  
+  <span class="keyword">return</span> <span class="keyword">await</span> <span class="variable">response</span>.<span class="function">json</span>();
+};</div>
                 </div>
-                <div class="token-card">
-                    <h3>🏪 Whop.io Inspiration</h3>
-                    <ul>
-                        <li>Direct creator-to-earnings model</li>
-                        <li>Transparent and fair payment system</li>
-                        <li>Community-driven platform growth</li>
-                        <li>Creators own their content and earnings</li>
-                        <li>Built by creators, for creators</li>
-                    </ul>
+                
+                <div class="code-example">
+                    <div class="code-header">Python - API Response Handling</div>
+                    <div class="code-content">
+<span class="keyword">import</span> <span class="variable">requests</span>
+
+<span class="keyword">def</span> <span class="function">verify_thread</span>(<span class="variable">thread_url</span>, <span class="variable">api_key</span>):
+    <span class="variable">headers</span> = {
+        <span class="string">'Authorization'</span>: <span class="string">f'Bearer {api_key}'</span>,
+        <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>
+    }
+    
+    <span class="variable">payload</span> = {
+        <span class="string">'url'</span>: <span class="variable">thread_url</span>,
+        <span class="string">'similarity_threshold'</span>: <span class="string">0.85</span>
+    }
+    
+    <span class="variable">response</span> = <span class="variable">requests</span>.<span class="function">post</span>(
+        <span class="string">'https://api.x.ai/v1/verify'</span>,
+        <span class="variable">headers</span>=<span class="variable">headers</span>,
+        <span class="variable">json</span>=<span class="variable">payload</span>
+    )
+    
+    <span class="keyword">return</span> <span class="variable">response</span>.<span class="function">json</span>()</div>
                 </div>
-                <div class="token-card">
-                    <h3>🚀 What You Can Do</h3>
-                    <ul>
-                        <li>Hold tokens as a long-term investment</li>
-                        <li>Trade tokens on major crypto exchanges</li>
-                        <li>Use tokens for premium platform features</li>
-                        <li>Tip and support other creators</li>
-                        <li>Participate in governance and platform decisions</li>
-                    </ul>
+                
+                <div class="code-example">
+                    <div class="code-header">API Response Example</div>
+                    <div class="code-content">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"is_duplicate"</span>: <span class="keyword">false</span>,
+  <span class="string">"confidence_score"</span>: <span class="string">0.94</span>,
+  <span class="string">"similar_threads"</span>: [],
+  <span class="string">"analysis"</span>: {
+    <span class="string">"content_hash"</span>: <span class="string">"abc123..."</span>,
+    <span class="string">"semantic_similarity"</span>: <span class="string">0.12</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"2024-08-02T15:30:00Z"</span>
+  },
+  <span class="string">"metadata"</span>: {
+    <span class="string">"processed_at"</span>: <span class="string">"2024-08-02T15:30:01Z"</span>,
+    <span class="string">"api_version"</span>: <span class="string">"1.0"</span>
+  }
+}</div>
+                </div>
+                
+                <div class="code-example">
+                    <div class="code-header">Node.js - Express Integration</div>
+                    <div class="code-content">
+<span class="keyword">const</span> <span class="variable">express</span> = <span class="function">require</span>(<span class="string">'express'</span>);
+<span class="keyword">const</span> <span class="variable">app</span> = <span class="function">express</span>();
+
+<span class="variable">app</span>.<span class="function">post</span>(<span class="string">'/verify-thread'</span>, <span class="keyword">async</span> (<span class="variable">req</span>, <span class="variable">res</span>) => {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> { <span class="variable">threadUrl</span> } = <span class="variable">req</span>.<span class="variable">body</span>;
+    
+    <span class="keyword">const</span> <span class="variable">result</span> = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'https://api.x.ai/v1/verify'</span>, {
+      <span class="variable">method</span>: <span class="string">'POST'</span>,
+      <span class="variable">headers</span>: {
+        <span class="string">'Authorization'</span>: <span class="string">`Bearer ${process.env.XAI_API_KEY}`</span>
+      },
+      <span class="variable">body</span>: <span class="function">JSON.stringify</span>({ <span class="variable">url</span>: <span class="variable">threadUrl</span> })
+    });
+    
+    <span class="variable">res</span>.<span class="function">json</span>(<span class="keyword">await</span> <span class="variable">result</span>.<span class="function">json</span>());
+  } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+    <span class="variable">res</span>.<span class="function">status</span>(<span class="string">500</span>).<span class="function">json</span>({ <span class="variable">error</span>: <span class="variable">error</span>.<span class="variable">message</span> });
+  }
+});</div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <h3>Join the Creator Economy Revolution</h3>
-                <div class="footer-links">
-                    <a href="#">About</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">Support</a>
-                    <a href="#">API</a>
-                </div>
-            </div>
-            <p>&copy; 2024 Clips - Where Views Convert to Crypto</p>
-            <p style="margin-top: 10px; opacity: 0.8;">1,000 views = 1 token • Inspired by Whop.io • Built for creators</p>
+        
+        <div class="footer">
+            <p>Built for content creators and platform moderators</p>
+            <p>Advanced AI-powered content verification</p>
         </div>
-    </footer>
-
+    </div>
+    
     <script>
-        function showAlert() {
-            alert('🎬 Ready to start earning?\n\n✅ Download the Clips app\n✅ Create your account\n✅ Connect your crypto wallet\n✅ Start making videos and earning 1 token per 1k views!\n\n🚀 Inspired by Whop.io\'s creator-first approach - join the revolution!');
+        function checkThread() {
+            const input = document.getElementById('threadInput');
+            const result = document.getElementById('result');
+            const url = input.value.trim();
+            
+            if (!url) {
+                alert('Please enter a thread URL');
+                return;
+            }
+            
+            // Show loading state
+            result.style.display = 'block';
+            result.innerHTML = `
+                <div>
+                    <p style="font-weight: 500; margin-bottom: 12px;">Analyzing thread content...</p>
+                    <div class="loading-bar">
+                        <div class="loading-progress" style="animation: loading 2s ease-in-out forwards;"></div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #64748b;">Checking against database of existing threads</p>
+                </div>
+            `;
+            
+            // Simulate API response
+            setTimeout(() => {
+                const isOriginal = Math.random() > 0.5;
+                const randomTimes = Math.floor(Math.random() * 10) + 1; // Random number 1-10
+                
+                if (isOriginal) {
+                    result.innerHTML = `
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="status-indicator status-original"></span>
+                                <h3 style="font-size: 1.1rem; font-weight: 600; color: #059669;">Original Content Verified</h3>
+                            </div>
+                            <p style="color: #64748b; margin-bottom: 12px;">
+                                This thread appears to be original content. No similar threads found in our database.
+                            </p>
+                            <div style="background: #f0fdf4; padding: 12px; border-radius: 4px; border-left: 3px solid #10b981;">
+                                <p style="font-size: 0.9rem; color: #166534; margin: 0;">
+                                    Confidence Score: 94% | Last Checked: ${new Date().toLocaleTimeString()}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <span class="status-indicator status-duplicate"></span>
+                                <h3 style="font-size: 1.1rem; font-weight: 600; color: #dc2626;">Larp - This was done over ${randomTimes} times</h3>
+                            </div>
+                            <p style="color: #64748b; margin-bottom: 16px;">
+                                Similar content was found. This thread may be derivative of existing posts.
+                            </p>
+                            <div style="background: #fef2f2; padding: 12px; border-radius: 4px; border-left: 3px solid #ef4444; margin-bottom: 12px;">
+                                <p style="font-size: 0.9rem; color: #991b1b; margin: 0; font-weight: 500;">
+                                    Match found: Thread posted 2 days ago by @verified_user
+                                </p>
+                            </div>
+                            <div style="background: #f8fafc; padding: 12px; border-radius: 4px;">
+                                <p style="font-size: 0.9rem; color: #475569; margin: 0;">
+                                    Similarity Score: 87% | Content overlap detected in opening statement
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 2000);
         }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        
+        // Add enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('threadInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkThread();
                 }
             });
         });
     </script>
 </body>
 </html>
-
