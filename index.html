@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bird Experiment</title>
+    <link rel="icon" type="image/x-icon" href="bird.png">
     <style>
         * {
             margin: 0;
@@ -65,22 +66,20 @@
             margin-bottom: 40px;
         }
 
-        .stream-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            margin-bottom: 15px;
-            border: 2px solid black;
+        .twitch-link {
+            display: inline-block;
+            background: #9146ff;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
         }
 
-        .stream-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .twitch-link:hover {
+            background: #7c3aed;
         }
 
         .live-indicator {
@@ -130,17 +129,10 @@
 <body>
     <div class="container">
         <header>
-            <a href="https://x.com/home" target="_blank" class="x-button">𝕏</a>
+            <a href="https://x.com/_TheBirdProject" target="_blank" class="x-button">𝕏</a>
             <h1>The Bird Experiment</h1>
             <p class="subtitle">Real-time bird tracking via blockchain</p>
         </header>
-
-        <div class="stream-section">
-            <div class="live-indicator">LIVE</div>
-            <div class="stream-container">
-                <iframe src="https://player.twitch.tv/?channel=lockedwithgrok&parent=https://thebirdexperiment.netlify.app/" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-            </div>
-        </div>
 
         <div class="info-section">
             <h2>The Project</h2>
@@ -157,7 +149,12 @@
                 This creates a living digital record of the bird's movements, stored permanently on the blockchain through token metadata updates.
             </div>
         </div>
+
+        <div class="stream-section">
+            <a href="https://twitch.tv/lockedwithgrok" target="_blank" class="twitch-link">
+                Watch Live on Twitch →
+            </a>
+        </div>
     </div>
 </body>
 </html>
-
