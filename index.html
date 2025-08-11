@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clyde Walks</title>
-    <link rel="icon" type="image/x-icon" href="clyde.png">
+    <title>The Company Project</title>
+    <link rel="icon" type="image/x-icon" href="company.png">
     <style>
         * {
             margin: 0;
@@ -13,327 +13,310 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
             background: #ffffff;
-            color: #333333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            line-height: 1.8;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 700px;
-            text-align: left;
-            border-left: 3px solid #4a9eff;
-            padding-left: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 400;
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid #e8f5e8;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d5a2d;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a4d1a;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: #4a704a;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .stats {
+            display: inline-block;
+            background: #2d5a2d;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #1a4d1a;
             margin-bottom: 1.5rem;
-            color: #4a9eff;
-            font-family: 'Courier New', monospace;
+            text-align: center;
         }
 
-        .description {
-            font-size: 1.2rem;
+        .section p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            background: #f8fff8;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e8f5e8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(45, 90, 45, 0.1);
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            color: #2d5a2d;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2d5a2d 0%, #4a704a 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #b8d4b8;
             margin-bottom: 2rem;
-            color: #666666;
-            font-style: italic;
         }
 
-        .status-container {
-            background: rgba(74, 158, 255, 0.1);
-            border: 1px solid rgba(74, 158, 255, 0.3);
-            border-radius: 4px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .live-indicator {
-            width: 12px;
-            height: 12px;
-            background: #00ff41;
-            border-radius: 50%;
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 5px #00ff41; }
-            to { box-shadow: 0 0 15px #00ff41, 0 0 20px #00ff41; }
-        }
-
-        .status-text {
-            font-size: 0.95rem;
-            color: #4a9eff;
-            font-weight: 500;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
+        .email-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
             margin-top: 1rem;
         }
 
-        .docs-section {
-            display: none;
-            max-width: 800px;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e0e0e0;
+        footer {
+            background: #f8fff8;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #e8f5e8;
+            color: #666;
         }
 
-        .docs-section.active {
-            display: block;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .docs-title {
-            font-size: 1.8rem;
-            color: #4a9eff;
-            margin-bottom: 1.5rem;
-            font-family: 'Courier New', monospace;
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
-        .docs-content {
-            margin-bottom: 2rem;
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.4);
+            }
+            100% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            }
         }
 
-        .docs-content h3 {
-            color: #333;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .docs-content p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .code-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
-            padding: 1rem;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-comment {
-            color: #6c757d;
-        }
-
-        .code-keyword {
-            color: #d63384;
-        }
-
-        .code-string {
-            color: #198754;
-        }
-
-        .code-function {
-            color: #0d6efd;
-        }
-
-        .nav-link {
-            color: #777;
-            text-decoration: none;
-            font-size: 1rem;
-            position: relative;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-link:hover {
-            color: #4a9eff;
-        }
-
-        .nav-link.active {
-            color: #4a9eff;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #4a9eff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+            
             .container {
-                text-align: center;
-                border-left: none;
-                border-top: 3px solid #4a9eff;
-                padding-left: 0;
-                padding-top: 1rem;
+                padding: 0 15px;
             }
             
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .description {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links {
-                justify-content: center;
-                gap: 1.5rem;
+            .features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Clyde Walks</h1>
-        
-        <p class="description">
-            A robot I purchased and modified to roam the streets of Tokyo. 
-            All information it receives is sent back on X and livestreamed to the world.
-        </p>
-        
-        <div class="status-container">
-            <div class="live-indicator"></div>
-            <span class="status-text">Currently active in Tokyo</span>
-        </div>
-        
-        <div class="nav-links">
-            <a href="https://www.twitch.tv/lockedwithgrok" class="nav-link" target="_blank">Live Stream</a>
-            <a href="#" class="nav-link" id="docs-link" onclick="showDocs(); return false;">Documentation</a>
-            <a href="https://x.com/Project_Clyde" class="nav-link" target="_blank">Follow on X</a>
-        </div>
-        
-        <div id="docs" class="docs-section">
-            <h2 class="docs-title">TECHNICAL DOCUMENTATION</h2>
-            
-            <div class="docs-content">
-                <h3>GPS Tracking System</h3>
-                <p>Clyde Walks continuously broadcasts its location using integrated GPS modules. Real-time coordinates are transmitted every 30 seconds.</p>
-                
-                <div class="code-block">
-<span class="code-comment"># GPS tracking implementation</span>
-<span class="code-keyword">import</span> gps
-<span class="code-keyword">import</span> time
-
-<span class="code-keyword">def</span> <span class="code-function">get_current_location</span>():
-    session = gps.gps(<span class="code-string">"localhost"</span>, <span class="code-string">"2947"</span>)
-    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
-    
-    <span class="code-keyword">while</span> <span class="code-keyword">True</span>:
-        report = session.next()
-        <span class="code-keyword">if</span> report[<span class="code-string">'class'</span>] == <span class="code-string">'TPV'</span>:
-            <span class="code-keyword">return</span> {
-                <span class="code-string">'lat'</span>: report.lat,
-                <span class="code-string">'lon'</span>: report.lon,
-                <span class="code-string">'timestamp'</span>: time.time()
-            }
-
-<span class="code-comment"># Broadcast location every 30 seconds</span>
-location = get_current_location()
-broadcast_to_x(location)
-                </div>
-            </div>
-            
-            <div class="docs-content">
-                <h3>X API Integration</h3>
-                <p>All observations and data are automatically posted to X using OAuth 2.0 authentication. The bot can receive commands and respond to mentions.</p>
-                
-                <div class="code-block">
-<span class="code-comment"># X API communication</span>
-<span class="code-keyword">import</span> tweepy
-
-client = tweepy.Client(
-    bearer_token=<span class="code-string">BEARER_TOKEN</span>,
-    consumer_key=<span class="code-string">API_KEY</span>,
-    consumer_secret=<span class="code-string">API_SECRET</span>,
-    access_token=<span class="code-string">ACCESS_TOKEN</span>,
-    access_token_secret=<span class="code-string">ACCESS_SECRET</span>
-)
-
-<span class="code-keyword">def</span> <span class="code-function">post_update</span>(message, location=<span class="code-keyword">None</span>):
-    tweet = <span class="code-string">f"🤖 {message}"</span>
-    
-    <span class="code-keyword">if</span> location:
-        tweet += <span class="code-string">f"\n📍 {location['lat']:.6f}, {location['lon']:.6f}"</span>
-    
-    <span class="code-keyword">try</span>:
-        response = client.create_tweet(text=tweet)
-        <span class="code-keyword">return</span> response.data[<span class="code-string">'id'</span>]
-    <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:
-        log_error(<span class="code-string">f"Tweet failed: {e}"</span>)
-
-<span class="code-comment"># Monitor mentions and respond</span>
-<span class="code-keyword">def</span> <span class="code-function">check_mentions</span>():
-    mentions = client.get_mentions(max_results=10)
-    <span class="code-keyword">for</span> tweet <span class="code-keyword">in</span> mentions.data:
-        process_command(tweet.text, tweet.author_id)
-                </div>
-            </div>
-            
-            <div class="docs-content">
-                <h3>Data Stream</h3>
-                <p>The following data points are continuously collected and transmitted:</p>
-                <p>• GPS coordinates (lat/lon)<br>
-                • Battery status and power consumption<br>
-                • Camera feed and image analysis<br>
-                • Environmental sensors (temperature, humidity)<br>
-                • Network connectivity status<br>
-                • System performance metrics</p>
-                
-                <div class="code-block">
-<span class="code-comment"># Data collection and streaming</span>
-<span class="code-keyword">def</span> <span class="code-function">collect_telemetry</span>():
-    <span class="code-keyword">return</span> {
-        <span class="code-string">'timestamp'</span>: time.time(),
-        <span class="code-string">'location'</span>: get_current_location(),
-        <span class="code-string">'battery'</span>: get_battery_level(),
-        <span class="code-string">'temperature'</span>: read_sensor(<span class="code-string">'temp'</span>),
-        <span class="code-string">'network'</span>: check_connectivity(),
-        <span class="code-string">'status'</span>: <span class="code-string">'active'</span>
-    }
-
-<span class="code-keyword">while</span> <span class="code-keyword">True</span>:
-    data = collect_telemetry()
-    stream_to_server(data)
-    post_update(<span class="code-string">f"Status: {data['status']} | Battery: {data['battery']}%"</span>, data[<span class="code-string">'location'</span>])
-    time.sleep(30)
-                </div>
+    <header>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <img src="logo.png" alt="The Company Project Logo" style="height: 40px; width: auto;">
+                <a href="https://x.com/home" target="_blank" style="background: #2d5a2d; color: white; padding: 0.75rem; border-radius: 50%; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
             </div>
         </div>
-    </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>The Company Project</h1>
+            <p class="subtitle">We reached out to over 1000 companies to get them to promote our coin to their customers</p>
+            <div class="stats pulse">1000+ Companies Contacted</div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="section">
+                <h2>What We're Doing</h2>
+                <p>The Company Project represents a groundbreaking experiment in crypto adoption. We've sent emails to over 1000 major companies, asking them to promote our memecoin to their customers. This isn't just about getting endorsements—it's about measuring how deeply cryptocurrency has penetrated the corporate world.</p>
+                <p>Our approach serves as a unique litmus test for crypto's mainstream acceptance and provides valuable insights into corporate attitudes toward digital assets in 2025.</p>
+            </section>
+
+            <section class="section">
+                <h2>Why Are We Making It A Token?</h2>
+                <p>We want to pay businesses to promote us and need funds to do so—which is where bags come in. By creating a token, we're able to generate the resources necessary to compensate companies for their participation in this groundbreaking experiment.</p>
+                <p>This isn't just about creating another cryptocurrency; it's about funding a legitimate business model that bridges the gap between traditional corporate marketing and crypto innovation.</p>
+            </section>
+
+            <section class="section">
+                <h2>Why This Matters</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h3>🚀 First of Its Kind</h3>
+                        <p>We're the first memecoin to systematically approach major corporations, creating a new paradigm for crypto-corporate relations.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📊 Market Research</h3>
+                        <p>This experiment provides real data on how far cryptocurrency has penetrated traditional business structures.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🌱 Normie Onboarding</h3>
+                        <p>By involving mainstream companies, we're creating pathways for everyday people to enter the crypto space naturally.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>The Vision</h2>
+                <p>Traditional crypto adoption has been bottom-up, driven by tech-savvy individuals and retail investors. The Company Project flips this model, testing whether top-down corporate adoption can accelerate mainstream crypto acceptance.</p>
+                <p>We're not just launching another memecoin—we're conducting social and economic research that could reshape how we think about cryptocurrency adoption in the corporate world.</p>
+            </section>
+        </div>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Be Part of History</h2>
+            <p>Follow our journey as we track responses from major corporations and document this unprecedented experiment in crypto adoption.</p>
+            <div class="email-display">hello@thecompanyproject.com</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 The Company Project. Pioneering crypto-corporate relations.</p>
+        </div>
+    </footer>
 
     <script>
-        function showDocs() {
-            // Show docs section
-            document.getElementById('docs').classList.add('active');
-            
-            // Update nav link states
-            document.getElementById('docs-link').classList.add('active');
-        }
-        
-        // Reset docs link when page loads
+        // Add some interactive animations
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('docs-link').classList.remove('active');
+            const features = document.querySelectorAll('.feature');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            });
+
+            features.forEach(feature => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(30px)';
+                feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(feature);
+            });
         });
     </script>
 </body>
 </html>
-
