@@ -95,14 +95,6 @@
             display: block;
         }
 
-        .home-section {
-            display: block;
-        }
-
-        .home-section.hidden {
-            display: none;
-        }
-
         .docs-title {
             font-size: 1.8rem;
             color: #4a9eff;
@@ -185,21 +177,6 @@
             width: 100%;
         }
 
-        .stream-placeholder {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-top: 2rem;
-            color: #6c757d;
-        }
-
-        .stream-placeholder h3 {
-            margin-bottom: 1rem;
-            color: #495057;
-        }
-
         @media (max-width: 600px) {
             .container {
                 text-align: center;
@@ -239,23 +216,9 @@
         </div>
         
         <div class="nav-links">
-            <a href="#" class="nav-link active" id="stream-link" onclick="showHome(); return false;">Live Stream</a>
+            <a href="https://www.twitch.tv/lockedwithgrok" class="nav-link" target="_blank">Live Stream</a>
             <a href="#" class="nav-link" id="docs-link" onclick="showDocs(); return false;">Documentation</a>
             <a href="https://x.com" class="nav-link" target="_blank">Follow on X</a>
-        </div>
-        
-        <div id="home" class="home-section">
-            <div class="stream-placeholder">
-                <h3>🔴 Live Stream</h3>
-                <p>Project Clyde is currently exploring Tokyo.<br>
-                Live camera feed and real-time data would appear here.</p>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">
-                    📍 Last known location: Shibuya Crossing<br>
-                    🔋 Battery: 87%<br>
-                    📡 Signal: Strong<br>
-                    🌡️ Temperature: 23°C
-                </p>
-            </div>
         </div>
         
         <div id="docs" class="docs-section">
@@ -358,25 +321,18 @@ client = tweepy.Client(
     </div>
 
     <script>
-        function showHome() {
-            // Hide docs section
-            document.getElementById('docs').classList.remove('active');
-            document.getElementById('home').classList.remove('hidden');
-            
-            // Update nav link states
-            document.getElementById('docs-link').classList.remove('active');
-            document.getElementById('stream-link').classList.add('active');
-        }
-
         function showDocs() {
             // Show docs section
             document.getElementById('docs').classList.add('active');
-            document.getElementById('home').classList.add('hidden');
             
             // Update nav link states
-            document.getElementById('stream-link').classList.remove('active');
             document.getElementById('docs-link').classList.add('active');
         }
+        
+        // Reset docs link when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('docs-link').classList.remove('active');
+        });
     </script>
 </body>
 </html>
