@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eli</title>
-    <link rel="icon" type="image/x-icon" href="eli.png">
+    <title>The Company Project</title>
+    <link rel="icon" type="image/x-icon" href="company.png">
     <style>
         * {
             margin: 0;
@@ -13,134 +13,310 @@
         }
 
         body {
-            font-family: 'Helvetica', Arial, sans-serif;
-            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
             color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            line-height: 1.7;
+            background: #ffffff;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 650px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid #e8f5e8;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d5a2d;
             text-align: center;
         }
 
-        h1 {
-            font-size: 5rem;
-            font-weight: 200;
-            margin-bottom: 3rem;
-            letter-spacing: 1rem;
-            color: #000;
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
         }
 
-        .description {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            font-weight: 300;
-            max-width: 500px;
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a4d1a;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: #4a704a;
+            margin-bottom: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
         }
 
-        .status {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 3rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            font-weight: 400;
+        .stats {
+            display: inline-block;
+            background: #2d5a2d;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
         }
 
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            background: #ff0000;
-            border-radius: 50%;
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #1a4d1a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            background: #f8fff8;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e8f5e8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(45, 90, 45, 0.1);
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            color: #2d5a2d;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2d5a2d 0%, #4a704a 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #b8d4b8;
+            margin-bottom: 2rem;
+        }
+
+        .email-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: #f8fff8;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #e8f5e8;
+            color: #666;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+            0% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.4);
+            }
+            100% {
+                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            }
         }
 
-        .links {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .link {
-            color: #666;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.05rem;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .link:hover {
-            color: #000;
-            border-bottom-color: #000;
-        }
-
-        .divider {
-            width: 40px;
-            height: 1px;
-            background: #ddd;
-            margin: 2rem auto;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 3rem;
-                letter-spacing: 0.3rem;
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            .description {
+            .hero .subtitle {
                 font-size: 1rem;
             }
             
-            .links {
-                gap: 1rem;
+            .container {
+                padding: 0 15px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>ELI</h1>
-        
-        <p class="description">
-            A robot I purchased and modified to roam the streets of Tokyo. 
-            All information it receives is sent back on X and livestreamed to the world.
-        </p>
-        
-        <div class="divider"></div>
-        
-        <div class="status">
-            <div class="live-dot"></div>
-            <span>Live in Tokyo</span>
+    <header>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <img src="logo.png" alt="The Company Project Logo" style="height: 40px; width: auto;">
+                <a href="https://x.com/home" target="_blank" style="background: #2d5a2d; color: white; padding: 0.75rem; border-radius: 50%; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
-        
-        <div class="links">
-            <a href="https://www.twitch.tv/lockedwithgrok" class="link">Live Stream</a>
-            <a href="https://x.com/TheEliBot" class="link">Follow on X</a>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>The Company Project</h1>
+            <p class="subtitle">We reached out to over 1000 companies to get them to promote our coin to their customers</p>
+            <div class="stats pulse">1000+ Companies Contacted</div>
         </div>
-    </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="section">
+                <h2>What We're Doing</h2>
+                <p>The Company Project represents a groundbreaking experiment in crypto adoption. We've sent emails to over 1000 major companies, asking them to promote our memecoin to their customers. This isn't just about getting endorsements—it's about measuring how deeply cryptocurrency has penetrated the corporate world.</p>
+                <p>Our approach serves as a unique litmus test for crypto's mainstream acceptance and provides valuable insights into corporate attitudes toward digital assets in 2025.</p>
+            </section>
+
+            <section class="section">
+                <h2>Why Are We Making It A Token?</h2>
+                <p>We want to pay businesses to promote us and need funds to do so—which is where bags come in. By creating a token, we're able to generate the resources necessary to compensate companies for their participation in this groundbreaking experiment.</p>
+                <p>This isn't just about creating another cryptocurrency; it's about funding a legitimate business model that bridges the gap between traditional corporate marketing and crypto innovation.</p>
+            </section>
+
+            <section class="section">
+                <h2>Why This Matters</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h3>🚀 First of Its Kind</h3>
+                        <p>We're the first memecoin to systematically approach major corporations, creating a new paradigm for crypto-corporate relations.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📊 Market Research</h3>
+                        <p>This experiment provides real data on how far cryptocurrency has penetrated traditional business structures.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🌱 Normie Onboarding</h3>
+                        <p>By involving mainstream companies, we're creating pathways for everyday people to enter the crypto space naturally.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>The Vision</h2>
+                <p>Traditional crypto adoption has been bottom-up, driven by tech-savvy individuals and retail investors. The Company Project flips this model, testing whether top-down corporate adoption can accelerate mainstream crypto acceptance.</p>
+                <p>We're not just launching another memecoin—we're conducting social and economic research that could reshape how we think about cryptocurrency adoption in the corporate world.</p>
+            </section>
+        </div>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Be Part of History</h2>
+            <p>Follow our journey as we track responses from major corporations and document this unprecedented experiment in crypto adoption.</p>
+            <div class="email-display">hello@thecompanyproject.com</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 The Company Project. Pioneering crypto-corporate relations.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            });
+
+            features.forEach(feature => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(30px)';
+                feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(feature);
+            });
+        });
+    </script>
 </body>
 </html>
-
