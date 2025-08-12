@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Company Project</title>
-    <link rel="icon" type="image/x-icon" href="company.png">
+    <title>Youputer</title>
+    <link rel="icon" type="image/x-icon" href="youputer.png">
     <style>
         * {
             margin: 0;
@@ -13,312 +13,757 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #ffffff;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #ffffff 100%);
+            color: #1f2937;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(217, 119, 6, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            display: flex;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
         }
 
-        header {
-            padding: 2rem 0;
-            border-bottom: 1px solid #e8f5e8;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2d5a2d;
-            text-align: center;
-        }
-
-        .hero {
-            padding: 4rem 0;
-            text-align: center;
-            background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #1a4d1a;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        .hero .subtitle {
-            font-size: 1.25rem;
-            color: #4a704a;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-        }
-
-        .stats {
-            display: inline-block;
-            background: #2d5a2d;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
-            box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+        .sidebar {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-right: 1px solid rgba(217, 119, 6, 0.2);
+            overflow-y: auto;
+            box-shadow: 2px 0 20px rgba(217, 119, 6, 0.1);
         }
 
         .main-content {
-            padding: 4rem 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .section {
-            margin-bottom: 4rem;
-            padding: 2rem 0;
-        }
-
-        .section h2 {
-            font-size: 2rem;
-            color: #1a4d1a;
-            margin-bottom: 1.5rem;
+        .header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(217, 119, 6, 0.05), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(20px);
+            padding: 25px;
+            border-bottom: 1px solid rgba(217, 119, 6, 0.2);
             text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #d97706;
+            position: relative;
         }
 
-        .section p {
-            font-size: 1.1rem;
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto 1.5rem;
-            text-align: center;
-            line-height: 1.8;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature {
-            background: #f8fff8;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #e8f5e8;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(45, 90, 45, 0.1);
-        }
-
-        .feature h3 {
-            font-size: 1.3rem;
-            color: #2d5a2d;
-            margin-bottom: 1rem;
-        }
-
-        .feature p {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .cta-section {
-            background: linear-gradient(135deg, #2d5a2d 0%, #4a704a 100%);
+        .live-indicator {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #dc2626, #ef4444);
             color: white;
-            padding: 4rem 0;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .cta-section h2 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            color: #b8d4b8;
-            margin-bottom: 2rem;
-        }
-
-        .email-display {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-family: monospace;
-            font-size: 1.1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        footer {
-            background: #f8fff8;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid #e8f5e8;
-            color: #666;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .pulse {
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        .x-link {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(217, 119, 6, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            color: #d97706;
+            padding: 10px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: normal;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.1);
+        }
+
+        .x-link:hover {
+            background: rgba(217, 119, 6, 0.2);
+            border-color: #d97706;
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.2);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.08);
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 11px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: #d97706;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .explanation {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(217, 119, 6, 0.15);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.08);
+        }
+
+        .explanation h3 {
+            color: #d97706;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .explanation p {
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .voting-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(217, 119, 6, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 12px 35px rgba(217, 119, 6, 0.1);
+        }
+
+        .voting-title {
+            color: #d97706;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .voting-question {
+            color: #f4f1e8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .voting-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .vote-btn {
+            flex: 1;
+            background: rgba(42,36,25,0.8);
+            border: 2px solid #3f3a2f;
+            color: #f4f1e8;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .vote-btn:hover {
+            border-color: #d97706;
+            background: rgba(217,119,6,0.1);
+            transform: scale(1.02);
+        }
+
+        .vote-btn.selected {
+            border-color: #d97706;
+            background: rgba(217,119,6,0.2);
+            color: #d97706;
+        }
+
+        .vote-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .vote-timer {
+            text-align: center;
+            color: #d97706;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .vote-results {
+            display: none;
+        }
+
+        .vote-results.show {
+            display: block;
+        }
+
+        .result-bar {
+            background: #3f3a2f;
+            border-radius: 4px;
+            height: 8px;
+            margin: 8px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .result-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+            transition: width 1s ease;
+        }
+
+        .result-text {
+            display: flex;
+            justify-content: space-between;
+            color: #f4f1e8;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .ai-screen {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            border-radius: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(217, 119, 6, 0.1);
+            margin: 20px;
+        }
+
+        .ai-header {
+            padding: 18px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+            position: relative;
+        }
+
+        .stream-badge {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .video-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+            background: #000;
+        }
+
+        .video-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #10b981, #059669);
+            animation: pulse 2s infinite;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .log-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            border-radius: 12px;
+            padding: 18px;
+            max-height: 250px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.08);
+        }
+
+        .log-entry {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-left: 3px solid #d97706;
+            padding-left: 12px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            background: rgba(217, 119, 6, 0.05);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .timestamp {
+            color: #9ca3af;
+            font-size: 10px;
         }
 
         @keyframes pulse {
-            0% {
-                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1); 
             }
-            50% {
-                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.4);
-            }
-            100% {
-                box-shadow: 0 10px 30px rgba(45, 90, 45, 0.2);
+            50% { 
+                opacity: 0.8; 
+                transform: scale(0.95); 
             }
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-10px);
             }
-            
-            .hero .subtitle {
-                font-size: 1rem;
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
             }
-            
-            .container {
-                padding: 0 15px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
+        }
+
+        .viewer-count {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .current-task {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(217,119,6,0.9);
+            color: #1a1611;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        video::-webkit-media-controls {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <img src="company.png" alt="The Company Project Logo" style="height: 40px; width: auto;">
-                <a href="https://x.com/TheCompanyProj" target="_blank" style="background: #2d5a2d; color: white; padding: 0.75rem; border-radius: 50%; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
+    <div class="container">
+        <div class="sidebar">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-label">Live Timer</div>
+                    <div class="stat-value" id="liveTimer">02:15</div>
+                </div>
             </div>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>The Company Project</h1>
-            <p class="subtitle">We reached out to over 1000 companies to get them to promote our coin to their customers</p>
-            <div class="stats pulse">1000+ Companies Contacted</div>
-        </div>
-    </section>
+            <div class="explanation">
+                <h3>How Youputer Works</h3>
+                <p>YOU control the AI! Vote on technical decisions and watch as the AI executes your commands in real-time. Your collective votes determine what happens next.</p>
+            </div>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="section">
-                <h2>What We're Doing</h2>
-                <p>The Company Project represents a groundbreaking experiment in crypto adoption. We've sent emails to over 1000 major companies, asking them to promote our memecoin to their customers. This isn't just about getting endorsements—it's about measuring how deeply cryptocurrency has penetrated the corporate world.</p>
-                <p>Our approach serves as a unique litmus test for crypto's mainstream acceptance and provides valuable insights into corporate attitudes toward digital assets in 2025.</p>
-            </section>
+            <div class="voting-section" id="votingSection">
+                <div class="voting-title">Community Vote Active</div>
+                <div class="voting-question" id="votingQuestion">
+                    Should the AI continue optimizing the neural network or switch to debugging the memory allocation?
+                </div>
+                
+                <div class="vote-timer" id="voteTimer">15</div>
+                
+                <div class="voting-options" id="votingOptions">
+                    <button class="vote-btn" onclick="vote('A')" id="optionA">
+                        Continue Optimizing Neural Network
+                    </button>
+                    <button class="vote-btn" onclick="vote('B')" id="optionB">
+                        Switch to Memory Debugging
+                    </button>
+                </div>
 
-            <section class="section">
-                <h2>Why Are We Making It A Token?</h2>
-                <p>We want to pay businesses to promote us and need funds to do so—which is where bags come in. By creating a token, we're able to generate the resources necessary to compensate companies for their participation in this groundbreaking experiment.</p>
-                <p>This isn't just about creating another cryptocurrency; it's about funding a legitimate business model that bridges the gap between traditional corporate marketing and crypto innovation.</p>
-            </section>
-
-            <section class="section">
-                <h2>Why This Matters</h2>
-                <div class="features">
-                    <div class="feature">
-                        <h3>🚀 First of Its Kind</h3>
-                        <p>We're the first memecoin to systematically approach major corporations, creating a new paradigm for crypto-corporate relations.</p>
+                <div class="vote-results" id="voteResults">
+                    <div class="result-text">
+                        <span id="resultA">Option A</span>
+                        <span id="percentA">0%</span>
                     </div>
-                    <div class="feature">
-                        <h3>📊 Market Research</h3>
-                        <p>This experiment provides real data on how far cryptocurrency has penetrated traditional business structures.</p>
+                    <div class="result-bar">
+                        <div class="result-fill" id="fillA" style="width: 0%;"></div>
                     </div>
-                    <div class="feature">
-                        <h3>🌱 Normie Onboarding</h3>
-                        <p>By involving mainstream companies, we're creating pathways for everyday people to enter the crypto space naturally.</p>
+                    <div class="result-text">
+                        <span id="resultB">Option B</span>
+                        <span id="percentB">0%</span>
+                    </div>
+                    <div class="result-bar">
+                        <div class="result-fill" id="fillB" style="width: 0%;"></div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="section">
-                <h2>The Vision</h2>
-                <p>Traditional crypto adoption has been bottom-up, driven by tech-savvy individuals and retail investors. The Company Project flips this model, testing whether top-down corporate adoption can accelerate mainstream crypto acceptance.</p>
-                <p>We're not just launching another memecoin—we're conducting social and economic research that could reshape how we think about cryptocurrency adoption in the corporate world.</p>
-            </section>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry">
+                    <div class="timestamp">02:15:42</div>
+                    AI: Initializing quantum processor threads...
+                </div>
+                <div class="log-entry">
+                    <div class="timestamp">02:15:45</div>
+                    AI: Compiling advanced machine learning models...
+                </div>
+                <div class="log-entry">
+                    <div class="timestamp">02:15:48</div>
+                    AI: Optimizing parallel computing pathways...
+                </div>
+            </div>
         </div>
-    </main>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Be Part of History</h2>
-            <p>Follow our journey as we track responses from major corporations and document this unprecedented experiment in crypto adoption.</p>
-            <div class="email-display">hello@thecompanyproject.com</div>
+        <div class="main-content">
+            <div class="header">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
+                YOUPUTER
+                <a href="https://x.com/home" target="_blank" class="x-link">
+                    <span>𝕏</span>
+                    Follow Stream
+                </a>
+            </div>
+            
+            <div class="ai-screen">
+                <div class="ai-header">
+                    <div class="stream-badge">LIVE</div>
+                </div>
+                <div class="video-area">
+                    <div class="status-indicator"></div>
+                    <div class="current-task" id="currentTask">Optimizing Neural Networks...</div>
+                    <video class="video-element" id="aiVideo" autoplay muted loop playsinline>
+                        <source src="claude-workspace.mp4" type="video/mp4">
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #f4f1e8;">
+                            <div style="font-size: 64px; margin-bottom: 20px;">🤖</div>
+                            <div style="font-size: 24px; margin-bottom: 10px;">AI Computer - Live</div>
+                            <div style="font-size: 16px; opacity: 0.7;">Executing your commands...</div>
+                        </div>
+                    </video>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 The Company Project. Pioneering crypto-corporate relations.</p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Add some interactive animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const features = document.querySelectorAll('.feature');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, index * 200);
-                    }
-                });
-            });
+        let startTime = Date.now();
+        let currentVote = null;
+        let voteTimer = 15;
+        let voteInterval = null;
+        let votingActive = true;
+        let votes = { A: 0, B: 0 };
 
-            features.forEach(feature => {
-                feature.style.opacity = '0';
-                feature.style.transform = 'translateY(30px)';
-                feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(feature);
+        const votingQuestions = [
+            {
+                question: "Should the AI continue optimizing the neural network or switch to debugging the memory allocation?",
+                optionA: "Continue Optimizing Neural Network",
+                optionB: "Switch to Memory Debugging",
+                taskA: "Optimizing Neural Networks...",
+                taskB: "Debugging Memory Allocation..."
+            },
+            {
+                question: "Should the AI compile the machine learning model or run security diagnostics first?",
+                optionA: "Compile ML Model",
+                optionB: "Run Security Diagnostics",
+                taskA: "Compiling ML Models...",
+                taskB: "Running Security Scans..."
+            },
+            {
+                question: "Should the AI increase processing threads or optimize the existing algorithms?",
+                optionA: "Increase Processing Threads",
+                optionB: "Optimize Algorithms",
+                taskA: "Scaling Processing Threads...",
+                taskB: "Algorithm Optimization..."
+            },
+            {
+                question: "Should the AI backup current progress or continue with real-time execution?",
+                optionA: "Backup Progress",
+                optionB: "Continue Real-time",
+                taskA: "Creating System Backup...",
+                taskB: "Real-time Execution Mode..."
+            },
+            {
+                question: "Should the AI prioritize energy efficiency or maximum performance output?",
+                optionA: "Energy Efficiency Mode",
+                optionB: "Maximum Performance",
+                taskA: "Energy Efficiency Mode...",
+                taskB: "Maximum Performance Mode..."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const logMessages = [
+            "Initializing quantum processor threads...",
+            "Compiling advanced machine learning models...",
+            "Optimizing parallel computing pathways...",
+            "Executing neural network calibration...",
+            "Processing real-time data streams...",
+            "Analyzing computational efficiency metrics...",
+            "Synchronizing distributed processing nodes...",
+            "Implementing adaptive algorithm modifications...",
+            "Monitoring system resource allocation...",
+            "Executing community-voted directives..."
+        ];
+
+        function updateTimer() {
+            const elapsed = Date.now() - startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            
+            document.getElementById('liveTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateViewerCount() {
+            // Removed viewer count functionality
+        }
+
+        function vote(option) {
+            if (!votingActive || currentVote) return;
+            
+            currentVote = option;
+            votes[option]++;
+            
+            // Add some random votes from other "users"
+            const otherOption = option === 'A' ? 'B' : 'A';
+            votes[otherOption] += Math.floor(Math.random() * 3);
+            
+            // Visual feedback
+            document.getElementById(`option${option}`).classList.add('selected');
+            document.querySelectorAll('.vote-btn').forEach(btn => btn.classList.add('disabled'));
+        }
+
+        function showResults() {
+            votingActive = false;
+            const totalVotes = votes.A + votes.B;
+            const percentA = totalVotes > 0 ? Math.round((votes.A / totalVotes) * 100) : 50;
+            const percentB = 100 - percentA;
+            
+            document.getElementById('votingOptions').style.display = 'none';
+            document.getElementById('voteTimer').style.display = 'none';
+            document.getElementById('voteResults').classList.add('show');
+            
+            // Animate results
+            setTimeout(() => {
+                document.getElementById('percentA').textContent = `${percentA}%`;
+                document.getElementById('percentB').textContent = `${percentB}%`;
+                document.getElementById('fillA').style.width = `${percentA}%`;
+                document.getElementById('fillB').style.width = `${percentB}%`;
+                
+                // Update current task based on winning option
+                const currentQ = votingQuestions[currentQuestionIndex];
+                const winningTask = percentA > percentB ? currentQ.taskA : currentQ.taskB;
+                document.getElementById('currentTask').textContent = winningTask;
+                
+                // Add log entry
+                addLogEntry(`Executing community decision: ${winningTask}`);
+            }, 500);
+            
+            // Start next vote after 5 seconds
+            setTimeout(startNextVote, 5000);
+        }
+
+        function startNextVote() {
+            currentQuestionIndex = (currentQuestionIndex + 1) % votingQuestions.length;
+            const question = votingQuestions[currentQuestionIndex];
+            
+            // Reset voting state
+            currentVote = null;
+            votes = { A: 0, B: 0 };
+            votingActive = true;
+            voteTimer = 15;
+            
+            // Update UI
+            document.getElementById('votingQuestion').textContent = question.question;
+            document.getElementById('optionA').textContent = question.optionA;
+            document.getElementById('optionB').textContent = question.optionB;
+            
+            // Reset UI state
+            document.getElementById('votingOptions').style.display = 'flex';
+            document.getElementById('voteTimer').style.display = 'block';
+            document.getElementById('voteResults').classList.remove('show');
+            
+            document.querySelectorAll('.vote-btn').forEach(btn => {
+                btn.classList.remove('selected', 'disabled');
             });
+            
+            // Start countdown
+            startVoteCountdown();
+        }
+
+        function startVoteCountdown() {
+            document.getElementById('voteTimer').textContent = voteTimer;
+            
+            voteInterval = setInterval(() => {
+                voteTimer--;
+                document.getElementById('voteTimer').textContent = voteTimer;
+                
+                if (voteTimer <= 0) {
+                    clearInterval(voteInterval);
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function addLogEntry(message = null) {
+            const container = document.getElementById('logContainer');
+            const logDiv = document.createElement('div');
+            logDiv.className = 'log-entry';
+            
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            
+            const logMessage = message || logMessages[Math.floor(Math.random() * logMessages.length)];
+            
+            logDiv.innerHTML = `
+                <div class="timestamp">${timeStr}</div>
+                AI: ${logMessage}
+            `;
+            
+            container.appendChild(logDiv);
+            
+            // Keep only last 8 entries
+            while (container.children.length > 8) {
+                container.removeChild(container.firstChild);
+            }
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('aiVideo');
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(e => console.log('Autoplay prevented:', e));
+            });
+            
+            // Start first vote countdown
+            startVoteCountdown();
         });
+
+        // Update timers and stats
+        setInterval(() => {
+            updateTimer();
+            
+            if (Math.random() < 0.4 && votingActive) {
+                addLogEntry();
+            }
+        }, 3000);
+
+        // Simulate some automated votes during countdown
+        setInterval(() => {
+            if (votingActive && voteTimer > 0) {
+                const option = Math.random() > 0.5 ? 'A' : 'B';
+                votes[option] += Math.floor(Math.random() * 2);
+            }
+        }, 2000);
     </script>
 </body>
 </html>
-
-
