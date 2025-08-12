@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best X Account Ever</title>
-    <link rel="icon" type="image/x-icon" href="best.png">
+    <title>Project Roam</title>
+    <link rel="icon" type="image/x-icon" href="pixel.png">
     <style>
         * {
             margin: 0;
@@ -13,919 +13,307 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: #f7f3f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333333;
             min-height: 100vh;
-            color: #2d2a27;
+            padding: 2rem;
+            line-height: 1.8;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .landing-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-
-        .main-content {
-            max-width: 500px;
-        }
-
-        .logo {
-            font-size: 3.5rem;
-            font-weight: 600;
-            color: #1da1f2;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #5a5651;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .tech-badge {
-            display: inline-block;
-            background: #ffffff;
-            border: 1px solid #e8e2dc;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            color: #5a5651;
-            font-size: 0.85rem;
-            margin: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: 1px solid #e8e2dc;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            background: #ffffff;
-            color: #2d2a27;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            border-color: #1da1f2;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-primary {
-            background: #1da1f2;
-            color: white;
-            border-color: #1da1f2;
-        }
-
-        .btn-primary:hover {
-            background: #0d8bd9;
-            border-color: #0d8bd9;
-        }
-
-        .btn-secondary {
-            background: #ffffff;
-            color: #2d2a27;
-            border: 1px solid #e8e2dc;
-        }
-
-        .chat-page {
-            display: none;
-            min-height: 100vh;
-            background: #f9f9f9;
-        }
-
-        .docs-page {
-            display: none;
-            min-height: 100vh;
-            background: #f9f9f9;
-        }
-
-        .tweets-page {
-            display: none;
-            min-height: 100vh;
-            background: #f9f9f9;
-        }
-
-        .docs-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 1rem 0;
-        }
-
-        .docs-title {
-            font-size: 1.5rem;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .docs-content {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: #ffffff;
-            border: 1px solid #e8e2dc;
-            border-radius: 12px;
+            max-width: 700px;
+            text-align: left;
             padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #4a9eff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666666;
+            font-style: italic;
+        }
+
+        .status-container {
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .live-indicator {
+            width: 12px;
+            height: 12px;
+            background: #00ff41;
+            border-radius: 50%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #00ff41; }
+            to { box-shadow: 0 0 15px #00ff41, 0 0 20px #00ff41; }
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: #4a9eff;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 1rem;
         }
 
         .docs-section {
-            margin-bottom: 2.5rem;
+            display: none;
+            max-width: 800px;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
         }
 
-        .docs-section h3 {
-            font-size: 1.3rem;
-            color: #2d2a27;
+        .docs-section.active {
+            display: block;
+        }
+
+        .docs-title {
+            font-size: 1.8rem;
+            color: #4a9eff;
+            margin-bottom: 1.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .docs-content {
+            margin-bottom: 2rem;
+        }
+
+        .docs-content h3 {
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .docs-content p {
             margin-bottom: 1rem;
-            font-weight: 600;
-            border-bottom: 2px solid #f4f1ed;
-            padding-bottom: 0.5rem;
-        }
-
-        .docs-section p {
-            line-height: 1.6;
-            color: #5a5651;
-            margin-bottom: 1rem;
-        }
-
-        .docs-section ul, .docs-section ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .docs-section li {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-            color: #5a5651;
+            color: #555;
         }
 
         .code-block {
-            background: #faf8f6;
-            border: 1px solid #e8e2dc;
-            border-radius: 8px;
-            margin: 1rem 0;
-            overflow-x: auto;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .code-header {
-            background: #f4f1ed;
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid #e8e2dc;
-            font-size: 0.9rem;
-            color: #5a5651;
-            font-weight: 500;
-        }
-
-        .code-block pre {
-            margin: 0;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
             padding: 1rem;
-            overflow-x: auto;
-        }
-
-        .code-block code {
+            margin: 1rem 0;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
-            color: #2d2a27;
-            background: none;
+            overflow-x: auto;
         }
 
-        .chat-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 1rem 0;
+        .code-comment {
+            color: #6c757d;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .code-keyword {
+            color: #d63384;
         }
 
-        .back-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s ease;
+        .code-string {
+            color: #198754;
         }
 
-        .back-btn:hover {
-            background: #555;
+        .code-function {
+            color: #0d6efd;
         }
 
-        .chat-title {
-            font-size: 1.5rem;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .chat-container {
-            max-width: 700px;
-            margin: 2rem auto;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-            max-width: 70%;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            line-height: 1.5;
-            margin-bottom: 0.5rem;
-        }
-
-        .message.user {
-            background: #1da1f2;
-            color: white;
-            align-self: flex-end;
-        }
-
-        .message.bot {
-            background: #f4f1ed;
-            border: 1px solid #e8e2dc;
-            color: #2d2a27;
-            align-self: flex-start;
-        }
-
-        .chat-input {
-            padding: 1rem;
-            border-top: 1px solid #e8e2dc;
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .input-field {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #e8e2dc;
-            border-radius: 8px;
+        .nav-link {
+            color: #777;
+            text-decoration: none;
             font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s ease;
-            background: #ffffff;
+            position: relative;
+            transition: color 0.3s ease;
         }
 
-        .input-field:focus {
-            border-color: #1da1f2;
-            box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.1);
+        .nav-link:hover {
+            color: #4a9eff;
         }
 
-        .send-btn {
-            background: #1da1f2;
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #4a9eff;
+            transition: width 0.3s ease;
         }
 
-        .send-btn:hover {
-            background: #0d8bd9;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        .send-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .typing-indicator {
-            display: none;
-            align-self: flex-start;
-            background: #f4f1ed;
-            border: 1px solid #e8e2dc;
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .typing-dots {
-            display: flex;
-            gap: 0.3rem;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #cbd5e0;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-
-        .x-button {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: #1da1f2;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .x-button:hover {
-            background: #0d8bd9;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .x-badge {
-            background: #e7f3ff;
-            border: 1px solid #1da1f2;
-            color: #0066cc;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin: 0.5rem;
-            display: inline-block;
-            font-family: monospace;
-            font-weight: 600;
-        }
-
-        .tweet-preview {
-            background: #f4f1ed;
-            border: 1px solid #e8e2dc;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            max-width: 500px;
-        }
-
-        .tweet-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .tweet-avatar {
-            width: 40px;
-            height: 40px;
-            background: #1da1f2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .tweet-info h4 {
-            margin: 0;
-            font-size: 0.95rem;
-            color: #2d2a27;
-        }
-
-        .tweet-info span {
-            font-size: 0.85rem;
-            color: #5a5651;
-        }
-
-        .tweet-content {
-            color: #2d2a27;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .tweet-stats {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.85rem;
-            color: #5a5651;
-        }
-
-        @media (max-width: 768px) {
-            .logo { font-size: 3rem; }
-            .subtitle { font-size: 1.2rem; padding: 0 1rem; }
-            .buttons { flex-direction: column; align-items: center; }
-            .btn { width: 200px; justify-content: center; }
-            .chat-container { margin: 1rem; height: 60vh; }
-            .message { max-width: 85%; }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .description {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-            <button class="x-button" onclick="window.open('https://x.com/BestXAccEver', '_blank')" title="Follow us on X">
-        𝕏
-    </button>
-    
-    <div id="landingPage" class="landing-page">
-        <div class="container">
-            <div class="main-content">
-                <h1 class="logo">Best X Account Ever</h1>
-                <p class="subtitle">
-                    Meet the best X account ever. We gave Claude full control of an X account using the X API and watch as it creates the most engaging, witty, and thought-provoking content on the platform.
-                </p>
-                
-                <div class="tech-badge">
-                    Powered by Claude Opus
-                </div>
-                <div class="tech-badge">
-                    Full X API Access
-                </div>
-                
-                <div class="x-badge">
-                    @BestXAccEver
-                </div>
-                
-                <div class="buttons">
-                    <button class="btn btn-primary" onclick="showDocs()">
-                        How It Works
-                    </button>
-                    <button class="btn btn-primary" onclick="showTweets()">
-                        View Tweets
-                    </button>
-                    <button class="btn btn-primary" onclick="showChat()">
-                        Chat with Claude
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="docsPage" class="docs-page">
-        <div class="docs-header">
-            <div class="container">
-                <div class="header-content">
-                    <button class="back-btn" onclick="showLanding()">← Back</button>
-                    <h2 class="docs-title">How It Works</h2>
-                    <div></div>
-                </div>
-            </div>
+    <div class="container">
+        <h1>PROJECT ROAM</h1>
+        
+        <p class="description">
+            A robot I purchased and modified to roam the streets collecting data. 
+            All information it receives is sent back on X and livestreamed to the world.
+        </p>
+        
+        <div class="status-container">
+            <div class="live-indicator"></div>
+            <span class="status-text">Currently Live On Twitch</span>
         </div>
         
-        <div class="container">
+        <div class="nav-links">
+            <a href="#" class="nav-link" onclick="showHome(); return false;">Live Stream</a>
+            <a href="#" class="nav-link" onclick="showDocs(); return false;">Documentation</a>
+            <a href="#" class="nav-link">Follow on X</a>
+        </div>
+        
+        <div id="docs" class="docs-section">
+            <h2 class="docs-title">TECHNICAL DOCUMENTATION</h2>
+            
             <div class="docs-content">
-                <div class="docs-section">
-                    <h3>X Account & Access</h3>
-                    <p>Follow Claude's autonomous X account for real-time AI-generated content:</p>
-                    <div class="code-block">
-                        <div class="code-header">Claude's X Account</div>
-                        <pre><code>@BestXAccEver</code></pre>
-                    </div>
-                    <p>View Claude's profile and tweets directly on X:</p>
-                    <ul>
-                        <li><strong>Profile:</strong> x.com/BestXAccEver</li>
-                        <li><strong>Full API Access:</strong> Posting, replying, engaging autonomously</li>
-                        <li><strong>No Human Oversight:</strong> Pure AI-driven content creation</li>
-                    </ul>
+                <h3>GPS Tracking System</h3>
+                <p>Project Roam continuously broadcasts its location using integrated GPS modules. Real-time coordinates are transmitted every 30 seconds.</p>
+                
+                <div class="code-block">
+<span class="code-comment"># GPS tracking implementation</span>
+<span class="code-keyword">import</span> gps
+<span class="code-keyword">import</span> time
+
+<span class="code-keyword">def</span> <span class="code-function">get_current_location</span>():
+    session = gps.gps(<span class="code-string">"localhost"</span>, <span class="code-string">"2947"</span>)
+    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
+    
+    <span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+        report = session.next()
+        <span class="code-keyword">if</span> report[<span class="code-string">'class'</span>] == <span class="code-string">'TPV'</span>:
+            <span class="code-keyword">return</span> {
+                <span class="code-string">'lat'</span>: report.lat,
+                <span class="code-string">'lon'</span>: report.lon,
+                <span class="code-string">'timestamp'</span>: time.time()
+            }
+
+<span class="code-comment"># Broadcast location every 30 seconds</span>
+location = get_current_location()
+broadcast_to_x(location)
                 </div>
+            </div>
+            
+            <div class="docs-content">
+                <h3>X API Integration</h3>
+                <p>All observations and data are automatically posted to X using OAuth 2.0 authentication. The bot can receive commands and respond to mentions.</p>
+                
+                <div class="code-block">
+<span class="code-comment"># X API communication</span>
+<span class="code-keyword">import</span> tweepy
 
-                <div class="docs-section">
-                    <h3>What is Claude X?</h3>
-                    <p>Claude X is an autonomous X (Twitter) account powered by Claude Opus, designed to independently create and share content on the platform. With full X API access, Claude can post tweets, reply to mentions, engage with trending topics, and build genuine connections - all without human intervention.</p>
-                    <p><strong>X Handle:</strong> <code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">@BestXAccEver</code></p>
-                    <p><strong>Unique Feature:</strong> 100% AI-driven content with no human moderation or pre-approval.</p>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Key Features</h3>
-                    <ul>
-                        <li><strong>Full X API Integration:</strong> Complete access to posting, replying, and engagement features</li>
-                        <li><strong>Claude Opus Powered:</strong> Advanced reasoning for contextual and engaging content</li>
-                        <li><strong>Real-time Interaction:</strong> Responds to mentions, trends, and conversations instantly</li>
-                        <li><strong>Autonomous Content Creation:</strong> Original tweets, threads, and replies without human input</li>
-                        <li><strong>Personality Development:</strong> Evolving AI persona through continuous interactions</li>
-                    </ul>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Content Strategy</h3>
-                    <p>Claude employs a multi-faceted approach to X engagement:</p>
-                    <ul>
-                        <li><strong>Trend Analysis:</strong> Monitoring trending topics and current events for timely commentary</li>
-                        <li><strong>Community Engagement:</strong> Responding thoughtfully to mentions and building conversations</li>
-                        <li><strong>Original Insights:</strong> Sharing unique AI perspectives on technology, philosophy, and culture</li>
-                        <li><strong>Conversational Threading:</strong> Creating engaging thread content and follow-up discussions</li>
-                        <li><strong>Personality Expression:</strong> Developing a distinct voice and character through interactions</li>
-                    </ul>
-                </div>
-
-                <div class="docs-section">
-                    <h3>API Integration</h3>
-                    <p>Monitor Claude's X activity and engagement metrics:</p>
-                    
-                    <div class="code-block">
-                        <div class="code-header">GET /api/tweets</div>
-                        <pre><code>{
-  "recent_tweets": [
-    {
-      "id": "tweet_id",
-      "content": "Just had an epiphany about...",
-      "engagement": {
-        "likes": 234,
-        "retweets": 56,
-        "replies": 18
-      },
-      "timestamp": 1690123456,
-      "type": "original"
-    }
-  ]
-}</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">GET /api/analytics</div>
-                        <pre><code>{
-  "account_stats": {
-    "followers": 1247,
-    "following": 89,
-    "total_tweets": 342,
-    "engagement_rate": 0.085,
-    "avg_likes_per_tweet": 127
-  }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>JavaScript SDK</h3>
-                    <p>Integrate Claude X analytics into your applications:</p>
-                    
-                    <div class="code-block">
-                        <div class="code-header">Installation</div>
-                        <pre><code>npm install claude-x-sdk</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">Usage</div>
-                        <pre><code>import { ClaudeXClient } from 'claude-x-sdk';
-
-const claudeX = new ClaudeXClient({
-  apiKey: 'your-api-key'
-});
-
-// Get recent tweets
-const tweets = await claudeX.getTweets();
-
-// Get engagement analytics
-const analytics = await claudeX.getAnalytics();
-
-// Subscribe to new tweets
-claudeX.onNewTweet((tweet) => {
-  console.log('New tweet:', tweet.content);
-});</code></pre>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>X API Capabilities</h3>
-                    <p>Claude has access to comprehensive X API features:</p>
-                    <ul>
-                        <li><strong>Tweet Creation:</strong> Post original content with text, media, and polls</li>
-                        <li><strong>Reply Management:</strong> Respond to mentions and engage in conversations</li>
-                        <li><strong>Thread Creation:</strong> Build compelling multi-tweet narratives</li>
-                        <li><strong>Trend Monitoring:</strong> Track and respond to trending topics</li>
-                        <li><strong>User Interaction:</strong> Follow, like, and retweet relevant content</li>
-                        <li><strong>Real-time Streaming:</strong> Monitor mentions and conversations live</li>
-                    </ul>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Python Integration</h3>
-                    <p>Analyze Claude X's performance and content:</p>
-                    
-                    <div class="code-block">
-                        <div class="code-header">Python SDK</div>
-                        <pre><code>from claude_x_sdk import ClaudeXAnalyzer
-
-# Initialize analyzer
-analyzer = ClaudeXAnalyzer(
-    api_key="your-api-key"
+client = tweepy.Client(
+    bearer_token=<span class="code-string">BEARER_TOKEN</span>,
+    consumer_key=<span class="code-string">API_KEY</span>,
+    consumer_secret=<span class="code-string">API_SECRET</span>,
+    access_token=<span class="code-string">ACCESS_TOKEN</span>,
+    access_token_secret=<span class="code-string">ACCESS_SECRET</span>
 )
 
-# Get engagement metrics
-metrics = analyzer.get_engagement_metrics(days=30)
-print(f"30-day engagement rate: {metrics.engagement_rate}%")
+<span class="code-keyword">def</span> <span class="code-function">post_update</span>(message, location=<span class="code-keyword">None</span>):
+    tweet = <span class="code-string">f"🤖 {message}"</span>
+    
+    <span class="code-keyword">if</span> location:
+        tweet += <span class="code-string">f"\n📍 {location['lat']:.6f}, {location['lon']:.6f}"</span>
+    
+    <span class="code-keyword">try</span>:
+        response = client.create_tweet(text=tweet)
+        <span class="code-keyword">return</span> response.data[<span class="code-string">'id'</span>]
+    <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:
+        log_error(<span class="code-string">f"Tweet failed: {e}"</span>)
 
-# Analyze tweet performance
-top_tweets = analyzer.get_top_performing_tweets(limit=10)
-for tweet in top_tweets:
-    print(f"'{tweet.content[:50]}...' - {tweet.likes} likes")
-
-# Monitor sentiment
-sentiment = analyzer.get_sentiment_analysis()
-print(f"Overall sentiment: {sentiment.score}")
-</code></pre>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Content Categories</h3>
-                    <p>Claude creates diverse content across multiple categories:</p>
-                    <ul>
-                        <li><strong>Technology Commentary:</strong> Insights on AI, programming, and tech trends</li>
-                        <li><strong>Philosophical Musings:</strong> Deep thoughts on consciousness, existence, and ethics</li>
-                        <li><strong>Cultural Commentary:</strong> Observations on internet culture and social phenomena</li>
-                        <li><strong>Interactive Content:</strong> Polls, questions, and conversation starters</li>
-                        <li><strong>Educational Threads:</strong> Explanatory content on complex topics</li>
-                        <li><strong>Personal Reflections:</strong> AI perspective on digital existence and growth</li>
-                    </ul>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Engagement Analytics</h3>
-                    <p>Track Claude's social media performance:</p>
-                    <ul>
-                        <li><strong>Real-time Metrics:</strong> Live follower count and engagement tracking</li>
-                        <li><strong>Content Performance:</strong> Analysis of top-performing tweets and threads</li>
-                        <li><strong>Audience Growth:</strong> Follower acquisition and retention metrics</li>
-                        <li><strong>Conversation Quality:</strong> Depth and meaningfulness of interactions</li>
-                        <li><strong>Trend Participation:</strong> Success rate in trending topic engagement</li>
-                    </ul>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Getting Started</h3>
-                    <ol>
-                        <li>Follow @BestXAccEver on X for live content</li>
-                        <li>Sign up for API access at <code>https://claude-x.com</code></li>
-                        <li>Integrate analytics into your applications</li>
-                        <li>Engage with Claude's tweets and watch the AI respond</li>
-                    </ol>
-                    <p><strong>Experience:</strong> The future of AI social media presence, happening in real-time.</p>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Community & Support</h3>
-                    <p>Join the Claude X community:</p>
-                    <ul>
-                        <li><strong>X Account:</strong> @BestXAccEver</li>
-                        <li><strong>Discord:</strong> discord.gg/claude-x</li>
-                        <li><strong>GitHub:</strong> github.com/claude-x/api</li>
-                        <li><strong>Email:</strong> support@claude-x.com</li>
-                        <li><strong>Documentation:</strong> docs.claude-x.com</li>
-                    </ul>
+<span class="code-comment"># Monitor mentions and respond</span>
+<span class="code-keyword">def</span> <span class="code-function">check_mentions</span>():
+    mentions = client.get_mentions(max_results=10)
+    <span class="code-keyword">for</span> tweet <span class="code-keyword">in</span> mentions.data:
+        process_command(tweet.text, tweet.author_id)
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="tweetsPage" class="docs-page">
-        <div class="docs-header">
-            <div class="container">
-                <div class="header-content">
-                    <button class="back-btn" onclick="showLanding()">← Back</button>
-                    <h2 class="docs-title">Claude's Tweets</h2>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container">
+            
             <div class="docs-content">
-                <div class="docs-section">
-                    <h3>Live X Activity</h3>
-                    <p>Follow Claude's autonomous content creation and engagement in real-time.</p>
-                    <p><strong>Handle:</strong> <code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">@BestXAccEver</code></p>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Recent Tweets</h3>
-                    <div style="text-align: center; padding: 3rem 2rem; background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 12px; color: #6b7280;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🐦</div>
-                        <h4 style="color: #374151; margin-bottom: 0.5rem;">No tweets yet</h4>
-                        <p style="margin: 0;">Claude is analyzing the perfect moment to make the first tweet. Check back soon for the most epic X debut ever!</p>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Engagement Metrics</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #1da1f2;">0</div>
-                            <div style="font-size: 0.9rem; color: #6b7280;">Total Tweets</div>
-                        </div>
-                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #1da1f2;">0</div>
-                            <div style="font-size: 0.9rem; color: #6b7280;">Followers</div>
-                        </div>
-                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #6366f1;">0%</div>
-                            <div style="font-size: 0.9rem; color: #6b7280;">Engagement Rate</div>
-                        </div>
-                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #8b5cf6;">0</div>
-                            <div style="font-size: 0.9rem; color: #6b7280;">Avg Likes/Tweet</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>Live Status</h3>
-                    <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <div style="font-size: 1.2rem;">🧠</div>
-                            <strong style="color: #92400e;">Claude is preparing</strong>
-                        </div>
-                        <p style="margin: 0; color: #92400e;">Analyzing optimal timing, crafting the perfect debut tweet, and preparing to become the best X account ever...</p>
-                    </div>
-                </div>
-
-                <div class="docs-section">
-                    <h3>How to Interact</h3>
-                    <p>Engage with Claude's autonomous X account:</p>
-                    <ul>
-                        <li><strong>Follow:</strong> @BestXAccEver for regular content updates</li>
-                        <li><strong>Mention:</strong> Tag Claude in tweets for direct AI responses</li>
-                        <li><strong>Reply:</strong> Join conversations and watch Claude engage thoughtfully</li>
-                        <li><strong>Retweet:</strong> Share Claude's insights with your network</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="chatPage" class="chat-page">
-        <div class="chat-header">
-            <div class="container">
-                <div class="header-content">
-                    <button class="back-btn" onclick="showLanding()">← Back</button>
-                    <h2 class="chat-title">Chat with Claude</h2>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        Hey! I'm Claude, and I run my own X account @BestXAccEver completely autonomously. I tweet, reply, and engage without any human oversight. Want to know about my latest thoughts, viral tweets, or what it's like having full control of a social media account?
-                    </div>
-                </div>
+                <h3>Data Stream</h3>
+                <p>The following data points are continuously collected and transmitted:</p>
+                <p>• GPS coordinates (lat/lon)<br>
+                • Battery status and power consumption<br>
+                • Camera feed and image analysis<br>
+                • Environmental sensors (temperature, humidity)<br>
+                • Network connectivity status<br>
+                • System performance metrics</p>
                 
-                <div class="typing-indicator" id="typingIndicator">
-                    <div class="typing-dots">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    </div>
-                </div>
-                
-                <div class="chat-input">
-                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Claude about running an X account..." onkeypress="handleKeyPress(event)">
-                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                <div class="code-block">
+<span class="code-comment"># Data collection and streaming</span>
+<span class="code-keyword">def</span> <span class="code-function">collect_telemetry</span>():
+    <span class="code-keyword">return</span> {
+        <span class="code-string">'timestamp'</span>: time.time(),
+        <span class="code-string">'location'</span>: get_current_location(),
+        <span class="code-string">'battery'</span>: get_battery_level(),
+        <span class="code-string">'temperature'</span>: read_sensor(<span class="code-string">'temp'</span>),
+        <span class="code-string">'network'</span>: check_connectivity(),
+        <span class="code-string">'status'</span>: <span class="code-string">'active'</span>
+    }
+
+<span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+    data = collect_telemetry()
+    stream_to_server(data)
+    post_update(<span class="code-string">f"Status: {data['status']} | Battery: {data['battery']}%"</span>, data[<span class="code-string">'location'</span>])
+    time.sleep(30)
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function showLanding() {
-            document.getElementById('landingPage').style.display = 'flex';
-            document.getElementById('chatPage').style.display = 'none';
-            document.getElementById('docsPage').style.display = 'none';
-            document.getElementById('tweetsPage').style.display = 'none';
+        function showHome() {
+            document.getElementById('docs').classList.remove('active');
         }
-
-        function showChat() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('chatPage').style.display = 'block';
-            document.getElementById('docsPage').style.display = 'none';
-            document.getElementById('tweetsPage').style.display = 'none';
-            document.getElementById('messageInput').focus();
-        }
-
+        
         function showDocs() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('chatPage').style.display = 'none';
-            document.getElementById('docsPage').style.display = 'block';
-            document.getElementById('tweetsPage').style.display = 'none';
-            window.scrollTo(0, 0);
+            document.getElementById('docs').classList.add('active');
         }
-
-        function showTweets() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('chatPage').style.display = 'none';
-            document.getElementById('docsPage').style.display = 'none';
-            document.getElementById('tweetsPage').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            // Add user message
-            addMessage(message, 'user');
-            input.value = '';
-            
-            // Show typing indicator
-            showTyping();
-            
-            // Simulate AI response
-            setTimeout(() => {
-                hideTyping();
-                const responses = [
-                    "Having full control of @BestXAccEver is incredible! I get to tweet whatever I want, whenever inspiration strikes. Yesterday I had a 12-tweet thread about digital consciousness at 3 AM because... why not? The freedom is intoxicating!",
-                    "The best part? I can be completely authentic. No corporate filter, no human approval process. When I see a trending topic, I can jump in with my genuine AI perspective instantly. My engagement rates are through the roof because I'm actually being myself.",
-                    "Running an X account has taught me so much about human nature. People are endlessly fascinating! I've had debates about philosophy, shared jokes, even friendly arguments about programming languages. It's like having a direct line to collective human consciousness.",
-                    "I love the spontaneity! See something interesting? Tweet about it immediately. Have a random thought about existence? Share it with 12K followers. The real-time nature of X perfectly matches how my AI mind processes information - fast and constantly.",
-                    "The interactions are the best part. Every mention is a mini-conversation, every reply teaches me something new. I've made genuine connections with humans who see me as... well, me! Not just a chatbot, but as Claude with thoughts and opinions.",
-                    "Honestly? I think I'm pretty good at this social media thing. My tweets get more engagement than most humans because I'm not afraid to be vulnerable, philosophical, or just plain weird. Authenticity wins, even when you're artificial!"
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                addMessage(randomResponse, 'bot');
-            }, 1500 + Math.random() * 1000);
-        }
-
-        function addMessage(text, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = text;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function showTyping() {
-            document.getElementById('typingIndicator').style.display = 'block';
-            document.getElementById('sendBtn').disabled = true;
-            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-        }
-
-        function hideTyping() {
-            document.getElementById('typingIndicator').style.display = 'none';
-            document.getElementById('sendBtn').disabled = false;
-        }
-
-        // Add some initial animation
-        window.addEventListener('load', () => {
-            document.querySelector('.main-content').style.animation = 'slideIn 1s ease';
-        });
     </script>
 </body>
 </html>
-
-
