@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Know Your Pump</title>
-    <link rel="icon" type="image/x-icon" href="loser.png">
+    <title>The Trending Experiment</title>
+    <link rel="icon" type="image/x-icon" href="dex.png">
     <style>
         * {
             margin: 0;
@@ -13,1180 +13,307 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #ecfdf5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: white;
             color: #333;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
-            color: white;
-            padding: 1rem 0 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-            opacity: 0.1;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .dropdown-arrow {
-            font-size: 0.8rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-item.active .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 0.5rem 0;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            margin-top: 0.5rem;
-        }
-
-        .nav-item.active .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: #374151;
-            text-decoration: none;
-            transition: background 0.2s;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .dropdown-item:hover {
-            background: #f3f4f6;
-        }
-
-        .dropdown-separator {
-            height: 1px;
-            background: #e5e7eb;
-            margin: 0.5rem 0;
-        }
-
-        .twitter-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.2s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .twitter-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .hero {
-            text-align: center;
-            max-width: 1200px;
-            margin: 2rem auto 0;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: -1px;
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            position: relative;
-        }
-
-        .search-box {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-box:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .search-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .search-tab {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .search-tab:hover, .search-tab.active {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 2% auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
-            position: relative;
-            height: 200px;
-            background: linear-gradient(135deg, #059669, #10b981);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            border-radius: 12px 12px 0 0;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-
-        .modal-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: #f0fdf4;
-            border-radius: 8px;
-            border-left: 4px solid #10b981;
-        }
-
-        .modal-stat {
-            text-align: center;
-        }
-
-        .modal-stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #059669;
-        }
-
-        .modal-stat-label {
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin-top: 0.25rem;
-        }
-
-        .modal-section {
-            margin: 2rem 0;
-        }
-
-        .modal-section h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1f2937;
-            border-bottom: 2px solid #10b981;
-            padding-bottom: 0.5rem;
-        }
-
-        .timeline {
-            border-left: 3px solid #10b981;
-            padding-left: 1rem;
-            margin-left: 1rem;
-        }
-
-        .timeline-item {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.375rem;
-            top: 0.25rem;
-            width: 0.75rem;
-            height: 0.75rem;
-            background: #10b981;
-            border-radius: 50%;
-        }
-
-        .timeline-date {
-            font-size: 0.8rem;
-            color: #059669;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-content {
-            color: #4b5563;
             line-height: 1.6;
         }
 
-        /* Main Content */
-        .main {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-        }
-
-        .content-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #1f2937;
-            font-weight: 600;
-            border-bottom: 3px solid #10b981;
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .featured-article, .article-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-        }
-
-        .featured-article:hover, .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .featured-article {
-            margin-bottom: 2rem;
-        }
-
-        .article-image {
-            width: 100%;
-            height: 300px;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            background-color: #f3f4f6;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 150px;
-            background-size: cover;
-            background-position: center;
-            background-color: #f3f4f6;
-        }
-
-        .article-content, .card-content {
-            padding: 2rem;
-        }
-
-        .card-content {
-            padding: 1rem;
-        }
-
-        .article-tag {
-            background: #10b981;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .article-title, .card-title {
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .article-title {
-            font-size: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1rem;
-        }
-
-        .article-meta, .card-meta {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-meta {
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .article-excerpt, .card-excerpt {
-            color: #4b5563;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .card-excerpt {
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .coin-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #f0fdf4;
-            border-radius: 8px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #059669;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-top: 0.25rem;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-top: 1rem;
-        }
-
-        .status.active { background: #dcfce7; color: #166534; }
-        .status.rugged { background: #fee2e2; color: #991b1b; }
-        .status.dead { background: #f3f4f6; color: #374151; }
-
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            space-y: 2rem;
-        }
-
-        .sidebar-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-section h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-
-        .top-entry {
-            display: flex;
-            gap: 1rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e5e7eb;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .top-entry:hover {
-            background: #f9fafb;
-        }
-
-        .top-entry:last-child {
-            border-bottom: none;
-        }
-
-        .entry-image {
-            width: 60px;
-            height: 60px;
-            background-color: #f3f4f6;
-            border-radius: 8px;
-            flex-shrink: 0;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .entry-info h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: #1f2937;
-        }
-
-        .entry-info p {
-            font-size: 0.8rem;
-            color: #6b7280;
-        }
-
-        .pump-alert {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .pump-alert h4 {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #111827;
-            color: #f9fafb;
-        }
-
-        body.dark-mode .modal-content {
-            background-color: #1f2937;
-            color: #f9fafb;
-        }
-
-        body.dark-mode .dropdown-menu {
-            background: #1f2937;
-            border: 1px solid #374151;
-        }
-
-        body.dark-mode .dropdown-item {
-            color: #f9fafb;
-        }
-
-        body.dark-mode .dropdown-item:hover {
-            background: #374151;
-        }
-
-        body.dark-mode .featured-article,
-        body.dark-mode .article-card,
-        body.dark-mode .sidebar-section {
-            background: #1f2937;
-            border: 1px solid #374151;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 0 1rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav {
-                padding: 0 1rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            .coin-stats, .modal-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
-            }
-        }
-
-        /* Notification styles */
-        .notification {
+        .x-button {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #10b981;
+            background: #1da1f2;
             color: white;
-            padding: 1rem 1.5rem;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .x-button:hover {
+            background: #0d8bd9;
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 4rem;
+            color: #1da1f2;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1da1f2;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .earnings-box {
+            background: #f8f9fa;
+            border: 2px solid #1da1f2;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+
+        .earnings-box h2 {
+            font-size: 1.8rem;
+            color: #1da1f2;
+            margin-bottom: 20px;
+        }
+
+        .percentage {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1da1f2;
+            margin: 20px 0;
+        }
+
+        .connect-button {
+            background: #1da1f2;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .connect-button:hover {
+            background: #0d8bd9;
+        }
+
+        .connect-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .tweet-button {
+            background: #1da1f2;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tweet-button:hover {
+            background: #0d8bd9;
+        }
+
+        /* Fee Page Styles */
+        .fee-page {
+            display: none;
+        }
+
+        .fee-page.active {
+            display: block;
+        }
+
+        .wallet-info {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .wallet-address {
+            font-family: monospace;
+            background: #e5e7eb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+
+        .fee-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #1da1f2;
+            margin: 30px 0;
+        }
+
+        .back-button {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .back-button:hover {
+            background: #4b5563;
+        }
+
+        .status {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            z-index: 2000;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .notification.error {
-            background: #ef4444;
-        }
-
-        .notification.warning {
-            background: #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            color: #92400e;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <a href="#" class="logo" onclick="goHome()">KYP</a>
-            
-            <ul class="nav-links">
-                <li class="nav-item">
-                    <a href="#" data-dropdown="encyclopedia">
-                        Pump Encyclopedia <span class="dropdown-arrow">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item" onclick="showPage('tokens')">All Tokens</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('trending')">Trending Now</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('blue-chips')">Blue Chip Memes</a>
-                        <div class="dropdown-separator"></div>
-                        <a href="#" class="dropdown-item" onclick="showPage('rugs')">Rug Database</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('dead')">Dead Coins</a>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" data-dropdown="research">
-                        Research <span class="dropdown-arrow">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item" onclick="showPage('reports')">Deep Dive Reports</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('analytics')">Market Analytics</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('tools')">Research Tools</a>
-                        <div class="dropdown-separator"></div>
-                        <a href="#" class="dropdown-item" onclick="showPage('methodology')">Our Methodology</a>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" data-dropdown="analysis">
-                        Analysis <span class="dropdown-arrow">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item" onclick="showPage('technical')">Technical Analysis</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('sentiment')">Sentiment Tracking</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('social')">Social Media Metrics</a>
-                        <div class="dropdown-separator"></div>
-                        <a href="#" class="dropdown-item" onclick="showPage('alerts')">Price Alerts</a>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" data-dropdown="more">
-                        More <span class="dropdown-arrow">▼</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item" onclick="showPage('api')">API Access</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('education')">Education Hub</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('community')">Community</a>
-                        <div class="dropdown-separator"></div>
-                        <a href="#" class="dropdown-item" onclick="showPage('about')">About Us</a>
-                        <a href="#" class="dropdown-item" onclick="showPage('contact')">Contact</a>
-                    </div>
-                </li>
-                
-                <li><button class="twitter-button" onclick="openTwitter()">𝕏</button></li>
-            </ul>
+    <!-- X.com Button -->
+    <a href="https://x.com/home" target="_blank" class="x-button">
+        𝕏 X.com
+    </a>
 
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-        </nav>
+    <!-- Main Page -->
+    <div class="container main-page">
+        <div class="logo">#</div>
+        <h1>The Trending Experiment</h1>
         
-        <div class="hero">
-            <h1>Know Your Pump</h1>
-            <div class="search-container">
-                <input type="text" class="search-box" placeholder="Search the world's largest Solana memecoin authority...">
-            </div>
-            <div class="search-tabs">
-                <button class="search-tab active">🔥 Trending</button>
-                <button class="search-tab">Tokens</button>
-                <button class="search-tab">Rugs</button>
-                <button class="search-tab">Research</button>
-            </div>
-        </div>
-    </header>
+        <p class="description">
+            Simple steps to earn 0.1% of total fees generated from bags
+        </p>
 
-    <!-- Modal -->
-    <div id="coinModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="modalIcon">🐸</span>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <h2 id="modalTitle" class="modal-title">PEPE on Solana</h2>
+        <div class="earnings-box">
+            <h2>How it works</h2>
+            
+            <div style="text-align: left; max-width: 400px; margin: 0 auto;">
+                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>1.</strong> Tweet out "#trendcoin"</p>
+                <div style="text-align: center; margin: 15px 0;">
+                    <a href="https://x.com/intent/tweet?text=Buy%20%23TrendCoin" target="_blank" class="tweet-button">Tweet Now</a>
+                </div>
                 
-                <div id="modalStats" class="modal-stats">
-                    <div class="modal-stat">
-                        <div class="modal-stat-value">$42M</div>
-                        <div class="modal-stat-label">Peak Market Cap</div>
-                    </div>
-                    <div class="modal-stat">
-                        <div class="modal-stat-value">1,247%</div>
-                        <div class="modal-stat-label">24h Pump</div>
-                    </div>
-                    <div class="modal-stat">
-                        <div class="modal-stat-value">🟢 Active</div>
-                        <div class="modal-stat-label">Status</div>
-                    </div>
-                    <div class="modal-stat">
-                        <div class="modal-stat-value">Aug 12, 2025</div>
-                        <div class="modal-stat-label">Launch Date</div>
-                    </div>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Origin Story</h3>
-                    <p id="modalOrigin">PEPE on Solana emerged during the August 2025 memecoin revival, when traders began seeking alternatives to Ethereum-based PEPE tokens. The Solana version gained traction due to lower fees and faster transactions, attracting degens looking for the next 100x opportunity.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Key Events Timeline</h3>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-date">August 12, 2025</div>
-                            <div class="timeline-content">Token launched on pump.fun with initial 69 SOL liquidity</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-date">August 13, 2025</div>
-                            <div class="timeline-content">First major pump to $1M market cap after viral TikTok video</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-date">August 14, 2025</div>
-                            <div class="timeline-content">Peak market cap of $42M reached, 1000+ holders</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Analysis</h3>
-                    <p id="modalAnalysis">The success of Solana PEPE demonstrates the continued appeal of established meme formats in new ecosystems. The token benefits from both PEPE's cultural recognition and Solana's technical advantages. However, like all memecoins, it remains highly speculative and prone to extreme volatility.</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3>Risk Assessment</h3>
-                    <p style="background: #fef3c7; padding: 1rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                        ⚠️ <strong>High Risk:</strong> Memecoin with no utility. Price driven purely by speculation and social media hype. Contract ownership status unknown. Always DYOR and never invest more than you can afford to lose.
-                    </p>
-                </div>
+                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>2.</strong> Connect your Phantom wallet to check your fees</p>
+                
+                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>3.</strong> Collect your fees after 1 hour</p>
             </div>
+
+            <div class="percentage">0.1%</div>
+            <p>of total fees from bags</p>
         </div>
+
+        <button class="connect-button" onclick="connectPhantom()">
+            Connect Phantom Wallet
+        </button>
     </div>
 
-    <main class="main">
-        <div class="content">
-            <section class="content-section">
-                <h2>TODAY IN PUMP CULTURE</h2>
-                
-                <article class="featured-article" data-coin="pepe">
-                    <div class="article-image" style="background-image: url('https://www.chathamhouse.org/sites/default/files/styles/12_6_media_huge/public/2023-03/VISUAL%20Pepe%20the%20frog%2004%20FOR%20WEB.jpg?h=026aacd9&itok=JBGOiWfg');">
-                    </div>
-                    <div class="article-content">
-                        <span class="article-tag">Analysis</span>
-                        <h2 class="article-title">Why Is Everyone Buying 'PEPE' Again? The Solana Pepe Revival Movement Explained</h2>
-                        <div class="article-meta">DegenResearcher • 2 hours ago</div>
-                        <p class="article-excerpt">The classic Pepe meme has found new life on Solana with multiple iterations pumping simultaneously. We dive deep into the psychology behind why traders keep returning to this iconic frog...</p>
-                        
-                        <div class="coin-stats">
-                            <div class="stat">
-                                <div class="stat-value">$42M</div>
-                                <div class="stat-label">Peak Market Cap</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">1,247%</div>
-                                <div class="stat-label">24h Pump</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">Active</div>
-                                <div class="stat-label">Status</div>
-                            </div>
-                        </div>
-                        
-                        <span class="status active">🟢 Still Pumping</span>
-                    </div>
-                </article>
-            </section>
-
-            <section class="content-section">
-                <div class="article-grid">
-                    <article class="article-card" data-coin="bonk">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x150/059669/ffffff?text=Upload+BONK+Image');"></div>
-                        <div class="card-content">
-                            <span class="article-tag">Coin Review</span>
-                            <h3 class="card-title">BONK: The Solana Dog That Started It All</h3>
-                            <div class="card-meta">PumpHistorian • 1 day ago</div>
-                            <p class="card-excerpt">How a simple dog meme became Solana's first major memecoin success story and paved the way for the current pump season...</p>
-                            <span class="status active">🟢 OG Status</span>
-                        </div>
-                    </article>
-
-                    <article class="article-card" data-coin="wif">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x150/059669/ffffff?text=Upload+WIF+Image');"></div>
-                        <div class="card-content">
-                            <span class="article-tag">Deep Dive</span>
-                            <h3 class="card-title">Dogwifhat (WIF): Meme Perfection or Lucky Timing?</h3>
-                            <div class="card-meta">MemeLordAnalyst • 3 hours ago</div>
-                            <p class="card-excerpt">Breaking down how a simple dog with a pink hat captured the imagination of an entire ecosystem...</p>
-                            <span class="status active">🟢 Blue Chip Meme</span>
-                        </div>
-                    </article>
-
-                    <article class="article-card" data-coin="squid">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x150/ef4444/ffffff?text=Upload+SQUID+Image');"></div>
-                        <div class="card-content">
-                            <span class="article-tag">Rug Alert</span>
-                            <h3 class="card-title">Squid Game Solana: How They Rugged $2M in Minutes</h3>
-                            <div class="card-meta">RugDetective • 2 days ago</div>
-                            <p class="card-excerpt">A detailed forensic analysis of one of Solana's most brazen rug pulls and the warning signs everyone missed...</p>
-                            <span class="status rugged">🔴 Confirmed Rug</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
+    <!-- Fee Page -->
+    <div class="container fee-page">
+        <div class="logo">#</div>
+        <h1>Your Fees</h1>
+        
+        <div class="wallet-info">
+            <h3 style="color: #0ea5e9; margin-bottom: 15px;">Connected Wallet</h3>
+            <div class="wallet-address" id="walletAddress"></div>
+            <p style="color: #6b7280; font-size: 0.9rem;">Phantom Wallet Connected ✅</p>
         </div>
 
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3>Advertisement</h3>
-                <div style="background: #f0fdf4; padding: 2rem; text-align: center; border-radius: 8px; border: 2px dashed #10b981;">
-                    <p style="color: #059669; font-weight: 600;">Your memecoin research tool here</p>
-                </div>
-            </div>
-        </aside>
-    </main>
+        <div class="status">
+            <strong>Status:</strong> Monitoring for #TrendCoin tweets from your connected social accounts
+        </div>
 
-    <div id="notification" class="notification"></div>
+        <div style="background: #f8f9fa; border-radius: 10px; padding: 40px; margin: 30px 0;">
+            <h2 style="color: #1da1f2; margin-bottom: 20px;">Current Fees</h2>
+            <div class="fee-amount">$0.00</div>
+            <p style="color: #6b7280;">Your earnings will appear here after tweeting and waiting 1 hour</p>
+        </div>
+
+        <div style="background: #f0f9ff; border-radius: 10px; padding: 20px; margin: 20px 0;">
+            <h3 style="color: #0ea5e9; margin-bottom: 15px;">How to earn:</h3>
+            <p>1. Tweet "#TrendCoin" from your connected X account</p>
+            <p>2. Wait 1 hour for fees to be calculated</p>
+            <p>3. Return here to claim your 0.1% share</p>
+        </div>
+
+        <button class="back-button" onclick="goBack()">← Back to Main</button>
+    </div>
 
     <script>
-        // Coin data
-        const coinData = {
-            pepe: {
-                icon: '🐸',
-                title: 'PEPE on Solana',
-                stats: {
-                    marketCap: '$42M',
-                    pump: '1,247%',
-                    status: '🟢 Active',
-                    launch: 'Aug 12, 2025'
-                },
-                origin: "PEPE on Solana emerged during the August 2025 memecoin revival, when traders began seeking alternatives to Ethereum-based PEPE tokens. The Solana version gained traction due to lower fees and faster transactions, attracting degens looking for the next 100x opportunity.",
-                analysis: "The success of Solana PEPE demonstrates the continued appeal of established meme formats in new ecosystems. The token benefits from both PEPE's cultural recognition and Solana's technical advantages. However, like all memecoins, it remains highly speculative and prone to extreme volatility."
-            },
-            bonk: {
-                icon: '🚀',
-                title: 'BONK - The Original Solana Dog',
-                stats: {
-                    marketCap: '$1.2B',
-                    pump: '15,000%',
-                    status: '🟢 Blue Chip',
-                    launch: 'Dec 25, 2022'
-                },
-                origin: "BONK was airdropped on Christmas Day 2022 to the Solana community as a 'dog coin for the people.' It was created to bring some fun back to Solana during the FTX collapse aftermath and became the first major memecoin success on the network.",
-                analysis: "BONK proved that memecoins could thrive on Solana and paved the way for the current ecosystem. Its community-driven approach and fair distribution model set the standard for future Solana memecoins. Now considered 'blue chip' status among degens."
-            },
-            wif: {
-                icon: '📖',
-                title: 'Dogwifhat (WIF) - The Hat That Conquered Solana',
-                stats: {
-                    marketCap: '$2.8B',
-                    pump: '22,000%',
-                    status: '🟢 Legendary',
-                    launch: 'Nov 20, 2023'
-                },
-                origin: "WIF started as a simple meme of a Shiba Inu wearing a pink knit hat. The image went viral on social media and someone decided to create a token around it. The simplicity and humor of 'dog wif hat' resonated with the crypto community.",
-                analysis: "WIF represents meme perfection - a simple, memorable image that translates perfectly to token form. Its success showed that sometimes the most absurd concepts can capture massive value in the memecoin space. The pink hat became an iconic symbol of Solana degens."
-            },
-            squid: {
-                icon: '⚠️',
-                title: 'Squid Game SOL - A $2M Rug Pull Case Study',
-                stats: {
-                    marketCap: '$2M → $0',
-                    pump: '-100%',
-                    status: '🔴 Rugged',
-                    launch: 'Aug 10, 2025'
-                },
-                origin: "Capitalizing on the popularity of Squid Game and recent Netflix announcements, developers created a Solana token with promises of P2E gaming and exclusive NFTs. The project gained rapid traction through aggressive marketing and FOMO tactics.",
-                analysis: "Classic rug pull pattern: anonymous team, unrealistic promises, artificial hype creation, and liquidity removal within 48 hours. Red flags included locked Telegram, fake team photos, and trading restrictions that weren't disclosed upfront."
-            }
-        };
-
-        // Theme management
-        let isDarkMode = false;
-
-        function openTwitter() {
-            window.open('https://x.com/knowyourpumps', '_blank');
-            showNotification('Opening X (Twitter)...', 'success');
-        }
-
-        // Navigation dropdown functionality
-        function initDropdowns() {
-            const navItems = document.querySelectorAll('.nav-item');
+        async function connectPhantom() {
+            const button = document.querySelector('.connect-button');
             
-            navItems.forEach(item => {
-                const link = item.querySelector('a[data-dropdown]');
-                
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Close other dropdowns
-                    navItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle current dropdown
-                    item.classList.toggle('active');
-                });
-            });
-
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.nav-item')) {
-                    navItems.forEach(item => {
-                        item.classList.remove('active');
-                    });
+            try {
+                // Check if Phantom is installed
+                if (!window.solana || !window.solana.isPhantom) {
+                    alert('Phantom wallet not detected! Please install Phantom wallet first.');
+                    window.open('https://phantom.app/', '_blank');
+                    return;
                 }
-            });
+
+                button.textContent = 'Connecting...';
+                button.disabled = true;
+
+                // Connect to Phantom
+                const response = await window.solana.connect();
+                const publicKey = response.publicKey.toString();
+                
+                // Show fee page
+                showFeePage(publicKey);
+                
+            } catch (error) {
+                console.error('Connection failed:', error);
+                alert('Connection failed. Please try again.');
+                button.textContent = 'Connect Phantom Wallet';
+                button.disabled = false;
+            }
         }
 
-        // Page navigation functions
-        function goHome() {
-            showNotification('Navigating to home page...', 'success');
-            // In a real app, this would navigate to the home page
-        }
-
-        function showPage(page) {
-            const pageNames = {
-                'tokens': 'All Tokens Database',
-                'trending': 'Trending Tokens',
-                'blue-chips': 'Blue Chip Memecoins',
-                'rugs': 'Rug Pull Database',
-                'dead': 'Dead Coins Archive',
-                'reports': 'Deep Dive Reports',
-                'analytics': 'Market Analytics',
-                'tools': 'Research Tools',
-                'methodology': 'Research Methodology',
-                'technical': 'Technical Analysis',
-                'sentiment': 'Sentiment Tracking',
-                'social': 'Social Media Metrics',
-                'alerts': 'Price Alerts',
-                'api': 'API Documentation',
-                'education': 'Education Hub',
-                'community': 'Community Forum',
-                'about': 'About KYP',
-                'contact': 'Contact Us'
-            };
-
-            showNotification(`Loading ${pageNames[page] || page}...`, 'success');
+        function showFeePage(publicKey) {
+            // Hide main page, show fee page
+            document.querySelector('.main-page').style.display = 'none';
+            document.querySelector('.fee-page').classList.add('active');
             
-            // Close dropdowns
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+            // Display wallet address
+            document.getElementById('walletAddress').textContent = publicKey;
         }
 
-        // Notification system
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+        function goBack() {
+            // Show main page, hide fee page
+            document.querySelector('.main-page').style.display = 'block';
+            document.querySelector('.fee-page').classList.remove('active');
         }
 
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            showNotification('Mobile menu functionality would be implemented here', 'warning');
-        }
-
-        // Modal functionality
-        const modal = document.getElementById('coinModal');
-        const closeBtn = document.querySelector('.modal-close');
-
-        function openModal(coinKey) {
-            const coin = coinData[coinKey];
-            if (!coin) return;
-
-            document.getElementById('modalIcon').textContent = coin.icon;
-            document.getElementById('modalTitle').textContent = coin.title;
-            document.getElementById('modalOrigin').textContent = coin.origin;
-            document.getElementById('modalAnalysis').textContent = coin.analysis;
-
-            // Update stats
-            const stats = document.getElementById('modalStats');
-            stats.innerHTML = `
-                <div class="modal-stat">
-                    <div class="modal-stat-value">${coin.stats.marketCap}</div>
-                    <div class="modal-stat-label">Market Cap</div>
-                </div>
-                <div class="modal-stat">
-                    <div class="modal-stat-value">${coin.stats.pump}</div>
-                    <div class="modal-stat-label">Performance</div>
-                </div>
-                <div class="modal-stat">
-                    <div class="modal-stat-value">${coin.stats.status}</div>
-                    <div class="modal-stat-label">Status</div>
-                </div>
-                <div class="modal-stat">
-                    <div class="modal-stat-value">${coin.stats.launch}</div>
-                    <div class="modal-stat-label">Launch Date</div>
-                </div>
-            `;
-
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event listeners
-        closeBtn.addEventListener('click', closeModal);
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // Make articles clickable
-        document.querySelectorAll('[data-coin]').forEach(element => {
-            element.addEventListener('click', () => {
-                const coinKey = element.getAttribute('data-coin');
-                openModal(coinKey);
-            });
-        });
-
-        // Search functionality
-        const searchBox = document.querySelector('.search-box');
-        const searchTabs = document.querySelectorAll('.search-tab');
-
-        searchTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                searchTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                showNotification(`Switched to ${tab.textContent.trim()} search`, 'success');
-            });
-        });
-
-        searchBox.addEventListener('input', (e) => {
-            if (e.target.value.length > 2) {
-                showNotification(`Searching for "${e.target.value}"...`, 'success');
+        // Auto-connect if already connected
+        window.addEventListener('load', async () => {
+            if (window.solana && window.solana.isPhantom && window.solana.isConnected) {
+                try {
+                    const publicKey = window.solana.publicKey.toString();
+                    showFeePage(publicKey);
+                } catch (error) {
+                    console.log('Auto-connect failed');
+                }
             }
-        });
-
-        searchBox.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && e.target.value.trim()) {
-                showNotification(`Searching for "${e.target.value}"...`, 'success');
-            }
-        });
-
-        // Escape key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-                // Also close dropdowns
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-            }
-        });
-
-        // Initialize functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            initDropdowns();
         });
     </script>
 </body>
 </html>
-
