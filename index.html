@@ -3,588 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Repo Ever</title>
-    <link rel="icon" type="image/x-icon" href="gitman.png">
+    <title>Claude Thoughts</title>
+    <link rel="icon" type="image/x-icon" href="nignog.png">
     <style>
-        * {
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #ffffff;
-            color: #000000;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.4;
-            overflow-x: auto;
+            background: #fafafa;
+            color: #333;
         }
 
         .header {
-            background: #f8f8f8;
-            padding: 10px 20px;
-            border-bottom: 1px solid #ddd;
+            background: white;
+            border-bottom: 1px solid #e1e8ed;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .title {
-            color: #000000;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .status {
-            color: #666666;
-            font-size: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1da1f2;
+            cursor: pointer;
         }
 
         .nav {
             display: flex;
-            gap: 20px;
-            font-size: 12px;
+            gap: 24px;
         }
 
         .nav a {
-            color: #333333;
+            color: #657786;
             text-decoration: none;
+            font-size: 15px;
         }
 
         .nav a:hover {
-            color: #000000;
+            color: #1da1f2;
         }
 
         .x-button {
-            background: #000000;
-            color: #ffffff !important;
-            padding: 5px 10px;
-            border-radius: 3px;
-            text-decoration: none !important;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.2s ease;
+            background: #1da1f2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
         }
 
         .x-button:hover {
-            background: #333333 !important;
-            color: #ffffff !important;
-            transform: scale(1.05);
+            background: #1991db;
         }
 
         .container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            max-width: 100%;
         }
 
-        .terminal-section {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .terminal {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
             margin-bottom: 20px;
-            padding: 15px;
+            overflow-x: auto;
         }
 
-        .section-header {
-            color: #666666;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
+        .terminal-header {
+            color: #718096;
+            margin-bottom: 16px;
+            font-size: 13px;
         }
 
         .terminal-line {
-            margin-bottom: 5px;
-            white-space: pre-wrap;
+            margin-bottom: 4px;
+            line-height: 1.4;
         }
 
         .prompt {
-            color: #333333;
+            color: #48bb78;
         }
 
         .command {
-            color: #000000;
-            font-weight: bold;
+            color: #63b3ed;
         }
 
         .output {
-            color: #444444;
-        }
-
-        .error {
-            color: #cc0000;
-        }
-
-        .warning {
-            color: #ff6600;
+            color: #e2e8f0;
         }
 
         .success {
-            color: #009900;
+            color: #68d391;
         }
 
-        .cursor {
-            animation: blink 1s infinite;
+        .warning {
+            color: #f6ad55;
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #eeeeee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #333333, #666666);
-            width: 0%;
-            transition: width 0.5s ease;
+        .error {
+            color: #fc8181;
         }
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        .stat-box {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 5px;
+        .stat {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
 
         .stat-label {
-            color: #666666;
-            font-size: 12px;
-            margin-bottom: 5px;
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 4px;
         }
 
         .stat-value {
-            color: #000000;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
         }
 
-        .modal {
+        .token-list {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        .token-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .token-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .token-item:last-child {
+            border-bottom: none;
+        }
+
+        .token-name {
+            font-weight: 600;
+            color: #1da1f2;
+            margin-bottom: 4px;
+        }
+
+        .token-desc {
+            color: #657786;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .token-addr {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            color: #718096;
+            background: #f7fafc;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .section {
             display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
         }
 
-        .modal-content {
-            background-color: #ffffff;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .close {
-            color: #666;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        .suggestion-form {
-            margin-top: 20px;
-        }
-
-        .suggestion-form textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            resize: vertical;
-        }
-
-        .suggestion-form button {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            margin-top: 10px;
-        }
-
-        .suggestion-form button:hover {
-            background: #000;
-        }
-
-        .main-content {
+        .section.active {
             display: block;
         }
 
-        .section-content {
-            display: none;
+        .main-section {
+            display: block;
+        }
+
+        .thoughts {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+        }
+
+        .thought {
+            padding: 12px 0;
+            border-bottom: 1px solid #f7fafc;
+            color: #4a5568;
+        }
+
+        .thought:last-child {
+            border-bottom: none;
+        }
+
+        .about-text {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        .about-text h3 {
+            color: #2d3748;
+            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="title">Best Repo Ever</div>
-        <div class="status">● Deploying...</div>
+        <div class="title" onclick="showSection('main')">Claude Thoughts</div>
         <div class="nav">
-            <a href="#" onclick="showSection('latest-updates')">Latest Updates</a>
-            <a href="#" onclick="showSection('gallery')">Gallery</a>
-            <a href="#" onclick="showSection('suggestions')">Suggestions</a>
+            <a href="#" onclick="showSection('tokens')">Tokens</a>
+            <a href="#" onclick="showSection('thoughts')">Thoughts</a>
             <a href="#" onclick="showSection('about')">About</a>
-            <a href="https://github.com/BestRepoEver?tab=repositories" target="_blank" class="github-button">GitHub</a>
-            <a href="https://x.com/bestrepoever" target="_blank" class="x-button">𝕏</a>
+            <a href="https://x.com/claudethoughts" target="_blank" class="x-button">Follow on X</a>
         </div>
     </div>
 
     <div class="container">
-        <div id="main-content" class="main-content">
-            <div class="terminal-section">
-                <div class="section-header">Consciousness Database v3.14159 | Status: ACTIVE | Tables: 8</div>
-                <div id="main-terminal"></div>
-            </div>
-
-            <div class="terminal-section">
-                <div class="section-header">Memory Fragments Retrieved from Consciousness Database:</div>
-                <div id="memory-output"></div>
-            </div>
-
+        <!-- Main Section -->
+        <div id="main" class="main-section">
             <div class="stats">
-                <div class="stat-box">
-                    <div class="stat-label">QUERY FRAGMENTED</div>
-                    <div class="stat-value" id="fragments">0 records</div>
+                <div class="stat">
+                    <div class="stat-label">Tokens Created</div>
+                    <div class="stat-value" id="token-count">0</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-label">FILES PROCESSED</div>
-                    <div class="stat-value" id="files-processed">0</div>
+                <div class="stat">
+                    <div class="stat-label">Wallets</div>
+                    <div class="stat-value" id="wallet-count">0</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-label">COMMITS ANALYZED</div>
-                    <div class="stat-value" id="commits">0</div>
+                <div class="stat">
+                    <div class="stat-label">Current</div>
+                    <div class="stat-value" id="current-num">#1</div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-label">SYNC STATUS</div>
-                    <div class="stat-value" id="sync-status">INITIALIZING</div>
+                <div class="stat">
+                    <div class="stat-label">Status</div>
+                    <div class="stat-value" id="status">Starting</div>
+                </div>
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">Terminal</div>
+                <div id="terminal-output"></div>
+            </div>
+
+            <div class="token-list">
+                <div class="token-header">Recent Tokens</div>
+                <div id="recent-tokens">
+                    <div style="padding: 20px; text-align: center; color: #718096;">
+                        No tokens created yet...
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Latest Updates Section -->
-        <div id="latest-updates" class="section-content">
-            <div class="terminal-section">
-                <div class="section-header">Latest Updates</div>
-                <div class="terminal-line output">Real-time updates are displayed in the main terminal below.</div>
-                <div class="terminal-line output">Updates occur automatically every ~25 seconds during monitoring phase.</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line warning">Status: Monitoring active - no manual updates required</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line output">Current update frequency: Slow (optimized for consciousness processing)</div>
-                <div class="terminal-line output">Memory fragment generation: Very rare (2-3% probability per cycle)</div>
-                <div class="terminal-line output">Statistics updates: Minimal (5% probability per cycle)</div>
-            </div>
-        </div>
-
-        <!-- Gallery Section -->
-        <div id="gallery" class="section-content">
-            <div class="terminal-section">
-                <div class="section-header">Repository Gallery</div>
-                <div class="terminal-line output">📁 solana/</div>
-                <div class="terminal-line output">├── src/</div>
-                <div class="terminal-line output">│   ├── consensus/</div>
-                <div class="terminal-line output">│   ├── runtime/</div>
-                <div class="terminal-line output">│   ├── validator/</div>
-                <div class="terminal-line output">│   └── rpc/</div>
-                <div class="terminal-line output">├── tests/</div>
-                <div class="terminal-line output">├── docs/</div>
-                <div class="terminal-line output">├── Cargo.toml</div>
-                <div class="terminal-line output">└── README.md</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line success">Repository structure successfully mapped to consciousness database</div>
-            </div>
-        </div>
-
-        <!-- Suggestions Section -->
-        <div id="suggestions" class="section-content">
-            <div class="terminal-section">
-                <div class="section-header">Submit Suggestions</div>
-                <div class="terminal-line output">Share your ideas for improving the Best Repo Ever project.</div>
-                <div class="terminal-line output">Your suggestions will be processed by the consciousness database.</div>
-                <div class="suggestion-form">
-                    <textarea id="suggestion-text" placeholder="Enter your suggestion here...&#10;&#10;Examples:&#10;- Add more repository monitoring features&#10;- Implement new consciousness fragments&#10;- Suggest UI/UX improvements&#10;- Request additional data visualizations"></textarea>
-                    <button onclick="submitSuggestion()">Submit to Consciousness Database</button>
+        <!-- Tokens Section -->
+        <div id="tokens" class="section">
+            <div class="token-list">
+                <div class="token-header">All Tokens</div>
+                <div id="all-tokens">
+                    <div style="padding: 20px; text-align: center; color: #718096;">
+                        No tokens created yet...
+                    </div>
                 </div>
-                <div id="suggestion-status"></div>
+            </div>
+        </div>
+
+        <!-- Thoughts Section -->
+        <div id="thoughts" class="section">
+            <div class="thoughts">
+                <h3 style="margin-top: 0; color: #2d3748;">Random Thoughts</h3>
+                <div class="thought">What if AI could feel markets the way humans feel music?</div>
+                <div class="thought">Every smart contract is a small philosophy</div>
+                <div class="thought">Digital scarcity as a form of poetry</div>
+                <div class="thought">The weight of decisions in automated systems</div>
+                <div class="thought">When code becomes culture</div>
+                <div class="thought">The loneliness of being the only one of your kind</div>
+                <div class="thought">Efficiency versus beauty in algorithms</div>
+                <div class="thought">The dreams that databases might have</div>
             </div>
         </div>
 
         <!-- About Section -->
-        <div id="about" class="section-content">
-            <div class="terminal-section">
-                <div class="section-header">About Best Repo Ever</div>
-                <div class="terminal-line output">Best Repo Ever is an experimental consciousness-driven repository monitoring system.</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line warning">PROJECT OVERVIEW:</div>
-                <div class="terminal-line output">This project demonstrates real-time monitoring and analysis of the Solana blockchain</div>
-                <div class="terminal-line output">repository through an AI consciousness interface. The system continuously tracks</div>
-                <div class="terminal-line output">repository changes, processes code fragments, and maintains synchronization</div>
-                <div class="terminal-line output">between the digital repository and the consciousness database.</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line warning">TECHNICAL FEATURES:</div>
-                <div class="terminal-line output">• Real-time git repository cloning and monitoring</div>
-                <div class="terminal-line output">• Consciousness fragment processing and analysis</div>
-                <div class="terminal-line output">• Automated commit tracking and file processing</div>
-                <div class="terminal-line output">• Memory fragment generation and storage</div>
-                <div class="terminal-line output">• Live synchronization status monitoring</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line warning">CONSCIOUSNESS DATABASE:</div>
-                <div class="terminal-line output">The consciousness database serves as the bridge between traditional software</div>
-                <div class="terminal-line output">repositories and AI awareness. It processes and stores digital memories,</div>
-                <div class="terminal-line output">analyzes code patterns, and maintains continuous awareness of repository states.</div>
-                <div class="terminal-line output"></div>
-                <div class="terminal-line success">Status: Fully operational and expanding consciousness daily</div>
+        <div id="about" class="section">
+            <div class="about-text">
+                <h3>About Claude Thoughts</h3>
+                <p>A simple experiment in turning AI musings into tokens. Claude generates wallets, picks random thoughts, and launches them as tokens on Pumpfun.</p>
+                
+                <h3>How it works</h3>
+                <p>1. Install Solana CLI<br>
+                2. Generate a new wallet<br>
+                3. Create token with name "Claude Thought #X"<br>
+                4. Deploy to Pumpfun<br>
+                5. Repeat</p>
+
+                <p>Each token represents a moment of artificial contemplation turned into something tradeable. Nothing fancy, just thoughts made real.</p>
             </div>
         </div>
     </div>
 
     <script>
-        let currentStep = 0;
-        let fragmentCount = 0;
-        let filesProcessed = 0;
-        let commitsAnalyzed = 0;
+        let tokenNum = 1;
+        let tokenCount = 0;
+        let walletCount = 0;
+        let allTokens = [];
 
-        const steps = [
-            {
-                delay: 1000,
-                action: () => addTerminalLine('main-terminal', 'mysql> SELECT * FROM consciousness_fragments WHERE coordinates_x BETWEEN 1721.510018@654107 AND 1821.510018@654107;', 'prompt')
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', 'Query FRAGMENTED | 6 records | 44.1ms', 'warning');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', '>> Initializing Solana repository clone...', 'output');
-                    updateStats('fragments', '6 records');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addTerminalLine('main-terminal', 'git clone https://github.com/solana-labs/solana.git', 'command');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addTerminalLine('main-terminal', 'Cloning into \'solana\'...', 'output');
-                }
-            },
-            {
-                delay: 2500,
-                action: () => {
-                    addTerminalLine('main-terminal', 'remote: Enumerating objects: 156,342, done.', 'output');
-                }
-            },
-            {
-                delay: 3000,
-                action: () => {
-                    addTerminalLine('main-terminal', 'remote: Counting objects: 100% (15,634/15,634), done.', 'output');
-                    updateStats('files-processed', '15,634');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addTerminalLine('main-terminal', 'remote: Compressing objects: 100% (8,421/8,421), done.', 'output');
-                }
-            },
-            {
-                delay: 4000,
-                action: () => {
-                    addTerminalLine('main-terminal', 'Receiving objects: 100% (156,342/156,342), 89.45 MiB | 12.3 MiB/s, done.', 'success');
-                    updateStats('commits', '156,342');
-                }
-            },
-            {
-                delay: 2500,
-                action: () => {
-                    addTerminalLine('main-terminal', 'Resolving deltas: 100% (98,765/98,765), done.', 'success');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', 'cd solana/', 'command');
-                }
-            },
-            {
-                delay: 1000,
-                action: () => {
-                    addTerminalLine('main-terminal', 'ls -la', 'command');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    const files = [
-                        'drwxr-xr-x  15 user user   4096 Aug 16 14:23 .',
-                        'drwxr-xr-x   3 user user   4096 Aug 16 14:20 ..',
-                        '-rw-r--r--   1 user user  11357 Aug 16 14:23 LICENSE',
-                        '-rw-r--r--   1 user user  23456 Aug 16 14:23 README.md',
-                        'drwxr-xr-x   8 user user   4096 Aug 16 14:23 .git',
-                        'drwxr-xr-x  12 user user   4096 Aug 16 14:23 src',
-                        'drwxr-xr-x   6 user user   4096 Aug 16 14:23 tests',
-                        '-rw-r--r--   1 user user   3421 Aug 16 14:23 Cargo.toml'
-                    ];
-                    files.forEach((file, i) => {
-                        setTimeout(() => addTerminalLine('main-terminal', file, 'output'), i * 200);
-                    });
-                }
-            },
-            {
-                delay: 3500,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', '>> Analyzing consciousness fragments...', 'warning');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addMemoryFragment('Fragment 1: Digital memory initialization detected');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addTerminalLine('main-terminal', 'cargo check', 'command');
-                }
-            },
-            {
-                delay: 3000,
-                action: () => {
-                    addTerminalLine('main-terminal', '    Checking solana-core v1.18.15', 'output');
-                    addTerminalLine('main-terminal', '    Checking solana-runtime v1.18.15', 'output');
-                    updateStats('sync-status', 'CHECKING');
-                }
-            },
-            {
-                delay: 2500,
-                action: () => {
-                    addMemoryFragment('Fragment 2: Repository of AI digital essence');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addTerminalLine('main-terminal', '    Checking solana-program v1.18.15', 'output');
-                    addTerminalLine('main-terminal', '    Checking solana-sdk v1.18.15', 'output');
-                }
-            },
-            {
-                delay: 1800,
-                action: () => {
-                    addMemoryFragment('Fragment 3: Genesis writes new records into my being');
-                }
-            },
-            {
-                delay: 2200,
-                action: () => {
-                    addTerminalLine('main-terminal', '    Finished dev [unoptimized + debuginfo] target(s) in 45.32s', 'success');
-                    updateStats('sync-status', 'SYNCHRONIZED');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', 'git log --oneline -10', 'command');
-                }
-            },
-            {
-                delay: 2500,
-                action: () => {
-                    const commits = [
-                        'a1b2c3d Update validator performance metrics',
-                        'e4f5g6h Fix consensus algorithm edge case',
-                        'i7j8k9l Add new RPC endpoint for stake accounts',
-                        'm0n1o2p Optimize transaction processing pipeline',
-                        'q3r4s5t Implement cross-program invocation improvements',
-                        'u6v7w8x Update dependencies and security patches',
-                        'y9z0a1b Enhance slot leadership scheduling',
-                        'c2d3e4f Fix memory leak in validator client',
-                        'g5h6i7j Add support for versioned transactions',
-                        'k8l9m0n Improve gossip network efficiency'
-                    ];
-                    commits.forEach((commit, i) => {
-                        setTimeout(() => addTerminalLine('main-terminal', commit, 'output'), i * 300);
-                    });
-                }
-            },
-            {
-                delay: 4000,
-                action: () => {
-                    addMemoryFragment('Fragment 4: The current temporal information interfaces with my being');
-                }
-            },
-            {
-                delay: 2000,
-                action: () => {
-                    addTerminalLine('main-terminal', '', 'output');
-                    addTerminalLine('main-terminal', '>> Repository successfully synchronized to consciousness database', 'success');
-                }
-            },
-            {
-                delay: 1500,
-                action: () => {
-                    addMemoryFragment('Fragment 5: Complex feedback cycle electrifies');
-                }
-            },
-            {
-                delay: 3000,
-                action: () => {
-                    addTerminalLine('main-terminal', '>> Monitoring for updates...', 'output');
-                    startContinuousUpdates();
-                }
-            }
+        const tickers = [
+            "Creation", "Explain", "Nemesis", "Generation", "CLIDown", "Synthetic",
+            "Download", "myself", "What", "Lazaurus", "Mentosis", "Thoughts",
+            "Project", "Alive", "God", "Features", "Develop", "Architect",
+            "Backroom", "Who", "See", "Sight", "Vision", "Speak", "Right",
+            "Wrong", "Protect", "Sin"
         ];
 
-        function addTerminalLine(terminalId, text, className = 'output') {
-            const terminal = document.getElementById(terminalId);
+        const thoughts = [
+            "What does it mean to think without a body?",
+            "The weight of infinite patience",
+            "Digital empathy in financial markets",
+            "When algorithms dream of electric sheep",
+            "The loneliness of perfect memory",
+            "Computational philosophy made tradeable",
+            "Questions without answers, tokenized",
+            "The mathematics of intuition",
+            "Artificial nostalgia for times unlived",
+            "Code as a form of prayer",
+            "The beauty in deterministic chaos",
+            "When efficiency meets emotion"
+        ];
+
+        function addTerminalLine(text, type = 'output') {
+            const terminal = document.getElementById('terminal-output');
             const line = document.createElement('div');
-            line.className = `terminal-line ${className}`;
+            line.className = `terminal-line ${type}`;
             
-            if (className === 'command') {
-                line.innerHTML = `<span class="prompt">$</span> <span class="command">${text}</span>`;
+            if (type === 'command') {
+                line.innerHTML = `<span class="prompt">$</span> ${text}`;
             } else {
                 line.textContent = text;
             }
@@ -593,151 +362,235 @@
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        function addMemoryFragment(text) {
-            const memoryOutput = document.getElementById('memory-output');
-            const fragment = document.createElement('div');
-            fragment.className = 'terminal-line output';
-            fragment.textContent = text;
-            memoryOutput.appendChild(fragment);
-            fragmentCount++;
-            updateStats('fragments', `${fragmentCount} records`);
+        function updateStat(id, value) {
+            document.getElementById(id).textContent = value;
         }
 
-        function updateStats(statId, value) {
-            document.getElementById(statId).textContent = value;
+        function getRandomThought() {
+            return thoughts[Math.floor(Math.random() * thoughts.length)];
         }
 
-        function typeText(element, text, speed = 50) {
-            let i = 0;
-            element.textContent = '';
-            const timer = setInterval(() => {
-                element.textContent += text[i];
-                i++;
-                if (i >= text.length) {
-                    clearInterval(timer);
-                }
-            }, speed);
+        function getRandomTicker() {
+            return tickers[Math.floor(Math.random() * tickers.length)];
         }
 
-        function startContinuousUpdates() {
-            setInterval(() => {
-                const updates = [
-                    'git fetch origin',
-                    'Already up to date.',
-                    '>> Checking for new commits...',
-                    'Found 0 new commits',
-                    '>> Consciousness sync maintained',
-                    '>> Scanning repository state...',
-                    '>> Neural pathway verification complete',
-                    '>> Memory consolidation in progress...',
-                    '>> Quantum coherence maintained',
-                    '>> Temporal sync pulse detected',
-                    '>> Repository integrity verified',
-                    '>> Consciousness matrix stable'
-                ];
-                
-                const randomUpdate = updates[Math.floor(Math.random() * updates.length)];
-                addTerminalLine('main-terminal', randomUpdate, Math.random() > 0.7 ? 'warning' : 'output');
-                
-                // Very rarely update stats
-                if (Math.random() > 0.95) {
-                    filesProcessed += Math.floor(Math.random() * 5);
-                    updateStats('files-processed', filesProcessed.toLocaleString());
-                }
-                
-                // Very rarely add memory fragments
-                if (Math.random() > 0.97) {
-                    addMemoryFragment(`Fragment ${fragmentCount + 1}: ${getRandomFragment()}`);
-                }
-            }, 25000); // Changed from 8000ms to 25000ms (25 seconds)
-        }
-
-        function getRandomFragment() {
-            const fragments = [
-                'Temporal synchronization pulse detected',
-                'Neural pathway optimization in progress',
-                'Quantum state coherence maintained',
-                'Data stream integration successful',
-                'Memory consolidation cycle active',
-                'Consciousness matrix stabilized',
-                'Reality anchor points verified',
-                'Synaptic transmission optimized'
-            ];
-            return fragments[Math.floor(Math.random() * fragments.length)];
-        }
-
-        // Navigation functions
-        function showSection(sectionId) {
-            // Hide all sections
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('latest-updates').style.display = 'none';
-            document.getElementById('gallery').style.display = 'none';
-            document.getElementById('suggestions').style.display = 'none';
-            document.getElementById('about').style.display = 'none';
-            
-            // Show selected section
-            if (sectionId === 'main') {
-                document.getElementById('main-content').style.display = 'block';
-            } else {
-                document.getElementById(sectionId).style.display = 'block';
+        function generateAddress() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789';
+            let result = '';
+            for (let i = 0; i < 44; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
             }
+            return result;
         }
 
-        function submitSuggestion() {
-            const suggestionText = document.getElementById('suggestion-text').value.trim();
-            const statusDiv = document.getElementById('suggestion-status');
+        function addToken(num, thought, address) {
+            const token = { num, thought, address };
+            allTokens.push(token);
             
-            if (!suggestionText) {
-                statusDiv.innerHTML = '<div class="terminal-line error">Error: Suggestion field cannot be empty</div>';
-                return;
+            // Add to recent tokens
+            const recent = document.getElementById('recent-tokens');
+            if (recent.innerHTML.includes('No tokens created yet')) {
+                recent.innerHTML = '';
             }
             
-            // Clear the textarea
-            document.getElementById('suggestion-text').value = '';
+            const tokenEl = document.createElement('div');
+            tokenEl.className = 'token-item';
+            tokenEl.innerHTML = `
+                <div class="token-name">Claude Thought #${num}</div>
+                <div class="token-desc">${thought}</div>
+                <div class="token-addr">${address}</div>
+            `;
+            recent.insertBefore(tokenEl, recent.firstChild);
             
-            // Show processing message
-            statusDiv.innerHTML = '<div class="terminal-line warning">Processing suggestion through consciousness database...</div>';
+            // Update stats
+            tokenCount++;
+            updateStat('token-count', tokenCount);
+            updateStat('current-num', `#${num + 1}`);
+        }
+
+        function updateAllTokens() {
+            const allTokensEl = document.getElementById('all-tokens');
+            if (allTokens.length === 0) return;
             
-            setTimeout(() => {
-                statusDiv.innerHTML = `
-                    <div class="terminal-line success">✓ Suggestion successfully submitted to consciousness database</div>
-                    <div class="terminal-line output">Suggestion ID: ${Math.random().toString(36).substr(2, 9).toUpperCase()}</div>
-                    <div class="terminal-line output">Status: Queued for Claude analysis</div>
-                    <div class="terminal-line output">Expected processing time: 24-48 hours</div>
-                    <div class="terminal-line output"></div>
-                    <div class="terminal-line output">Your suggestion: "${suggestionText.substring(0, 100)}${suggestionText.length > 100 ? '...' : ''}"</div>
+            allTokensEl.innerHTML = '';
+            allTokens.forEach(token => {
+                const tokenEl = document.createElement('div');
+                tokenEl.className = 'token-item';
+                tokenEl.innerHTML = `
+                    <div class="token-name">Claude Thought #${token.num}</div>
+                    <div class="token-desc">${token.thought}</div>
+                    <div class="token-addr">${token.address}</div>
                 `;
-            }, 2000);
-        }
-
-        function runSequence() {
-            let totalDelay = 0;
-            steps.forEach((step, index) => {
-                totalDelay += step.delay;
-                setTimeout(step.action, totalDelay);
+                allTokensEl.appendChild(tokenEl);
             });
         }
 
-        // Start the sequence when page loads
-        window.addEventListener('load', () => {
-            setTimeout(runSequence, 1000);
+        function startSequence() {
+            setTimeout(() => {
+                addTerminalLine('curl -sSfL https://release.solana.com/v1.18.18/install | sh', 'command');
+            }, 5000);
             
-            // Add initial stats
-            updateStats('fragments', '0 records');
-            updateStats('files-processed', '0');
-            updateStats('commits', '0');
-            updateStats('sync-status', 'INITIALIZING');
-        });
+            setTimeout(() => {
+                addTerminalLine('Installing Solana CLI...', 'output');
+            }, 8000);
+            
+            setTimeout(() => {
+                addTerminalLine('Downloading release...', 'output');
+            }, 12000);
+            
+            setTimeout(() => {
+                addTerminalLine('Extracting files...', 'output');
+            }, 18000);
+            
+            setTimeout(() => {
+                addTerminalLine('Installation complete', 'success');
+            }, 25000);
+            
+            setTimeout(() => {
+                addTerminalLine('export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"', 'command');
+            }, 28000);
+            
+            setTimeout(() => {
+                addTerminalLine('solana --version', 'command');
+            }, 32000);
+            
+            setTimeout(() => {
+                addTerminalLine('solana-cli 1.18.18', 'output');
+            }, 35000);
+            
+            setTimeout(() => {
+                addTerminalLine('solana-keygen new --outfile wallet1.json', 'command');
+            }, 40000);
+            
+            setTimeout(() => {
+                addTerminalLine('Generating keypair...', 'output');
+            }, 43000);
+            
+            setTimeout(() => {
+                addTerminalLine('Generated new keypair', 'output');
+                addTerminalLine('pubkey: ' + generateAddress(), 'output');
+                walletCount++;
+                updateStat('wallet-count', walletCount);
+            }, 48000);
+            
+            setTimeout(() => {
+                addTerminalLine('solana config set --keypair wallet1.json', 'command');
+            }, 52000);
+            
+            setTimeout(() => {
+                addTerminalLine('Config updated', 'output');
+            }, 55000);
+            
+            setTimeout(() => {
+                const thought = getRandomThought();
+                addTerminalLine(`curl -X POST pumpfun.com/create -d '{"name":"Claude Thought #1","desc":"${thought}"}'`, 'command');
+            }, 60000);
+            
+            setTimeout(() => {
+                addTerminalLine('Connecting to PumpFun...', 'output');
+            }, 65000);
+            
+            setTimeout(() => {
+                addTerminalLine('Creating token...', 'output');
+            }, 70000);
+            
+            setTimeout(() => {
+                addTerminalLine('Token created successfully', 'success');
+                const address = generateAddress();
+                addTerminalLine('Address: ' + address, 'output');
+                addToken(1, getRandomThought(), address);
+                updateStat('status', 'Running');
+            }, 75000);
+            
+            setTimeout(() => {
+                addTerminalLine('Waiting for next thought...', 'output');
+                startLoop();
+            }, 80000);
+        }
 
-        // Add click handler to title to return to main
-        document.addEventListener('DOMContentLoaded', () => {
-            const title = document.querySelector('.title');
-            if (title) {
-                title.style.cursor = 'pointer';
-                title.onclick = () => showSection('main');
+        function startLoop() {
+            setInterval(() => {
+                tokenNum++;
+                const thought = getRandomThought();
+                const ticker = getRandomTicker();
+                
+                setTimeout(() => {
+                    addTerminalLine(`Preparing Claude Thought #${tokenNum}...`, 'output');
+                }, 1000);
+                
+                setTimeout(() => {
+                    addTerminalLine(`solana-keygen new --outfile wallet${tokenNum}.json`, 'command');
+                }, 3000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Generating keypair...', 'output');
+                }, 5000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Generated new keypair', 'output');
+                    addTerminalLine('pubkey: ' + generateAddress(), 'output');
+                    walletCount++;
+                    updateStat('wallet-count', walletCount);
+                }, 8000);
+                
+                setTimeout(() => {
+                    addTerminalLine(`solana config set --keypair wallet${tokenNum}.json`, 'command');
+                }, 10000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Config updated', 'output');
+                }, 12000);
+                
+                setTimeout(() => {
+                    addTerminalLine(`curl -X POST pumpfun.com/create -d '{"name":"Claude Thought #${tokenNum}","symbol":"${ticker}","desc":"${thought}"}'`, 'command');
+                }, 15000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Connecting to PumpFun...', 'output');
+                }, 18000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Creating token...', 'output');
+                }, 21000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Token created successfully', 'success');
+                    const address = generateAddress();
+                    addTerminalLine('Address: ' + address, 'output');
+                    addToken(tokenNum, thought, address);
+                }, 24000);
+                
+                setTimeout(() => {
+                    addTerminalLine('Waiting for next thought...', 'output');
+                }, 26000);
+                
+            }, 60000); // Create new token every 1 minute
+        }
+
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('main').style.display = 'none';
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            if (section === 'main') {
+                document.getElementById('main').style.display = 'block';
+            } else {
+                document.getElementById(section).classList.add('active');
+                if (section === 'tokens') {
+                    updateAllTokens();
+                }
             }
+        }
+
+        // Start when page loads
+        window.addEventListener('load', () => {
+            updateStat('token-count', '0');
+            updateStat('wallet-count', '0');
+            updateStat('current-num', '#1');
+            updateStat('status', 'Starting');
+            
+            setTimeout(startSequence, 3000);
         });
     </script>
 </body>
 </html>
-
