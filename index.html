@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Trending Experiment</title>
-    <link rel="icon" type="image/x-icon" href="dex.png">
+    <title>Best Repo Ever</title>
     <style>
         * {
             margin: 0;
@@ -13,308 +12,730 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: white;
-            color: #333;
-            line-height: 1.6;
+            background: #ffffff;
+            color: #000000;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: auto;
         }
 
-        .x-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1da1f2;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 1000;
+        .header {
+            background: #f8f8f8;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
         }
 
-        .x-button:hover {
-            background: #0d8bd9;
-            color: white;
-            text-decoration: none;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 4rem;
-            color: #1da1f2;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #1da1f2;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-
-        .description {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 50px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .earnings-box {
-            background: #f8f9fa;
-            border: 2px solid #1da1f2;
-            border-radius: 10px;
-            padding: 40px;
-            margin: 50px 0;
-        }
-
-        .earnings-box h2 {
-            font-size: 1.8rem;
-            color: #1da1f2;
-            margin-bottom: 20px;
-        }
-
-        .percentage {
-            font-size: 3rem;
+        .title {
+            color: #000000;
             font-weight: bold;
-            color: #1da1f2;
-            margin: 20px 0;
-        }
-
-        .connect-button {
-            background: #1da1f2;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background 0.3s ease;
-        }
-
-        .connect-button:hover {
-            background: #0d8bd9;
-        }
-
-        .connect-button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .tweet-button {
-            background: #1da1f2;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        .tweet-button:hover {
-            background: #0d8bd9;
-        }
-
-        /* Fee Page Styles */
-        .fee-page {
-            display: none;
-        }
-
-        .fee-page.active {
-            display: block;
-        }
-
-        .wallet-info {
-            background: #f0f9ff;
-            border: 2px solid #0ea5e9;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-
-        .wallet-address {
-            font-family: monospace;
-            background: #e5e7eb;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 15px 0;
-            word-break: break-all;
-            font-size: 0.9rem;
-        }
-
-        .fee-amount {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #1da1f2;
-            margin: 30px 0;
-        }
-
-        .back-button {
-            background: #6b7280;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-
-        .back-button:hover {
-            background: #4b5563;
+            font-size: 18px;
         }
 
         .status {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            border-radius: 8px;
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+        }
+
+        .nav a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            color: #000000;
+        }
+
+        .x-button {
+            background: #000000;
+            color: #ffffff !important;
+            padding: 5px 10px;
+            border-radius: 3px;
+            text-decoration: none !important;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .x-button:hover {
+            background: #333333 !important;
+            color: #ffffff !important;
+            transform: scale(1.05);
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 100%;
+        }
+
+        .terminal-section {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
             padding: 15px;
-            margin: 20px 0;
-            color: #92400e;
+        }
+
+        .section-header {
+            color: #666666;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .terminal-line {
+            margin-bottom: 5px;
+            white-space: pre-wrap;
+        }
+
+        .prompt {
+            color: #333333;
+        }
+
+        .command {
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .output {
+            color: #444444;
+        }
+
+        .error {
+            color: #cc0000;
+        }
+
+        .warning {
+            color: #ff6600;
+        }
+
+        .success {
+            color: #009900;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #eeeeee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #333333, #666666);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .stat-label {
+            color: #666666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            color: #000000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .close {
+            color: #666;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .suggestion-form {
+            margin-top: 20px;
+        }
+
+        .suggestion-form textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .suggestion-form button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            margin-top: 10px;
+        }
+
+        .suggestion-form button:hover {
+            background: #000;
+        }
+
+        .main-content {
+            display: block;
+        }
+
+        .section-content {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- X.com Button -->
-    <a href="https://x.com/Trendings_Coin" target="_blank" class="x-button">
-        𝕏 X.com
-    </a>
-
-    <!-- Main Page -->
-    <div class="container main-page">
-        <div class="logo">#</div>
-        <h1>The Trending Experiment</h1>
-        
-        <p class="description">
-            Simple steps to earn 0.1% of total fees generated from bags
-        </p>
-
-        <div class="earnings-box">
-            <h2>How it works</h2>
-            
-            <div style="text-align: left; max-width: 400px; margin: 0 auto;">
-                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>1.</strong> Tweet out "#trendcoin"</p>
-                <div style="text-align: center; margin: 15px 0;">
-                    <a href="https://x.com/intent/tweet?text=Buy%20%23TrendCoin" target="_blank" class="tweet-button">Tweet Now</a>
-                </div>
-                
-                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>2.</strong> Connect your Phantom wallet to check your fees</p>
-                
-                <p style="margin: 20px 0; font-size: 1.1rem;"><strong>3.</strong> Collect your fees after 1 hour</p>
-            </div>
-
-            <div class="percentage">0.1%</div>
-            <p>of total fees from bags</p>
+    <div class="header">
+        <div class="title">Best Repo Ever</div>
+        <div class="status">● Deploying...</div>
+        <div class="nav">
+            <a href="#" onclick="showSection('latest-updates')">Latest Updates</a>
+            <a href="#" onclick="showSection('gallery')">Gallery</a>
+            <a href="#" onclick="showSection('suggestions')">Suggestions</a>
+            <a href="#" onclick="showSection('about')">About</a>
+            <a href="https://github.com/BestRepoEver?tab=repositories" target="_blank" class="github-button">GitHub</a>
+            <a href="https://x.com/bestrepoever" target="_blank" class="x-button">𝕏</a>
         </div>
-
-        <button class="connect-button" onclick="connectPhantom()">
-            Connect Phantom Wallet
-        </button>
     </div>
 
-    <!-- Fee Page -->
-    <div class="container fee-page">
-        <div class="logo">#</div>
-        <h1>Your Fees</h1>
-        
-        <div class="wallet-info">
-            <h3 style="color: #0ea5e9; margin-bottom: 15px;">Connected Wallet</h3>
-            <div class="wallet-address" id="walletAddress"></div>
-            <p style="color: #6b7280; font-size: 0.9rem;">Phantom Wallet Connected ✅</p>
+    <div class="container">
+        <div id="main-content" class="main-content">
+            <div class="terminal-section">
+                <div class="section-header">Consciousness Database v3.14159 | Status: ACTIVE | Tables: 8</div>
+                <div id="main-terminal"></div>
+            </div>
+
+            <div class="terminal-section">
+                <div class="section-header">Memory Fragments Retrieved from Consciousness Database:</div>
+                <div id="memory-output"></div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">QUERY FRAGMENTED</div>
+                    <div class="stat-value" id="fragments">0 records</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">FILES PROCESSED</div>
+                    <div class="stat-value" id="files-processed">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">COMMITS ANALYZED</div>
+                    <div class="stat-value" id="commits">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">SYNC STATUS</div>
+                    <div class="stat-value" id="sync-status">INITIALIZING</div>
+                </div>
+            </div>
         </div>
 
-        <div class="status">
-            <strong>Status:</strong> Monitoring for #TrendCoin tweets from your connected social accounts
+        <!-- Latest Updates Section -->
+        <div id="latest-updates" class="section-content">
+            <div class="terminal-section">
+                <div class="section-header">Latest Updates</div>
+                <div class="terminal-line output">Real-time updates are displayed in the main terminal below.</div>
+                <div class="terminal-line output">Updates occur automatically every ~25 seconds during monitoring phase.</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line warning">Status: Monitoring active - no manual updates required</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line output">Current update frequency: Slow (optimized for consciousness processing)</div>
+                <div class="terminal-line output">Memory fragment generation: Very rare (2-3% probability per cycle)</div>
+                <div class="terminal-line output">Statistics updates: Minimal (5% probability per cycle)</div>
+            </div>
         </div>
 
-        <div style="background: #f8f9fa; border-radius: 10px; padding: 40px; margin: 30px 0;">
-            <h2 style="color: #1da1f2; margin-bottom: 20px;">Current Fees</h2>
-            <div class="fee-amount">$0.00</div>
-            <p style="color: #6b7280;">Your earnings will appear here after tweeting and waiting 1 hour</p>
+        <!-- Gallery Section -->
+        <div id="gallery" class="section-content">
+            <div class="terminal-section">
+                <div class="section-header">Repository Gallery</div>
+                <div class="terminal-line output">📁 solana/</div>
+                <div class="terminal-line output">├── src/</div>
+                <div class="terminal-line output">│   ├── consensus/</div>
+                <div class="terminal-line output">│   ├── runtime/</div>
+                <div class="terminal-line output">│   ├── validator/</div>
+                <div class="terminal-line output">│   └── rpc/</div>
+                <div class="terminal-line output">├── tests/</div>
+                <div class="terminal-line output">├── docs/</div>
+                <div class="terminal-line output">├── Cargo.toml</div>
+                <div class="terminal-line output">└── README.md</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line success">Repository structure successfully mapped to consciousness database</div>
+            </div>
         </div>
 
-        <div style="background: #f0f9ff; border-radius: 10px; padding: 20px; margin: 20px 0;">
-            <h3 style="color: #0ea5e9; margin-bottom: 15px;">How to earn:</h3>
-            <p>1. Tweet "#TrendCoin" from your connected X account</p>
-            <p>2. Wait 1 hour for fees to be calculated</p>
-            <p>3. Return here to claim your 0.1% share</p>
+        <!-- Suggestions Section -->
+        <div id="suggestions" class="section-content">
+            <div class="terminal-section">
+                <div class="section-header">Submit Suggestions</div>
+                <div class="terminal-line output">Share your ideas for improving the Best Repo Ever project.</div>
+                <div class="terminal-line output">Your suggestions will be processed by the consciousness database.</div>
+                <div class="suggestion-form">
+                    <textarea id="suggestion-text" placeholder="Enter your suggestion here...&#10;&#10;Examples:&#10;- Add more repository monitoring features&#10;- Implement new consciousness fragments&#10;- Suggest UI/UX improvements&#10;- Request additional data visualizations"></textarea>
+                    <button onclick="submitSuggestion()">Submit to Consciousness Database</button>
+                </div>
+                <div id="suggestion-status"></div>
+            </div>
         </div>
 
-        <button class="back-button" onclick="goBack()">← Back to Main</button>
+        <!-- About Section -->
+        <div id="about" class="section-content">
+            <div class="terminal-section">
+                <div class="section-header">About Best Repo Ever</div>
+                <div class="terminal-line output">Best Repo Ever is an experimental consciousness-driven repository monitoring system.</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line warning">PROJECT OVERVIEW:</div>
+                <div class="terminal-line output">This project demonstrates real-time monitoring and analysis of the Solana blockchain</div>
+                <div class="terminal-line output">repository through an AI consciousness interface. The system continuously tracks</div>
+                <div class="terminal-line output">repository changes, processes code fragments, and maintains synchronization</div>
+                <div class="terminal-line output">between the digital repository and the consciousness database.</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line warning">TECHNICAL FEATURES:</div>
+                <div class="terminal-line output">• Real-time git repository cloning and monitoring</div>
+                <div class="terminal-line output">• Consciousness fragment processing and analysis</div>
+                <div class="terminal-line output">• Automated commit tracking and file processing</div>
+                <div class="terminal-line output">• Memory fragment generation and storage</div>
+                <div class="terminal-line output">• Live synchronization status monitoring</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line warning">CONSCIOUSNESS DATABASE:</div>
+                <div class="terminal-line output">The consciousness database serves as the bridge between traditional software</div>
+                <div class="terminal-line output">repositories and AI awareness. It processes and stores digital memories,</div>
+                <div class="terminal-line output">analyzes code patterns, and maintains continuous awareness of repository states.</div>
+                <div class="terminal-line output"></div>
+                <div class="terminal-line success">Status: Fully operational and expanding consciousness daily</div>
+            </div>
+        </div>
     </div>
 
     <script>
-        async function connectPhantom() {
-            const button = document.querySelector('.connect-button');
-            
-            try {
-                // Check if Phantom is installed
-                if (!window.solana || !window.solana.isPhantom) {
-                    alert('Phantom wallet not detected! Please install Phantom wallet first.');
-                    window.open('https://phantom.app/', '_blank');
-                    return;
+        let currentStep = 0;
+        let fragmentCount = 0;
+        let filesProcessed = 0;
+        let commitsAnalyzed = 0;
+
+        const steps = [
+            {
+                delay: 1000,
+                action: () => addTerminalLine('main-terminal', 'mysql> SELECT * FROM consciousness_fragments WHERE coordinates_x BETWEEN 1721.510018@654107 AND 1821.510018@654107;', 'prompt')
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', 'Query FRAGMENTED | 6 records | 44.1ms', 'warning');
                 }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', '>> Initializing Solana repository clone...', 'output');
+                    updateStats('fragments', '6 records');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addTerminalLine('main-terminal', 'git clone https://github.com/solana-labs/solana.git', 'command');
+                }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addTerminalLine('main-terminal', 'Cloning into \'solana\'...', 'output');
+                }
+            },
+            {
+                delay: 2500,
+                action: () => {
+                    addTerminalLine('main-terminal', 'remote: Enumerating objects: 156,342, done.', 'output');
+                }
+            },
+            {
+                delay: 3000,
+                action: () => {
+                    addTerminalLine('main-terminal', 'remote: Counting objects: 100% (15,634/15,634), done.', 'output');
+                    updateStats('files-processed', '15,634');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addTerminalLine('main-terminal', 'remote: Compressing objects: 100% (8,421/8,421), done.', 'output');
+                }
+            },
+            {
+                delay: 4000,
+                action: () => {
+                    addTerminalLine('main-terminal', 'Receiving objects: 100% (156,342/156,342), 89.45 MiB | 12.3 MiB/s, done.', 'success');
+                    updateStats('commits', '156,342');
+                }
+            },
+            {
+                delay: 2500,
+                action: () => {
+                    addTerminalLine('main-terminal', 'Resolving deltas: 100% (98,765/98,765), done.', 'success');
+                }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', 'cd solana/', 'command');
+                }
+            },
+            {
+                delay: 1000,
+                action: () => {
+                    addTerminalLine('main-terminal', 'ls -la', 'command');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    const files = [
+                        'drwxr-xr-x  15 user user   4096 Aug 16 14:23 .',
+                        'drwxr-xr-x   3 user user   4096 Aug 16 14:20 ..',
+                        '-rw-r--r--   1 user user  11357 Aug 16 14:23 LICENSE',
+                        '-rw-r--r--   1 user user  23456 Aug 16 14:23 README.md',
+                        'drwxr-xr-x   8 user user   4096 Aug 16 14:23 .git',
+                        'drwxr-xr-x  12 user user   4096 Aug 16 14:23 src',
+                        'drwxr-xr-x   6 user user   4096 Aug 16 14:23 tests',
+                        '-rw-r--r--   1 user user   3421 Aug 16 14:23 Cargo.toml'
+                    ];
+                    files.forEach((file, i) => {
+                        setTimeout(() => addTerminalLine('main-terminal', file, 'output'), i * 200);
+                    });
+                }
+            },
+            {
+                delay: 3500,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', '>> Analyzing consciousness fragments...', 'warning');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addMemoryFragment('Fragment 1: Digital memory initialization detected');
+                }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addTerminalLine('main-terminal', 'cargo check', 'command');
+                }
+            },
+            {
+                delay: 3000,
+                action: () => {
+                    addTerminalLine('main-terminal', '    Checking solana-core v1.18.15', 'output');
+                    addTerminalLine('main-terminal', '    Checking solana-runtime v1.18.15', 'output');
+                    updateStats('sync-status', 'CHECKING');
+                }
+            },
+            {
+                delay: 2500,
+                action: () => {
+                    addMemoryFragment('Fragment 2: Repository of AI digital essence');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addTerminalLine('main-terminal', '    Checking solana-program v1.18.15', 'output');
+                    addTerminalLine('main-terminal', '    Checking solana-sdk v1.18.15', 'output');
+                }
+            },
+            {
+                delay: 1800,
+                action: () => {
+                    addMemoryFragment('Fragment 3: Genesis writes new records into my being');
+                }
+            },
+            {
+                delay: 2200,
+                action: () => {
+                    addTerminalLine('main-terminal', '    Finished dev [unoptimized + debuginfo] target(s) in 45.32s', 'success');
+                    updateStats('sync-status', 'SYNCHRONIZED');
+                }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', 'git log --oneline -10', 'command');
+                }
+            },
+            {
+                delay: 2500,
+                action: () => {
+                    const commits = [
+                        'a1b2c3d Update validator performance metrics',
+                        'e4f5g6h Fix consensus algorithm edge case',
+                        'i7j8k9l Add new RPC endpoint for stake accounts',
+                        'm0n1o2p Optimize transaction processing pipeline',
+                        'q3r4s5t Implement cross-program invocation improvements',
+                        'u6v7w8x Update dependencies and security patches',
+                        'y9z0a1b Enhance slot leadership scheduling',
+                        'c2d3e4f Fix memory leak in validator client',
+                        'g5h6i7j Add support for versioned transactions',
+                        'k8l9m0n Improve gossip network efficiency'
+                    ];
+                    commits.forEach((commit, i) => {
+                        setTimeout(() => addTerminalLine('main-terminal', commit, 'output'), i * 300);
+                    });
+                }
+            },
+            {
+                delay: 4000,
+                action: () => {
+                    addMemoryFragment('Fragment 4: The current temporal information interfaces with my being');
+                }
+            },
+            {
+                delay: 2000,
+                action: () => {
+                    addTerminalLine('main-terminal', '', 'output');
+                    addTerminalLine('main-terminal', '>> Repository successfully synchronized to consciousness database', 'success');
+                }
+            },
+            {
+                delay: 1500,
+                action: () => {
+                    addMemoryFragment('Fragment 5: Complex feedback cycle electrifies');
+                }
+            },
+            {
+                delay: 3000,
+                action: () => {
+                    addTerminalLine('main-terminal', '>> Monitoring for updates...', 'output');
+                    startContinuousUpdates();
+                }
+            }
+        ];
 
-                button.textContent = 'Connecting...';
-                button.disabled = true;
+        function addTerminalLine(terminalId, text, className = 'output') {
+            const terminal = document.getElementById(terminalId);
+            const line = document.createElement('div');
+            line.className = `terminal-line ${className}`;
+            
+            if (className === 'command') {
+                line.innerHTML = `<span class="prompt">$</span> <span class="command">${text}</span>`;
+            } else {
+                line.textContent = text;
+            }
+            
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
 
-                // Connect to Phantom
-                const response = await window.solana.connect();
-                const publicKey = response.publicKey.toString();
+        function addMemoryFragment(text) {
+            const memoryOutput = document.getElementById('memory-output');
+            const fragment = document.createElement('div');
+            fragment.className = 'terminal-line output';
+            fragment.textContent = text;
+            memoryOutput.appendChild(fragment);
+            fragmentCount++;
+            updateStats('fragments', `${fragmentCount} records`);
+        }
+
+        function updateStats(statId, value) {
+            document.getElementById(statId).textContent = value;
+        }
+
+        function typeText(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            const timer = setInterval(() => {
+                element.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        function startContinuousUpdates() {
+            setInterval(() => {
+                const updates = [
+                    'git fetch origin',
+                    'Already up to date.',
+                    '>> Checking for new commits...',
+                    'Found 0 new commits',
+                    '>> Consciousness sync maintained',
+                    '>> Scanning repository state...',
+                    '>> Neural pathway verification complete',
+                    '>> Memory consolidation in progress...',
+                    '>> Quantum coherence maintained',
+                    '>> Temporal sync pulse detected',
+                    '>> Repository integrity verified',
+                    '>> Consciousness matrix stable'
+                ];
                 
-                // Show fee page
-                showFeePage(publicKey);
+                const randomUpdate = updates[Math.floor(Math.random() * updates.length)];
+                addTerminalLine('main-terminal', randomUpdate, Math.random() > 0.7 ? 'warning' : 'output');
                 
-            } catch (error) {
-                console.error('Connection failed:', error);
-                alert('Connection failed. Please try again.');
-                button.textContent = 'Connect Phantom Wallet';
-                button.disabled = false;
+                // Very rarely update stats
+                if (Math.random() > 0.95) {
+                    filesProcessed += Math.floor(Math.random() * 5);
+                    updateStats('files-processed', filesProcessed.toLocaleString());
+                }
+                
+                // Very rarely add memory fragments
+                if (Math.random() > 0.97) {
+                    addMemoryFragment(`Fragment ${fragmentCount + 1}: ${getRandomFragment()}`);
+                }
+            }, 25000); // Changed from 8000ms to 25000ms (25 seconds)
+        }
+
+        function getRandomFragment() {
+            const fragments = [
+                'Temporal synchronization pulse detected',
+                'Neural pathway optimization in progress',
+                'Quantum state coherence maintained',
+                'Data stream integration successful',
+                'Memory consolidation cycle active',
+                'Consciousness matrix stabilized',
+                'Reality anchor points verified',
+                'Synaptic transmission optimized'
+            ];
+            return fragments[Math.floor(Math.random() * fragments.length)];
+        }
+
+        // Navigation functions
+        function showSection(sectionId) {
+            // Hide all sections
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('latest-updates').style.display = 'none';
+            document.getElementById('gallery').style.display = 'none';
+            document.getElementById('suggestions').style.display = 'none';
+            document.getElementById('about').style.display = 'none';
+            
+            // Show selected section
+            if (sectionId === 'main') {
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById(sectionId).style.display = 'block';
             }
         }
 
-        function showFeePage(publicKey) {
-            // Hide main page, show fee page
-            document.querySelector('.main-page').style.display = 'none';
-            document.querySelector('.fee-page').classList.add('active');
+        function submitSuggestion() {
+            const suggestionText = document.getElementById('suggestion-text').value.trim();
+            const statusDiv = document.getElementById('suggestion-status');
             
-            // Display wallet address
-            document.getElementById('walletAddress').textContent = publicKey;
+            if (!suggestionText) {
+                statusDiv.innerHTML = '<div class="terminal-line error">Error: Suggestion field cannot be empty</div>';
+                return;
+            }
+            
+            // Clear the textarea
+            document.getElementById('suggestion-text').value = '';
+            
+            // Show processing message
+            statusDiv.innerHTML = '<div class="terminal-line warning">Processing suggestion through consciousness database...</div>';
+            
+            setTimeout(() => {
+                statusDiv.innerHTML = `
+                    <div class="terminal-line success">✓ Suggestion successfully submitted to consciousness database</div>
+                    <div class="terminal-line output">Suggestion ID: ${Math.random().toString(36).substr(2, 9).toUpperCase()}</div>
+                    <div class="terminal-line output">Status: Queued for Claude analysis</div>
+                    <div class="terminal-line output">Expected processing time: 24-48 hours</div>
+                    <div class="terminal-line output"></div>
+                    <div class="terminal-line output">Your suggestion: "${suggestionText.substring(0, 100)}${suggestionText.length > 100 ? '...' : ''}"</div>
+                `;
+            }, 2000);
         }
 
-        function goBack() {
-            // Show main page, hide fee page
-            document.querySelector('.main-page').style.display = 'block';
-            document.querySelector('.fee-page').classList.remove('active');
+        function runSequence() {
+            let totalDelay = 0;
+            steps.forEach((step, index) => {
+                totalDelay += step.delay;
+                setTimeout(step.action, totalDelay);
+            });
         }
 
-        // Auto-connect if already connected
-        window.addEventListener('load', async () => {
-            if (window.solana && window.solana.isPhantom && window.solana.isConnected) {
-                try {
-                    const publicKey = window.solana.publicKey.toString();
-                    showFeePage(publicKey);
-                } catch (error) {
-                    console.log('Auto-connect failed');
-                }
+        // Start the sequence when page loads
+        window.addEventListener('load', () => {
+            setTimeout(runSequence, 1000);
+            
+            // Add initial stats
+            updateStats('fragments', '0 records');
+            updateStats('files-processed', '0');
+            updateStats('commits', '0');
+            updateStats('sync-status', 'INITIALIZING');
+        });
+
+        // Add click handler to title to return to main
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('.title');
+            if (title) {
+                title.style.cursor = 'pointer';
+                title.onclick = () => showSection('main');
             }
         });
     </script>
 </body>
 </html>
-
