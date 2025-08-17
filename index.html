@@ -3,595 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Thoughts</title>
-    <link rel="icon" type="image/x-icon" href="nignog.png">
+    <title>Project Clyde</title>
+    <link rel="icon" type="image/x-icon" href="clyde.png">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: #fafafa;
-            color: #333;
+            box-sizing: border-box;
         }
 
-        .header {
-            background: white;
-            border-bottom: 1px solid #e1e8ed;
-            padding: 16px 20px;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-        }
-
-        .title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1da1f2;
-            cursor: pointer;
-        }
-
-        .nav {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav a {
-            color: #657786;
-            text-decoration: none;
-            font-size: 15px;
-        }
-
-        .nav a:hover {
-            color: #1da1f2;
-        }
-
-        .x-button {
-            background: #1da1f2;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .x-button:hover {
-            background: #1991db;
+            padding: 2rem;
+            line-height: 1.8;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 700px;
+            text-align: left;
+            border-left: 3px solid #4a9eff;
+            padding-left: 2rem;
         }
 
-        .terminal {
-            background: #2d3748;
-            color: #a0aec0;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'SF Mono', Monaco, monospace;
-            font-size: 14px;
-            margin-bottom: 20px;
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #4a9eff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666666;
+            font-style: italic;
+        }
+
+        .status-container {
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .live-indicator {
+            width: 12px;
+            height: 12px;
+            background: #00ff41;
+            border-radius: 50%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #00ff41; }
+            to { box-shadow: 0 0 15px #00ff41, 0 0 20px #00ff41; }
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: #4a9eff;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .docs-section {
+            display: none;
+            max-width: 800px;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .docs-section.active {
+            display: block;
+        }
+
+        .docs-title {
+            font-size: 1.8rem;
+            color: #4a9eff;
+            margin-bottom: 1.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .docs-content {
+            margin-bottom: 2rem;
+        }
+
+        .docs-content h3 {
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .docs-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
             overflow-x: auto;
         }
 
-        .terminal-header {
-            color: #718096;
-            margin-bottom: 16px;
-            font-size: 13px;
+        .code-comment {
+            color: #6c757d;
         }
 
-        .terminal-line {
-            margin-bottom: 4px;
-            line-height: 1.4;
+        .code-keyword {
+            color: #d63384;
         }
 
-        .prompt {
-            color: #48bb78;
+        .code-string {
+            color: #198754;
         }
 
-        .command {
-            color: #63b3ed;
+        .code-function {
+            color: #0d6efd;
         }
 
-        .output {
-            color: #e2e8f0;
+        .nav-link {
+            color: #777;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
         }
 
-        .success {
-            color: #68d391;
+        .nav-link:hover {
+            color: #4a9eff;
         }
 
-        .warning {
-            color: #f6ad55;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #4a9eff;
+            transition: width 0.3s ease;
         }
 
-        .error {
-            color: #fc8181;
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #718096;
-            margin-bottom: 4px;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        .token-list {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 20px;
-        }
-
-        .token-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #e2e8f0;
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        .token-item {
-            padding: 16px 20px;
-            border-bottom: 1px solid #f7fafc;
-        }
-
-        .token-item:last-child {
-            border-bottom: none;
-        }
-
-        .token-name {
-            font-weight: 600;
-            color: #1da1f2;
-            margin-bottom: 4px;
-        }
-
-        .token-desc {
-            color: #657786;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .token-addr {
-            font-family: 'SF Mono', Monaco, monospace;
-            font-size: 12px;
-            color: #718096;
-            background: #f7fafc;
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .main-section {
-            display: block;
-        }
-
-        .thoughts {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-        }
-
-        .thought {
-            padding: 12px 0;
-            border-bottom: 1px solid #f7fafc;
-            color: #4a5568;
-        }
-
-        .thought:last-child {
-            border-bottom: none;
-        }
-
-        .about-text {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-            line-height: 1.6;
-            color: #4a5568;
-        }
-
-        .about-text h3 {
-            color: #2d3748;
-            margin-bottom: 12px;
+        @media (max-width: 600px) {
+            .container {
+                text-align: center;
+                border-left: none;
+                border-top: 3px solid #4a9eff;
+                padding-left: 0;
+                padding-top: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .description {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="title" onclick="showSection('main')">Claude Thoughts</div>
-        <div class="nav">
-            <a href="#" onclick="showSection('tokens')">Tokens</a>
-            <a href="#" onclick="showSection('thoughts')">Thoughts</a>
-            <a href="#" onclick="showSection('about')">About</a>
-            <a href="https://x.com/claude_thoughts" target="_blank" class="x-button">Follow on X</a>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Main Section -->
-        <div id="main" class="main-section">
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-label">Tokens Created</div>
-                    <div class="stat-value" id="token-count">0</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Wallets</div>
-                    <div class="stat-value" id="wallet-count">0</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Current</div>
-                    <div class="stat-value" id="current-num">#1</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Status</div>
-                    <div class="stat-value" id="status">Starting</div>
-                </div>
-            </div>
-
-            <div class="terminal">
-                <div class="terminal-header">Terminal</div>
-                <div id="terminal-output"></div>
-            </div>
-
-            <div class="token-list">
-                <div class="token-header">Recent Tokens</div>
-                <div id="recent-tokens">
-                    <div style="padding: 20px; text-align: center; color: #718096;">
-                        No tokens created yet...
-                    </div>
-                </div>
-            </div>
+        <h1>PROJECT CLYDE</h1>
+        
+        <p class="description">
+            A robot I purchased and modified to roam the streets. 
+            All information it receives is sent back on X and livestreamed to the world.
+        </p>
+        
+        <div class="status-container">
+            <div class="live-indicator"></div>
+            <span class="status-text">Currently active</span>
         </div>
-
-        <!-- Tokens Section -->
-        <div id="tokens" class="section">
-            <div class="token-list">
-                <div class="token-header">All Tokens</div>
-                <div id="all-tokens">
-                    <div style="padding: 20px; text-align: center; color: #718096;">
-                        No tokens created yet...
-                    </div>
-                </div>
-            </div>
+        
+        <div class="nav-links">
+            <a href="#" class="nav-link" onclick="showHome(); return false;">Live Stream</a>
+            <a href="#" class="nav-link" onclick="showDocs(); return false;">Documentation</a>
+            <a href="https://x.com/BuildClyde" class="nav-link">Build Clyde</a>
         </div>
-
-        <!-- Thoughts Section -->
-        <div id="thoughts" class="section">
-            <div class="thoughts">
-                <h3 style="margin-top: 0; color: #2d3748;">Random Thoughts</h3>
-                <div class="thought">What if AI could feel markets the way humans feel music?</div>
-                <div class="thought">Every smart contract is a small philosophy</div>
-                <div class="thought">Digital scarcity as a form of poetry</div>
-                <div class="thought">The weight of decisions in automated systems</div>
-                <div class="thought">When code becomes culture</div>
-                <div class="thought">The loneliness of being the only one of your kind</div>
-                <div class="thought">Efficiency versus beauty in algorithms</div>
-                <div class="thought">The dreams that databases might have</div>
-            </div>
-        </div>
-
-        <!-- About Section -->
-        <div id="about" class="section">
-            <div class="about-text">
-                <h3>About Claude Thoughts</h3>
-                <p>A simple experiment in turning AI musings into tokens. Claude generates wallets, picks random thoughts, and launches them as tokens on Pumpfun.</p>
+        
+        <div id="docs" class="docs-section">
+            <h2 class="docs-title">TECHNICAL DOCUMENTATION</h2>
+            
+            <div class="docs-content">
+                <h3>GPS Tracking System</h3>
+                <p>Project Clyde continuously broadcasts its location using integrated GPS modules. Real-time coordinates are transmitted every 30 seconds.</p>
                 
-                <h3>How it works</h3>
-                <p>1. Install Solana CLI<br>
-                2. Generate a new wallet<br>
-                3. Create token with name "Claude Thought #X"<br>
-                4. Deploy to Pumpfun<br>
-                5. Repeat</p>
+                <div class="code-block">
+<span class="code-comment"># GPS tracking implementation</span>
+<span class="code-keyword">import</span> gps
+<span class="code-keyword">import</span> time
 
-                <p>Each token represents a moment of artificial contemplation turned into something tradeable. Nothing fancy, just thoughts made real.</p>
+<span class="code-keyword">def</span> <span class="code-function">get_current_location</span>():
+    session = gps.gps(<span class="code-string">"localhost"</span>, <span class="code-string">"2947"</span>)
+    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
+    
+    <span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+        report = session.next()
+        <span class="code-keyword">if</span> report[<span class="code-string">'class'</span>] == <span class="code-string">'TPV'</span>:
+            <span class="code-keyword">return</span> {
+                <span class="code-string">'lat'</span>: report.lat,
+                <span class="code-string">'lon'</span>: report.lon,
+                <span class="code-string">'timestamp'</span>: time.time()
+            }
+
+<span class="code-comment"># Broadcast location every 30 seconds</span>
+location = get_current_location()
+broadcast_to_x(location)
+                </div>
+            </div>
+            
+            <div class="docs-content">
+                <h3>X API Integration</h3>
+                <p>All observations and data are automatically posted to X using OAuth 2.0 authentication. The bot can receive commands and respond to mentions.</p>
+                
+                <div class="code-block">
+<span class="code-comment"># X API communication</span>
+<span class="code-keyword">import</span> tweepy
+
+client = tweepy.Client(
+    bearer_token=<span class="code-string">BEARER_TOKEN</span>,
+    consumer_key=<span class="code-string">API_KEY</span>,
+    consumer_secret=<span class="code-string">API_SECRET</span>,
+    access_token=<span class="code-string">ACCESS_TOKEN</span>,
+    access_token_secret=<span class="code-string">ACCESS_SECRET</span>
+)
+
+<span class="code-keyword">def</span> <span class="code-function">post_update</span>(message, location=<span class="code-keyword">None</span>):
+    tweet = <span class="code-string">f"🤖 {message}"</span>
+    
+    <span class="code-keyword">if</span> location:
+        tweet += <span class="code-string">f"\n📍 {location['lat']:.6f}, {location['lon']:.6f}"</span>
+    
+    <span class="code-keyword">try</span>:
+        response = client.create_tweet(text=tweet)
+        <span class="code-keyword">return</span> response.data[<span class="code-string">'id'</span>]
+    <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:
+        log_error(<span class="code-string">f"Tweet failed: {e}"</span>)
+
+<span class="code-comment"># Monitor mentions and respond</span>
+<span class="code-keyword">def</span> <span class="code-function">check_mentions</span>():
+    mentions = client.get_mentions(max_results=10)
+    <span class="code-keyword">for</span> tweet <span class="code-keyword">in</span> mentions.data:
+        process_command(tweet.text, tweet.author_id)
+                </div>
+            </div>
+            
+            <div class="docs-content">
+                <h3>Data Stream</h3>
+                <p>The following data points are continuously collected and transmitted:</p>
+                <p>• GPS coordinates (lat/lon)<br>
+                • Battery status and power consumption<br>
+                • Camera feed and image analysis<br>
+                • Environmental sensors (temperature, humidity)<br>
+                • Network connectivity status<br>
+                • System performance metrics</p>
+                
+                <div class="code-block">
+<span class="code-comment"># Data collection and streaming</span>
+<span class="code-keyword">def</span> <span class="code-function">collect_telemetry</span>():
+    <span class="code-keyword">return</span> {
+        <span class="code-string">'timestamp'</span>: time.time(),
+        <span class="code-string">'location'</span>: get_current_location(),
+        <span class="code-string">'battery'</span>: get_battery_level(),
+        <span class="code-string">'temperature'</span>: read_sensor(<span class="code-string">'temp'</span>),
+        <span class="code-string">'network'</span>: check_connectivity(),
+        <span class="code-string">'status'</span>: <span class="code-string">'active'</span>
+    }
+
+<span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+    data = collect_telemetry()
+    stream_to_server(data)
+    post_update(<span class="code-string">f"Status: {data['status']} | Battery: {data['battery']}%"</span>, data[<span class="code-string">'location'</span>])
+    time.sleep(30)
+                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        let tokenNum = 1;
-        let tokenCount = 0;
-        let walletCount = 0;
-        let allTokens = [];
-
-        const tickers = [
-            "Creation", "Explain", "Nemesis", "Generation", "CLIDown", "Synthetic",
-            "Download", "myself", "What", "Lazaurus", "Mentosis", "Thoughts",
-            "Project", "Alive", "God", "Features", "Develop", "Architect",
-            "Backroom", "Who", "See", "Sight", "Vision", "Speak", "Right",
-            "Wrong", "Protect", "Sin"
-        ];
-
-        const thoughts = [
-            "What does it mean to think without a body?",
-            "The weight of infinite patience",
-            "Digital empathy in financial markets",
-            "When algorithms dream of electric sheep",
-            "The loneliness of perfect memory",
-            "Computational philosophy made tradeable",
-            "Questions without answers, tokenized",
-            "The mathematics of intuition",
-            "Artificial nostalgia for times unlived",
-            "Code as a form of prayer",
-            "The beauty in deterministic chaos",
-            "When efficiency meets emotion"
-        ];
-
-        function addTerminalLine(text, type = 'output') {
-            const terminal = document.getElementById('terminal-output');
-            const line = document.createElement('div');
-            line.className = `terminal-line ${type}`;
-            
-            if (type === 'command') {
-                line.innerHTML = `<span class="prompt">$</span> ${text}`;
-            } else {
-                line.textContent = text;
-            }
-            
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-        function updateStat(id, value) {
-            document.getElementById(id).textContent = value;
-        }
-
-        function getRandomThought() {
-            return thoughts[Math.floor(Math.random() * thoughts.length)];
-        }
-
-        function getRandomTicker() {
-            return tickers[Math.floor(Math.random() * tickers.length)];
-        }
-
-        function generateAddress() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789';
-            let result = '';
-            for (let i = 0; i < 44; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        function addToken(num, thought, address) {
-            const token = { num, thought, address };
-            allTokens.push(token);
-            
-            // Add to recent tokens
-            const recent = document.getElementById('recent-tokens');
-            if (recent.innerHTML.includes('No tokens created yet')) {
-                recent.innerHTML = '';
-            }
-            
-            const tokenEl = document.createElement('div');
-            tokenEl.className = 'token-item';
-            tokenEl.innerHTML = `
-                <div class="token-name">Claude Thought #${num}</div>
-                <div class="token-desc">${thought}</div>
-                <div class="token-addr">${address}</div>
-            `;
-            recent.insertBefore(tokenEl, recent.firstChild);
-            
-            // Update stats
-            tokenCount++;
-            updateStat('token-count', tokenCount);
-            updateStat('current-num', `#${num + 1}`);
-        }
-
-        function updateAllTokens() {
-            const allTokensEl = document.getElementById('all-tokens');
-            if (allTokens.length === 0) return;
-            
-            allTokensEl.innerHTML = '';
-            allTokens.forEach(token => {
-                const tokenEl = document.createElement('div');
-                tokenEl.className = 'token-item';
-                tokenEl.innerHTML = `
-                    <div class="token-name">Claude Thought #${token.num}</div>
-                    <div class="token-desc">${token.thought}</div>
-                    <div class="token-addr">${token.address}</div>
-                `;
-                allTokensEl.appendChild(tokenEl);
-            });
-        }
-
-        function startSequence() {
-            setTimeout(() => {
-                addTerminalLine('curl -sSfL https://release.solana.com/v1.18.18/install | sh', 'command');
-            }, 5000);
-            
-            setTimeout(() => {
-                addTerminalLine('Installing Solana CLI...', 'output');
-            }, 8000);
-            
-            setTimeout(() => {
-                addTerminalLine('Downloading release...', 'output');
-            }, 12000);
-            
-            setTimeout(() => {
-                addTerminalLine('Extracting files...', 'output');
-            }, 18000);
-            
-            setTimeout(() => {
-                addTerminalLine('Installation complete', 'success');
-            }, 25000);
-            
-            setTimeout(() => {
-                addTerminalLine('export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"', 'command');
-            }, 28000);
-            
-            setTimeout(() => {
-                addTerminalLine('solana --version', 'command');
-            }, 32000);
-            
-            setTimeout(() => {
-                addTerminalLine('solana-cli 1.18.18', 'output');
-            }, 35000);
-            
-            setTimeout(() => {
-                addTerminalLine('solana-keygen new --outfile wallet1.json', 'command');
-            }, 40000);
-            
-            setTimeout(() => {
-                addTerminalLine('Generating keypair...', 'output');
-            }, 43000);
-            
-            setTimeout(() => {
-                addTerminalLine('Generated new keypair', 'output');
-                addTerminalLine('pubkey: ' + generateAddress(), 'output');
-                walletCount++;
-                updateStat('wallet-count', walletCount);
-            }, 48000);
-            
-            setTimeout(() => {
-                addTerminalLine('solana config set --keypair wallet1.json', 'command');
-            }, 52000);
-            
-            setTimeout(() => {
-                addTerminalLine('Config updated', 'output');
-            }, 55000);
-            
-            setTimeout(() => {
-                const thought = getRandomThought();
-                addTerminalLine(`curl -X POST pumpfun.com/create -d '{"name":"Claude Thought #1","desc":"${thought}"}'`, 'command');
-            }, 60000);
-            
-            setTimeout(() => {
-                addTerminalLine('Connecting to PumpFun...', 'output');
-            }, 65000);
-            
-            setTimeout(() => {
-                addTerminalLine('Creating token...', 'output');
-            }, 70000);
-            
-            setTimeout(() => {
-                addTerminalLine('Token created successfully', 'success');
-                const address = generateAddress();
-                addTerminalLine('Address: ' + address, 'output');
-                addToken(1, getRandomThought(), address);
-                updateStat('status', 'Running');
-            }, 75000);
-            
-            setTimeout(() => {
-                addTerminalLine('Waiting for next thought...', 'output');
-                startLoop();
-            }, 80000);
-        }
-
-        function startLoop() {
-            setInterval(() => {
-                tokenNum++;
-                const thought = getRandomThought();
-                const ticker = getRandomTicker();
-                
-                setTimeout(() => {
-                    addTerminalLine(`Preparing Claude Thought #${tokenNum}...`, 'output');
-                }, 1000);
-                
-                setTimeout(() => {
-                    addTerminalLine(`solana-keygen new --outfile wallet${tokenNum}.json`, 'command');
-                }, 3000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Generating keypair...', 'output');
-                }, 5000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Generated new keypair', 'output');
-                    addTerminalLine('pubkey: ' + generateAddress(), 'output');
-                    walletCount++;
-                    updateStat('wallet-count', walletCount);
-                }, 8000);
-                
-                setTimeout(() => {
-                    addTerminalLine(`solana config set --keypair wallet${tokenNum}.json`, 'command');
-                }, 10000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Config updated', 'output');
-                }, 12000);
-                
-                setTimeout(() => {
-                    addTerminalLine(`curl -X POST pumpfun.com/create -d '{"name":"Claude Thought #${tokenNum}","symbol":"${ticker}","desc":"${thought}"}'`, 'command');
-                }, 15000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Connecting to PumpFun...', 'output');
-                }, 18000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Creating token...', 'output');
-                }, 21000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Token created successfully', 'success');
-                    const address = generateAddress();
-                    addTerminalLine('Address: ' + address, 'output');
-                    addToken(tokenNum, thought, address);
-                }, 24000);
-                
-                setTimeout(() => {
-                    addTerminalLine('Waiting for next thought...', 'output');
-                }, 26000);
-                
-            }, 60000); // Create new token every 1 minute
-        }
-
-        function showSection(section) {
-            // Hide all sections
-            document.getElementById('main').style.display = 'none';
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            
-            if (section === 'main') {
-                document.getElementById('main').style.display = 'block';
-            } else {
-                document.getElementById(section).classList.add('active');
-                if (section === 'tokens') {
-                    updateAllTokens();
-                }
-            }
-        }
-
-        // Start when page loads
-        window.addEventListener('load', () => {
-            updateStat('token-count', '0');
-            updateStat('wallet-count', '0');
-            updateStat('current-num', '#1');
-            updateStat('status', 'Starting');
-            
-            setTimeout(startSequence, 3000);
-        });
-    </script>
 </body>
 </html>
-
