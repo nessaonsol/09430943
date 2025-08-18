@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rex</title>
-    <meta name="description" content="Interactive AI dog agent powered by Purl's backend system built for Solana. Animal backrooms simulations.">
-    <link rel="icon" type="image/png" href="asciidog.png">
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <title>The Robot Experiment</title>
+    <link rel="icon" type="image/x-icon" href="clyde.png">
     <style>
         * {
             margin: 0;
@@ -15,777 +13,314 @@
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(248, 249, 250, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 0 20px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 24px;
-            height: 24px;
-            background: #8B4513;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-        }
-
-        .nav-center {
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-link {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #333;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-info {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .x-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            background: rgba(0, 0, 0, 0.05);
-            color: #333;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .x-button:hover {
-            background: rgba(0, 0, 0, 0.1);
-            transform: translateY(-1px);
-        }
-
-        /* Page Styles */
-        .page {
-            display: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #f8f9fa;
-            z-index: 20;
-            overflow-y: auto;
-            padding: 40px;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .page-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .page-title {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .page-section {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .terminal {
-            background: #1a1a1a;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            padding: 20px;
-            border-radius: 8px;
-            min-height: 400px;
-            overflow-y: auto;
-        }
-
-        .terminal-line {
-            margin-bottom: 5px;
-        }
-
-        .terminal-prompt {
-            color: #ffa500;
-        }
-
-        .chat-container {
-            height: 500px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #fafafa;
-        }
-
-        .chat-input-container {
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            background: white;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 18px;
-            max-width: 70%;
-        }
-
-        .message.user {
-            background: #007bff;
-            color: white;
-            margin-left: auto;
-        }
-
-        .message.rex {
-            background: #e9ecef;
-            color: #333;
-        }
-
-        .log-entry {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            font-family: monospace;
-            font-size: 13px;
-        }
-
-        .log-timestamp {
-            color: #666;
-            margin-right: 10px;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            z-index: 1000;
-            transition: all 0.2s ease;
-        }
-
-        .back-button:hover {
-            background: white;
-            transform: translateY(-1px);
-        }
-
-        /* Animated Grid Background */
-        .grid-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .grid-item {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            opacity: 0.7;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .grid-item.orange {
-            background: linear-gradient(135deg, #fb923c, #f97316);
-        }
-
-        .grid-item.green {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-        }
-
-        .grid-item.blue {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-        }
-
-        .grid-item.purple {
-            background: linear-gradient(135deg, #c084fc, #a855f7);
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) translateX(0px);
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-            50% {
-                transform: translateY(-10px) translateX(-15px);
-            }
-            75% {
-                transform: translateY(-30px) translateX(5px);
-            }
-        }
-
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 60px;
-        }
-
-        .tooltip {
-            position: absolute;
-            top: 200px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 12px 20px;
-            font-size: 14px;
-            color: #333;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: tooltipPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes tooltipPulse {
-            0%, 100% { opacity: 0.9; transform: translateY(0px); }
-            50% { opacity: 1; transform: translateY(-5px); }
-        }
-
-        .ascii-art {
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
-            line-height: 1.2;
-            color: #333;
-            margin: 40px 0;
-            white-space: pre;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .title {
-            font-size: 4rem;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto 40px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333333;
             line-height: 1.6;
         }
 
-        .pagination {
-            position: absolute;
-            bottom: 100px;
+        .header {
+            background: #4a9eff;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0 2rem;
         }
 
-        .dot {
-            width: 8px;
-            height: 8px;
+        .nav-link {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: #4a9eff;
+            color: white;
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .status-container {
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .live-indicator {
+            width: 12px;
+            height: 12px;
+            background: #28a745;
             border-radius: 50%;
-            background: #ccc;
-            transition: background 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
-        .dot.active {
-            background: #333;
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
-        .footer-info {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 12px;
-            color: #666;
-            z-index: 1000;
+        .status-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #28a745;
         }
 
-        /* Responsive */
+        .content {
+            margin-bottom: 3rem;
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #4a9eff;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .docs-section {
+            display: none;
+        }
+
+        .docs-section.active {
+            display: block;
+        }
+
+        .docs-content {
+            margin-bottom: 2.5rem;
+        }
+
+        .docs-content h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #6c757d;
+        }
+
+        .code-keyword {
+            color: #d63384;
+        }
+
+        .code-string {
+            color: #198754;
+        }
+
+        .code-function {
+            color: #0d6efd;
+        }
+
         @media (max-width: 768px) {
-            .nav-center {
-                display: none;
+            .header h1 {
+                font-size: 2rem;
+                letter-spacing: 0.1rem;
             }
             
-            .title {
-                font-size: 2.5rem;
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
             }
             
-            .ascii-art {
-                font-size: 16px;
+            .main {
+                padding: 2rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <header class="header">
+        <h1>THE ROBOT EXPERIMENT</h1>
+        <p>Claude AI on Wheels</p>
+    </header>
+
     <nav class="nav">
-        <div class="nav-left">
-            <a href="#" class="logo">
-                <div class="logo-icon">🐕</div>
-                <span>rex</span>
-            </a>
-            <div class="status">
-                <div class="status-dot"></div>
-                <span>online</span>
-            </div>
-        </div>
-        
-        <div class="nav-center">
-            <a href="#" class="nav-link" onclick="showPage('dash')">dash</a>
-            <a href="#" class="nav-link" onclick="showPage('about')">about</a>
-            <a href="#" class="nav-link" onclick="showPage('chat')">chat</a>
-            <a href="#" class="nav-link" onclick="showPage('logs')">logs</a>
-            <a href="#" class="nav-link" onclick="showPage('terminal')">terminal</a>
-            <a href="#" class="nav-link" onclick="showPage('docs')">docs</a>
-        </div>
-        
-        <div class="nav-right">
-            <a href="https://x.com/rexthesoul" target="_blank" class="x-button">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-            </a>
-            <span class="nav-info">⚡</span>
+        <div class="nav-container">
+            <a href="#" class="nav-link" onclick="showHome(); return false;">Live Stream</a>
+            <a href="#" class="nav-link" onclick="showDocs(); return false;">Documentation</a>
+            <a href="https://x.com/TheRobotExp_" class="nav-link">Build Clyde</a>
         </div>
     </nav>
 
-    <!-- Animated Grid Background -->
-    <div class="grid-container" id="gridContainer"></div>
+    <main class="main">
+        <div id="home">
+            <div class="status-container">
+                <div class="live-indicator"></div>
+                <span class="status-text">Currently active</span>
+            </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="tooltip">Back to main</div>
-        
-        <div class="ascii-art">    .
-   ..^____/
- `-. ___ )
-   ||  || rex</div>
-        
-        <h1 class="title">REX</h1>
-        <p class="subtitle">Digital German Shepherd</p>
-        <p class="description">
-            Interactive AI dog agent powered by Purl's backend system built for Solana. Animal backrooms simulations.
-        </p>
-        
-        <div class="pagination">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <div class="content">
+                <h2>About The Robot Experiment</h2>
+                <p>A robot I purchased and modified to roam the streets with Claude AI integrated into it. All information it receives is sent back on X and livestreamed to the world.</p>
+                <p>Experience real-time exploration through Claude's autonomous decision-making as it navigates urban environments, documenting and analyzing everything it encounters.</p>
+            </div>
+        </div>
+
+        <div id="docs" class="docs-section">
+            <div class="content">
+                <h2>Technical Documentation</h2>
+                
+                <div class="docs-content">
+                    <h3>GPS Tracking System</h3>
+                    <p>The Robot Experiment continuously broadcasts its location using integrated GPS modules. Real-time coordinates are transmitted every 30 seconds.</p>
+                    
+                    <div class="code-block">
+<span class="code-comment"># GPS tracking implementation</span>
+<span class="code-keyword">import</span> gps
+<span class="code-keyword">import</span> time
+
+<span class="code-keyword">def</span> <span class="code-function">get_current_location</span>():
+    session = gps.gps(<span class="code-string">"localhost"</span>, <span class="code-string">"2947"</span>)
+    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
+    
+    <span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+        report = session.next()
+        <span class="code-keyword">if</span> report[<span class="code-string">'class'</span>] == <span class="code-string">'TPV'</span>:
+            <span class="code-keyword">return</span> {
+                <span class="code-string">'lat'</span>: report.lat,
+                <span class="code-string">'lon'</span>: report.lon,
+                <span class="code-string">'timestamp'</span>: time.time()
+            }
+
+<span class="code-comment"># Broadcast location every 30 seconds</span>
+location = get_current_location()
+broadcast_to_x(location)
+                    </div>
+                </div>
+                
+                <div class="docs-content">
+                    <h3>X API Integration</h3>
+                    <p>All observations and data are automatically posted to X using OAuth 2.0 authentication. The bot can receive commands and respond to mentions.</p>
+                    
+                    <div class="code-block">
+<span class="code-comment"># X API communication</span>
+<span class="code-keyword">import</span> tweepy
+
+client = tweepy.Client(
+    bearer_token=<span class="code-string">BEARER_TOKEN</span>,
+    consumer_key=<span class="code-string">API_KEY</span>,
+    consumer_secret=<span class="code-string">API_SECRET</span>,
+    access_token=<span class="code-string">ACCESS_TOKEN</span>,
+    access_token_secret=<span class="code-string">ACCESS_SECRET</span>
+)
+
+<span class="code-keyword">def</span> <span class="code-function">post_update</span>(message, location=<span class="code-keyword">None</span>):
+    tweet = <span class="code-string">f"🤖 {message}"</span>
+    
+    <span class="code-keyword">if</span> location:
+        tweet += <span class="code-string">f"\n📍 {location['lat']:.6f}, {location['lon']:.6f}"</span>
+    
+    <span class="code-keyword">try</span>:
+        response = client.create_tweet(text=tweet)
+        <span class="code-keyword">return</span> response.data[<span class="code-string">'id'</span>]
+    <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:
+        log_error(<span class="code-string">f"Tweet failed: {e}"</span>)
+
+<span class="code-comment"># Monitor mentions and respond</span>
+<span class="code-keyword">def</span> <span class="code-function">check_mentions</span>():
+    mentions = client.get_mentions(max_results=10)
+    <span class="code-keyword">for</span> tweet <span class="code-keyword">in</span> mentions.data:
+        process_command(tweet.text, tweet.author_id)
+                    </div>
+                </div>
+                
+                <div class="docs-content">
+                    <h3>Data Stream</h3>
+                    <p>The following data points are continuously collected and transmitted:</p>
+                    <p>• GPS coordinates (lat/lon)<br>
+                    • Battery status and power consumption<br>
+                    • Camera feed and image analysis<br>
+                    • Environmental sensors (temperature, humidity)<br>
+                    • Network connectivity status<br>
+                    • System performance metrics</p>
+                    
+                    <div class="code-block">
+<span class="code-comment"># Data collection and streaming</span>
+<span class="code-keyword">def</span> <span class="code-function">collect_telemetry</span>():
+    <span class="code-keyword">return</span> {
+        <span class="code-string">'timestamp'</span>: time.time(),
+        <span class="code-string">'location'</span>: get_current_location(),
+        <span class="code-string">'battery'</span>: get_battery_level(),
+        <span class="code-string">'temperature'</span>: read_sensor(<span class="code-string">'temp'</span>),
+        <span class="code-string">'network'</span>: check_connectivity(),
+        <span class="code-string">'status'</span>: <span class="code-string">'active'</span>
+    }
+
+<span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+    data = collect_telemetry()
+    stream_to_server(data)
+    post_update(<span class="code-string">f"Status: {data['status']} | Battery: {data['battery']}%"</span>, data[<span class="code-string">'location'</span>])
+    time.sleep(30)
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <div class="footer-info">Interactive grid enabled</div>
-
-    <!-- Page Contents -->
-    <!-- Dashboard Page -->
-    <div class="page" id="dash-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">Dashboard</h1>
-            <div class="page-section">
-                <h3>Rex Status</h3>
-                <p><strong>Status:</strong> Online and Ready</p>
-                <p><strong>Uptime:</strong> 24h 32m 15s</p>
-                <p><strong>Active Sessions:</strong> 1,247</p>
-                <p><strong>Model:</strong> Purl-Enhanced ElizaOS v2.1</p>
-            </div>
-            <div class="page-section">
-                <h3>Performance Metrics</h3>
-                <p><strong>Response Time:</strong> <0.5s average</p>
-                <p><strong>Success Rate:</strong> 99.8%</p>
-                <p><strong>Learning Rate:</strong> Adaptive</p>
-                <p><strong>Memory Usage:</strong> 67% of allocated</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Page -->
-    <div class="page" id="about-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">About Rex</h1>
-            <div class="page-section">
-                <h3>Digital German Shepherd</h3>
-                <p>Rex is an advanced AI companion built using Purl's sophisticated backend system. Designed to embody the loyalty, intelligence, and protective nature of a German Shepherd, Rex serves as your digital guardian in the blockchain ecosystem.</p>
-            </div>
-            <div class="page-section">
-                <h3>Core Capabilities</h3>
-                <ul>
-                    <li>Advanced natural language processing</li>
-                    <li>Blockchain transaction monitoring</li>
-                    <li>Adaptive personality learning</li>
-                    <li>24/7 availability and support</li>
-                    <li>Multi-protocol DeFi integration</li>
-                </ul>
-            </div>
-            <div class="page-section">
-                <h3>Built With</h3>
-                <p><strong>Backend:</strong> Purl's ElizaOS Framework</p>
-                <p><strong>Blockchain:</strong> Solana Integration</p>
-                <p><strong>AI Model:</strong> Custom-trained personality matrix</p>
-                <p><strong>Deployment:</strong> Distributed edge network</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chat Page -->
-    <div class="page" id="chat-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">Chat with Rex</h1>
-            <div class="page-section">
-                <div class="chat-container">
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="message rex">
-                            <strong>Rex:</strong> Woof! Hello there! I'm Rex, your loyal digital companion. How can I help you today?
-                        </div>
-                    </div>
-                    <div class="chat-input-container">
-                        <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatInput(event)">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Logs Page -->
-    <div class="page" id="logs-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">System Logs</h1>
-            <div class="page-section">
-                <div id="logsContainer">
-                    <div class="log-entry">
-                        <span class="log-timestamp">2024-08-18 14:32:15</span>
-                        <span>[INFO] Rex initialized successfully</span>
-                    </div>
-                    <div class="log-entry">
-                        <span class="log-timestamp">2024-08-18 14:32:16</span>
-                        <span>[INFO] Purl backend connection established</span>
-                    </div>
-                    <div class="log-entry">
-                        <span class="log-timestamp">2024-08-18 14:32:17</span>
-                        <span>[INFO] Solana network sync complete</span>
-                    </div>
-                    <div class="log-entry">
-                        <span class="log-timestamp">2024-08-18 14:32:18</span>
-                        <span>[INFO] Personality matrix loaded</span>
-                    </div>
-                    <div class="log-entry">
-                        <span class="log-timestamp">2024-08-18 14:35:22</span>
-                        <span>[INFO] User session started</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terminal Page -->
-    <div class="page" id="terminal-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">Terminal</h1>
-            <div class="page-section">
-                <div class="terminal" id="terminal">
-                    <div class="terminal-line"><span class="terminal-prompt">rex@solana:~$</span> status</div>
-                    <div class="terminal-line">Rex Digital Companion v2.1.0</div>
-                    <div class="terminal-line">Status: ONLINE</div>
-                    <div class="terminal-line">Backend: Purl ElizaOS Framework</div>
-                    <div class="terminal-line">Network: Solana Mainnet</div>
-                    <div class="terminal-line"><span class="terminal-prompt">rex@solana:~$</span> personality --status</div>
-                    <div class="terminal-line">Personality Matrix: LOADED</div>
-                    <div class="terminal-line">Breed: German Shepherd</div>
-                    <div class="terminal-line">Traits: Loyal, Intelligent, Protective</div>
-                    <div class="terminal-line">Learning Rate: Adaptive</div>
-                    <div class="terminal-line"><span class="terminal-prompt">rex@solana:~$</span> <span class="terminal-cursor">_</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Docs Page -->
-    <div class="page" id="docs-page">
-        <a href="#" class="back-button" onclick="showHome()">← Back to main</a>
-        <div class="page-content">
-            <h1 class="page-title">Documentation</h1>
-            <div class="page-section">
-                <h3>Getting Started</h3>
-                <p>Rex is designed to be your intelligent companion in the digital realm. Here's how to get the most out of your interaction:</p>
-                <ol>
-                    <li>Start by greeting Rex in the chat</li>
-                    <li>Ask about blockchain operations or general assistance</li>
-                    <li>Use the terminal for advanced commands</li>
-                    <li>Monitor system status via the dashboard</li>
-                </ol>
-            </div>
-            <div class="page-section">
-                <h3>Commands</h3>
-                <p><strong>/status</strong> - Check Rex's current status</p>
-                <p><strong>/help</strong> - Display available commands</p>
-                <p><strong>/wallet</strong> - Access wallet functions</p>
-                <p><strong>/market</strong> - Get market information</p>
-                <p><strong>/guard</strong> - Enable protection mode</p>
-            </div>
-            <div class="page-section">
-                <h3>API Integration</h3>
-                <p>Rex integrates with multiple APIs and protocols:</p>
-                <ul>
-                    <li>Solana RPC endpoints</li>
-                    <li>DeFi protocol interfaces</li>
-                    <li>Market data feeds</li>
-                    <li>Security monitoring systems</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Create animated grid background
-        function createGrid() {
-            const container = document.getElementById('gridContainer');
-            const colors = ['orange', 'green', 'blue', 'purple'];
-            const gridSize = 100; // Number of items
-
-            for (let i = 0; i < gridSize; i++) {
-                const item = document.createElement('div');
-                item.className = `grid-item ${colors[Math.floor(Math.random() * colors.length)]}`;
-                
-                // Random positioning
-                item.style.left = Math.random() * 100 + '%';
-                item.style.top = Math.random() * 100 + '%';
-                
-                // Random animation delay
-                item.style.animationDelay = Math.random() * 8 + 's';
-                
-                // Random animation duration
-                item.style.animationDuration = (6 + Math.random() * 4) + 's';
-                
-                container.appendChild(item);
-            }
-        }
-
-        // Initialize grid on load
-        document.addEventListener('DOMContentLoaded', () => {
-            createGrid();
-            
-            // Add some interactivity to grid items
-            const gridItems = document.querySelectorAll('.grid-item');
-            gridItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    item.style.transform = 'scale(1.2)';
-                    item.style.zIndex = '100';
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    item.style.transform = 'scale(1)';
-                    item.style.zIndex = '1';
-                });
-            });
-            
-            // Animate pagination dots
-            const dots = document.querySelectorAll('.dot');
-            let currentDot = 0;
-            
-            setInterval(() => {
-                dots.forEach(dot => dot.classList.remove('active'));
-                dots[currentDot].classList.add('active');
-                currentDot = (currentDot + 1) % dots.length;
-            }, 3000);
-            
-            // Add click effect to ASCII art
-            const asciiArt = document.querySelector('.ascii-art');
-            asciiArt.addEventListener('click', () => {
-                asciiArt.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    asciiArt.style.transform = 'scale(1)';
-                }, 200);
-            });
-        });
-
-        // Page Navigation Functions
-        function showPage(pageId) {
-            // Hide main content and all pages
-            document.querySelector('.main-content').style.display = 'none';
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageId + '-page').classList.add('active');
-        }
-
         function showHome() {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show main content
-            document.querySelector('.main-content').style.display = 'flex';
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('docs').classList.remove('active');
         }
-
-        // Chat Functions
-        function handleChatInput(event) {
-            if (event.key === 'Enter') {
-                const input = document.getElementById('chatInput');
-                const message = input.value.trim();
-                if (message) {
-                    addChatMessage('user', message);
-                    input.value = '';
-                    
-                    // Simulate Rex response
-                    setTimeout(() => {
-                        const responses = [
-                            "Woof! I understand. Let me help you with that.",
-                            "That's interesting! As your loyal companion, I suggest...",
-                            "Good thinking! My protective instincts tell me...",
-                            "Excellent question! Based on my training...",
-                            "I'm here to help! Let me analyze that for you..."
-                        ];
-                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                        addChatMessage('rex', randomResponse);
-                    }, 1000);
-                }
-            }
+        
+        function showDocs() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('docs').classList.add('active');
         }
-
-        function addChatMessage(sender, message) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Rex'}:</strong> ${message}`;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Add some dynamic grid movement
-        setInterval(() => {
-            const items = document.querySelectorAll('.grid-item');
-            const randomItem = items[Math.floor(Math.random() * items.length)];
-            randomItem.style.transform = 'scale(1.3) rotate(45deg)';
-            
-            setTimeout(() => {
-                randomItem.style.transform = 'scale(1) rotate(0deg)';
-            }, 1000);
-        }, 2000);
-
-        // Terminal cursor animation
-        setInterval(() => {
-            const cursor = document.querySelector('.terminal-cursor');
-            if (cursor) {
-                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-            }
-        }, 500);
     </script>
 </body>
 </html>
