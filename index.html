@@ -3,324 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Robot Experiment</title>
-    <link rel="icon" type="image/x-icon" href="clyde.png">
+    <title>CommuneOS - Linux for Cooperative Living</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffffff;
-            color: #333333;
+            background: #0a0a0a;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
             line-height: 1.6;
+            overflow-x: hidden;
         }
-
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
         .header {
-            background: #4a9eff;
-            color: white;
             text-align: center;
-            padding: 2rem 0;
+            margin-bottom: 40px;
+            border: 3px solid #ff00ff;
+            padding: 20px;
+            position: relative;
         }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 0.2rem;
-            margin-bottom: 0.5rem;
+        
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
         }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+            to { text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff; }
         }
-
-        .nav {
-            background: #f8f9fa;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e9ecef;
+        
+        .subtitle {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 0 2rem;
+        
+        .warning {
+            color: #ffff00;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
         }
-
-        .nav-link {
-            color: #495057;
+        
+        .version {
+            color: #888;
+            font-size: 0.7rem;
+        }
+        
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .prompt {
+            color: #00ff41;
+            margin: 10px 0;
+        }
+        
+        .prompt::before {
+            content: "root@commune:~$ ";
+            color: #ff00ff;
+        }
+        
+        .org-selector {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ffff00;
+            border-radius: 5px;
+        }
+        
+        .org-type {
+            display: inline-block;
+            margin: 10px;
+            padding: 8px 15px;
+            background: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            color: #ffff00;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
+        }
+        
+        .org-type:hover {
+            background: rgba(255, 255, 0, 0.3);
+            color: #0a0a0a;
+            transform: scale(1.05);
+        }
+        
+        .org-type.selected {
+            background: #ffff00;
+            color: #0a0a0a;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .software-category {
+            border: 2px solid #00ffff;
+            padding: 15px;
+            border-radius: 5px;
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .category-title {
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .software-item {
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px dotted #333;
+        }
+        
+        .software-name {
+            color: #00ff41;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
         }
-
-        .nav-link:hover {
-            background: #4a9eff;
-            color: white;
+        
+        .software-desc {
+            color: #888;
+            font-size: 0.8rem;
         }
-
-        .main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
+        
+        .install-section {
+            margin: 40px 0;
+            text-align: center;
         }
-
-        .status-container {
-            background: #f8f9fa;
-            border-left: 4px solid #28a745;
-            padding: 1.5rem;
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        
+        .install-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255, 0, 255, 0.2);
+            border: 2px solid #ff00ff;
+            color: #ff00ff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 10px;
         }
-
-        .live-indicator {
-            width: 12px;
-            height: 12px;
-            background: #28a745;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        
+        .install-btn:hover {
+            background: #ff00ff;
+            color: #0a0a0a;
+            transform: scale(1.05);
         }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        
+        .ascii-art {
+            color: #00ff41;
+            font-size: 0.6rem;
+            line-height: 1;
+            white-space: pre;
+            margin: 20px 0;
+            text-align: center;
         }
-
-        .status-text {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #28a745;
+        
+        .blinking {
+            animation: blink 1s infinite;
         }
-
-        .content {
-            margin-bottom: 3rem;
+        
+        @keyframes blink {
+            50% { opacity: 0; }
         }
-
-        .content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #4a9eff;
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            border: 2px solid #00ff41;
+            margin: 20px 0;
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
         }
-
-        .content p {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #555;
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff41, #ffff00);
+            width: 0%;
+            transition: width 0.5s ease;
         }
-
-        .docs-section {
-            display: none;
-        }
-
-        .docs-section.active {
-            display: block;
-        }
-
-        .docs-content {
-            margin-bottom: 2.5rem;
-        }
-
-        .docs-content h3 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .code-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-comment {
-            color: #6c757d;
-        }
-
-        .code-keyword {
-            color: #d63384;
-        }
-
-        .code-string {
-            color: #198754;
-        }
-
-        .code-function {
-            color: #0d6efd;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-                letter-spacing: 0.1rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .main {
-                padding: 2rem 1rem;
-            }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 0.7rem;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>THE ROBOT EXPERIMENT</h1>
-        <p>Claude AI on Wheels</p>
-    </header>
-
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="#" class="nav-link" onclick="showHome(); return false;">Live Stream</a>
-            <a href="#" class="nav-link" onclick="showDocs(); return false;">Documentation</a>
-            <a href="https://x.com/TheRobotExp_" class="nav-link">Build Clyde</a>
-        </div>
-    </nav>
-
-    <main class="main">
-        <div id="home">
-            <div class="status-container">
-                <div class="live-indicator"></div>
-                <span class="status-text">Currently active</span>
-            </div>
-
-            <div class="content">
-                <h2>About The Robot Experiment</h2>
-                <p>A robot I purchased and modified to roam the streets with Claude AI integrated into it. All information it receives is sent back on X and livestreamed to the world.</p>
-                <p>Experience real-time exploration through Claude's autonomous decision-making as it navigates urban environments, documenting and analyzing everything it encounters.</p>
-            </div>
+    <div class="container">
+        <div class="header">
+            <div class="title">COMMUNEOS</div>
+            <div class="subtitle">Linux Distribution for Cooperative Living</div>
+            <div class="warning">WARNING - EXPERIMENTAL BUILD - POWER TO THE PEOPLE</div>
+            <div class="version">Version 2.4.1-collective | Build: solidarity-stable</div>
         </div>
 
-        <div id="docs" class="docs-section">
-            <div class="content">
-                <h2>Technical Documentation</h2>
-                
-                <div class="docs-content">
-                    <h3>GPS Tracking System</h3>
-                    <p>The Robot Experiment continuously broadcasts its location using integrated GPS modules. Real-time coordinates are transmitted every 30 seconds.</p>
-                    
-                    <div class="code-block">
-<span class="code-comment"># GPS tracking implementation</span>
-<span class="code-keyword">import</span> gps
-<span class="code-keyword">import</span> time
+        <div class="ascii-art">
+    ╔══════════════════════════════════════════╗
+    ║  ░█▀▀▄ ░█▀▀▄ ░█▀▄▀█ ░█▀▄▀█ ░█─░█ ░█▄─░█  ║
+    ║  ░█─── ░█──█ ░█░█░█ ░█░█░█ ░█─░█ ░█░█░█  ║
+    ║  ░█▄▄▀ ░█▄▄▀ ░█──░█ ░█──░█ ░█▄▄█ ░█──▀█  ║
+    ║                                          ║
+    ║       ░█▀▀▄ ░█▀▀▀█                       ║
+    ║       ░█──█ ─▀▀▀▄▄                       ║
+    ║       ░█▄▄▀ ░█▄▄▄█                       ║
+    ╚══════════════════════════════════════════╝
+        </div>
 
-<span class="code-keyword">def</span> <span class="code-function">get_current_location</span>():
-    session = gps.gps(<span class="code-string">"localhost"</span>, <span class="code-string">"2947"</span>)
-    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
-    
-    <span class="code-keyword">while</span> <span class="code-keyword">True</span>:
-        report = session.next()
-        <span class="code-keyword">if</span> report[<span class="code-string">'class'</span>] == <span class="code-string">'TPV'</span>:
-            <span class="code-keyword">return</span> {
-                <span class="code-string">'lat'</span>: report.lat,
-                <span class="code-string">'lon'</span>: report.lon,
-                <span class="code-string">'timestamp'</span>: time.time()
-            }
+        <div class="terminal">
+            <div class="prompt">Initializing collective consciousness...</div>
+            <div class="prompt">Loading cooperative protocols...</div>
+            <div class="prompt">Establishing mesh networking...</div>
+            <div class="prompt">Ready for community setup <span class="blinking">█</span></div>
+        </div>
 
-<span class="code-comment"># Broadcast location every 30 seconds</span>
-location = get_current_location()
-broadcast_to_x(location)
-                    </div>
+        <div class="org-selector">
+            <h3 style="color: #ffff00; margin-bottom: 20px;">ORGANIZATION TYPE SELECTION:</h3>
+            <p style="color: #888; margin-bottom: 15px;">Choose your collective structure to auto-configure governance and economic tools:</p>
+            
+            <div class="org-type" onclick="selectOrg(this, 'commune')">🏠 COMMUNE</div>
+            <div class="org-type" onclick="selectOrg(this, 'coop')">🤝 MULTI-STAKEHOLDER CO-OP</div>
+            <div class="org-type" onclick="selectOrg(this, 'collective')">🌐 ANARCHIST COLLECTIVE</div>
+            <div class="org-type" onclick="selectOrg(this, 'ecovillage')">🌱 ECOVILLAGE</div>
+            <div class="org-type" onclick="selectOrg(this, 'partnership')">👥 PARTNERSHIP</div>
+            <div class="org-type" onclick="selectOrg(this, 'kibbutz')">🚜 KIBBUTZ</div>
+            <div class="org-type" onclick="selectOrg(this, 'hackspace')">💻 HACKSPACE/MAKERSPACE</div>
+            <div class="org-type" onclick="selectOrg(this, 'sole')">👤 SOLE TRADER</div>
+        </div>
+
+        <div class="software-grid" id="softwareGrid">
+            <div class="software-category">
+                <div class="category-title">🏛️ Governance & Decision Making</div>
+                <div class="software-item">
+                    <div class="software-name">ConsensusOS</div>
+                    <div class="software-desc">Real-time consensus building with Sociocracy tools</div>
                 </div>
-                
-                <div class="docs-content">
-                    <h3>X API Integration</h3>
-                    <p>All observations and data are automatically posted to X using OAuth 2.0 authentication. The bot can receive commands and respond to mentions.</p>
-                    
-                    <div class="code-block">
-<span class="code-comment"># X API communication</span>
-<span class="code-keyword">import</span> tweepy
-
-client = tweepy.Client(
-    bearer_token=<span class="code-string">BEARER_TOKEN</span>,
-    consumer_key=<span class="code-string">API_KEY</span>,
-    consumer_secret=<span class="code-string">API_SECRET</span>,
-    access_token=<span class="code-string">ACCESS_TOKEN</span>,
-    access_token_secret=<span class="code-string">ACCESS_SECRET</span>
-)
-
-<span class="code-keyword">def</span> <span class="code-function">post_update</span>(message, location=<span class="code-keyword">None</span>):
-    tweet = <span class="code-string">f"🤖 {message}"</span>
-    
-    <span class="code-keyword">if</span> location:
-        tweet += <span class="code-string">f"\n📍 {location['lat']:.6f}, {location['lon']:.6f}"</span>
-    
-    <span class="code-keyword">try</span>:
-        response = client.create_tweet(text=tweet)
-        <span class="code-keyword">return</span> response.data[<span class="code-string">'id'</span>]
-    <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:
-        log_error(<span class="code-string">f"Tweet failed: {e}"</span>)
-
-<span class="code-comment"># Monitor mentions and respond</span>
-<span class="code-keyword">def</span> <span class="code-function">check_mentions</span>():
-    mentions = client.get_mentions(max_results=10)
-    <span class="code-keyword">for</span> tweet <span class="code-keyword">in</span> mentions.data:
-        process_command(tweet.text, tweet.author_id)
-                    </div>
+                <div class="software-item">
+                    <div class="software-name">VoteChain</div>
+                    <div class="software-desc">Blockchain-based voting with multiple methods</div>
                 </div>
-                
-                <div class="docs-content">
-                    <h3>Data Stream</h3>
-                    <p>The following data points are continuously collected and transmitted:</p>
-                    <p>• GPS coordinates (lat/lon)<br>
-                    • Battery status and power consumption<br>
-                    • Camera feed and image analysis<br>
-                    • Environmental sensors (temperature, humidity)<br>
-                    • Network connectivity status<br>
-                    • System performance metrics</p>
-                    
-                    <div class="code-block">
-<span class="code-comment"># Data collection and streaming</span>
-<span class="code-keyword">def</span> <span class="code-function">collect_telemetry</span>():
-    <span class="code-keyword">return</span> {
-        <span class="code-string">'timestamp'</span>: time.time(),
-        <span class="code-string">'location'</span>: get_current_location(),
-        <span class="code-string">'battery'</span>: get_battery_level(),
-        <span class="code-string">'temperature'</span>: read_sensor(<span class="code-string">'temp'</span>),
-        <span class="code-string">'network'</span>: check_connectivity(),
-        <span class="code-string">'status'</span>: <span class="code-string">'active'</span>
-    }
+                <div class="software-item">
+                    <div class="software-name">MeetingWeaver</div>
+                    <div class="software-desc">Facilitates assemblies, circles, and councils</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">ConflictResolver</div>
+                    <div class="software-desc">Mediation tools and restorative justice protocols</div>
+                </div>
+            </div>
 
-<span class="code-keyword">while</span> <span class="code-keyword">True</span>:
-    data = collect_telemetry()
-    stream_to_server(data)
-    post_update(<span class="code-string">f"Status: {data['status']} | Battery: {data['battery']}%"</span>, data[<span class="code-string">'location'</span>])
-    time.sleep(30)
-                    </div>
+            <div class="software-category">
+                <div class="category-title">💰 Economics & Accounting</div>
+                <div class="software-item">
+                    <div class="software-name">CommonLedger</div>
+                    <div class="software-desc">Multi-currency accounting for gift/market economies</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">ResourceTracker</div>
+                    <div class="software-desc">Inventory, tool sharing, and resource allocation</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">LaborFlow</div>
+                    <div class="software-desc">Work coordination and contribution tracking</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">MutualCredit</div>
+                    <div class="software-desc">Community currency and barter system</div>
+                </div>
+            </div>
+
+            <div class="software-category">
+                <div class="category-title">📱 Communication & Coordination</div>
+                <div class="software-item">
+                    <div class="software-name">MeshTalk</div>
+                    <div class="software-desc">Decentralized mesh networking and VoIP</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">CollectiveChat</div>
+                    <div class="software-desc">Privacy-focused group messaging with encryption</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">SkillShare</div>
+                    <div class="software-desc">Knowledge sharing and skill mapping platform</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">EventHive</div>
+                    <div class="software-desc">Community calendar and event coordination</div>
+                </div>
+            </div>
+
+            <div class="software-category">
+                <div class="category-title">🌱 Sustainability & Production</div>
+                <div class="software-item">
+                    <div class="software-name">PermacultureDB</div>
+                    <div class="software-desc">Land management and food forest planning</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">EnergyFlow</div>
+                    <div class="software-desc">Renewable energy monitoring and distribution</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">WasteLoop</div>
+                    <div class="software-desc">Circular economy and zero-waste tracking</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">BioMonitor</div>
+                    <div class="software-desc">Ecosystem health and biodiversity tracking</div>
+                </div>
+            </div>
+
+            <div class="software-category">
+                <div class="category-title">🔧 Infrastructure & Security</div>
+                <div class="software-item">
+                    <div class="software-name">HardwareCoop</div>
+                    <div class="software-desc">Shared computing resources and maintenance</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">DataCommons</div>
+                    <div class="software-desc">Distributed storage with collective ownership</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">PrivacyShield</div>
+                    <div class="software-desc">Community-controlled privacy and security tools</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">ToolLibrary</div>
+                    <div class="software-desc">Physical asset sharing and maintenance tracking</div>
+                </div>
+            </div>
+
+            <div class="software-category">
+                <div class="category-title">🎓 Learning & Culture</div>
+                <div class="software-item">
+                    <div class="software-name">FreeUniversity</div>
+                    <div class="software-desc">Peer-to-peer education and course management</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">CultureKeeper</div>
+                    <div class="software-desc">Community memory and tradition preservation</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">CreativeCommons</div>
+                    <div class="software-desc">Collaborative arts and media production</div>
+                </div>
+                <div class="software-item">
+                    <div class="software-name">WisdomCircle</div>
+                    <div class="software-desc">Elder knowledge and intergenerational learning</div>
                 </div>
             </div>
         </div>
-    </main>
+
+        <div class="terminal">
+            <div class="prompt">Configuring collective parameters...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="prompt" id="statusText">Awaiting organization selection...</div>
+        </div>
+
+        <div class="install-section">
+            <div class="install-btn" onclick="startInstall()">INITIALIZE COLLECTIVE</div>
+            <div class="install-btn" onclick="downloadISO()">DOWNLOAD ISO</div>
+            <div class="install-btn" onclick="viewDocs()">READ THE DOCS</div>
+        </div>
+
+        <div class="terminal">
+            <div style="color: #00ffff; margin-bottom: 10px;">SYSTEM REQUIREMENTS:</div>
+            <div>• Minimum: Commitment to mutual aid</div>
+            <div>• Recommended: 8GB RAM, Open mind, Solidarity</div>
+            <div>• Storage: 40GB (scales with collective size)</div>
+            <div>• Network: Mesh-capable WiFi or Ethernet</div>
+            <div>• Human: Willingness to share and cooperate</div>
+        </div>
+
+        <div class="footer">
+            Built by the community, for the community | Licensed under Copyleft Commons<br>
+            "From each according to their ability, to each according to their need" - Karl Marx<br>
+            No corporations were enriched in the making of this software
+        </div>
+    </div>
 
     <script>
-        function showHome() {
-            document.getElementById('home').style.display = 'block';
-            document.getElementById('docs').classList.remove('active');
+        let selectedOrgType = null;
+        let isInstalling = false;
+
+        function selectOrg(element, type) {
+            // Remove selected class from all org types
+            document.querySelectorAll('.org-type').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked element
+            element.classList.add('selected');
+            selectedOrgType = type;
+            
+            // Update status
+            document.getElementById('statusText').textContent = `Selected: ${type.toUpperCase()} - Ready to configure`;
+            
+            // Start progress animation
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = '25%';
         }
-        
-        function showDocs() {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('docs').classList.add('active');
+
+        function startInstall() {
+            if (!selectedOrgType) {
+                alert('Please select an organization type first!');
+                return;
+            }
+            
+            if (isInstalling) return;
+            
+            isInstalling = true;
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('statusText');
+            
+            const stages = [
+                'Establishing mesh network...',
+                'Configuring consensus protocols...',
+                'Installing economic tools...',
+                'Setting up conflict resolution...',
+                'Initializing resource sharing...',
+                'Activating collective consciousness...',
+                'COMMUNE ONLINE - SOLIDARITY ACHIEVED!'
+            ];
+            
+            let currentStage = 0;
+            const interval = setInterval(() => {
+                progressBar.style.width = `${(currentStage + 1) * 14.3}%`;
+                statusText.textContent = stages[currentStage];
+                
+                currentStage++;
+                if (currentStage >= stages.length) {
+                    clearInterval(interval);
+                    statusText.innerHTML = '<span style="color: #00ff41;">COMMUNEOS READY - WELCOME TO THE COLLECTIVE! 🌟</span>';
+                    isInstalling = false;
+                }
+            }, 1500);
         }
+
+        function downloadISO() {
+            alert('ISO download would begin for CommuneOS v2.4.1-collective (3.2GB)\n\n"The revolution will not be downloaded, but it might be installed." 😉');
+        }
+
+        function viewDocs() {
+            const docWindow = window.open('', '_blank');
+            docWindow.document.write(`
+                <html>
+                    <head><title>CommuneOS Documentation</title></head>
+                    <body style="background: #0a0a0a; color: #00ff41; font-family: monospace; padding: 20px;">
+                        <h1>CommuneOS Documentation</h1>
+                        <h2>Installation Guide</h2>
+                        <p>1. Gather your community</p>
+                        <p>2. Achieve consensus on adoption</p>
+                        <p>3. Boot from USB with collective intention</p>
+                        <p>4. Select your organizational structure</p>
+                        <p>5. Configure governance protocols</p>
+                        <p>6. Establish economic relationships</p>
+                        <p>7. Begin cooperative computing!</p>
+                        
+                        <h2>Philosophy</h2>
+                        <p>CommuneOS embodies the principle that technology should serve communities, not corporations. Every line of code is written with mutual aid in mind.</p>
+                        
+                        <p style="margin-top: 40px; color: #888;">
+                        "The master's tools will never dismantle the master's house." - Audre Lorde<br>
+                        So we built our own tools.
+                        </p>
+                    </body>
+                </html>
+            `);
+        }
+
+        // Add some dynamic terminal effects
+        setInterval(() => {
+            const cursors = document.querySelectorAll('.blinking');
+            cursors.forEach(cursor => {
+                cursor.textContent = cursor.textContent === '█' ? '▋' : '█';
+            });
+        }, 500);
     </script>
 </body>
 </html>
