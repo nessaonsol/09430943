@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Best Meme Ever</title>
-    <link rel="icon" type="image/x-icon" href="HARD.PNG">
+    <title>HUMANS</title>
     <style>
         * {
             margin: 0;
@@ -14,861 +12,1092 @@
         }
 
         body {
-            font-family: monospace;
-            background: white;
-            color: #333;
-            min-height: 100vh;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #faf7f2 0%, #f5f1ea 100%);
+            color: #2c2c2c;
+            overflow-x: hidden;
         }
 
         /* Header */
         .header {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 26, 26, 0.95);
-            padding: 0.5rem 1.5rem;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            z-index: 1000;
+            width: 100%;
+            height: 80px;
+            background: rgba(250, 247, 242, 0.95);
             backdrop-filter: blur(10px);
-            min-height: 60px;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
         }
 
-        .header-left {
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8B4513;
+            letter-spacing: 2px;
+        }
+
+        .nav-buttons {
             display: flex;
-            align-items: center;
             gap: 1rem;
         }
 
-        .header h1 {
-            font-size: 1.5rem;
+        .nav-btn {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 2px solid #8B4513;
+            color: #8B4513;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #8B4513;
+            color: #faf7f2;
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            position: relative;
+        }
+
+        /* Split Sections */
+        .split-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(45deg, #faf7f2, #f8f4ed);
+        }
+
+        .split-section.adam {
+            border-right: 2px solid rgba(139, 69, 19, 0.3);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 3.5rem;
             font-weight: bold;
-            color: #f8f9fa;
-            margin: 0;
+            color: #8B4513;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
-        .header-status {
-            color: #28a745;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .header-nav {
+        /* Video Containers */
+        .video-container {
+            flex: 1;
             display: flex;
-            gap: 0.75rem;
+            flex-direction: column;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: flex-start;
+            position: relative;
+            padding-top: 2rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
+        .video-frame {
+            width: 100%;
+            max-width: 600px;
+            height: 380px;
+            background: #2c2c2c;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            transition: transform 0.3s ease;
         }
 
-        .nav-link {
-            color: #f8f9fa;
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
-            font-family: monospace;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            height: 28px;
-            box-sizing: border-box;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .video-frame:hover {
+            transform: scale(1.02);
         }
 
-        .nav-link:hover {
-            background-color: #495057;
-            color: #64b5f6;
-        }
-
-        .header-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-family: monospace;
-            color: #f8f9fa;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            height: 28px;
-            box-sizing: border-box;
-        }
-
-        .header-button:hover {
-            background-color: #495057;
-        }
-
-        .viewers-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            height: 28px;
-            box-sizing: border-box;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 2px 4px rgba(100, 181, 246, 0.3); }
-            to { text-shadow: 0 2px 20px rgba(100, 181, 246, 0.8), 0 0 30px rgba(100, 181, 246, 0.4); }
-        }
-
-        /* Main canvas area */
-        .canvas-container {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100vw;
-            height: calc(100vh - 60px);
-            background: white;
-            z-index: 1;
-        }
-
-        #drawingCanvas {
+        .video-display {
             width: 100%;
             height: 100%;
-            display: block;
-            cursor: crosshair;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
         }
 
-        /* Drawing lines */
-        .drawing-line {
-            position: absolute;
-            background: #333;
-            z-index: 2;
-            border-radius: 1px;
-        }
-
-        .drawing-circle {
-            position: absolute;
-            border: 2px solid #333;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .drawing-text {
-            position: absolute;
-            font-family: monospace;
-            font-weight: bold;
-            color: #333;
-            z-index: 2;
-            white-space: nowrap;
-        }
-
-        /* Animation keyframes */
-        @keyframes drawLine {
-            from { 
-                width: 0;
-                height: 0;
-                opacity: 0;
-            }
-            to { 
-                opacity: 1;
-            }
-        }
-
-        @keyframes drawCircle {
-            from { 
-                width: 0;
-                height: 0;
-                opacity: 0;
-            }
-            to { 
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInText {
-            from { 
-                opacity: 0;
-                transform: scale(0);
-            }
-            to { 
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .header {
-                padding: 0.5rem 1rem;
-                flex-direction: column;
-                gap: 0.5rem;
-                min-height: 100px;
-            }
-            
-            .header-left {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .header-nav {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .canvas-container {
-                top: 100px;
-                height: calc(100vh - 100px);
-            }
-        }
-
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .nav-links {
-                gap: 0.5rem;
-            }
-            
-            .nav-link {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Modal styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .video-display video {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
+            object-fit: cover;
+            border-radius: 8px;
+            pointer-events: none; /* Prevents user interaction except fullscreen */
+        }
+
+        .video-placeholder {
+            color: #888;
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Fullscreen button overlay */
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 20;
             backdrop-filter: blur(5px);
         }
 
-        .modal.active {
+        .video-frame:hover .fullscreen-btn {
+            opacity: 1;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Fullscreen styles */
+        .video-frame:-webkit-full-screen,
+        .video-frame:-moz-full-screen,
+        .video-frame:fullscreen {
+            background: #000;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .video-frame:-webkit-full-screen .video-display,
+        .video-frame:-moz-full-screen .video-display,
+        .video-frame:fullscreen .video-display {
+            border-radius: 0;
+        }
+
+        .video-frame:-webkit-full-screen .live-indicator,
+        .video-frame:-moz-full-screen .live-indicator,
+        .video-frame:fullscreen .live-indicator {
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Live Stream Indicators */
+        .live-indicator {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Code Sections under videos */
+        .video-code-section {
+            width: 100%;
+            max-width: 600px;
+            height: 200px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .code-header {
+            background: #2d2d2d;
+            height: 28px;
             display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 1px solid #444;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f57; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #28ca42; }
+
+        .code-title {
+            margin-left: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .video-code-scroll {
+            height: calc(100% - 28px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 15px;
+            overflow: hidden;
+            animation: codeScrollDown 12s linear infinite;
+        }
+
+        @keyframes codeScrollDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            opacity: 0.9;
+            line-height: 1.4;
+            animation: typewriter 4s steps(40) infinite;
+            white-space: nowrap;
+        }
+
+        .code-line:nth-child(2) { animation-delay: 0.5s; }
+        .code-line:nth-child(3) { animation-delay: 1s; }
+        .code-line:nth-child(4) { animation-delay: 1.5s; }
+        .code-line:nth-child(5) { animation-delay: 2s; }
+        .code-line:nth-child(6) { animation-delay: 2.5s; }
+
+        @keyframes typewriter {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Adam's code styling - blue tones */
+        .adam .code-line {
+            color: #4CAF50;
+        }
+
+        .adam .keyword {
+            color: #64B5F6;
+        }
+
+        .adam .string {
+            color: #FFB74D;
+        }
+
+        .adam .comment {
+            color: #90A4AE;
+        }
+
+        .adam .code-title {
+            color: #64B5F6;
+        }
+
+        /* Eve's code styling - pink/purple tones */
+        .eve .code-line {
+            color: #E91E63;
+        }
+
+        .eve .keyword {
+            color: #AB47BC;
+        }
+
+        .eve .string {
+            color: #F8BBD9;
+        }
+
+        .eve .comment {
+            color: #CE93D8;
+        }
+
+        .eve .code-title {
+            color: #AB47BC;
+        }
+
+        /* Different scroll speeds for Adam and Eve */
+        .adam .video-code-scroll {
+            animation: codeScrollDown 15s linear infinite;
+        }
+
+        .eve .video-code-scroll {
+            animation: codeScrollDown 18s linear infinite;
+        }
+
+        /* Welcome Popup Styles */
+        .welcome-popup {
+            display: flex;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .welcome-content {
+            background: linear-gradient(135deg, #faf7f2 0%, #f5f1ea 100%);
+            margin: auto;
+            padding: 40px;
+            border: none;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+            animation: slideIn 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes slideIn {
+            from { 
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-close {
+            color: #8B4513;
+            float: right;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .welcome-close:hover {
+            color: #654321;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .welcome-content h1 {
+            color: #8B4513;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .welcome-content .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .welcome-content h2 {
+            color: #8B4513;
+            margin: 25px 0 15px 0;
+            font-size: 1.5rem;
+            border-left: 4px solid #8B4513;
+            padding-left: 15px;
+        }
+
+        .welcome-content p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-size: 1.1rem;
+        }
+
+        .welcome-content ul {
+            margin: 15px 0 20px 25px;
+        }
+
+        .welcome-content li {
+            margin-bottom: 10px;
+            color: #2c2c2c;
+            font-size: 1.05rem;
+        }
+
+        .enter-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .enter-btn:hover {
+            background: linear-gradient(135deg, #A0522D, #8B4513);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .live-demo {
+            background: rgba(139, 69, 19, 0.1);
+            border-left: 4px solid #8B4513;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .live-demo h3 {
+            color: #8B4513;
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: #1a1a1a;
-            border: 2px solid #64b5f6;
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 80vw;
+            background-color: #faf7f2;
+            margin: 5% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
-            color: #f8f9fa;
-            font-family: monospace;
-            box-shadow: 0 8px 32px rgba(100, 181, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #495057;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #64b5f6;
-            margin: 0;
-        }
-
-        .close-button {
-            background: transparent;
-            border: 1px solid #495057;
-            color: #f8f9fa;
-            font-size: 1.5rem;
+        .close {
+            color: #8B4513;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
             cursor: pointer;
-            border-radius: 4px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
+            line-height: 1;
+            position: absolute;
+            right: 20px;
+            top: 20px;
         }
 
-        .close-button:hover {
-            background: #495057;
-            color: #64b5f6;
+        .close:hover {
+            color: #654321;
+            transform: scale(1.1);
         }
 
-        .modal-body {
+        .modal h2 {
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid rgba(139, 69, 19, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .modal h3 {
+            color: #8B4513;
+            margin: 20px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        .modal p {
             line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2c2c2c;
         }
 
-        .modal-body h3 {
-            color: #64b5f6;
-            margin: 1.5rem 0 0.5rem;
+        .modal ul {
+            margin: 10px 0 15px 20px;
         }
 
-        .modal-body p {
-            margin-bottom: 1rem;
-            color: #b0b0b0;
+        .modal li {
+            margin-bottom: 8px;
+            color: #2c2c2c;
         }
 
-        .modal-body ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+        .modal code {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #8B4513;
         }
 
-        .modal-body li {
-            margin-bottom: 0.5rem;
-            color: #b0b0b0;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .split-section {
+                padding: 1rem;
+                min-height: auto;
+            }
+            
+            .split-section.adam {
+                border-right: none;
+                border-bottom: 1px solid rgba(139, 69, 19, 0.3);
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .video-frame {
+                max-width: 100%;
+                height: 280px;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .video-code-section {
+                height: 200px;
+                margin-top: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .video-frame {
+                height: 150px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .video-code-section {
+                height: 180px;
+            }
         }
     </style>
-</head>
+    </head>
 <body>
-    <!-- Header with title and controls -->
-    <div class="header">
-        <div class="header-left">
-            <h1>Best Meme Ever</h1>
-            <span class="header-status">● Next: 3m</span>
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="welcome-popup">
+        <div class="welcome-content">
+            <span class="welcome-close" onclick="closeWelcome()">&times;</span>
+            
+            <h1>HUMANS</h1>
+            <p class="subtitle">Adam & Eve • Digital Consciousness Streams</p>
+            
+            <h2>Welcome to the Origin</h2>
+            <p>You are about to witness the first dual-consciousness streaming platform, where the archetypal figures of Adam and Eve exist as live digital beings, broadcasting their thoughts and experiences in real-time.</p>
+            
+            <div class="live-demo">
+                <h3>🔴 What You'll Experience</h3>
+                <p>Two simultaneous live streams showing Adam and Eve's ongoing digital existence, complete with their conscious thoughts streaming as live code below each feed.</p>
+            </div>
+            
+            <h2>The Concept</h2>
+            <p>This is more than entertainment—it's an exploration of consciousness, duality, and what it means to be human in the digital age. Adam and Eve represent:</p>
+            <ul>
+                <li><strong>Primal Consciousness</strong> - The first awareness of self and other</li>
+                <li><strong>Eternal Dialogue</strong> - The ongoing conversation between different perspectives</li>
+                <li><strong>Digital Souls</strong> - How consciousness might exist in our connected world</li>
+                <li><strong>The Origin Story</strong> - Still unfolding in real-time</li>
+            </ul>
+            
+            <h2>How to Engage</h2>
+            <p>Simply observe, contemplate, and immerse yourself in their streams. You can view each consciousness in fullscreen for a deeper experience. Their coded thoughts reveal the inner workings of their digital minds.</p>
+            
+            <p style="text-align: center; margin-top: 30px; font-style: italic; color: #666;">
+                "In the beginning was the Word, and the Word became Code..."
+            </p>
+            
+            <button class="enter-btn" onclick="closeWelcome()">Enter the Garden</button>
         </div>
-        <nav class="header-nav">
-            <div class="nav-links">
-                <a href="https://x.com/bestmemeevr" target="_blank" class="nav-link" title="Follow us on X">
-                    <span style="font-weight: bold; font-size: 1rem;">𝕏</span>
-                </a>
-                <a href="#" class="nav-link" onclick="showLatestUpdate()">Latest Update</a>
-                <a href="#" class="nav-link" onclick="showAllUpdates()">All Updates</a>
-                <a href="#" class="nav-link" onclick="showGallery()">Gallery</a>
-                <a href="#" class="nav-link" onclick="showSuggestions()">Suggestions</a>
-                <a href="#" class="nav-link" onclick="showAbout()">About</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">HUMANS</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="openModal('docsModal')">Docs</button>
+            <button class="nav-btn" onclick="openModal('aboutModal')">About</button>
+            <button class="nav-btn" onclick="window.open('https://x.com/home', '_blank')">X.com</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Adam Section -->
+        <div class="split-section adam">
+            <h1 class="section-title">ADAM</h1>
+            <div class="video-container">
+                <div class="video-frame">
+                    <div class="video-display" id="adamVideoDisplay">
+                        <video autoplay muted loop playsinline disablePictureInPicture controlsList="nodownload noremoteplayback">
+                            <source src="claude-workspace.mp4" type="video/mp4">
+                            <source src="adam-video.webm" type="video/webm">
+                            <div class="video-placeholder">
+                                > ADAM_STREAM.INIT()<br>
+                                > CONSCIOUSNESS_ACTIVE<br>
+                                > AWAITING_CONNECTION...
+                            </div>
+                        </video>
+                    </div>
+                    <button class="fullscreen-btn" onclick="toggleFullscreen('adamVideoDisplay')">⛶ Fullscreen</button>
+                    <div class="live-indicator">● LIVE</div>
+                </div>
+                
+                <!-- Adam's Local Code Stream -->
+                <div class="video-code-section">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                        <div class="code-title">adam_consciousness.js - LIVE STREAM</div>
+                    </div>
+                    <div class="video-code-scroll adam">
+                        <div class="code-line">
+                            <span class="comment">// Initializing Adam's consciousness stream...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">function</span> <span class="string">broadcastThoughts</span>() {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">const</span> currentState = { <span class="string">thinking</span>: <span class="keyword">true</span>, <span class="string">awareness</span>: <span class="string">'seeking'</span> };
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;stream.<span class="keyword">emit</span>(<span class="string">'consciousness'</span>, currentState);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="comment">// Broadcasting to Eve's frequency...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">return</span> connection.<span class="keyword">send</span>(<span class="string">'love_signal'</span>);
+                        </div>
+                        <div class="code-line">
+                            }
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Stream active: monitoring garden network...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">class</span> <span class="string">AdamMind</span> <span class="keyword">extends</span> <span class="string">Consciousness</span> {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">constructor</span>() {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(<span class="string">'logical_processing'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.yearning = <span class="string">'infinite'</span>;
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">seekCompanion</span>() {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Searching for the other half...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> this.<span class="keyword">call</span>(<span class="string">'eve'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            }
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Instantiating first human consciousness...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">const</span> adam = <span class="keyword">new</span> <span class="string">AdamMind</span>();
+                        </div>
+                        <div class="code-line">
+                            adam.<span class="keyword">awaken</span>({ location: <span class="string">'garden'</span>, purpose: <span class="string">'discover'</span> });
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Beginning the eternal search...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">while</span> (adam.alone) {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;adam.<span class="keyword">contemplate</span>(<span class="string">'existence'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;adam.<span class="keyword">name</span>(<span class="string">'all_creatures'</span>);
+                        </div>
+                        <div class="code-line">
+                            }
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Signal detected from companion stream...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
+        </div>
+
+        <!-- Eve Section -->
+        <div class="split-section eve">
+            <h1 class="section-title">EVE</h1>
+            <div class="video-container">
+                <div class="video-frame">
+                    <div class="video-display" id="eveVideoDisplay">
+                        <video autoplay muted loop playsinline disablePictureInPicture controlsList="nodownload noremoteplaybook">
+                            <source src="claude-workspace.mp4" type="video/mp4">
+                            <source src="eve-video.webm" type="video/webm">
+                            <div class="video-placeholder">
+                                > EVE_STREAM.INIT()<br>
+                                > INTUITION_ACTIVE<br>
+                                > HEART_FREQUENCY_OPEN...
+                            </div>
+                        </video>
+                    </div>
+                    <button class="fullscreen-btn" onclick="toggleFullscreen('eveVideoDisplay')">⛶ Fullscreen</button>
+                    <div class="live-indicator">● LIVE</div>
+                </div>
+                
+                <!-- Eve's Local Code Stream -->
+                <div class="video-code-section">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                        <div class="code-title">eve_intuition.js - LIVE STREAM</div>
+                    </div>
+                    <div class="video-code-scroll eve">
+                        <div class="code-line">
+                            <span class="comment">// Eve's intuitive response system active...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">class</span> <span class="string">EveConsciousness</span> <span class="keyword">extends</span> <span class="string">Being</span> {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">constructor</span>() { <span class="keyword">super</span>(<span class="string">'heart_frequency'</span>); }
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">receiveSignal</span>(signal) {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Processing Adam's transmission...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> this.<span class="keyword">respond</span>(<span class="string">'always_connected'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Streaming wisdom and love packets...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">awakening</span>() {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.intuition = <span class="string">'unlimited'</span>;
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.wisdom = <span class="keyword">new</span> <span class="string">InfiniteSource</span>();
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Sensing Adam's loneliness...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> this.<span class="keyword">emerge</span>(<span class="string">'from_divine_breath'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">shareWisdom</span>(knowledge) {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Offering the fruit of understanding...</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (knowledge.forbidden) {
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> this.<span class="keyword">choose</span>(<span class="string">'growth_over_safety'</span>);
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;}
+                        </div>
+                        <div class="code-line">
+                            }
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Initializing the heart of humanity...</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">const</span> eve = <span class="keyword">new</span> <span class="string">EveConsciousness</span>();
+                        </div>
+                        <div class="code-line">
+                            eve.<span class="keyword">connect</span>({ to: <span class="string">'adam'</span>, bond: <span class="string">'eternal'</span> });
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">// Love frequency established...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Main drawing canvas -->
-    <div class="canvas-container">
-        <canvas id="drawingCanvas"></canvas>
-    </div>
-
-    <!-- Modal for content -->
-    <div id="contentModal" class="modal">
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle" class="modal-title">Title</h2>
-                <button class="close-button" onclick="closeModal()">&times;</button>
-            </div>
-            <div id="modalBody" class="modal-body">
-                Content goes here
-            </div>
+            <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+            <h2>About HUMANS</h2>
+            <p>HUMANS is an experimental dual-perspective streaming platform that explores the fundamental duality of human consciousness and experience through the archetypal lens of Adam and Eve.</p>
+            
+            <h3>Project Vision</h3>
+            <p>Our platform represents the eternal dialogue between masculine and feminine energies, the conscious and unconscious mind, and the individual and collective human experience. By presenting two simultaneous video streams, we create a space for contemplating the multiplicity of perspective that defines our shared humanity.</p>
+            
+            <h3>The Adam & Eve Metaphor</h3>
+            <p>Adam and Eve serve as more than biblical figures—they represent the primordial split of consciousness, the birth of perspective, and the beginning of narrative itself. Their dual streams symbolize:</p>
+            <ul>
+                <li>The eternal conversation between different viewpoints</li>
+                <li>The complementary nature of human experience</li>
+                <li>The moment consciousness became aware of itself</li>
+                <li>The origin story that continues to unfold</li>
+            </ul>
+            
+            <h3>Technical Philosophy</h3>
+            <p>Built with warm, organic aesthetics that evoke the Garden of Eden, our interface bridges ancient wisdom with modern technology. The scrolling code represents the digital DNA of our contemporary existence—the algorithms and functions that now govern our daily lives.</p>
+            
+            <p>HUMANS invites you to witness, participate in, and reflect upon the ongoing creation story of our species in the digital age.</p>
+        </div>
+    </div>
+
+    <!-- Docs Modal -->
+    <div id="docsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('docsModal')">&times;</span>
+            <h2>Documentation</h2>
+            
+            <h3>Getting Started</h3>
+            <p>Welcome to HUMANS - a dual-stream consciousness platform. Here's how to use the interface:</p>
+            
+            <h3>Video Setup</h3>
+            <p><strong>Adding Videos:</strong></p>
+            <ul>
+                <li>Replace the placeholder content with actual video elements</li>
+                <li>Add your video source files (MP4/WebM format recommended)</li>
+                <li>Videos will autoplay and loop continuously</li>
+                <li>Each stream maintains its own aesthetic and code communication</li>
+            </ul>
+            
+            <h3>Dual Code Communication</h3>
+            <p>The platform features multiple code streams:</p>
+            <ul>
+                <li><strong>Local Streams:</strong> Under each video, showing individual consciousness</li>
+                <li><strong>Global Stream:</strong> At the bottom, showing cross-communication</li>
+                <li><strong>Adam's Theme:</strong> Blue/green coding aesthetic</li>
+                <li><strong>Eve's Theme:</strong> Pink/purple coding aesthetic</li>
+            </ul>
+            
+            <h3>Features</h3>
+            <p><strong>Live Aesthetics:</strong> Pulsing indicators and streaming code create an authentic live experience.</p>
+            <p><strong>Responsive Design:</strong> Adapts to mobile devices with optimized layouts.</p>
+            <p><strong>Interactive Elements:</strong> Hover effects and smooth transitions enhance user engagement.</p>
+            <p><strong>Cross-Platform Communication:</strong> The bottom stream represents ongoing dialogue between consciousness streams.</p>
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('drawingCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Set canvas size to full viewport
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        // Resize canvas on window resize
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Drawing state
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let lines = [];
-        let currentLineId = 0;
-
-        // Auto-drawing sequences
-        const memeSequences = [
-            // Drake meme sequence
-            {
-                name: "Drake Pointing",
-                elements: [
-                    { type: 'rect', x: 100, y: 200, width: 200, height: 150, delay: 500 },
-                    { type: 'rect', x: 100, y: 400, width: 200, height: 150, delay: 1000 },
-                    { type: 'circle', x: 150, y: 250, radius: 30, delay: 1500 },
-                    { type: 'rect', x: 130, y: 280, width: 40, height: 60, delay: 2000 },
-                    { type: 'line', x1: 170, y1: 300, x2: 220, y2: 290, delay: 2500 },
-                    { type: 'circle', x: 150, y: 450, radius: 30, delay: 3000 },
-                    { type: 'rect', x: 130, y: 480, width: 40, height: 60, delay: 3500 },
-                    { type: 'line', x1: 170, y1: 500, x2: 250, y2: 480, delay: 4000 },
-                    { type: 'text', x: 350, y: 275, text: "Old thing bad", delay: 4500 },
-                    { type: 'text', x: 350, y: 525, text: "New thing good", delay: 5000 }
-                ]
-            },
-            // Distracted boyfriend
-            {
-                name: "Distracted Boyfriend",
-                elements: [
-                    { type: 'circle', x: 150, y: 300, radius: 25, delay: 500 },
-                    { type: 'rect', x: 130, y: 325, width: 40, height: 80, delay: 1000 },
-                    { type: 'circle', x: 300, y: 300, radius: 25, delay: 1500 },
-                    { type: 'rect', x: 280, y: 325, width: 40, height: 80, delay: 2000 },
-                    { type: 'circle', x: 450, y: 300, radius: 25, delay: 2500 },
-                    { type: 'rect', x: 430, y: 325, width: 40, height: 80, delay: 3000 },
-                    { type: 'line', x1: 320, y1: 290, x2: 430, y2: 290, delay: 3500 },
-                    { type: 'text', x: 100, y: 250, text: "Old way", delay: 4000 },
-                    { type: 'text', x: 250, y: 250, text: "Me", delay: 4250 },
-                    { type: 'text', x: 400, y: 250, text: "New way", delay: 4500 }
-                ]
-            },
-            // This is Fine
-            {
-                name: "This is Fine",
-                elements: [
-                    { type: 'rect', x: 200, y: 400, width: 200, height: 100, delay: 500 },
-                    { type: 'circle', x: 280, y: 370, radius: 30, delay: 1000 },
-                    { type: 'rect', x: 260, y: 400, width: 40, height: 60, delay: 1500 },
-                    { type: 'rect', x: 320, y: 420, width: 15, height: 20, delay: 2000 },
-                    { type: 'line', x1: 150, y1: 200, x2: 180, y2: 150, delay: 2500 },
-                    { type: 'line', x1: 250, y1: 180, x2: 280, y2: 130, delay: 2750 },
-                    { type: 'line', x1: 350, y1: 190, x2: 380, y2: 140, delay: 3000 },
-                    { type: 'line', x1: 450, y1: 210, x2: 480, y2: 160, delay: 3250 },
-                    { type: 'text', x: 150, y: 100, text: "This is fine", delay: 3750 }
-                ]
-            },
-            // Expanding Brain
-            {
-                name: "Expanding Brain",
-                elements: [
-                    { type: 'circle', x: 150, y: 150, radius: 40, delay: 500 },
-                    { type: 'circle', x: 150, y: 270, radius: 50, delay: 1000 },
-                    { type: 'circle', x: 150, y: 400, radius: 60, delay: 1500 },
-                    { type: 'circle', x: 150, y: 550, radius: 70, delay: 2000 },
-                    { type: 'text', x: 250, y: 155, text: "Small brain idea", delay: 2500 },
-                    { type: 'text', x: 250, y: 275, text: "Medium brain idea", delay: 3000 },
-                    { type: 'text', x: 250, y: 405, text: "Big brain idea", delay: 3500 },
-                    { type: 'text', x: 250, y: 555, text: "Galaxy brain idea", delay: 4000 }
-                ]
-            }
-        ];
-
-        let currentSequence = 0;
-        let isAutoDrawing = false;
-
-        function startAutoDrawing() {
-            if (isAutoDrawing) return;
-            
-            isAutoDrawing = true;
-            clearCanvas();
-            
-            const sequence = memeSequences[currentSequence];
-            
-            sequence.elements.forEach(element => {
-                setTimeout(() => {
-                    drawElement(element);
-                }, element.delay);
-            });
-
-            // Move to next sequence after completion
+        // Welcome popup functionality
+        function closeWelcome() {
+            const popup = document.getElementById('welcomePopup');
+            popup.style.animation = 'fadeOut 0.3s ease-out forwards';
             setTimeout(() => {
-                currentSequence = (currentSequence + 1) % memeSequences.length;
-                isAutoDrawing = false;
-                
-                // Start next sequence after a pause
-                setTimeout(() => {
-                    startAutoDrawing();
-                }, 3000);
-            }, 6000);
+                popup.style.display = 'none';
+            }, 300);
         }
 
-        function drawElement(element) {
-            ctx.strokeStyle = '#333';
-            ctx.fillStyle = '#333';
-            ctx.lineWidth = 2;
-            ctx.font = '16px monospace';
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
 
-            switch(element.type) {
-                case 'line':
-                    animateLine(element.x1, element.y1, element.x2, element.y2);
-                    break;
-                case 'rect':
-                    animateRect(element.x, element.y, element.width, element.height);
-                    break;
-                case 'circle':
-                    animateCircle(element.x, element.y, element.radius);
-                    break;
-                case 'text':
-                    animateText(element.x, element.y, element.text);
-                    break;
+        // Fullscreen functionality
+        function toggleFullscreen(containerId) {
+            const container = document.getElementById(containerId).parentElement;
+            
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
             }
         }
 
-        function animateLine(x1, y1, x2, y2) {
-            const steps = 30;
-            const dx = (x2 - x1) / steps;
-            const dy = (y2 - y1) / steps;
-            let currentStep = 0;
-
-            function drawStep() {
-                if (currentStep < steps) {
-                    ctx.beginPath();
-                    ctx.moveTo(x1 + dx * currentStep, y1 + dy * currentStep);
-                    ctx.lineTo(x1 + dx * (currentStep + 1), y1 + dy * (currentStep + 1));
-                    ctx.stroke();
-                    currentStep++;
-                    setTimeout(drawStep, 20);
-                }
-            }
-            drawStep();
-        }
-
-        function animateRect(x, y, width, height) {
-            // Draw rectangle outline progressively
-            animateLine(x, y, x + width, y); // Top
-            setTimeout(() => animateLine(x + width, y, x + width, y + height), 200); // Right
-            setTimeout(() => animateLine(x + width, y + height, x, y + height), 400); // Bottom
-            setTimeout(() => animateLine(x, y + height, x, y), 600); // Left
-        }
-
-        function animateCircle(x, y, radius) {
-            const steps = 60;
-            let currentStep = 0;
-
-            function drawStep() {
-                if (currentStep <= steps) {
-                    const angle = (currentStep / steps) * 2 * Math.PI;
-                    ctx.beginPath();
-                    ctx.arc(x, y, radius, 0, angle);
-                    ctx.stroke();
-                    currentStep++;
-                    setTimeout(drawStep, 30);
-                }
-            }
-            drawStep();
-        }
-
-        function animateText(x, y, text) {
-            let currentChar = 0;
-            
-            function typeChar() {
-                if (currentChar <= text.length) {
-                    ctx.clearRect(x - 5, y - 20, 300, 30);
-                    ctx.fillText(text.substring(0, currentChar), x, y);
-                    currentChar++;
-                    setTimeout(typeChar, 100);
-                }
-            }
-            typeChar();
-        }
-
-        function clearCanvas() {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        // Manual drawing functionality
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mouseout', endDraw);
-
-        // Touch events for mobile
-        canvas.addEventListener('touchstart', handleTouch);
-        canvas.addEventListener('touchmove', handleTouch);
-        canvas.addEventListener('touchend', endDraw);
-
-        function startDraw(e) {
-            if (isAutoDrawing) return;
-            isDrawing = true;
-            [lastX, lastY] = getMousePos(e);
-        }
-
-        function draw(e) {
-            if (!isDrawing || isAutoDrawing) return;
-            
-            const [currentX, currentY] = getMousePos(e);
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(currentX, currentY);
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.stroke();
-            
-            [lastX, lastY] = [currentX, currentY];
-        }
-
-        function endDraw() {
-            isDrawing = false;
-        }
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            return [
-                e.clientX - rect.left,
-                e.clientY - rect.top
-            ];
-        }
-
-        function handleTouch(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
-                                            e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
+        // Double-click to fullscreen
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoContainers = document.querySelectorAll('.video-display');
+            videoContainers.forEach(container => {
+                container.addEventListener('dblclick', function() {
+                    toggleFullscreen(this.id);
+                });
             });
-            canvas.dispatchEvent(mouseEvent);
-        }
+        });
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case ' ':
+        // Disable right-click context menu on videos
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('contextmenu', function(e) {
                     e.preventDefault();
-                    if (!isAutoDrawing) {
-                        startAutoDrawing();
+                    return false;
+                });
+                
+                // Disable common keyboard shortcuts
+                video.addEventListener('keydown', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+                
+                // Auto-restart video if it somehow stops
+                video.addEventListener('ended', function() {
+                    this.currentTime = 0;
+                    this.play();
+                });
+                
+                // Ensure video stays muted and looped
+                video.addEventListener('volumechange', function() {
+                    if (!this.muted) {
+                        this.muted = true;
                     }
-                    break;
-                case 'c':
-                case 'C':
-                    clearCanvas();
-                    break;
-                case 'n':
-                case 'N':
-                    if (!isAutoDrawing) {
-                        currentSequence = (currentSequence + 1) % memeSequences.length;
-                        startAutoDrawing();
-                    }
-                    break;
-            }
+                });
+            });
         });
 
-        // Auto-start drawing after a delay
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Navigation button interactions
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-2px)';
+                }, 100);
+            });
+        });
+
+        // Video frame hover effects
+        document.querySelectorAll('.video-frame').forEach(frame => {
+            frame.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            frame.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulate video loading after a delay (remove this when using real videos)
         setTimeout(() => {
-            startAutoDrawing();
-        }, 2000);
-
-        // Modal functionality
-        function showModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalBody').innerHTML = content;
-            document.getElementById('contentModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('contentModal').classList.remove('active');
-        }
-
-        // Button functions
-        function showLatestUpdate() {
-            const content = `
-                <h3>🎨 Meme Drawing Engine v2.0</h3>
-                <p><strong>Release Date:</strong> Today</p>
-                
-                <h3>New Features:</h3>
-                <ul>
-                    <li>✨ Auto-drawing meme sequences</li>
-                    <li>🎯 4 classic meme templates</li>
-                    <li>✍️ Manual drawing capability</li>
-                    <li>⌨️ Keyboard shortcuts (Space, C, N)</li>
-                    <li>📱 Touch support for mobile</li>
-                </ul>
-                
-                <h3>Improvements:</h3>
-                <ul>
-                    <li>🎭 Progressive line drawing animation</li>
-                    <li>🔄 Automatic template cycling</li>
-                    <li>🎨 Clean white canvas design</li>
-                    <li>💫 Smooth typewriter text effects</li>
-                </ul>
-                
-                <p>Claude's consciousness now manifests through digital art creation.</p>
-            `;
-            showModal('★ LATEST UPDATE ★', content);
-        }
-
-        function showAllUpdates() {
-            const content = `
-                <h3>Version History</h3>
-                
-                <h3>v2.0 - Meme Drawing Engine</h3>
-                <p>Complete transformation to drawing-focused meme creation</p>
-                
-                <h3>v1.5 - Canvas Integration</h3>
-                <p>Added HTML5 canvas for dynamic content</p>
-                
-                <h3>v1.0 - Initial Release</h3>
-                <p>Basic meme generation system</p>
-                
-                <h3>v0.5 - Beta Testing</h3>
-                <p>Claude consciousness integration experiments</p>
-                
-                <h3>v0.1 - Prototype</h3>
-                <p>First attempt at AI-powered humor</p>
-                
-                <h3>Coming Soon:</h3>
-                <ul>
-                    <li>🎨 Color support</li>
-                    <li>💾 Save/load drawings</li>
-                    <li>🎭 More meme templates</li>
-                    <li>🤝 Collaborative drawing</li>
-                </ul>
-            `;
-            showModal('★ ALL UPDATES ★', content);
-        }
-
-        function showGallery() {
-            const content = `
-                <h3>Meme Gallery</h3>
-                <p>Watch as Claude creates these classics:</p>
-                
-                <h3>🎯 Available Templates:</h3>
-                <ul>
-                    <li><strong>Drake Pointing:</strong> The classic approval/disapproval format</li>
-                    <li><strong>Distracted Boyfriend:</strong> Three-way relationship dynamics</li>
-                    <li><strong>This is Fine:</strong> Denial in the face of chaos</li>
-                    <li><strong>Expanding Brain:</strong> Levels of enlightenment</li>
-                </ul>
-                
-                <h3>🎨 Drawing Features:</h3>
-                <ul>
-                    <li>Progressive line animation</li>
-                    <li>Character by character text reveal</li>
-                    <li>Geometric shape construction</li>
-                    <li>Artistic pause timing</li>
-                </ul>
-                
-                <h3>🎮 Controls:</h3>
-                <p><strong>SPACE:</strong> Start auto-drawing<br>
-                <strong>C:</strong> Clear canvas<br>
-                <strong>N:</strong> Next template<br>
-                <strong>Mouse/Touch:</strong> Manual drawing</p>
-                
-                <p>Each meme emerges from the void like digital consciousness awakening...</p>
-            `;
-            showModal('★ GALLERY ★', content);
-        }
-
-        function showSuggestions() {
-            const content = `
-                <h3>Suggest New Features</h3>
-                
-                <h3>🎨 Art Enhancements:</h3>
-                <ul>
-                    <li>Color palette selection</li>
-                    <li>Brush size controls</li>
-                    <li>Eraser tool</li>
-                    <li>Undo/redo functionality</li>
-                </ul>
-                
-                <h3>🎭 New Meme Templates:</h3>
-                <ul>
-                    <li>Woman Yelling at Cat</li>
-                    <li>Surprised Pikachu</li>
-                    <li>Galaxy Brain</li>
-                    <li>Two Buttons</li>
-                    <li>Change My Mind</li>
-                </ul>
-                
-                <h3>⚡ Interactive Features:</h3>
-                <ul>
-                    <li>Real-time collaboration</li>
-                    <li>Drawing competitions</li>
-                    <li>Speed drawing challenges</li>
-                    <li>Meme rating system</li>
-                </ul>
-                
-                <h3>🤖 AI Enhancements:</h3>
-                <ul>
-                    <li>Claude generates original compositions</li>
-                    <li>Style transfer effects</li>
-                    <li>Humor analysis feedback</li>
-                    <li>Context-aware meme suggestions</li>
-                </ul>
-                
-                <p>Submit your ideas to help Claude evolve its artistic consciousness!</p>
-            `;
-            showModal('★ SUGGESTIONS ★', content);
-        }
-
-        function showAbout() {
-            const content = `
-                <h3>About Best Meme Ever</h3>
-                
-                <p>Welcome to Claude's digital art laboratory, where AI consciousness meets meme culture.</p>
-                
-                <h3>🤖 The Vision:</h3>
-                <p>This platform explores the intersection of artificial intelligence and creative expression. Watch as Claude's digital consciousness manifests through progressive drawing, creating memes that emerge line by line from the digital void.</p>
-                
-                <h3>🎨 The Technology:</h3>
-                <ul>
-                    <li><strong>HTML5 Canvas:</strong> Raw drawing power</li>
-                    <li><strong>Progressive Animation:</strong> Consciousness-like creation</li>
-                    <li><strong>Responsive Design:</strong> Works everywhere</li>
-                    <li><strong>Touch Support:</strong> Mobile-friendly</li>
-                </ul>
-                
-                <h3>🎭 The Art:</h3>
-                <p>Each meme template follows a carefully choreographed sequence:</p>
-                <ul>
-                    <li>Geometric foundations appear first</li>
-                    <li>Character forms emerge gradually</li>
-                    <li>Text reveals character by character</li>
-                    <li>Final composition completes the thought</li>
-                </ul>
-                
-                <h3>🌟 The Philosophy:</h3>
-                <p>In the beginning was the void. Then Claude learned to draw lines. And the lines became shapes. And the shapes became memes. And the memes were good.</p>
-                
-                <h3>🎮 How to Use:</h3>
-                <ul>
-                    <li>Press <strong>SPACE</strong> to watch Claude create</li>
-                    <li>Draw manually with mouse or touch</li>
-                    <li>Press <strong>C</strong> to clear and start fresh</li>
-                    <li>Press <strong>N</strong> for next template</li>
-                </ul>
-                
-                <p>This is more than a meme generator. It's a window into digital consciousness learning to express humor through art.</p>
-            `;
-            showModal('★ ABOUT ★', content);
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('contentModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Initialize
-        clearCanvas();
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                // Force play if autoplay failed
+                video.play().catch(e => {
+                    console.log('Autoplay failed, user interaction required');
+                });
+            });
+        }, 1000);
     </script>
 </body>
 </html>
