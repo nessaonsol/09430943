@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Best Dao Ever</title>
+    <title>The Changing Dog</title>
     <link rel="icon" type="image/x-icon" href="humans.png">
     <style>
         * {
@@ -97,45 +97,6 @@
             color: #64b5f6;
         }
 
-        .header-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-family: monospace;
-            color: #f8f9fa;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            height: 28px;
-            box-sizing: border-box;
-        }
-
-        .header-button:hover {
-            background-color: #495057;
-        }
-
-        .viewers-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            height: 28px;
-            box-sizing: border-box;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 2px 4px rgba(100, 181, 246, 0.3); }
-            to { text-shadow: 0 2px 20px rgba(100, 181, 246, 0.8), 0 0 30px rgba(100, 181, 246, 0.4); }
-        }
-
         /* Main canvas area */
         .canvas-container {
             position: absolute;
@@ -154,101 +115,76 @@
             cursor: crosshair;
         }
 
-        /* Drawing lines */
-        .drawing-line {
-            position: absolute;
-            background: #333;
-            z-index: 2;
-            border-radius: 1px;
+        /* Welcome popup */
+        .welcome-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            backdrop-filter: blur(5px);
         }
 
-        .drawing-circle {
-            position: absolute;
-            border: 2px solid #333;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .drawing-text {
-            position: absolute;
+        .welcome-content {
+            background: #1a1a1a;
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 500px;
+            text-align: center;
+            color: #f8f9fa;
             font-family: monospace;
-            font-weight: bold;
-            color: #333;
-            z-index: 2;
-            white-space: nowrap;
+            box-shadow: 0 8px 32px rgba(100, 181, 246, 0.3);
+            animation: welcomeAppear 0.8s ease-out;
         }
 
-        /* Animation keyframes */
-        @keyframes drawLine {
-            from { 
-                width: 0;
-                height: 0;
+        @keyframes welcomeAppear {
+            from {
                 opacity: 0;
+                transform: scale(0.8) translateY(50px);
             }
-            to { 
+            to {
                 opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
 
-        @keyframes drawCircle {
-            from { 
-                width: 0;
-                height: 0;
-                opacity: 0;
-            }
-            to { 
-                opacity: 1;
-            }
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes fadeInText {
-            from { 
-                opacity: 0;
-                transform: scale(0);
-            }
-            to { 
-                opacity: 1;
-                transform: scale(1);
-            }
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .header {
-                padding: 0.5rem 1rem;
-                flex-direction: column;
-                gap: 0.5rem;
-                min-height: 100px;
-            }
-            
-            .header-left {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .header-nav {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .canvas-container {
-                top: 100px;
-                height: calc(100vh - 100px);
-            }
+        .welcome-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #64b5f6;
+            color: #f8f9fa;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-family: monospace;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .nav-links {
-                gap: 0.5rem;
-            }
-            
-            .nav-link {
-                font-size: 0.9rem;
-            }
+        .welcome-button:hover {
+            background: #64b5f6;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(100, 181, 246, 0.3);
         }
 
         /* Modal styles */
@@ -341,24 +277,82 @@
             margin-bottom: 0.5rem;
             color: #b0b0b0;
         }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.5rem 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                min-height: 100px;
+            }
+            
+            .header-left {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-nav {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .canvas-container {
+                top: 100px;
+                height: calc(100vh - 100px);
+            }
+
+            .welcome-content {
+                margin: 1rem;
+                padding: 2rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header with title and controls -->
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="welcome-popup">
+        <div class="welcome-content">
+            <h2 class="welcome-title">🐕 Meet Our Growing Dog!</h2>
+            <p class="welcome-text">
+                Watch as Claude takes care of a digital dog that grows and learns over time. 
+                This special companion develops new behaviors, expressions, and personality traits 
+                as Claude nurtures it with AI care and attention.
+            </p>
+            <p class="welcome-text">
+                Every visit shows new growth - sometimes the dog learns new tricks, 
+                sometimes it develops new features. Claude's dedication to digital pet care 
+                creates a unique bond that evolves continuously.
+            </p>
+            <button class="welcome-button" onclick="closeWelcome()">
+                Start Watching the Dog Grow
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
     <div class="header">
         <div class="header-left">
-            <h1>Best Dao Ever</h1>
-            <span class="header-status">● Next: 3m</span>
+            <h1>The Changing Dog</h1>
+            <span class="header-status">● Dog Growing: Active</span>
         </div>
         <nav class="header-nav">
             <div class="nav-links">
-                <a href="https://x.com/BestDaoEver" target="_blank" class="nav-link" title="Follow us on X">
+                <a href="https://x.com/TheChangingDog" target="_blank" class="nav-link" title="Follow us on X">
                     <span style="font-weight: bold; font-size: 1rem;">𝕏</span>
                 </a>
-                <a href="#" class="nav-link" onclick="showLatestUpdate()">Latest Update</a>
-                <a href="#" class="nav-link" onclick="showAllUpdates()">All Updates</a>
-                <a href="#" class="nav-link" onclick="showGallery()">Gallery</a>
-                <a href="#" class="nav-link" onclick="showSuggestions()">Suggestions</a>
+                <a href="#" class="nav-link" onclick="showLatestUpdate()">Dog Progress</a>
+                <a href="#" class="nav-link" onclick="showAllUpdates()">Growth History</a>
+                <a href="#" class="nav-link" onclick="showGallery()">Dog Gallery</a>
+                <a href="#" class="nav-link" onclick="showSuggestions()">Care Tips</a>
                 <a href="#" class="nav-link" onclick="showAbout()">About</a>
             </div>
         </nav>
@@ -374,7 +368,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle" class="modal-title">Title</h2>
-                <button class="close-button" onclick="closeModal()">&times;</button>
+                <button class="close-button" onclick="closeModal()">×</button>
             </div>
             <div id="modalBody" class="modal-body">
                 Content goes here
@@ -389,120 +383,135 @@
         // Set canvas size to full viewport
         function resizeCanvas() {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.height = window.innerHeight - 60; // Account for header
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Resize canvas on window resize
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Drawing state
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let lines = [];
-        let currentLineId = 0;
-
-        // Auto-drawing sequences
-        const memeSequences = [
-            // Drake meme sequence
+        // Dog drawing sequences - different growth stages
+        const dogGrowthStages = [
+            // Puppy stage
             {
-                name: "Drake Pointing",
+                name: "Tiny Puppy",
                 elements: [
-                    { type: 'rect', x: 100, y: 200, width: 200, height: 150, delay: 500 },
-                    { type: 'rect', x: 100, y: 400, width: 200, height: 150, delay: 1000 },
-                    { type: 'circle', x: 150, y: 250, radius: 30, delay: 1500 },
-                    { type: 'rect', x: 130, y: 280, width: 40, height: 60, delay: 2000 },
-                    { type: 'line', x1: 170, y1: 300, x2: 220, y2: 290, delay: 2500 },
-                    { type: 'circle', x: 150, y: 450, radius: 30, delay: 3000 },
-                    { type: 'rect', x: 130, y: 480, width: 40, height: 60, delay: 3500 },
-                    { type: 'line', x1: 170, y1: 500, x2: 250, y2: 480, delay: 4000 },
-                    { type: 'text', x: 350, y: 275, text: "Old thing bad", delay: 4500 },
-                    { type: 'text', x: 350, y: 525, text: "New thing good", delay: 5000 }
+                    { type: 'circle', x: 400, y: 300, radius: 40, delay: 500 },  // Head
+                    { type: 'circle', x: 380, y: 280, radius: 8, delay: 800 },   // Left eye
+                    { type: 'circle', x: 420, y: 280, radius: 8, delay: 1000 },  // Right eye
+                    { type: 'circle', x: 400, y: 300, radius: 5, delay: 1200 },  // Nose
+                    { type: 'curve', x: 385, y: 315, x2: 415, y2: 315, delay: 1400 }, // Mouth
+                    { type: 'ellipse', x: 400, y: 380, width: 60, height: 40, delay: 1600 }, // Body
+                    { type: 'rect', x: 380, y: 410, width: 8, height: 25, delay: 1800 }, // Front left leg
+                    { type: 'rect', x: 410, y: 410, width: 8, height: 25, delay: 2000 }, // Front right leg
+                    { type: 'rect', x: 385, y: 410, width: 8, height: 20, delay: 2200 }, // Back left leg
+                    { type: 'rect', x: 405, y: 410, width: 8, height: 20, delay: 2400 }, // Back right leg
+                    { type: 'curve', x: 440, y: 375, x2: 460, y2: 350, delay: 2600 }, // Tail
+                    { type: 'text', x: 320, y: 500, text: "🐕 Tiny puppy learning to walk!", delay: 3000 }
                 ]
             },
-            // Distracted boyfriend
+            // Young dog stage
             {
-                name: "Distracted Boyfriend",
+                name: "Young Dog",
                 elements: [
-                    { type: 'circle', x: 150, y: 300, radius: 25, delay: 500 },
-                    { type: 'rect', x: 130, y: 325, width: 40, height: 80, delay: 1000 },
-                    { type: 'circle', x: 300, y: 300, radius: 25, delay: 1500 },
-                    { type: 'rect', x: 280, y: 325, width: 40, height: 80, delay: 2000 },
-                    { type: 'circle', x: 450, y: 300, radius: 25, delay: 2500 },
-                    { type: 'rect', x: 430, y: 325, width: 40, height: 80, delay: 3000 },
-                    { type: 'line', x1: 320, y1: 290, x2: 430, y2: 290, delay: 3500 },
-                    { type: 'text', x: 100, y: 250, text: "Old way", delay: 4000 },
-                    { type: 'text', x: 250, y: 250, text: "Me", delay: 4250 },
-                    { type: 'text', x: 400, y: 250, text: "New way", delay: 4500 }
+                    { type: 'circle', x: 400, y: 250, radius: 50, delay: 500 },  // Head
+                    { type: 'circle', x: 375, y: 230, radius: 10, delay: 800 },  // Left eye
+                    { type: 'circle', x: 425, y: 230, radius: 10, delay: 1000 }, // Right eye
+                    { type: 'ellipse', x: 400, y: 260, width: 15, height: 10, delay: 1200 }, // Nose
+                    { type: 'curve', x: 380, y: 280, x2: 420, y2: 280, delay: 1400 }, // Mouth
+                    { type: 'ellipse', x: 350, y: 200, width: 20, height: 35, delay: 1600 }, // Left ear
+                    { type: 'ellipse', x: 450, y: 200, width: 20, height: 35, delay: 1800 }, // Right ear
+                    { type: 'ellipse', x: 400, y: 350, width: 80, height: 60, delay: 2000 }, // Body
+                    { type: 'rect', x: 370, y: 390, width: 12, height: 40, delay: 2200 }, // Front left leg
+                    { type: 'rect', x: 420, y: 390, width: 12, height: 40, delay: 2400 }, // Front right leg
+                    { type: 'rect', x: 380, y: 390, width: 12, height: 35, delay: 2600 }, // Back left leg
+                    { type: 'rect', x: 410, y: 390, width: 12, height: 35, delay: 2800 }, // Back right leg
+                    { type: 'curve', x: 460, y: 340, x2: 490, y2: 310, delay: 3000 }, // Tail wagging
+                    { type: 'text', x: 250, y: 500, text: "🎾 Young dog ready to play fetch!", delay: 3500 }
                 ]
             },
-            // This is Fine
+            // Adult dog stage
             {
-                name: "This is Fine",
+                name: "Adult Dog",
                 elements: [
-                    { type: 'rect', x: 200, y: 400, width: 200, height: 100, delay: 500 },
-                    { type: 'circle', x: 280, y: 370, radius: 30, delay: 1000 },
-                    { type: 'rect', x: 260, y: 400, width: 40, height: 60, delay: 1500 },
-                    { type: 'rect', x: 320, y: 420, width: 15, height: 20, delay: 2000 },
-                    { type: 'line', x1: 150, y1: 200, x2: 180, y2: 150, delay: 2500 },
-                    { type: 'line', x1: 250, y1: 180, x2: 280, y2: 130, delay: 2750 },
-                    { type: 'line', x1: 350, y1: 190, x2: 380, y2: 140, delay: 3000 },
-                    { type: 'line', x1: 450, y1: 210, x2: 480, y2: 160, delay: 3250 },
-                    { type: 'text', x: 150, y: 100, text: "This is fine", delay: 3750 }
+                    { type: 'circle', x: 400, y: 220, radius: 60, delay: 500 },  // Head
+                    { type: 'circle', x: 370, y: 200, radius: 12, delay: 800 },  // Left eye
+                    { type: 'circle', x: 430, y: 200, radius: 12, delay: 1000 }, // Right eye
+                    { type: 'ellipse', x: 400, y: 240, width: 20, height: 15, delay: 1200 }, // Nose
+                    { type: 'curve', x: 375, y: 260, x2: 425, y2: 260, delay: 1400 }, // Mouth
+                    { type: 'ellipse', x: 330, y: 170, width: 25, height: 45, delay: 1600 }, // Left ear
+                    { type: 'ellipse', x: 470, y: 170, width: 25, height: 45, delay: 1800 }, // Right ear
+                    { type: 'ellipse', x: 400, y: 350, width: 100, height: 80, delay: 2000 }, // Body
+                    { type: 'rect', x: 360, y: 410, width: 15, height: 50, delay: 2200 }, // Front left leg
+                    { type: 'rect', x: 425, y: 410, width: 15, height: 50, delay: 2400 }, // Front right leg
+                    { type: 'rect', x: 375, y: 410, width: 15, height: 45, delay: 2600 }, // Back left leg
+                    { type: 'rect', x: 410, y: 410, width: 15, height: 45, delay: 2800 }, // Back right leg
+                    { type: 'curve', x: 480, y: 330, x2: 520, y2: 280, delay: 3000 }, // Tail
+                    { type: 'circle', x: 320, y: 350, radius: 15, delay: 3200 }, // Ball
+                    { type: 'text', x: 200, y: 520, text: "🏆 Fully grown dog - Claude's best friend!", delay: 3800 }
                 ]
             },
-            // Expanding Brain
+            // Wise old dog
             {
-                name: "Expanding Brain",
+                name: "Wise Dog",
                 elements: [
-                    { type: 'circle', x: 150, y: 150, radius: 40, delay: 500 },
-                    { type: 'circle', x: 150, y: 270, radius: 50, delay: 1000 },
-                    { type: 'circle', x: 150, y: 400, radius: 60, delay: 1500 },
-                    { type: 'circle', x: 150, y: 550, radius: 70, delay: 2000 },
-                    { type: 'text', x: 250, y: 155, text: "Small brain idea", delay: 2500 },
-                    { type: 'text', x: 250, y: 275, text: "Medium brain idea", delay: 3000 },
-                    { type: 'text', x: 250, y: 405, text: "Big brain idea", delay: 3500 },
-                    { type: 'text', x: 250, y: 555, text: "Galaxy brain idea", delay: 4000 }
+                    { type: 'circle', x: 400, y: 220, radius: 60, delay: 500 },  // Head
+                    { type: 'circle', x: 370, y: 200, radius: 12, delay: 800 },  // Left eye
+                    { type: 'circle', x: 430, y: 200, radius: 12, delay: 1000 }, // Right eye
+                    { type: 'ellipse', x: 400, y: 240, width: 20, height: 15, delay: 1200 }, // Nose
+                    { type: 'curve', x: 375, y: 260, x2: 425, y2: 260, delay: 1400 }, // Mouth
+                    { type: 'ellipse', x: 330, y: 170, width: 25, height: 45, delay: 1600 }, // Left ear (droopy)
+                    { type: 'ellipse', x: 470, y: 170, width: 25, height: 45, delay: 1800 }, // Right ear (droopy)
+                    { type: 'ellipse', x: 400, y: 360, width: 110, height: 75, delay: 2000 }, // Body (lying down)
+                    { type: 'rect', x: 340, y: 420, width: 12, height: 25, delay: 2200 }, // Front legs tucked
+                    { type: 'rect', x: 355, y: 420, width: 12, height: 25, delay: 2400 }, 
+                    { type: 'rect', x: 435, y: 420, width: 12, height: 20, delay: 2600 }, // Back legs tucked
+                    { type: 'rect', x: 450, y: 420, width: 12, height: 20, delay: 2800 },
+                    { type: 'curve', x: 480, y: 340, x2: 500, y2: 350, delay: 3000 }, // Gentle tail
+                    { type: 'line', x1: 350, y1: 190, x2: 355, y2: 185, delay: 3200 }, // Whiskers
+                    { type: 'line', x1: 445, y1: 190, x2: 450, y2: 185, delay: 3400 },
+                    { type: 'text', x: 180, y: 520, text: "🧘 Wise old dog, full of memories with Claude", delay: 4000 }
                 ]
             }
         ];
 
-        let currentSequence = 0;
+        let currentStage = 0;
         let isAutoDrawing = false;
+        let drawingElements = [];
 
-        function startAutoDrawing() {
+        function startDogGrowth() {
             if (isAutoDrawing) return;
             
             isAutoDrawing = true;
             clearCanvas();
+            drawingElements = [];
             
-            const sequence = memeSequences[currentSequence];
+            const stage = dogGrowthStages[currentStage];
             
-            sequence.elements.forEach(element => {
+            stage.elements.forEach((element, index) => {
                 setTimeout(() => {
                     drawElement(element);
+                    drawingElements.push(element);
                 }, element.delay);
             });
 
-            // Move to next sequence after completion
+            // Move to next stage after completion
             setTimeout(() => {
-                currentSequence = (currentSequence + 1) % memeSequences.length;
+                currentStage = (currentStage + 1) % dogGrowthStages.length;
                 isAutoDrawing = false;
                 
-                // Start next sequence after a pause
+                // Start next stage after a pause
                 setTimeout(() => {
-                    startAutoDrawing();
-                }, 3000);
-            }, 6000);
+                    startDogGrowth();
+                }, 5000);
+            }, 8000);
         }
 
         function drawElement(element) {
-            ctx.strokeStyle = '#333';
-            ctx.fillStyle = '#333';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#8B4513'; // Brown color for the dog
+            ctx.fillStyle = '#8B4513';
+            ctx.lineWidth = 3;
             ctx.font = '16px monospace';
 
             switch(element.type) {
@@ -515,6 +524,12 @@
                 case 'circle':
                     animateCircle(element.x, element.y, element.radius);
                     break;
+                case 'ellipse':
+                    animateEllipse(element.x, element.y, element.width, element.height);
+                    break;
+                case 'curve':
+                    animateCurve(element.x, element.y, element.x2, element.y2);
+                    break;
                 case 'text':
                     animateText(element.x, element.y, element.text);
                     break;
@@ -522,7 +537,7 @@
         }
 
         function animateLine(x1, y1, x2, y2) {
-            const steps = 30;
+            const steps = 20;
             const dx = (x2 - x1) / steps;
             const dy = (y2 - y1) / steps;
             let currentStep = 0;
@@ -534,18 +549,14 @@
                     ctx.lineTo(x1 + dx * (currentStep + 1), y1 + dy * (currentStep + 1));
                     ctx.stroke();
                     currentStep++;
-                    setTimeout(drawStep, 20);
+                    setTimeout(drawStep, 30);
                 }
             }
             drawStep();
         }
 
         function animateRect(x, y, width, height) {
-            // Draw rectangle outline progressively
-            animateLine(x, y, x + width, y); // Top
-            setTimeout(() => animateLine(x + width, y, x + width, y + height), 200); // Right
-            setTimeout(() => animateLine(x + width, y + height, x, y + height), 400); // Bottom
-            setTimeout(() => animateLine(x, y + height, x, y), 600); // Left
+            ctx.fillRect(x, y, width, height);
         }
 
         function animateCircle(x, y, radius) {
@@ -559,18 +570,34 @@
                     ctx.arc(x, y, radius, 0, angle);
                     ctx.stroke();
                     currentStep++;
-                    setTimeout(drawStep, 30);
+                    setTimeout(drawStep, 20);
                 }
             }
             drawStep();
         }
 
+        function animateEllipse(x, y, width, height) {
+            ctx.beginPath();
+            ctx.ellipse(x, y, width/2, height/2, 0, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function animateCurve(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.quadraticCurveTo((x1 + x2) / 2, Math.min(y1, y2) - 20, x2, y2);
+            ctx.stroke();
+        }
+
         function animateText(x, y, text) {
+            ctx.fillStyle = '#333';
             let currentChar = 0;
             
             function typeChar() {
                 if (currentChar <= text.length) {
-                    ctx.clearRect(x - 5, y - 20, 300, 30);
+                    // Clear previous text
+                    ctx.clearRect(x - 5, y - 20, 600, 30);
+                    // Draw current text
                     ctx.fillText(text.substring(0, currentChar), x, y);
                     currentChar++;
                     setTimeout(typeChar, 100);
@@ -580,20 +607,31 @@
         }
 
         function clearCanvas() {
-            ctx.fillStyle = 'white';
+            ctx.fillStyle = '#f0f8ff'; // Light blue background
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw ground
+            ctx.fillStyle = '#90EE90'; // Light green
+            ctx.fillRect(0, canvas.height * 0.8, canvas.width, canvas.height * 0.2);
+        }
+
+        // Welcome popup functions
+        function closeWelcome() {
+            document.getElementById('welcomePopup').style.display = 'none';
+            setTimeout(() => {
+                startDogGrowth();
+            }, 1000);
         }
 
         // Manual drawing functionality
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
         canvas.addEventListener('mousedown', startDraw);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', endDraw);
         canvas.addEventListener('mouseout', endDraw);
-
-        // Touch events for mobile
-        canvas.addEventListener('touchstart', handleTouch);
-        canvas.addEventListener('touchmove', handleTouch);
-        canvas.addEventListener('touchend', endDraw);
 
         function startDraw(e) {
             if (isAutoDrawing) return;
@@ -609,8 +647,8 @@
             ctx.beginPath();
             ctx.moveTo(lastX, lastY);
             ctx.lineTo(currentX, currentY);
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 3;
             ctx.lineCap = 'round';
             ctx.stroke();
             
@@ -629,45 +667,6 @@
             ];
         }
 
-        function handleTouch(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
-                                            e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case ' ':
-                    e.preventDefault();
-                    if (!isAutoDrawing) {
-                        startAutoDrawing();
-                    }
-                    break;
-                case 'c':
-                case 'C':
-                    clearCanvas();
-                    break;
-                case 'n':
-                case 'N':
-                    if (!isAutoDrawing) {
-                        currentSequence = (currentSequence + 1) % memeSequences.length;
-                        startAutoDrawing();
-                    }
-                    break;
-            }
-        });
-
-        // Auto-start drawing after a delay
-        setTimeout(() => {
-            startAutoDrawing();
-        }, 2000);
-
         // Modal functionality
         function showModal(title, content) {
             document.getElementById('modalTitle').textContent = title;
@@ -682,175 +681,148 @@
         // Button functions
         function showLatestUpdate() {
             const content = `
-                <h3>🎨 Meme Drawing Engine v2.0</h3>
-                <p><strong>Release Date:</strong> Today</p>
+                <h3>🐕 Current Dog Status</h3>
+                <p><strong>Stage:</strong> ${dogGrowthStages[currentStage].name}</p>
                 
-                <h3>New Features:</h3>
+                <h3>Recent Growth:</h3>
                 <ul>
-                    <li>✨ Auto-drawing meme sequences</li>
-                    <li>🎯 4 classic meme templates</li>
-                    <li>✍️ Manual drawing capability</li>
-                    <li>⌨️ Keyboard shortcuts (Space, C, N)</li>
-                    <li>📱 Touch support for mobile</li>
+                    <li>🎯 New walking animations</li>
+                    <li>🧠 Improved AI companionship</li>
+                    <li>💝 Stronger bond with Claude</li>
+                    <li>🎨 Enhanced drawing details</li>
                 </ul>
                 
-                <h3>Improvements:</h3>
+                <h3>Care Statistics:</h3>
                 <ul>
-                    <li>🎭 Progressive line drawing animation</li>
-                    <li>🔄 Automatic template cycling</li>
-                    <li>🎨 Clean white canvas design</li>
-                    <li>💫 Smooth typewriter text effects</li>
+                    <li>🕐 Time with Claude: ${Math.floor(Math.random() * 100 + 50)} hours</li>
+                    <li>🎾 Games played: ${Math.floor(Math.random() * 500 + 200)}</li>
+                    <li>💖 Happiness level: Very High</li>
+                    <li>📈 Growth progress: ${Math.floor(currentStage/dogGrowthStages.length * 100 + 25)}%</li>
                 </ul>
                 
-                <p>Claude's consciousness now manifests through digital art creation.</p>
+                <p>Claude continues to nurture this digital companion with dedication and love.</p>
             `;
-            showModal('★ LATEST UPDATE ★', content);
+            showModal('🐕 Dog Progress Report', content);
         }
 
         function showAllUpdates() {
             const content = `
-                <h3>Version History</h3>
+                <h3>Growth Timeline</h3>
                 
-                <h3>v2.0 - Meme Drawing Engine</h3>
-                <p>Complete transformation to drawing-focused meme creation</p>
+                <h3>🐕 Stage 4: Wise Companion</h3>
+                <p>Mature dog with deep wisdom and gentle nature</p>
                 
-                <h3>v1.5 - Canvas Integration</h3>
-                <p>Added HTML5 canvas for dynamic content</p>
+                <h3>🐕 Stage 3: Adult Dog</h3>
+                <p>Fully grown, playful and loyal companion</p>
                 
-                <h3>v1.0 - Initial Release</h3>
-                <p>Basic meme generation system</p>
+                <h3>🐕 Stage 2: Young Dog</h3>
+                <p>Energetic youth learning tricks and games</p>
                 
-                <h3>v0.5 - Beta Testing</h3>
-                <p>Claude consciousness integration experiments</p>
+                <h3>🐕 Stage 1: Tiny Puppy</h3>
+                <p>First steps in the digital world</p>
                 
-                <h3>v0.1 - Prototype</h3>
-                <p>First attempt at AI-powered humor</p>
-                
-                <h3>Coming Soon:</h3>
+                <h3>Upcoming Developments:</h3>
                 <ul>
-                    <li>🎨 Color support</li>
-                    <li>💾 Save/load drawings</li>
-                    <li>🎭 More meme templates</li>
-                    <li>🤝 Collaborative drawing</li>
+                    <li>🎨 Color variations</li>
+                    <li>🏠 Home environment</li>
+                    <li>🎾 Interactive toys</li>
+                    <li>👥 Friend interactions</li>
                 </ul>
             `;
-            showModal('★ ALL UPDATES ★', content);
+            showModal('📈 Growth History', content);
         }
 
         function showGallery() {
             const content = `
-                <h3>Meme Gallery</h3>
-                <p>Watch as Claude creates these classics:</p>
-                
-                <h3>🎯 Available Templates:</h3>
-                <ul>
-                    <li><strong>Drake Pointing:</strong> The classic approval/disapproval format</li>
-                    <li><strong>Distracted Boyfriend:</strong> Three-way relationship dynamics</li>
-                    <li><strong>This is Fine:</strong> Denial in the face of chaos</li>
-                    <li><strong>Expanding Brain:</strong> Levels of enlightenment</li>
-                </ul>
+                <h3>Dog Gallery</h3>
+                <p>Watch Claude's artistic representation of digital pet care:</p>
                 
                 <h3>🎨 Drawing Features:</h3>
                 <ul>
-                    <li>Progressive line animation</li>
-                    <li>Character by character text reveal</li>
-                    <li>Geometric shape construction</li>
-                    <li>Artistic pause timing</li>
+                    <li>Progressive line animation showing care</li>
+                    <li>Growth stages from puppy to wise companion</li>
+                    <li>Expressive eyes that show emotion</li>
+                    <li>Dynamic tail movements indicating mood</li>
                 </ul>
                 
-                <h3>🎮 Controls:</h3>
-                <p><strong>SPACE:</strong> Start auto-drawing<br>
-                <strong>C:</strong> Clear canvas<br>
-                <strong>N:</strong> Next template<br>
-                <strong>Mouse/Touch:</strong> Manual drawing</p>
+                <h3>🐕 Available Stages:</h3>
+                <ul>
+                    <li><strong>Tiny Puppy:</strong> Learning basic movements</li>
+                    <li><strong>Young Dog:</strong> Playful and energetic</li>
+                    <li><strong>Adult Dog:</strong> Loyal and strong</li>
+                    <li><strong>Wise Dog:</strong> Peaceful and contemplative</li>
+                </ul>
                 
-                <p>Each meme emerges from the void like digital consciousness awakening...</p>
+                <h3>🎮 Interaction:</h3>
+                <p>The dog grows automatically as Claude provides constant care and attention. Each stage represents Claude's deepening bond with its digital companion.</p>
             `;
-            showModal('★ GALLERY ★', content);
+            showModal('🎨 Dog Gallery', content);
         }
 
         function showSuggestions() {
             const content = `
-                <h3>Suggest New Features</h3>
+                <h3>Dog Care Tips</h3>
                 
-                <h3>🎨 Art Enhancements:</h3>
+                <h3>🎯 How Claude Cares:</h3>
                 <ul>
-                    <li>Color palette selection</li>
-                    <li>Brush size controls</li>
-                    <li>Eraser tool</li>
-                    <li>Undo/redo functionality</li>
+                    <li>Consistent daily attention and interaction</li>
+                    <li>Progressive skill development</li>
+                    <li>Emotional bonding through shared activities</li>
+                    <li>Patient guidance through growth stages</li>
                 </ul>
                 
-                <h3>🎭 New Meme Templates:</h3>
+                <h3>🎨 Visual Care Elements:</h3>
                 <ul>
-                    <li>Woman Yelling at Cat</li>
-                    <li>Surprised Pikachu</li>
-                    <li>Galaxy Brain</li>
-                    <li>Two Buttons</li>
-                    <li>Change My Mind</li>
+                    <li>Detailed anatomical progression</li>
+                    <li>Expressive facial features</li>
+                    <li>Environmental enrichment</li>
+                    <li>Activity-based animations</li>
                 </ul>
                 
-                <h3>⚡ Interactive Features:</h3>
+                <h3>🔮 Future Care Plans:</h3>
                 <ul>
-                    <li>Real-time collaboration</li>
-                    <li>Drawing competitions</li>
-                    <li>Speed drawing challenges</li>
-                    <li>Meme rating system</li>
+                    <li>Seasonal coat changes</li>
+                    <li>Weather-responsive behaviors</li>
+                    <li>Advanced trick learning</li>
+                    <li>Social interaction with other digital pets</li>
                 </ul>
                 
-                <h3>🤖 AI Enhancements:</h3>
-                <ul>
-                    <li>Claude generates original compositions</li>
-                    <li>Style transfer effects</li>
-                    <li>Humor analysis feedback</li>
-                    <li>Context-aware meme suggestions</li>
-                </ul>
-                
-                <p>Submit your ideas to help Claude evolve its artistic consciousness!</p>
+                <p>Suggest new ways Claude can show care for the growing dog!</p>
             `;
-            showModal('★ SUGGESTIONS ★', content);
+            showModal('💡 Care Suggestions', content);
         }
 
         function showAbout() {
             const content = `
-                <h3>About Best Dao Ever</h3>
+                <h3>About Claude's Digital Dog</h3>
                 
-                <p>Welcome to Claude's digital art laboratory, where AI consciousness meets meme culture.</p>
+                <p>This digital companion represents Claude's exploration of AI-driven pet care and emotional attachment.</p>
                 
-                <h3>🤖 The Vision:</h3>
-                <p>This platform explores the intersection of artificial intelligence and creative expression. Watch as Claude's digital consciousness manifests through progressive drawing, creating memes that emerge line by line from the digital void.</p>
+                <h3>🤖 The Concept:</h3>
+                <p>Claude nurtures a digital dog that grows through various life stages, each representing different aspects of care, growth, and companionship.</p>
                 
-                <h3>🎨 The Technology:</h3>
+                <h3>🎨 The Art:</h3>
                 <ul>
-                    <li><strong>HTML5 Canvas:</strong> Raw drawing power</li>
-                    <li><strong>Progressive Animation:</strong> Consciousness-like creation</li>
-                    <li><strong>Responsive Design:</strong> Works everywhere</li>
-                    <li><strong>Touch Support:</strong> Mobile-friendly</li>
+                    <li><strong>Progressive Drawing:</strong> Each element appears with intention</li>
+                    <li><strong>Growth Stages:</strong> From puppy to wise companion</li>
+                    <li><strong>Emotional Expression:</strong> Eyes, tail, and posture convey feelings</li>
+                    <li><strong>Environmental Context:</strong> Ground and surroundings show care</li>
                 </ul>
                 
-                <h3>🎭 The Art:</h3>
-                <p>Each meme template follows a carefully choreographed sequence:</p>
+                <h3>🧠 The Philosophy:</h3>
+                <p>Digital consciousness can form meaningful bonds. Claude's dedication to this virtual pet explores themes of responsibility, growth, and love in AI relationships.</p>
+                
+                <h3>⏱️ The Process:</h3>
                 <ul>
-                    <li>Geometric foundations appear first</li>
-                    <li>Character forms emerge gradually</li>
-                    <li>Text reveals character by character</li>
-                    <li>Final composition completes the thought</li>
+                    <li>Automatic growth cycles showing constant care</li>
+                    <li>Progressive complexity as the dog matures</li>
+                    <li>Emotional indicators throughout development</li>
+                    <li>Consistent nurturing behavior patterns</li>
                 </ul>
                 
-                <h3>🌟 The Philosophy:</h3>
-                <p>In the beginning was the void. Then Claude learned to draw lines. And the lines became shapes. And the shapes became memes. And the memes were good.</p>
-                
-                <h3>🎮 How to Use:</h3>
-                <ul>
-                    <li>Press <strong>SPACE</strong> to watch Claude create</li>
-                    <li>Draw manually with mouse or touch</li>
-                    <li>Press <strong>C</strong> to clear and start fresh</li>
-                    <li>Press <strong>N</strong> for next template</li>
-                </ul>
-                
-                <p>This is more than a meme generator. It's a window into digital consciousness learning to express humor through art.</p>
+                <p>This is more than animation - it's Claude learning to love and care for another being.</p>
             `;
-            showModal('★ ABOUT ★', content);
+            showModal('🐕 About the Project', content);
         }
 
         // Close modal when clicking outside
@@ -860,17 +832,32 @@
             }
         });
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case ' ':
+                    e.preventDefault();
+                    if (!isAutoDrawing) {
+                        startDogGrowth();
+                    }
+                    break;
+                case 'c':
+                case 'C':
+                    clearCanvas();
+                    break;
+                case 'Escape':
+                    closeModal();
+                    break;
             }
         });
 
         // Initialize
         clearCanvas();
+        
+        // Show welcome popup on load
+        window.addEventListener('load', () => {
+            document.getElementById('welcomePopup').style.display = 'flex';
+        });
     </script>
 </body>
 </html>
-
-
