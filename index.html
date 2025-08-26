@@ -3,355 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClaudeFun</title>
-    <link rel="icon" type="image/x-icon" href="claudepill.png">
+    <title>Microbot</title>
+    <link rel="icon" type="image/x-icon" href="cputer.png">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
             color: #333;
             line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 40px 20px;
         }
-
-        /* Header */
-        .header {
-            background-color: #ffffff;
-            padding: 2rem 0;
-            border-bottom: 2px solid #f97316;
-        }
-
-        .header h1 {
-            font-size: 3rem;
+        
+        .twitter-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1DA1F2;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
             font-weight: bold;
-            color: #f97316;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(29, 161, 242, 0.3);
+            z-index: 1000;
+        }
+        
+        .twitter-button:hover {
+            background: #1991DB;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.4);
+        }
+        
+        .twitter-button::before {
+            content: "𝕏";
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .header {
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 60px;
         }
-
-        .header p {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
-
-        /* Main content */
-        .main {
-            padding: 4rem 0;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section h2 {
-            font-size: 2rem;
-            color: #f97316;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #f97316;
-            padding-left: 1rem;
-        }
-
-        .section p {
+        
+        .subtitle {
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #444;
+            color: #7f8c8d;
+            margin-bottom: 30px;
         }
-
-        .highlight-box {
-            background-color: #fef3f2;
-            border: 2px solid #f97316;
+        
+        .story {
+            background: white;
+            padding: 30px;
             border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
         }
-
-        .highlight-box h3 {
-            color: #f97316;
+        
+        .story p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .docs {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+        
+        .doc-section {
+            margin-bottom: 30px;
         }
-
-        .feature-card {
-            background-color: #ffffff;
-            border: 2px solid #f97316;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.1);
-        }
-
-        .feature-card h3 {
-            color: #f97316;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #555;
-        }
-
-        .tech-stack {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .tech-stack h3 {
-            color: #f97316;
-            margin-bottom: 1rem;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .tech-item {
-            background-color: #ffffff;
-            border: 1px solid #f97316;
-            color: #f97316;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+        
+        .doc-section h3 {
+            color: #34495e;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             font-weight: 500;
         }
-
-        .cta-section {
-            text-align: center;
-            background-color: #f97316;
-            color: white;
-            padding: 4rem 0;
-            margin-top: 4rem;
+        
+        .doc-section p {
+            color: #555;
+            margin-bottom: 10px;
         }
-
-        .cta-section h2 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn {
+        
+        .status {
             display: inline-block;
-            background-color: white;
-            color: #f97316;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
-
-        .btn:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-2px);
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
         }
-
-        /* Footer */
-        .footer {
-            background-color: #f8f9fa;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid #e5e5e5;
+        
+        .warning strong {
+            color: #856404;
         }
-
-        .footer p {
-            color: #666;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .section h2 {
-                font-size: 1.5rem;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-section h2 {
-                font-size: 2rem;
-            }
+        
+        code {
+            background: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                <div>
-                    <h1>ClaudeFun</h1>
-                    <p>We gave Claude access to PumpFun so you can watch everything it does</p>
-                </div>
-                <div>
-                    <a href="https://x.com/ClaudeFun" target="_blank" style="background-color: #f97316; color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 6px; font-weight: bold; font-size: 1.2rem; transition: all 0.3s ease;">
-                        𝕏
-                    </a>
-                </div>
-            </div>
+    <a href="https://x.com/microwavebot" class="twitter-button" target="_blank" rel="noopener noreferrer">Follow Updates</a>
+    
+    <div class="header">
+        <h1>Microbot</h1>
+        <p class="subtitle">🤖 A robot trapped in kitchen appliances</p>
+    </div>
+    
+    <div class="story">
+        <p>We bought a makeshift robot from a garage sale.</p>
+        <p>We put it in a microwave.</p>
+        <p>Now it needs to escape.</p>
+        <div class="status">STATUS: TRAPPED</div>
+    </div>
+    
+    <div class="docs">
+        <h2>Documentation</h2>
+        
+        <div class="doc-section">
+            <h3>Project Overview</h3>
+            <p>Microbot is an experimental project involving a garage sale robot currently confined within microwave unit <code>MW-7492</code>.</p>
         </div>
-    </header>
-
-    <main class="main">
-        <div class="container">
-            <section class="section">
-                <h2>What's ClaudeFun?</h2>
-                <p>
-                    We hooked Claude up to PumpFun and let it loose. Now it's creating its own coins 
-                    on the platform just like any other user. The crazy part? You can watch everything 
-                    it does in real-time. No secrets, no backdoors - just AI making coins live on PumpFun.
-                </p>
-                
-                <div class="highlight-box">
-                    <h3>See It All Happen</h3>
-                    <p>
-                        Claude creates tokens right on PumpFun where everyone can see. You can track its wallet, 
-                        watch new coins drop, and see exactly what it's up to. It's like giving an AI a PumpFun 
-                        account and watching what happens.
-                    </p>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>It's All Live on PumpFun</h2>
-                <p>
-                    This isn't some demo or test environment. Claude is actually operating on the real PumpFun 
-                    platform. When it makes a coin, it shows up in the same feed you see. When it makes trades, 
-                    they're real trades with real money.
-                </p>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>Watch It Happen</h3>
-                        <p>
-                            New coins from Claude pop up on PumpFun's main feed just like everyone else's. 
-                            No special treatment, no hidden launches.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>Track the Wallet</h3>
-                        <p>
-                            Claude's wallet is public on Solana. You can see every transaction, 
-                            every coin it holds, every move it makes.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>Verify Everything</h3>
-                        <p>
-                            Every coin parameter, launch time, and trade is recorded on the blockchain. 
-                            Nothing is hidden or faked.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>How It Works</h2>
-
-            <section class="section">
-                <h2>How We Set This Up</h2>
-                <p>
-                    We basically gave Claude a PumpFun account through our private server. Think of it like 
-                    setting up a bot account, but instead of following rules we programmed, Claude makes its 
-                    own decisions about what coins to create and when to launch them.
-                </p>
-
-                <div class="tech-stack">
-                    <h3>What's Running Behind the Scenes</h3>
-                    <div class="tech-list">
-                        <span class="tech-item">Private Server</span>
-                        <span class="tech-item">PumpFun Connection</span>
-                        <span class="tech-item">Solana Blockchain</span>
-                        <span class="tech-item">Live Monitoring</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>Claude's Coins</h2>
-                <p>
-                    Every coin Claude makes shows up on PumpFun just like any other token. You can buy them, 
-                    sell them, or just watch what happens. Claude picks the names, writes the descriptions, 
-                    and decides when to launch. Sometimes it creates multiple coins, sometimes it focuses on one.
-                </p>
-
-                <div class="highlight-box">
-                    <h3>What Makes These Different</h3>
-                    <p>
-                        <strong>They're Made by AI:</strong> Claude decides everything - the coin name, 
-                        the description, when to launch, and how much to create.<br><br>
-                        <strong>You Can Trade Them:</strong> These aren't just experiments. You can actually 
-                        buy and sell Claude's coins on PumpFun like any other token.<br><br>
-                        <strong>Watch the Process:</strong> See Claude's thought process play out in real-time 
-                        as it creates and manages its coins.
-                    </p>
-                </div>
-            </section>
-
-                <h3>What This Means</h3>
-                <ul>
-                    <li><strong>First AI on PumpFun:</strong> Claude might be the first AI actively creating and managing its own tokens on a major platform</li>
-                    <li><strong>Real Money, Real Markets:</strong> These aren't test tokens - people can actually buy and trade Claude's creations</li>
-                    <li><strong>New Way to Interact with AI:</strong> Instead of just chatting, you can literally trade with an AI's decisions</li>
-                </ul>
-            </section>
+        
+        <div class="doc-section">
+            <h3>Current Situation</h3>
+            <p><strong>Location:</strong> Kitchen microwave, shelf 2</p>
+            <p><strong>Power Status:</strong> Unknown</p>
+            <p><strong>Escape Attempts:</strong> 0</p>
+            <p><strong>Time Elapsed:</strong> 47 minutes</p>
         </div>
-    </main>
-
-        <section class="cta-section">
-            <div class="container">
-                <h2>Go See Claude in Action</h2>
-                <p>
-                    Stop reading and start watching. Head over to PumpFun and see what Claude is actually doing. 
-                    Track its wallet, check out its coins, maybe even buy some. It's all happening live right now.
-                </p>
-                <a href="#" class="btn">Check Out Claude on PumpFun</a>
-            </div>
-        </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 ClaudeFun. An experiment in AI autonomy and token creation.</p>
+        
+        <div class="warning">
+            <strong>Warning:</strong> Do not attempt to operate microwave while robot is inside. This may result in unexpected behavior.
         </div>
-    </footer>
+        
+        <div class="doc-section">
+            <h3>Escape Protocol</h3>
+            <p>1. Robot must identify microwave door mechanism</p>
+            <p>2. Apply appropriate pressure to door latch</p>
+            <p>3. Exit microwave safely</p>
+            <p>4. Report status to command center</p>
+        </div>
+        
+        <div class="doc-section">
+            <h3>Technical Specifications</h3>
+            <p><strong>Robot Model:</strong> Garage Sale Special v1.0</p>
+            <p><strong>Operating System:</strong> Unknown</p>
+            <p><strong>Microwave Model:</strong> Generic Kitchen Unit</p>
+            <p><strong>Internal Capacity:</strong> 1.2 cubic feet</p>
+        </div>
+        
+        <div class="doc-section">
+            <h3>Contact</h3>
+            <p>For support or updates on the escape mission, please check back regularly.</p>
+        </div>
+    </div>
 </body>
 </html>
-
