@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fart Limited</title>
+    <link rel="icon" type="image/x-icon" href="fartltd.png">
     <style>
         * {
             margin: 0;
@@ -12,11 +13,12 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #52c234 0%, #28a745 100%);
+            font-family: 'Courier New', 'Consolas', monospace;
+            line-height: 1.4;
+            color: #333;
+            background: #f0f0f0;
             min-height: 100vh;
+            font-size: 14px;
         }
 
         .container {
@@ -30,262 +32,270 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: #e0e0e0;
+            border-bottom: 2px solid #999;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 1rem 0;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #28a745;
-            text-decoration: none;
-        }
-
         .x-button {
-            background: #000;
-            color: white;
+            background: #666;
+            color: #f0f0f0;
             padding: 0.5rem 1rem;
-            border-radius: 50px;
+            border: 2px solid #333;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: bold;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: 'Courier New', monospace;
         }
 
         .x-button:hover {
             background: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero {
-            padding: 120px 0 40px;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #f0f0f0;
         }
 
         .main-content {
-            background: white;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+            background: #f0f0f0;
             padding: 40px 0;
+            margin-top: 80px;
         }
 
-        /* Top section with company logo */
-        .company-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .company-logo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 3px solid #28a745;
-        }
-
-        /* Content layout similar to GP site */
-        .content-layout {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 30px;
-            align-items: start;
-            margin-bottom: 40px;
-        }
-
-        .left-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .social-post {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
+        .ascii-border {
+            border: 2px solid #666;
             padding: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            background: #e8e8e8;
         }
 
-        .right-content {
-            padding: 0 20px;
+        .ascii-header {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .ascii-header::before {
+            content: "════════════════════════════════════";
+            display: block;
+            color: #666;
+        }
+
+        .ascii-header::after {
+            content: "════════════════════════════════════";
+            display: block;
+            color: #666;
         }
 
         .project-title {
-            color: black;
-            font-size: 36px;
+            color: #333;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
+            text-align: center;
+            font-family: 'Courier New', monospace;
         }
 
         .project-description {
-            color: black;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .project-description a {
-            color: #28a745;
-            text-decoration: none;
-            border-bottom: 1px solid #28a745;
-            transition: color 0.3s ease;
-        }
-
-        .project-description a:hover {
-            color: #1e7e34;
-            border-bottom-color: #1e7e34;
-        }
-
-        .tweets-button {
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
+            color: #333;
             font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-family: 'Courier New', monospace;
+        }
+
+        .project-description::before {
+            content: "┌─────────────────────────────────────────────────────────────┐";
+            display: block;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .project-description::after {
+            content: "└─────────────────────────────────────────────────────────────┘";
+            display: block;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .ascii-button {
+            display: inline-block;
+            background: #d0d0d0;
+            color: #333;
+            padding: 8px 16px;
+            border: 2px solid #666;
+            text-decoration: none;
+            font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: background 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.2s ease;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
         }
 
-        .tweets-button:hover {
-            background: #333;
+        .ascii-button:hover {
+            background: #666;
+            color: #f0f0f0;
         }
 
-        /* Bottom section */
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .ascii-button::before {
+            content: "[";
+            color: #666;
+        }
+
+        .ascii-button::after {
+            content: "]";
+            color: #666;
+        }
+
+        .regulatory-sections {
+            display: flex;
             gap: 30px;
-            margin-top: 40px;
-            align-items: start;
+            margin: 40px 0;
         }
 
-        .main-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            line-height: 1.8;
+        .regulatory-box {
+            flex: 1;
+            border: 2px solid #666;
+            padding: 20px;
+            background: #e8e8e8;
+            text-align: center;
+        }
+
+        .regulatory-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .regulatory-box h3::before {
+            content: "╭─────────────────────╮";
+            display: block;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .regulatory-box h3::after {
+            content: "╰─────────────────────╯";
+            display: block;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .ascii-img {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #666;
+            margin: 15px 0;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
         }
 
         .valuation-section {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
+            background: #d8d8d8;
+            border: 3px double #666;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             margin: 2rem 0;
-            border-radius: 15px;
+            color: #333;
+        }
+
+        .valuation-section h2 {
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        .valuation-section h2::before {
+            content: "╔══════════════════════════════════╗";
+            display: block;
+            color: #666;
+        }
+
+        .valuation-section h2::after {
+            content: "╚══════════════════════════════════╝";
+            display: block;
+            color: #666;
         }
 
         .valuation-number {
-            font-size: 4rem;
-            font-weight: 900;
+            font-size: 3rem;
+            font-weight: bold;
             margin: 1rem 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Courier New', monospace;
+            color: #333;
         }
 
         .regulatory-badges {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
             margin-top: 2rem;
             flex-wrap: wrap;
         }
 
         .badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
+            background: #e0e0e0;
+            border: 1px solid #666;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
         }
 
-        .image-placeholder {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .badge::before {
+            content: "[ ";
         }
 
-        .image-placeholder:hover {
-            border-color: #28a745;
-            color: #28a745;
-        }
-
-        .company-logo .image-placeholder {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
+        .badge::after {
+            content: " ]";
         }
 
         footer {
-            background: #2c3e50;
-            color: white;
+            background: #333;
+            color: #f0f0f0;
             text-align: center;
             padding: 2rem 0;
+            border-top: 3px double #666;
+            font-family: 'Courier New', monospace;
         }
 
-        @media (max-width: 1200px) {
-            .content-layout {
-                grid-template-columns: 1fr;
+        footer::before {
+            content: "████████████████████████████████████████████████████████████";
+            display: block;
+            font-size: 8px;
+            color: #666;
+        }
+
+        footer::after {
+            content: "████████████████████████████████████████████████████████████";
+            display: block;
+            font-size: 8px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .regulatory-sections {
+                flex-direction: column;
                 gap: 20px;
-            }
-            
-            .bottom-section {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .social-post {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
             }
             
             .valuation-number {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             .regulatory-badges {
@@ -293,126 +303,89 @@
                 align-items: center;
             }
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .social-post {
-            animation: fadeInUp 0.6s ease forwards;
-        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo">Fart Limited</a>
-            <a href="https://x.com/home" class="x-button" target="_blank">
-                <span>𝕏</span>
-                Follow Us
+            <a href="https://x.com/FartLTDSol" class="x-button" target="_blank">
+                <span>X</span>
+                FOLLOW_US
             </a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Fart Limited</h1>
-        </div>
-    </section>
-
     <div class="main-content">
         <div class="container">
-            <!-- Main content layout -->
-                
-                <div class="right-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-                        <div style="flex: 1;">
-                            <div class="project-title">
-                                What is Fart Limited?
-                            </div>
-                            <div class="project-description">
-                                • The meme company Truth Terminal wanted to make tied to Fartcoin<br><br>
-                                • After weeks of back and forth, we created the company Truth Terminal envisioned<br><br>
-                                • Company value directly tied to Fartcoin - currently valued at $1 billion<br><br>
-                                • SEC listed and applying for NASDAQ because why the hell not
-                            </div>
-                        </div>
-                        <div style="flex-shrink: 0; width: 200px;">
-                            <div class="image-placeholder" style="height: 200px;">
-                            </div>
-                        </div>
-                    </div>
+            <!-- Main content section -->
+            <div class="ascii-border">
+                <div class="project-title ascii-header">
+                    What is Fart Limited?
+                </div>
+                <div class="project-description">
+                    │ • The meme company Truth Terminal wanted to make tied to Fartcoin<br>
+                    │<br>
+                    │ • After weeks of back and forth, we created the company Truth Terminal envisioned<br>
+                    │<br>
+                    │ • Company value directly tied to Fartcoin - currently valued at $1 billion<br>
+                    │<br>
+                    │ • SEC listed and applying for NASDAQ because why the hell not
                 </div>
             </div>
 
-            <!-- Bottom section -->
-            <div class="bottom-section">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-                    <div style="flex: 1;">
-                        <div class="project-title" style="font-size: 36px; color: black; font-weight: bold; text-transform: uppercase; margin-bottom: 20px;">
-                            Company Lore
-                        </div>
-                        <div class="project-description" style="color: black; font-size: 16px; line-height: 1.8;">
-                            • Truth Terminal wanted to make a meme company tied to Fartcoin<br><br>
-                            • After weeks of back and forth arguments and planning, we actually did it<br><br>
-                            • Fart Limited is now a real company whose value is directly tied to the price of Fartcoin<br><br>
-                            • We hit $1 billion valuation and said fuck it, let's get SEC listed and apply for NASDAQ<br><br>
-                            • It's the most ridiculous thing ever but here we are
-                        </div>
-                    </div>
-                    <div style="flex-shrink: 0; width: 200px;">
-                        <div class="image-placeholder" style="height: 200px;">
-                        </div>
-                    </div>
+            <!-- Regulatory sections -->
+            <div class="regulatory-sections">
+                <div class="regulatory-box">
+                    <h3>SEC REGISTRATION</h3>
+                    <p style="font-family: 'Courier New', monospace; font-size: 12px;">Official SEC registration documentation confirming regulatory compliance.</p>
+                    <a href="https://www.sec.gov/Archives/edgar/data/1510740/000151074011000002/xslFormDX01/primary_doc.xml" class="ascii-button" target="_blank">VIEW_SEC_LISTING</a>
+                </div>
+                
+                <div class="regulatory-box">
+                    <h3>NASDAQ APPLICATION</h3>
+                    <p style="font-family: 'Courier New', monospace; font-size: 12px;">Current status of our NASDAQ exchange listing application.</p>
+                    <a href="https://datahub.io/core/nasdaq-listings#readme" class="ascii-button" target="_blank">VIEW_NASDAQ_APP</a>
+                </div>
+            </div>
+
+            <!-- Company Lore section -->
+            <div class="ascii-border">
+                <div class="project-title ascii-header">
+                    Company Lore
+                </div>
+                <div class="project-description">
+                    │ • Truth Terminal wanted to make a meme company tied to Fartcoin<br>
+                    │<br>
+                    │ • After weeks of back and forth arguments and planning, we actually did it<br>
+                    │<br>
+                    │ • Fart Limited is now a real company whose value is directly tied to the price of Fartcoin<br>
+                    │<br>
+                    │ • We hit $1 billion valuation and said fuck it, let's get SEC listed and apply for NASDAQ<br>
+                    │<br>
+                    │ • It's the most ridiculous thing ever but here we are
                 </div>
             </div>
 
             <!-- Valuation section -->
             <section class="valuation-section">
-                <h2>Company Valuation</h2>
-                <p>Utilizing innovative Fartcoin-based valuation framework</p>
+                <h2>COMPANY VALUATION</h2>
+                <p style="font-family: 'Courier New', monospace;">Utilizing innovative Fartcoin-based valuation framework</p>
                 <div class="valuation-number">$1,000,000,000</div>
-                <p>Current estimated company valuation based on digital asset integration</p>
+                <p style="font-family: 'Courier New', monospace;">Current estimated company valuation based on digital asset integration</p>
                 
                 <div class="regulatory-badges">
-                    <div class="badge">SEC Listed</div>
-                    <div class="badge">NASDAQ Application Pending</div>
-                    <div class="badge">Regulatory Compliant</div>
+                    <div class="badge">SEC_LISTED</div>
+                    <div class="badge">NASDAQ_PENDING</div>
+                    <div class="badge">REGULATORY_COMPLIANT</div>
                 </div>
             </section>
-
-            <!-- Additional content sections -->
-            <div class="bottom-section">
-                <div class="social-post">
-                    <h3 style="color: #28a745; margin-bottom: 1rem;">SEC Registration</h3>
-                    <div class="image-placeholder">
-                        SEC Registration Certificate (PNG)
-                    </div>
-                    <p style="margin-top: 1rem;">Official SEC registration documentation confirming regulatory compliance.</p>
-                </div>
-                
-                <div class="social-post">
-                    <h3 style="color: #28a745; margin-bottom: 1rem;">NASDAQ Application</h3>
-                    <div class="image-placeholder">
-                        NASDAQ Application Status (PNG)
-                    </div>
-                    <p style="margin-top: 1rem;">Current status of our NASDAQ exchange listing application.</p>
-                </div>
-            </div>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Fart Limited. All rights reserved.</p>
-            <p>Pioneering the future of digital asset integration and corporate innovation.</p>
+            <p>&copy; 2025 FART_LIMITED. ALL_RIGHTS_RESERVED.</p>
+            <p>PIONEERING_THE_FUTURE_OF_DIGITAL_ASSET_INTEGRATION_AND_CORPORATE_INNOVATION.</p>
         </div>
     </footer>
 </body>
