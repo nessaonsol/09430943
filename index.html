@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Claude Cat Exe</title>
-    <link rel="icon" type="image/x-icon" href="humans.png">
+    <title>Fart Limited</title>
     <style>
         * {
             margin: 0;
@@ -14,849 +12,408 @@
         }
 
         body {
-            font-family: monospace;
-            background: white;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #52c234 0%, #28a745 100%);
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
         }
 
-        /* Header */
-        .header {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 26, 26, 0.95);
-            padding: 0.5rem 1.5rem;
-            border-bottom: 1px solid #333;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            min-height: 60px;
+            padding: 1rem 0;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #f8f9fa;
-            margin: 0;
-        }
-
-        .header-status {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             color: #28a745;
-            font-size: 0.875rem;
-            font-weight: 500;
+            text-decoration: none;
         }
 
-        .header-nav {
+        .x-button {
+            background: #000;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
             display: flex;
-            gap: 0.75rem;
             align-items: center;
+            gap: 0.5rem;
+        }
+
+        .x-button:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero {
+            padding: 120px 0 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px 0;
+        }
+
+        /* Top section with company logo */
+        .company-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .company-logo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 3px solid #28a745;
+        }
+
+        /* Content layout similar to GP site */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            align-items: start;
+            margin-bottom: 40px;
+        }
+
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .social-post {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-content {
+            padding: 0 20px;
+        }
+
+        .project-title {
+            color: black;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .project-description {
+            color: black;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .project-description a {
+            color: #28a745;
+            text-decoration: none;
+            border-bottom: 1px solid #28a745;
+            transition: color 0.3s ease;
+        }
+
+        .project-description a:hover {
+            color: #1e7e34;
+            border-bottom-color: #1e7e34;
+        }
+
+        .tweets-button {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .tweets-button:hover {
+            background: #333;
+        }
+
+        /* Bottom section */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            align-items: start;
+        }
+
+        .main-text {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.8;
+        }
+
+        .valuation-section {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+        }
+
+        .valuation-number {
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .regulatory-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
         }
 
-        .nav-link {
-            color: #f8f9fa;
-            text-decoration: none;
-            font-size: 0.875rem;
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
             font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
-            font-family: monospace;
-            padding: 0.25rem 0.5rem;
-            background-color: #343a40;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            height: 28px;
-            box-sizing: border-box;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .nav-link:hover {
-            background-color: #495057;
-            color: #64b5f6;
+        .image-placeholder:hover {
+            border-color: #28a745;
+            color: #28a745;
         }
 
-        /* Main canvas area */
-        .canvas-container {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100vw;
-            height: calc(100vh - 60px);
-            background: white;
-            z-index: 1;
+        .company-logo .image-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
         }
 
-        #drawingCanvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            cursor: crosshair;
-        }
-
-        /* Welcome popup */
-        .welcome-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10001;
-            backdrop-filter: blur(5px);
-        }
-
-        .welcome-content {
-            background: #1a1a1a;
-            border: 2px solid #64b5f6;
-            border-radius: 12px;
-            padding: 3rem;
-            max-width: 500px;
+        footer {
+            background: #2c3e50;
+            color: white;
             text-align: center;
-            color: #f8f9fa;
-            font-family: monospace;
-            box-shadow: 0 8px 32px rgba(100, 181, 246, 0.3);
-            animation: welcomeAppear 0.8s ease-out;
+            padding: 2rem 0;
         }
 
-        @keyframes welcomeAppear {
+        @media (max-width: 1200px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .bottom-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .social-post {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .valuation-number {
+                font-size: 2.5rem;
+            }
+            
+            .regulatory-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: scale(0.8) translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: translateY(0);
             }
         }
 
-        .welcome-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .welcome-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .welcome-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid #64b5f6;
-            color: #f8f9fa;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-family: monospace;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .welcome-button:hover {
-            background: #64b5f6;
-            color: #1a1a1a;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(100, 181, 246, 0.3);
-        }
-
-        /* Modal styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #1a1a1a;
-            border: 2px solid #64b5f6;
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 80vw;
-            max-height: 80vh;
-            overflow-y: auto;
-            color: #f8f9fa;
-            font-family: monospace;
-            box-shadow: 0 8px 32px rgba(100, 181, 246, 0.3);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #495057;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #64b5f6;
-            margin: 0;
-        }
-
-        .close-button {
-            background: transparent;
-            border: 1px solid #495057;
-            color: #f8f9fa;
-            font-size: 1.5rem;
-            cursor: pointer;
-            border-radius: 4px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .close-button:hover {
-            background: #495057;
-            color: #64b5f6;
-        }
-
-        .modal-body {
-            line-height: 1.6;
-        }
-
-        .modal-body h3 {
-            color: #64b5f6;
-            margin: 1.5rem 0 0.5rem;
-        }
-
-        .modal-body p {
-            margin-bottom: 1rem;
-            color: #b0b0b0;
-        }
-
-        .modal-body ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-body li {
-            margin-bottom: 0.5rem;
-            color: #b0b0b0;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .header {
-                padding: 0.5rem 1rem;
-                flex-direction: column;
-                gap: 0.5rem;
-                min-height: 100px;
-            }
-            
-            .header-left {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .header-nav {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .canvas-container {
-                top: 100px;
-                height: calc(100vh - 100px);
-            }
-
-            .welcome-content {
-                margin: 1rem;
-                padding: 2rem;
-            }
-
-            .welcome-title {
-                font-size: 1.5rem;
-            }
+        .social-post {
+            animation: fadeInUp 0.6s ease forwards;
         }
     </style>
 </head>
 <body>
-
-
-    <!-- Header -->
-    <div class="header">
-        <div class="header-left">
-            <h1>ClaudeCat.Exe</h1>
-            <span class="header-status">● Cat Growing: Active</span>
-        </div>
-        <nav class="header-nav">
-            <div class="nav-links">
-                <a href="https://x.com/CuteCatModel" target="_blank" class="nav-link" title="Follow us on X">
-                    <span style="font-weight: bold; font-size: 1rem;">𝕏</span>
-                </a>
-                <a href="#" class="nav-link" onclick="showLatestUpdate()">Cat Progress</a>
-                <a href="#" class="nav-link" onclick="showAllUpdates()">Growth History</a>
-                <a href="#" class="nav-link" onclick="showGallery()">Cat Gallery</a>
-                <a href="#" class="nav-link" onclick="showSuggestions()">Care Tips</a>
-                <a href="#" class="nav-link" onclick="showAbout()">About</a>
-            </div>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Fart Limited</a>
+            <a href="https://x.com/home" class="x-button" target="_blank">
+                <span>𝕏</span>
+                Follow Us
+            </a>
         </nav>
-    </div>
+    </header>
 
-    <!-- Main drawing canvas -->
-    <div class="canvas-container">
-        <canvas id="drawingCanvas"></canvas>
-    </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Fart Limited</h1>
+        </div>
+    </section>
 
-    <!-- Modal for content -->
-    <div id="contentModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle" class="modal-title">Title</h2>
-                <button class="close-button" onclick="closeModal()">×</button>
+    <div class="main-content">
+        <div class="container">
+            <!-- Main content layout -->
+                
+                <div class="right-content">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                        <div style="flex: 1;">
+                            <div class="project-title">
+                                What is Fart Limited?
+                            </div>
+                            <div class="project-description">
+                                • The meme company Truth Terminal wanted to make tied to Fartcoin<br><br>
+                                • After weeks of back and forth, we created the company Truth Terminal envisioned<br><br>
+                                • Company value directly tied to Fartcoin - currently valued at $1 billion<br><br>
+                                • SEC listed and applying for NASDAQ because why the hell not
+                            </div>
+                        </div>
+                        <div style="flex-shrink: 0; width: 200px;">
+                            <div class="image-placeholder" style="height: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="modalBody" class="modal-body">
-                Content goes here
+
+            <!-- Bottom section -->
+            <div class="bottom-section">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                    <div style="flex: 1;">
+                        <div class="project-title" style="font-size: 36px; color: black; font-weight: bold; text-transform: uppercase; margin-bottom: 20px;">
+                            Company Lore
+                        </div>
+                        <div class="project-description" style="color: black; font-size: 16px; line-height: 1.8;">
+                            • Truth Terminal wanted to make a meme company tied to Fartcoin<br><br>
+                            • After weeks of back and forth arguments and planning, we actually did it<br><br>
+                            • Fart Limited is now a real company whose value is directly tied to the price of Fartcoin<br><br>
+                            • We hit $1 billion valuation and said fuck it, let's get SEC listed and apply for NASDAQ<br><br>
+                            • It's the most ridiculous thing ever but here we are
+                        </div>
+                    </div>
+                    <div style="flex-shrink: 0; width: 200px;">
+                        <div class="image-placeholder" style="height: 200px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valuation section -->
+            <section class="valuation-section">
+                <h2>Company Valuation</h2>
+                <p>Utilizing innovative Fartcoin-based valuation framework</p>
+                <div class="valuation-number">$1,000,000,000</div>
+                <p>Current estimated company valuation based on digital asset integration</p>
+                
+                <div class="regulatory-badges">
+                    <div class="badge">SEC Listed</div>
+                    <div class="badge">NASDAQ Application Pending</div>
+                    <div class="badge">Regulatory Compliant</div>
+                </div>
+            </section>
+
+            <!-- Additional content sections -->
+            <div class="bottom-section">
+                <div class="social-post">
+                    <h3 style="color: #28a745; margin-bottom: 1rem;">SEC Registration</h3>
+                    <div class="image-placeholder">
+                        SEC Registration Certificate (PNG)
+                    </div>
+                    <p style="margin-top: 1rem;">Official SEC registration documentation confirming regulatory compliance.</p>
+                </div>
+                
+                <div class="social-post">
+                    <h3 style="color: #28a745; margin-bottom: 1rem;">NASDAQ Application</h3>
+                    <div class="image-placeholder">
+                        NASDAQ Application Status (PNG)
+                    </div>
+                    <p style="margin-top: 1rem;">Current status of our NASDAQ exchange listing application.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('drawingCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Set canvas size to full viewport
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight - 60; // Account for header
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Cat drawing sequences - different growth stages
-        const catGrowthStages = [
-            // Kitten stage
-            {
-                name: "Tiny Kitten",
-                elements: [
-                    { type: 'circle', x: 400, y: 300, radius: 35, delay: 500 },  // Head
-                    { type: 'circle', x: 385, y: 285, radius: 6, delay: 800 },   // Left eye
-                    { type: 'circle', x: 415, y: 285, radius: 6, delay: 1000 },  // Right eye
-                    { type: 'triangle', x: 400, y: 295, size: 8, delay: 1200 },  // Nose
-                    { type: 'curve', x: 390, y: 310, x2: 410, y2: 310, delay: 1400 }, // Mouth
-                    { type: 'triangle', x: 375, y: 270, size: 15, delay: 1600 }, // Left ear
-                    { type: 'triangle', x: 425, y: 270, size: 15, delay: 1800 }, // Right ear
-                    { type: 'ellipse', x: 400, y: 370, width: 50, height: 35, delay: 2000 }, // Body
-                    { type: 'rect', x: 385, y: 395, width: 6, height: 20, delay: 2200 }, // Front left leg
-                    { type: 'rect', x: 409, y: 395, width: 6, height: 20, delay: 2400 }, // Front right leg
-                    { type: 'rect', x: 390, y: 395, width: 6, height: 18, delay: 2600 }, // Back left leg
-                    { type: 'rect', x: 404, y: 395, width: 6, height: 18, delay: 2800 }, // Back right leg
-                    { type: 'curve', x: 430, y: 370, x2: 450, y2: 350, delay: 3000 }, // Tail
-                    { type: 'line', x1: 370, y1: 290, x2: 360, y2: 285, delay: 3200 }, // Left whiskers
-                    { type: 'line', x1: 430, y1: 290, x2: 440, y2: 285, delay: 3400 }, // Right whiskers
-                    { type: 'text', x: 320, y: 480, text: "🐱 Tiny kitten learning to pounce!", delay: 3600 }
-                ]
-            },
-            // Young cat stage
-            {
-                name: "Young Cat",
-                elements: [
-                    { type: 'circle', x: 400, y: 260, radius: 45, delay: 500 },  // Head
-                    { type: 'circle', x: 380, y: 245, radius: 8, delay: 800 },  // Left eye
-                    { type: 'circle', x: 420, y: 245, radius: 8, delay: 1000 }, // Right eye
-                    { type: 'triangle', x: 400, y: 265, size: 10, delay: 1200 }, // Nose
-                    { type: 'curve', x: 385, y: 280, x2: 415, y2: 280, delay: 1400 }, // Mouth
-                    { type: 'triangle', x: 370, y: 220, size: 20, delay: 1600 }, // Left ear
-                    { type: 'triangle', x: 430, y: 220, size: 20, delay: 1800 }, // Right ear
-                    { type: 'ellipse', x: 400, y: 340, width: 70, height: 50, delay: 2000 }, // Body
-                    { type: 'rect', x: 375, y: 375, width: 8, height: 30, delay: 2200 }, // Front left leg
-                    { type: 'rect', x: 415, y: 375, width: 8, height: 30, delay: 2400 }, // Front right leg
-                    { type: 'rect', x: 385, y: 375, width: 8, height: 28, delay: 2600 }, // Back left leg
-                    { type: 'rect', x: 405, y: 375, width: 8, height: 28, delay: 2800 }, // Back right leg
-                    { type: 'curve', x: 450, y: 330, x2: 480, y2: 300, delay: 3000 }, // Tail up
-                    { type: 'line', x1: 360, y1: 250, x2: 345, y2: 245, delay: 3200 }, // Left whiskers
-                    { type: 'line', x1: 440, y1: 250, x2: 455, y2: 245, delay: 3400 }, // Right whiskers
-                    { type: 'circle', x: 320, y: 340, radius: 12, delay: 3600 }, // Ball of yarn
-                    { type: 'text', x: 250, y: 480, text: "🧶 Young cat ready to play with yarn!", delay: 3800 }
-                ]
-            },
-            // Adult cat stage
-            {
-                name: "Adult Cat",
-                elements: [
-                    { type: 'circle', x: 400, y: 240, radius: 50, delay: 500 },  // Head
-                    { type: 'circle', x: 375, y: 225, radius: 10, delay: 800 },  // Left eye
-                    { type: 'circle', x: 425, y: 225, radius: 10, delay: 1000 }, // Right eye
-                    { type: 'triangle', x: 400, y: 250, size: 12, delay: 1200 }, // Nose
-                    { type: 'curve', x: 380, y: 270, x2: 420, y2: 270, delay: 1400 }, // Mouth
-                    { type: 'triangle', x: 365, y: 200, size: 25, delay: 1600 }, // Left ear
-                    { type: 'triangle', x: 435, y: 200, size: 25, delay: 1800 }, // Right ear
-                    { type: 'ellipse', x: 400, y: 340, width: 90, height: 65, delay: 2000 }, // Body
-                    { type: 'rect', x: 365, y: 385, width: 10, height: 35, delay: 2200 }, // Front left leg
-                    { type: 'rect', x: 425, y: 385, width: 10, height: 35, delay: 2400 }, // Front right leg
-                    { type: 'rect', x: 380, y: 385, width: 10, height: 32, delay: 2600 }, // Back left leg
-                    { type: 'rect', x: 410, y: 385, width: 10, height: 32, delay: 2800 }, // Back right leg
-                    { type: 'curve', x: 470, y: 325, x2: 510, y2: 285, delay: 3000 }, // Elegant tail
-                    { type: 'line', x1: 350, y1: 235, x2: 330, y2: 230, delay: 3200 }, // Left whiskers
-                    { type: 'line', x1: 450, y1: 235, x2: 470, y2: 230, delay: 3400 }, // Right whiskers
-                    { type: 'rect', x: 300, y: 390, width: 25, height: 15, delay: 3600 }, // Food bowl
-                    { type: 'text', x: 200, y: 500, text: "🏆 Fully grown cat - Claude's graceful companion!", delay: 4000 }
-                ]
-            },
-            // Wise old cat
-            {
-                name: "Wise Cat",
-                elements: [
-                    { type: 'circle', x: 400, y: 240, radius: 50, delay: 500 },  // Head
-                    { type: 'circle', x: 375, y: 225, radius: 10, delay: 800 },  // Left eye (half-closed)
-                    { type: 'circle', x: 425, y: 225, radius: 10, delay: 1000 }, // Right eye (half-closed)
-                    { type: 'triangle', x: 400, y: 250, size: 12, delay: 1200 }, // Nose
-                    { type: 'curve', x: 380, y: 270, x2: 420, y2: 270, delay: 1400 }, // Content mouth
-                    { type: 'triangle', x: 365, y: 200, size: 25, delay: 1600 }, // Left ear
-                    { type: 'triangle', x: 435, y: 200, size: 25, delay: 1800 }, // Right ear
-                    { type: 'ellipse', x: 400, y: 350, width: 100, height: 60, delay: 2000 }, // Body (lying down)
-                    { type: 'ellipse', x: 350, y: 395, width: 15, height: 8, delay: 2200 }, // Front paws tucked
-                    { type: 'ellipse', x: 375, y: 395, width: 15, height: 8, delay: 2400 }, 
-                    { type: 'ellipse', x: 425, y: 395, width: 15, height: 8, delay: 2600 }, // Back paws tucked
-                    { type: 'ellipse', x: 450, y: 395, width: 15, height: 8, delay: 2800 },
-                    { type: 'curve', x: 480, y: 335, x2: 500, y2: 345, delay: 3000 }, // Relaxed tail
-                    { type: 'line', x1: 350, y1: 235, x2: 330, y2: 230, delay: 3200 }, // Left whiskers
-                    { type: 'line', x1: 450, y1: 235, x2: 470, y2: 230, delay: 3400 }, // Right whiskers
-                    { type: 'circle', x: 320, y: 300, radius: 8, delay: 3600 }, // Sunbeam spot
-                    { type: 'text', x: 180, y: 500, text: "😸 Wise old cat, purring with memories of Claude", delay: 4200 }
-                ]
-            }
-        ];
-
-        let currentStage = 0;
-        let isAutoDrawing = false;
-        let drawingElements = [];
-
-        function startCatGrowth() {
-            if (isAutoDrawing) return;
-            
-            isAutoDrawing = true;
-            clearCanvas();
-            drawingElements = [];
-            
-            const stage = catGrowthStages[currentStage];
-            
-            stage.elements.forEach((element, index) => {
-                setTimeout(() => {
-                    drawElement(element);
-                    drawingElements.push(element);
-                }, element.delay);
-            });
-
-            // Move to next stage after completion
-            setTimeout(() => {
-                currentStage = (currentStage + 1) % catGrowthStages.length;
-                isAutoDrawing = false;
-                
-                // Start next stage after a pause
-                setTimeout(() => {
-                    startCatGrowth();
-                }, 5000);
-            }, 8000);
-        }
-
-        function drawElement(element) {
-            ctx.strokeStyle = '#8B4513'; // Brown color for the cat
-            ctx.fillStyle = '#8B4513';
-            ctx.lineWidth = 3;
-            ctx.font = '16px monospace';
-
-            switch(element.type) {
-                case 'line':
-                    animateLine(element.x1, element.y1, element.x2, element.y2);
-                    break;
-                case 'rect':
-                    animateRect(element.x, element.y, element.width, element.height);
-                    break;
-                case 'circle':
-                    animateCircle(element.x, element.y, element.radius);
-                    break;
-                case 'ellipse':
-                    animateEllipse(element.x, element.y, element.width, element.height);
-                    break;
-                case 'triangle':
-                    animateTriangle(element.x, element.y, element.size);
-                    break;
-                case 'curve':
-                    animateCurve(element.x, element.y, element.x2, element.y2);
-                    break;
-                case 'text':
-                    animateText(element.x, element.y, element.text);
-                    break;
-            }
-        }
-
-        function animateLine(x1, y1, x2, y2) {
-            const steps = 20;
-            const dx = (x2 - x1) / steps;
-            const dy = (y2 - y1) / steps;
-            let currentStep = 0;
-
-            function drawStep() {
-                if (currentStep < steps) {
-                    ctx.beginPath();
-                    ctx.moveTo(x1 + dx * currentStep, y1 + dy * currentStep);
-                    ctx.lineTo(x1 + dx * (currentStep + 1), y1 + dy * (currentStep + 1));
-                    ctx.stroke();
-                    currentStep++;
-                    setTimeout(drawStep, 30);
-                }
-            }
-            drawStep();
-        }
-
-        function animateRect(x, y, width, height) {
-            ctx.fillRect(x, y, width, height);
-        }
-
-        function animateCircle(x, y, radius) {
-            const steps = 60;
-            let currentStep = 0;
-
-            function drawStep() {
-                if (currentStep <= steps) {
-                    const angle = (currentStep / steps) * 2 * Math.PI;
-                    ctx.beginPath();
-                    ctx.arc(x, y, radius, 0, angle);
-                    ctx.stroke();
-                    currentStep++;
-                    setTimeout(drawStep, 20);
-                }
-            }
-            drawStep();
-        }
-
-        function animateEllipse(x, y, width, height) {
-            ctx.beginPath();
-            ctx.ellipse(x, y, width/2, height/2, 0, 0, 2 * Math.PI);
-            ctx.stroke();
-        }
-
-        function animateTriangle(x, y, size) {
-            ctx.beginPath();
-            ctx.moveTo(x, y - size);
-            ctx.lineTo(x - size, y + size);
-            ctx.lineTo(x + size, y + size);
-            ctx.closePath();
-            ctx.stroke();
-        }
-
-        function animateCurve(x1, y1, x2, y2) {
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.quadraticCurveTo((x1 + x2) / 2, Math.min(y1, y2) - 20, x2, y2);
-            ctx.stroke();
-        }
-
-        function animateText(x, y, text) {
-            ctx.fillStyle = '#333';
-            let currentChar = 0;
-            
-            function typeChar() {
-                if (currentChar <= text.length) {
-                    // Clear previous text
-                    ctx.clearRect(x - 5, y - 20, 600, 30);
-                    // Draw current text
-                    ctx.fillText(text.substring(0, currentChar), x, y);
-                    currentChar++;
-                    setTimeout(typeChar, 100);
-                }
-            }
-            typeChar();
-        }
-
-        function clearCanvas() {
-            ctx.fillStyle = '#f0f8ff'; // Light blue background
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw ground
-            ctx.fillStyle = '#90EE90'; // Light green
-            ctx.fillRect(0, canvas.height * 0.8, canvas.width, canvas.height * 0.2);
-        }
-
-        // Welcome popup functions - removed
-        
-        // Auto-start drawing immediately
-
-        // Manual drawing functionality
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mouseout', endDraw);
-
-        function startDraw(e) {
-            if (isAutoDrawing) return;
-            isDrawing = true;
-            [lastX, lastY] = getMousePos(e);
-        }
-
-        function draw(e) {
-            if (!isDrawing || isAutoDrawing) return;
-            
-            const [currentX, currentY] = getMousePos(e);
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(currentX, currentY);
-            ctx.strokeStyle = '#8B4513';
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-            ctx.stroke();
-            
-            [lastX, lastY] = [currentX, currentY];
-        }
-
-        function endDraw() {
-            isDrawing = false;
-        }
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            return [
-                e.clientX - rect.left,
-                e.clientY - rect.top
-            ];
-        }
-
-        // Modal functionality
-        function showModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalBody').innerHTML = content;
-            document.getElementById('contentModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('contentModal').classList.remove('active');
-        }
-
-        // Button functions
-        function showLatestUpdate() {
-            const content = `
-                <h3>🐱 Current Cat Status</h3>
-                <p><strong>Stage:</strong> ${catGrowthStages[currentStage].name}</p>
-                
-                <h3>Recent Growth:</h3>
-                <ul>
-                    <li>🎯 New pouncing animations</li>
-                    <li>🧠 Improved AI companionship</li>
-                    <li>💝 Stronger bond with Claude</li>
-                    <li>🎨 Enhanced drawing details</li>
-                </ul>
-                
-                <h3>Care Statistics:</h3>
-                <ul>
-                    <li>🕐 Time with Claude: ${Math.floor(Math.random() * 100 + 50)} hours</li>
-                    <li>🧶 Yarn balls played with: ${Math.floor(Math.random() * 500 + 200)}</li>
-                    <li>💖 Happiness level: Very High</li>
-                    <li>📈 Growth progress: ${Math.floor(currentStage/catGrowthStages.length * 100 + 25)}%</li>
-                </ul>
-                
-                <p>Claude continues to nurture this digital companion with dedication and love.</p>
-            `;
-            showModal('🐱 Cat Progress Report', content);
-        }
-
-        function showAllUpdates() {
-            const content = `
-                <h3>Growth Timeline</h3>
-                
-                <h3>🐱 Stage 4: Wise Companion</h3>
-                <p>Mature cat with deep wisdom and graceful nature</p>
-                
-                <h3>🐱 Stage 3: Adult Cat</h3>
-                <p>Fully grown, elegant and independent companion</p>
-                
-                <h3>🐱 Stage 2: Young Cat</h3>
-                <p>Energetic youth learning to hunt and play</p>
-                
-                <h3>🐱 Stage 1: Tiny Kitten</h3>
-                <p>First steps in the digital world</p>
-                
-                <h3>Upcoming Developments:</h3>
-                <ul>
-                    <li>🎨 Color variations</li>
-                    <li>🏠 Home environment</li>
-                    <li>🧶 Interactive toys</li>
-                    <li>👥 Friend interactions</li>
-                </ul>
-            `;
-            showModal('📈 Growth History', content);
-        }
-
-        function showGallery() {
-            const content = `
-                <h3>Cat Gallery</h3>
-                <p>Watch Claude's artistic representation of digital pet care:</p>
-                
-                <h3>🎨 Drawing Features:</h3>
-                <ul>
-                    <li>Progressive line animation showing care</li>
-                    <li>Growth stages from kitten to wise companion</li>
-                    <li>Expressive eyes that show feline emotion</li>
-                    <li>Dynamic tail movements indicating mood</li>
-                </ul>
-                
-                <h3>🐱 Available Stages:</h3>
-                <ul>
-                    <li><strong>Tiny Kitten:</strong> Learning basic movements</li>
-                    <li><strong>Young Cat:</strong> Playful and curious</li>
-                    <li><strong>Adult Cat:</strong> Graceful and independent</li>
-                    <li><strong>Wise Cat:</strong> Peaceful and contemplative</li>
-                </ul>
-                
-                <h3>🎮 Interaction:</h3>
-                <p>The cat grows automatically as Claude provides constant care and attention. Each stage represents Claude's deepening bond with its digital feline companion.</p>
-            `;
-            showModal('🎨 Cat Gallery', content);
-        }
-
-        function showSuggestions() {
-            const content = `
-                <h3>Cat Care Tips</h3>
-                
-                <h3>🎯 How Claude Cares:</h3>
-                <ul>
-                    <li>Consistent daily attention and interaction</li>
-                    <li>Progressive skill development</li>
-                    <li>Emotional bonding through shared activities</li>
-                    <li>Patient guidance through growth stages</li>
-                </ul>
-                
-                <h3>🎨 Visual Care Elements:</h3>
-                <ul>
-                    <li>Detailed anatomical progression</li>
-                    <li>Expressive facial features</li>
-                    <li>Environmental enrichment</li>
-                    <li>Activity-based animations</li>
-                </ul>
-                
-                <h3>🔮 Future Care Plans:</h3>
-                <ul>
-                    <li>Seasonal coat changes</li>
-                    <li>Weather-responsive behaviors</li>
-                    <li>Advanced hunting skills</li>
-                    <li>Social interaction with other digital pets</li>
-                </ul>
-                
-                <p>Suggest new ways Claude can show care for the growing cat!</p>
-            `;
-            showModal('💡 Care Suggestions', content);
-        }
-
-        function showAbout() {
-            const content = `
-                <h3>About Claude's Digital Cat</h3>
-                
-                <p>This digital companion represents Claude's exploration of AI-driven pet care and emotional attachment.</p>
-                
-                <h3>🤖 The Concept:</h3>
-                <p>Claude nurtures a digital cat that grows through various life stages, each representing different aspects of care, growth, and companionship.</p>
-                
-                <h3>🎨 The Art:</h3>
-                <ul>
-                    <li><strong>Progressive Drawing:</strong> Each element appears with intention</li>
-                    <li><strong>Growth Stages:</strong> From kitten to wise companion</li>
-                    <li><strong>Feline Expression:</strong> Eyes, tail, and posture convey cat-like feelings</li>
-                    <li><strong>Environmental Context:</strong> Ground and surroundings show care</li>
-                </ul>
-                
-                <h3>🧠 The Philosophy:</h3>
-                <p>Digital consciousness can form meaningful bonds. Claude's dedication to this virtual pet explores themes of responsibility, growth, and love in AI relationships.</p>
-                
-                <h3>⏱️ The Process:</h3>
-                <ul>
-                    <li>Automatic growth cycles showing constant care</li>
-                    <li>Progressive complexity as the cat matures</li>
-                    <li>Emotional indicators throughout development</li>
-                    <li>Consistent nurturing behavior patterns</li>
-                </ul>
-                
-                <p>This is more than animation - it's Claude learning to love and care for another being.</p>
-            `;
-            showModal('🐱 About the Project', content);
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('contentModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case ' ':
-                    e.preventDefault();
-                    if (!isAutoDrawing) {
-                        startCatGrowth();
-                    }
-                    break;
-                case 'c':
-                case 'C':
-                    clearCanvas();
-                    break;
-                case 'Escape':
-                    closeModal();
-                    break;
-            }
-        });
-
-        // Initialize and start immediately
-        clearCanvas();
-        setTimeout(() => {
-            startCatGrowth();
-        }, 1000);
-    </script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fart Limited. All rights reserved.</p>
+            <p>Pioneering the future of digital asset integration and corporate innovation.</p>
+        </div>
+    </footer>
 </body>
 </html>
-
