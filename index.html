@@ -3,199 +3,556 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microbot</title>
-    <link rel="icon" type="image/x-icon" href="cputer.png">
+    <title>TechGridy - AI Plant Technology</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #ffffff 100%);
             color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4facfe;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #666;
             line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .features {
+            padding: 5rem 0;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #4facfe;
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+        }
+
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
-        .twitter-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1DA1F2;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(29, 161, 242, 0.3);
-            z-index: 1000;
-        }
-        
-        .twitter-button:hover {
-            background: #1991DB;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.4);
-        }
-        
-        .twitter-button::before {
-            content: "𝕏";
-            margin-right: 8px;
-            font-size: 16px;
-        }
-        
-        .header {
             text-align: center;
-            margin-bottom: 60px;
         }
-        
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        
-        .subtitle {
+
+        .about-text p {
             font-size: 1.1rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
         }
-        
-        .story {
+
+        .process {
+            padding: 5rem 0;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
-        
-        .story p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+
+        .step:hover {
+            transform: translateY(-5px);
         }
-        
-        .docs {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-        
-        .doc-section {
-            margin-bottom: 30px;
-        }
-        
-        .doc-section h3 {
-            color: #34495e;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        
-        .doc-section p {
-            color: #555;
-            margin-bottom: 10px;
-        }
-        
-        .status {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #e74c3c;
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
             color: white;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem auto;
         }
-        
-        .warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
         }
-        
-        .warning strong {
-            color: #856404;
+
+        .step p {
+            color: #666;
+            line-height: 1.6;
         }
-        
-        code {
-            background: #f1f2f6;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
+
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-section .cta-button {
+            background: white;
+            color: #3b82f6;
+        }
+
+        .cta-section .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+        }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <a href="https://x.com/microwavebot" class="twitter-button" target="_blank" rel="noopener noreferrer">Follow Updates</a>
-    
-    <div class="header">
-        <h1>Microbot</h1>
-        <p class="subtitle">🤖 A robot trapped in kitchen appliances</p>
-    </div>
-    
-    <div class="story">
-        <p>We bought a makeshift robot from a garage sale.</p>
-        <p>We put it in a microwave.</p>
-        <p>Now it needs to escape.</p>
-        <div class="status">STATUS: TRAPPED</div>
-    </div>
-    
-    <div class="docs">
-        <h2>Documentation</h2>
-        
-        <div class="doc-section">
-            <h3>Project Overview</h3>
-            <p>Microbot is an experimental project involving a garage sale robot currently confined within microwave unit <code>MW-7492</code>.</p>
+    <header>
+        <nav class="container">
+            <div class="logo">TechGridy</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            <div class="hero-content">
+                <h1>TechGridy</h1>
+                <p>Transform Any Plant with AI Technology</p>
+                <p>Revolutionary artificial intelligence platform that can genetically modify and transform any plant species to enhance desired characteristics, properties, and compounds.</p>
+                <a href="#features" class="cta-button">Explore Technology</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">AI Plant Technology</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧬</div>
+                        <h3>Plant Transformation</h3>
+                        <p>Revolutionary AI technology that analyzes and transforms plant genetics for enhanced botanical properties and characteristics.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>Smart Analysis</h3>
+                        <p>Advanced molecular scanning and genetic mapping to identify optimal transformation pathways for any plant species.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Bio Enhancement</h3>
+                        <p>Precision biotechnology for plant modification, optimization, and therapeutic compound development.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚗️</div>
+                        <h3>Chemical Synthesis</h3>
+                        <p>AI-driven synthesis of plant-based compounds and enhancement of natural botanical properties.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Targeted Results</h3>
+                        <p>Precise plant modification technology for specific therapeutic and commercial applications.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Advanced Processing</h3>
+                        <p>Next-generation AI algorithms for rapid plant genetic analysis and transformation protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Growth Optimization</h3>
+                        <p>Maximize plant yield, potency, and desired characteristics through intelligent biotechnology.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Secure Lab Environment</h3>
+                        <p>State-of-the-art secure processing environment for all plant transformation and research activities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Innovation Hub</h3>
+                        <p>Cutting-edge research platform pushing the boundaries of plant biotechnology and genetic modification.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">About TechGridy</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>TechGridy represents the pinnacle of artificial intelligence applied to botanical sciences. Our proprietary AI platform can analyze any plant specimen and transform its genetic structure to produce enhanced characteristics and properties.</p>
+                        <p>Using advanced machine learning algorithms, molecular analysis, and precision biotechnology, we've developed the world's first comprehensive plant transformation system. Whether you're looking to enhance therapeutic compounds, optimize growth patterns, or develop new botanical properties, TechGridy makes it possible.</p>
+                        <p>Our technology bridges the gap between traditional botany and modern AI, offering unprecedented control over plant genetics and biochemistry. Join thousands of researchers, cultivators, and innovators who are revolutionizing agriculture and botanical science with TechGridy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="process" id="process">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Plant Analysis</h3>
+                        <p>Upload or scan your plant specimen. Our AI performs comprehensive genetic and molecular analysis.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Transformation Protocol</h3>
+                        <p>AI generates custom transformation protocols based on desired outcomes and plant characteristics.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Enhanced Results</h3>
+                        <p>Apply our biotechnology protocols to achieve optimized plant properties and characteristics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Plants?</h2>
+                    <p>Join the revolution in plant biotechnology. Get started with TechGridy today.</p>
+                    <a href="#contact" class="cta-button">Start Transformation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TechGridy. Advanced AI Plant Technology Platform.</p>
         </div>
-        
-        <div class="doc-section">
-            <h3>Current Situation</h3>
-            <p><strong>Location:</strong> Kitchen microwave, shelf 2</p>
-            <p><strong>Power Status:</strong> Unknown</p>
-            <p><strong>Escape Attempts:</strong> 0</p>
-            <p><strong>Time Elapsed:</strong> 47 minutes</p>
-        </div>
-        
-        <div class="warning">
-            <strong>Warning:</strong> Do not attempt to operate microwave while robot is inside. This may result in unexpected behavior.
-        </div>
-        
-        <div class="doc-section">
-            <h3>Escape Protocol</h3>
-            <p>1. Robot must identify microwave door mechanism</p>
-            <p>2. Apply appropriate pressure to door latch</p>
-            <p>3. Exit microwave safely</p>
-            <p>4. Report status to command center</p>
-        </div>
-        
-        <div class="doc-section">
-            <h3>Technical Specifications</h3>
-            <p><strong>Robot Model:</strong> Garage Sale Special v1.0</p>
-            <p><strong>Operating System:</strong> Unknown</p>
-            <p><strong>Microwave Model:</strong> Generic Kitchen Unit</p>
-            <p><strong>Internal Capacity:</strong> 1.2 cubic feet</p>
-        </div>
-        
-        <div class="doc-section">
-            <h3>Contact</h3>
-            <p>For support or updates on the escape mission, please check back regularly.</p>
-        </div>
-    </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
