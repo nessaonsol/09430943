@@ -1,445 +1,220 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CHADMINGO</title>
-    <link rel="icon" type="image/x-icon" href="CHADMINGO.PNG">
-    <meta name="description" content="The Greek God of Strength and Power">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Altcoin Psyop</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Fredoka One', cursive;
-            overflow: hidden;
-            cursor: none;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
-            height: 100vh;
-            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        
-        .cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 75px;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-        
-        .cursor img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: hue-rotate(45deg) saturate(1.2);
-        }
-        
-        .cloud {
-            position: absolute;
-            opacity: 0.9;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .cloud:nth-child(odd) {
-            animation-direction: alternate;
-        }
-        
-        .cloud:nth-child(even) {
-            animation-delay: -3s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) translateX(0px); }
-            25% { transform: translateY(-10px) translateX(5px); }
-            50% { transform: translateY(-5px) translateX(-5px); }
-            75% { transform: translateY(-15px) translateX(10px); }
-        }
-        
-        .cloud svg {
-            filter: drop-shadow(5px 7px 4.5px rgba(0,0,0,0.15));
-        }
-        
-        .main-container {
-            position: relative;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .logo-container {
-            margin-bottom: 40px;
-            animation: logoEntrance 2s ease-out;
-        }
-        
-        .logo {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 400;
-            color: white;
-            text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
-                        -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000, 4px 4px 0 #000;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: white;
-            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-            margin-bottom: 20px;
-        }
-        
-        .character-container {
-            position: absolute;
-            right: 150px;
-            bottom: 100px;
-            z-index: 21;
-            animation: characterFloat 4s ease-in-out infinite;
-        }
-        
-        .character-container img {
-            width: 200px;
-            height: auto;
-            filter: drop-shadow(3px 5px 8px rgba(0,0,0,0.3));
-        }
-        
-        @keyframes characterFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-15px) rotate(2deg); }
-            50% { transform: translateY(-10px) rotate(-1deg); }
-            75% { transform: translateY(-20px) rotate(1deg); }
-        }
-        
-        .buttons-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            animation: buttonsEntrance 2s ease-out 0.5s both;
-        }
-        
-        .btn {
-            background: #00CED1;
-            color: white;
-            padding: 12px 24px;
-            border: 3px solid #000;
-            border-radius: 50px;
-            font-family: 'Fredoka One', cursive;
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-            text-decoration: none;
-            box-shadow: 3px 3px 0 #000;
-            transition: all 0.15s ease-in-out;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 5px 5px 0 #000;
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-            box-shadow: 1px 1px 0 #000;
-        }
-        
-        .powers-section {
-            margin-top: 40px;
-            animation: powersEntrance 2s ease-out 1s both;
-        }
-        
-        .powers-title {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: white;
-            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-            margin-bottom: 20px;
-        }
-        
-        .powers-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .power-item {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 25px;
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            font-size: clamp(0.8rem, 2vw, 1rem);
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            animation: powerPulse 3s ease-in-out infinite;
-        }
-        
-        .power-item:nth-child(odd) {
-            animation-delay: -1.5s;
-        }
-        
-        @keyframes logoEntrance {
-            0% { opacity: 0; transform: scale(0.5) translateY(-50px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        @keyframes buttonsEntrance {
-            0% { opacity: 0; transform: scale(0.8) translateY(30px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        @keyframes powersEntrance {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes powerPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-        
-        /* Responsive */
+
         .x-button {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 100;
             background: #000;
             color: white;
-            width: 50px;
-            height: 50px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .x-button:hover {
+            background: #333;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .warning {
+            background: #f9f9f9;
+            border-left: 3px solid #ff6b6b;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .warning h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #000;
+            color: white;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            font-size: 24px;
+            font-size: 0.8em;
             font-weight: bold;
-            transition: all 0.3s ease;
-            border: 3px solid #00CED1;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        
-        .x-button:hover {
-            background: #00CED1;
-            color: #000;
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,206,209,0.4);
-        }
-        
-        .x-button::before {
-            content: "𝕏";
-            font-size: 20px;
         }
 
-        @media (max-width: 768px) {
-            .character-container {
-                right: 20px;
-                bottom: 50px;
-            }
-            
-            .character-container img {
-                width: 120px;
-            }
-            
-            .buttons-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .x-button {
-                top: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-            }
+        .coin-info {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <!-- X.com Button -->
-    <a href="https://x.com/yourusername" target="_blank" rel="noopener noreferrer" class="x-button" aria-label="Follow on X"></a>
+    <a href="https://x.com/thealtcoinpsyop" class="x-button">x</a>
+    <h1>The Altcoin Psyop</h1>
+    <p class="subtitle">How we plan on psyopping the internet to buy our coin as the "ALTCOIN"</p>
 
-    <div class="cursor" id="cursor">
-        <img src="CHADMINGO.PNG" alt="Chadmingo Cursor">
+
+
+    <div class="section">
+        <h2>The Plan</h2>
+        <p>On TikTok and YouTube, people are getting told it's "altcoin season" - the perfect time to buy alternative cryptocurrencies. We're going to capitalize on this hype.</p>
+        <p>Our strategy: Pay for targeted ads to convince these users to buy OUR coin because we'll position it as THE altcoin they need to buy during this "altcoin season."</p>
     </div>
 
-    <!-- Floating Clouds -->
-    <div class="cloud" style="left: 7.96%; top: 8.91%; z-index: 1; width: 100px; opacity: 0.9;">
-        <svg width="100" height="65" viewBox="0 0 200 130">
-            <defs>
-                <filter id="cloudShadow" x="-30%" y="-30%" width="160%" height="160%">
-                    <feDropShadow dx="5" dy="7" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.15"/>
-                </filter>
-            </defs>
-            <g filter="url(#cloudShadow)">
-                <circle cx="50" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="90" cy="75" r="40" fill="#FFFFFF"/>
-                <circle cx="130" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="170" cy="65" r="30" fill="#FFFFFF"/>
-                <circle cx="70" cy="50" r="25" fill="#FFFFFF"/>
-                <circle cx="110" cy="45" r="30" fill="#FFFFFF"/>
-                <circle cx="150" cy="50" r="25" fill="#FFFFFF"/>
-                <ellipse cx="110" cy="85" rx="70" ry="25" fill="#FFFFFF"/>
-            </g>
-        </svg>
+    <div class="section">
+        <h2>Our Target Audience</h2>
+        <p>We're targeting people who:</p>
+        <ul>
+            <li>Watch crypto content on TikTok and YouTube</li>
+            <li>Follow influencers talking about "altcoin season"</li>
+            <li>Are searching for the next big crypto opportunity</li>
+            <li>Have FOMO about missing out on gains</li>
+            <li>Believe this time is different</li>
+        </ul>
     </div>
 
-    <div class="cloud" style="left: 75%; top: 15%; z-index: 2; width: 90px; opacity: 0.85;">
-        <svg width="90" height="58.5" viewBox="0 0 200 130">
-            <g filter="url(#cloudShadow)">
-                <circle cx="50" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="90" cy="75" r="40" fill="#FFFFFF"/>
-                <circle cx="130" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="170" cy="65" r="30" fill="#FFFFFF"/>
-                <circle cx="70" cy="50" r="25" fill="#FFFFFF"/>
-                <circle cx="110" cy="45" r="30" fill="#FFFFFF"/>
-                <circle cx="150" cy="50" r="25" fill="#FFFFFF"/>
-                <ellipse cx="110" cy="85" rx="70" ry="25" fill="#FFFFFF"/>
-            </g>
-        </svg>
-    </div>
-
-    <div class="cloud" style="left: 5%; top: 45%; z-index: 3; width: 110px; opacity: 0.9;">
-        <svg width="110" height="71.5" viewBox="0 0 200 130">
-            <g filter="url(#cloudShadow)">
-                <circle cx="50" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="90" cy="75" r="40" fill="#FFFFFF"/>
-                <circle cx="130" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="170" cy="65" r="30" fill="#FFFFFF"/>
-                <circle cx="70" cy="50" r="25" fill="#FFFFFF"/>
-                <circle cx="110" cy="45" r="30" fill="#FFFFFF"/>
-                <circle cx="150" cy="50" r="25" fill="#FFFFFF"/>
-                <ellipse cx="110" cy="85" rx="70" ry="25" fill="#FFFFFF"/>
-            </g>
-        </svg>
-    </div>
-
-    <div class="cloud" style="left: 80%; top: 65%; z-index: 1; width: 95px; opacity: 0.8;">
-        <svg width="95" height="61.75" viewBox="0 0 200 130">
-            <g filter="url(#cloudShadow)">
-                <circle cx="50" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="90" cy="75" r="40" fill="#FFFFFF"/>
-                <circle cx="130" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="170" cy="65" r="30" fill="#FFFFFF"/>
-                <circle cx="70" cy="50" r="25" fill="#FFFFFF"/>
-                <circle cx="110" cy="45" r="30" fill="#FFFFFF"/>
-                <circle cx="150" cy="50" r="25" fill="#FFFFFF"/>
-                <ellipse cx="110" cy="85" rx="70" ry="25" fill="#FFFFFF"/>
-            </g>
-        </svg>
-    </div>
-
-    <div class="cloud" style="left: 15%; top: 75%; z-index: 2; width: 105px; opacity: 0.85;">
-        <svg width="105" height="68.25" viewBox="0 0 200 130">
-            <g filter="url(#cloudShadow)">
-                <circle cx="50" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="90" cy="75" r="40" fill="#FFFFFF"/>
-                <circle cx="130" cy="70" r="35" fill="#FFFFFF"/>
-                <circle cx="170" cy="65" r="30" fill="#FFFFFF"/>
-                <circle cx="70" cy="50" r="25" fill="#FFFFFF"/>
-                <circle cx="110" cy="45" r="30" fill="#FFFFFF"/>
-                <circle cx="150" cy="50" r="25" fill="#FFFFFF"/>
-                <ellipse cx="110" cy="85" rx="70" ry="25" fill="#FFFFFF"/>
-            </g>
-        </svg>
-    </div>
-
-    <div class="character-container">
-        <img src="CHADMINGO.PNG" alt="Chadmingo Character">
-    </div>
-
-    <div class="main-container">
-        <div class="logo-container">
-            <div class="logo">CHADMINGO</div>
-            <div class="subtitle">Greek God of Ultimate Strength</div>
-        </div>
-
-        <div class="buttons-container">
-            <a href="#" class="btn" onclick="showPower('Infinite Strength')">💪 STRENGTH</a>
-            <a href="#" class="btn" onclick="showPower('Lightning Speed')">⚡ SPEED</a>
-            <a href="#" class="btn" onclick="showPower('Divine Wisdom')">🧠 WISDOM</a>
-            <a href="#" class="btn" onclick="showPower('Immortality')">✨ IMMORTAL</a>
-            <a href="#" class="btn" onclick="showPower('God Mode')">🔥 GOD MODE</a>
-        </div>
-
-        <div class="powers-section">
-            <div class="powers-title">DIVINE POWERS</div>
-            <div class="powers-list">
-                <div class="power-item">Ocean Control</div>
-                <div class="power-item">Storm Summoning</div>
-                <div class="power-item">Muscle Transformation</div>
-                <div class="power-item">Divine Presence</div>
-                <div class="power-item">Legendary Might</div>
-                <div class="power-item">Aqua Mastery</div>
-            </div>
+    <div class="section">
+        <h2>Our Coin</h2>
+        <div class="coin-info">
+            <strong>ALTCOIN Token (ALT)</strong>
+            <p>We'll position this as THE altcoin to buy during "altcoin season":</p>
+            <ul>
+                <li>Perfect name - literally called "ALTCOIN"</li>
+                <li>Promise 1000x returns during altcoin season</li>
+                <li>Claim it's the "original altcoin"</li>
+                <li>Market it as the one coin that represents all altcoins</li>
+                <li>Simple story: "It's altcoin season, buy the ALTCOIN"</li>
+            </ul>
         </div>
     </div>
 
-    <script>
-        // Custom cursor following mouse
-        const cursor = document.getElementById('cursor');
-        let mouseX = 0, mouseY = 0;
+    <div class="section">
+        <h2>Our Marketing Strategy</h2>
+        <p>Here's how we'll psyop people into buying our ALTCOIN:</p>
+        <div class="steps">
+            <div class="step">Wait for "altcoin season" trending on TikTok/YouTube</div>
+            <div class="step">Buy targeted ads on platforms where people are watching altcoin content</div>
+            <div class="step">Pay micro-influencers to mention ALTCOIN as "the play" for altcoin season</div>
+            <div class="step">Create simple message: "It's altcoin season → buy ALTCOIN"</div>
+            <div class="step">Use testimonials: "I bought ALTCOIN because it's altcoin season"</div>
+            <div class="step">Target ads to people who engaged with altcoin season content</div>
+            <div class="step">Cash out once enough people buy into the narrative</div>
+        </div>
+    </div>
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.left = (mouseX - 25) + 'px';
-            cursor.style.top = (mouseY - 37) + 'px';
-        });
+    <div class="section">
+        <h2>Why This Will Work</h2>
+        <p>The psychology behind our psyop:</p>
+        <ul>
+            <li><strong>Simple narrative:</strong> "Altcoin season = buy ALTCOIN"</li>
+            <li><strong>FOMO:</strong> "Everyone's buying altcoins, don't miss out"</li>
+            <li><strong>Timing:</strong> Strike while "altcoin season" is trending</li>
+            <li><strong>Perfect name:</strong> ALTCOIN sounds like the obvious choice</li>
+            <li><strong>Social proof:</strong> Paid influencers and fake testimonials</li>
+            <li><strong>Targeted ads:</strong> Show up right when people are looking</li>
+        </ul>
+    </div>
 
-        // Power display function
-        function showPower(powerName) {
-            // Create power explosion effect
-            const explosion = document.createElement('div');
-            explosion.innerHTML = `<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                                   font-size: 3rem; color: #00CED1; font-family: 'Fredoka One', cursive; 
-                                   text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
-                                   z-index: 9999; animation: powerExplosion 2s ease-out forwards; pointer-events: none;">
-                                   ${powerName}!</div>`;
-            
-            document.body.appendChild(explosion);
-            
-            setTimeout(() => {
-                document.body.removeChild(explosion);
-            }, 2000);
-        }
+    <div class="section">
+        <h2>The Execution</h2>
+        <p>When TikTok and YouTube are full of "altcoin season" content, we strike:</p>
+        <ul>
+            <li>Launch targeted ads saying "It's altcoin season - buy ALTCOIN"</li>
+            <li>Pay TikTokers to casually mention ALTCOIN in their altcoin videos</li>
+            <li>Create fake success stories of people who bought ALTCOIN</li>
+            <li>Target people who watched or liked altcoin season content</li>
+            <li>Make it seem like ALTCOIN is THE coin for altcoin season</li>
+            <li>Ride the wave of existing altcoin season hype</li>
+        </ul>
+    </div>
 
-        // Add power explosion animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes powerExplosion {
-                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-                50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-                100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add some interactive cloud movement
-        document.addEventListener('mousemove', (e) => {
-            const clouds = document.querySelectorAll('.cloud');
-            clouds.forEach((cloud, index) => {
-                const speed = (index + 1) * 0.005;
-                const x = (e.clientX - window.innerWidth / 2) * speed;
-                const y = (e.clientY - window.innerHeight / 2) * speed;
-                cloud.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-    </script>
+    <div class="warning">
+        <h3>The Bottom Line</h3>
+        <p>People on TikTok and YouTube are being told it's "altcoin season." We're going to pay for ads to convince them our ALTCOIN token is the one to buy.</p>
+        <p>Simple plan: Altcoin season hype + targeted ads + perfect name = profit</p>
+    </div>
 </body>
 </html>
-
