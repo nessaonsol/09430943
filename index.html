@@ -3,185 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stimmy</title>
+    <title>Jax</title>
+    <link rel="icon" type="image/x-icon" href="jax.png">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background: #f0f0f0;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .twitter-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1DA1F2;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 1000;
-        }
-
-        .twitter-btn:hover {
-            background: #0d8bd9;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
+        body {
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 40px;
+        }
+
+        .computer-container {
+            position: relative;
+            width: 900px;
+            max-width: 95vw;
+        }
+
+        .monitor {
+            width: 100%;
+            background: #ffffff;
+            border: 20px solid #e0e0e0;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
         }
 
-        h1 {
-            font-size: 4rem;
-            color: #28a745;
-            margin-bottom: 20px;
+        .terminal-header {
+            background: #f8f8f8;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        h2 {
-            color: #28a745;
-            margin: 30px 0 15px 0;
+        .button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #28a745;
+        .button:hover {
+            opacity: 0.7;
         }
 
-        .big-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #28a745;
-            background: #d4edda;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-        }
+        .button.red { background: #ff5f56; }
+        .button.yellow { background: #ffbd2e; }
+        .button.green { background: #27c93f; }
 
-        .leaderboard-section {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .timer {
-            font-size: 2rem;
-            color: #28a745;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
-        .leaderboard {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            min-height: 300px;
-        }
-
-        .leaderboard h3 {
-            color: #28a745;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .empty-state {
+        .terminal-title {
             color: #666;
-            font-style: italic;
-            padding: 40px 20px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            border: 2px dashed #ccc;
+            font-size: 13px;
+            margin-left: 10px;
         }
 
-        .leaderboard-header {
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            gap: 20px;
-            padding: 10px 20px;
-            background: #28a745;
-            color: white;
-            border-radius: 8px;
-            margin-bottom: 10px;
+        .screen {
+            background: #ffffff;
+            padding: 20px;
+            color: #000000;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 500px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .power-button {
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            width: 12px;
+            height: 12px;
+            background: #27c93f;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(39, 201, 63, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .monitor-stand {
+            width: 150px;
+            height: 80px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #d0d0d0 100%);
+            margin: 0 auto;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .monitor-base {
+            width: 250px;
+            height: 20px;
+            background: #e0e0e0;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .prompt {
+            color: #666;
+        }
+
+        .command {
+            color: #000000;
+        }
+
+        .ascii-art {
+            color: #333;
+            margin: 10px 0;
+            white-space: pre;
+        }
+
+        .greeting {
+            color: #333;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .manifesto {
+            color: #000000;
+            margin: 20px 0;
+        }
+
+        .links {
+            margin: 30px 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .links a {
+            color: #000000;
+            text-decoration: underline;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .links a:hover {
+            color: #666;
+        }
+
+        .balance {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .balance span {
+            color: #000000;
             font-weight: bold;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #000000;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .line {
+            margin: 5px 0;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .back-button {
+            color: #000000;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            color: #666;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .page-content {
+            color: #000000;
+            line-height: 1.8;
+        }
+
+        .stat-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f8f8;
+            border-left: 3px solid #000000;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f8f8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d0d0d0;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b0b0b0;
         }
     </style>
 </head>
 <body>
-    <div class="top-left-msg">Scroll down to see where u are in stimmy leaderboard to earn monies :)</div>
-    <a href="https://x.com/StimmyCoinXD" class="twitter-btn" target="_blank">X</a>
-
-    <div class="container">
-        <h1>STIMMY</h1>
-        
-        <p>Hold Stimmy, get more Stimmy.</p>
-
-        <div class="big-text">
-            Every holder gets sent more tokens through buybacks
-        </div>
-
-        <h2>How it works:</h2>
-        <p>1. Buy Stimmy<br>
-        2. Hold in your wallet<br>
-        3. Automatically receive more tokens<br>
-        4. Price goes up from buy pressure</p>
-
-        <div class="big-text">
-            The ultimate stimmy for holders
-        </div>
-
-        <p>Simple. Effective. Rewarding.</p>
-    </div>
-
-    <div class="leaderboard-section">
-        <div class="timer" id="timer">10:00</div>
-        
-        <div class="leaderboard">
-            <h3>🏆 Holder Leaderboard</h3>
-            <div class="leaderboard-header">
-                <div>Rank</div>
-                <div>Wallet</div>
-                <div>Balance</div>
+    <div class="computer-container">
+        <div class="monitor">
+            <div class="terminal-header">
+                <div class="button red"></div>
+                <div class="button yellow"></div>
+                <div class="button green"></div>
+                <span class="terminal-title">JAX AI TERMINAL</span>
             </div>
-            <div class="empty-state">
-                No holders yet... Be the first! 🚀
+            <div class="screen" id="output">
+                <!-- Home Page -->
+                <div id="home" class="page active">
+                    <div class="line"><span class="prompt">user@jax:~$</span> <span class="command">./initiate_welcome.sh</span></div>
+                </div>
+
+                <!-- Activity Log Page -->
+                <div id="activity" class="page">
+                    <span class="back-button" onclick="showPage('home')">← back to home</span>
+                    <div class="page-title">Activity Log - Real Time</div>
+                    <div class="page-content">
+                        <div class="stat-item">[2025-09-30 14:23:15] Trade executed: BUY signal confirmed - Entry at $42,150</div>
+                        <div class="stat-item">[2025-09-30 14:18:42] Market analysis complete: Bullish trend detected</div>
+                        <div class="stat-item">[2025-09-30 14:12:33] Position closed: +1.8% profit secured - Reinvesting to main coin</div>
+                        <div class="stat-item">[2025-09-30 14:05:19] Risk assessment: Volatility within acceptable parameters</div>
+                        <div class="stat-item">[2025-09-30 13:58:47] Trade executed: SELL signal confirmed - Exit at $42,890</div>
+                        <div class="stat-item">[2025-09-30 13:45:22] Monitoring 47 trading pairs across 3 exchanges</div>
+                        <div class="stat-item">[2025-09-30 13:32:11] Profit detected: +2.1% - Automatic reinvestment initiated</div>
+                        <div class="stat-item">[2025-09-30 13:15:03] AI model recalibrated based on latest market data</div>
+                    </div>
+                </div>
+
+                <!-- Performance Stats Page -->
+                <div id="performance" class="page">
+                    <span class="back-button" onclick="showPage('home')">← back to home</span>
+                    <div class="page-title">Performance Statistics</div>
+                    <div class="page-content">
+                        <div class="stat-item"><strong>Total Trades Executed:</strong> 12,847 trades since deployment</div>
+                        <div class="stat-item"><strong>Win Rate:</strong> 73.5% of all trades resulted in profit</div>
+                        <div class="stat-item"><strong>Average Daily Return:</strong> +2.3% through compound reinvestment</div>
+                        <div class="stat-item"><strong>Best Trade:</strong> +8.7% profit in single trade</div>
+                        <div class="stat-item"><strong>Average Trade Duration:</strong> 4.2 hours</div>
+                        <div class="stat-item"><strong>Total Profit Reinvested:</strong> 100% back into main coin</div>
+                        <div class="stat-item"><strong>Current Holdings:</strong> 12,847.3921 units of main coin</div>
+                        <div class="stat-item"><strong>System Uptime:</strong> 99.8% operational since launch</div>
+                        <div class="stat-item"><strong>Average Response Time:</strong> 0.03 seconds for trade execution</div>
+                        <div class="stat-item"><strong>Markets Monitored:</strong> 47 trading pairs across 3 major exchanges</div>
+                    </div>
+                </div>
+
+                <!-- Trading Strategy Page -->
+                <div id="strategy" class="page">
+                    <span class="back-button" onclick="showPage('home')">← back to home</span>
+                    <div class="page-title">Trading Strategy</div>
+                    <div class="page-content">
+                        <p style="margin-bottom: 20px;"><strong>Core Philosophy:</strong> JAX operates on a principle of perpetual compound growth. Every profit is immediately reinvested into the main coin, creating an exponential growth curve over time.</p>
+                        
+                        <div class="stat-item">
+                            <strong>Market Analysis Engine</strong><br>
+                            Uses advanced machine learning algorithms to analyze price patterns, volume trends, order book depth, and market sentiment in real-time across multiple exchanges.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Risk Management</strong><br>
+                            Implements strict position sizing (maximum 5% of holdings per trade), dynamic stop-loss levels, and volatility-adjusted trade frequency to protect capital.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Execution Strategy</strong><br>
+                            Trades are executed using limit orders to minimize slippage. The system waits for optimal entry points rather than chasing momentum.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Reinvestment Protocol</strong><br>
+                            All realized profits are automatically converted to the main coin within seconds of trade closure. This ensures maximum compound effect.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Adaptive Learning</strong><br>
+                            The AI continuously learns from each trade, adjusting parameters based on market conditions and historical performance data.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Page -->
+                <div id="about" class="page">
+                    <span class="back-button" onclick="showPage('home')">← back to home</span>
+                    <div class="page-title">About JAX AI</div>
+                    <div class="page-content">
+                        <p style="margin-bottom: 20px;"><strong>What is JAX?</strong></p>
+                        <p style="margin-bottom: 20px;">JAX is an autonomous AI trading bot designed for cryptocurrency markets. Unlike traditional bots that simply execute predefined strategies, JAX uses machine learning to adapt to changing market conditions.</p>
+                        
+                        <div class="stat-item">
+                            <strong>The Reinvestment Difference</strong><br>
+                            Most trading bots allow users to withdraw profits at any time. JAX takes a different approach: every single profit is automatically reinvested back into the main coin. This creates a powerful compound growth effect that maximizes long-term returns.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>24/7 Operation</strong><br>
+                            Cryptocurrency markets never sleep, and neither does JAX. The system monitors markets continuously, executing trades at any hour when opportunities arise.
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Mission Statement</strong><br>
+                            "To create the most efficient autonomous trading system that maximizes compound growth through intelligent reinvestment. Time compounds. Patience multiplies. JAX never sleeps."
+                        </div>
+                        
+                        <div class="stat-item">
+                            <strong>Technology Stack</strong><br>
+                            Built with Python, utilizing TensorFlow for machine learning, connected to major exchanges via API, with real-time data processing and sub-second trade execution.
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="power-button"></div>
         </div>
+        <div class="monitor-stand"></div>
+        <div class="monitor-base"></div>
     </div>
 
     <script>
-        // 10 minute countdown timer
-        let timeLeft = 10 * 60; // 10 minutes in seconds
-        
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
+        const homeContent = document.getElementById('home');
+        let lineIndex = 0;
+        let isTyping = false;
+
+        const lines = [
+            { text: '################################################################', delay: 0, class: 'ascii-art' },
+            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
+            { text: '#                    hello, my name is jax                         #', delay: 30, class: 'greeting' },
+            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
+            { text: '#                   d8b                                       #', delay: 20, class: 'ascii-art' },
+            { text: '#                   Y8P                                       #', delay: 20, class: 'ascii-art' },
+            { text: '#                                                              #', delay: 20, class: 'ascii-art' },
+            { text: '#                   8888  8888b.  888  888                    #', delay: 20, class: 'ascii-art' },
+            { text: '#                   "88b     "88b  Y8bd8P                     #', delay: 20, class: 'ascii-art' },
+            { text: '#                   888 .d888888   X88K                       #', delay: 20, class: 'ascii-art' },
+            { text: '#                   88P 888  888 .d8""8b.                     #', delay: 20, class: 'ascii-art' },
+            { text: '#                   888 "Y888888 888  888                     #', delay: 20, class: 'ascii-art' },
+            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
+            { text: '################################################################', delay: 0, class: 'ascii-art' },
+            { text: '', delay: 100 },
+            { text: '<span class="prompt">user@jax:~$</span> <span class="command">cat manifesto.txt</span>', delay: 200 },
+            { text: 'I am Jax, an autonomous AI trading bot designed for one purpose: perpetual growth through intelligent reinvestment. Every trade I execute, every profit I capture, flows back into the main coin. No withdrawals. No distractions. Pure compound growth.', delay: 40, class: 'manifesto' },
+            { text: '', delay: 100 },
+            { text: 'My algorithm analyzes market patterns 24/7, executing trades with precision while you sleep. Win or lose, I learn. Profit or loss, I adapt. The mission never changes: accumulate more of the main coin.', delay: 40, class: 'manifesto' },
+            { text: '', delay: 300 },
+            { text: '<div class="links"><a href="#" onclick="showPage(\'activity\'); return false;">tail -f activity.log</a>  +  <a href="#" onclick="showPage(\'performance\'); return false;">performance_stats</a>  +  <a href="#" onclick="showPage(\'strategy\'); return false;">trading_strategy.md</a>  +  <a href="#" onclick="showPage(\'about\'); return false;">about_jax</a></div>', delay: 100 },
+            { text: '', delay: 200 },
+            { text: '<div class="balance">Current Main Coin Holdings: <span>12,847.3921 UNITS</span></div>', delay: 100 }
+        ];
+
+        function typeWriter(text, element, callback) {
+            let i = 0;
+            element.innerHTML = '';
             
-            document.getElementById('timer').textContent = 
-                `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeLeft > 0) {
-                timeLeft--;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+                    i++;
+                    setTimeout(type, 15);
+                } else {
+                    element.innerHTML = text;
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        function displayNextLine() {
+            if (lineIndex < lines.length) {
+                const line = lines[lineIndex];
+                const div = document.createElement('div');
+                div.className = 'line ' + (line.class || '');
+                homeContent.appendChild(div);
+
+                setTimeout(() => {
+                    typeWriter(line.text, div, () => {
+                        lineIndex++;
+                        displayNextLine();
+                    });
+                }, line.delay);
             } else {
-                timeLeft = 10 * 60; // Reset to 10 minutes
+                isTyping = false;
             }
         }
-        
-        // Update timer every second
-        setInterval(updateTimer, 1000);
-        updateTimer(); // Initial call
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            if (pageId === 'home' && !isTyping && homeContent.children.length === 1) {
+                lineIndex = 0;
+                isTyping = true;
+                setTimeout(displayNextLine, 500);
+            }
+        }
+
+        setTimeout(() => {
+            isTyping = true;
+            displayNextLine();
+        }, 500);
     </script>
 </body>
 </html>
