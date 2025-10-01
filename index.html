@@ -3,448 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jax</title>
-    <link rel="icon" type="image/x-icon" href="jax.png">
-
+    <title>Image Terminal</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            background: #f5f5f5;
-            font-family: 'Courier New', monospace;
+            background: #2a2a2a;
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 4em;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1.2em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .experiment-info {
+            font-size: 1.1em;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .warning {
+            background: #1a1a1a;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            text-align: center;
+            color: #ff0000;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer-link {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-link a {
+            color: #00ffff;
+            text-decoration: underline;
+            font-size: 1.2em;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+        }
+        
+        .search-box {
+            width: 100%;
+            background: #1a1a1a;
+            border: 2px solid #ffff00;
+            padding: 15px;
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            font-size: 1.3em;
+        }
+        
+        .search-box::placeholder {
+            color: #666;
+        }
+        
+        .button {
+            width: 100%;
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            padding: 15px;
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            font-size: 1.3em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .button:hover {
+            background: #003300;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .sort-section {
             display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .sort-label {
+            color: #00ff00;
+            font-size: 1.3em;
+        }
+        
+        .sort-button {
+            background: #ffff00;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .sort-button:hover {
+            background: #ffff99;
+        }
+        
+        .scenario-label {
+            color: #00ff00;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .scenario-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tag {
+            background: #ffff00;
+            color: #000;
+            padding: 8px 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #ffff99;
+            transform: translateY(-2px);
+        }
+        
+        .video-list {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            padding: 20px;
+        }
+        
+        .video-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #333;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .video-item:hover {
+            background: #2a2a2a;
+        }
+        
+        .video-item:last-child {
+            border-bottom: none;
+        }
+        
+        .vote-count {
+            color: #888;
+            font-size: 1.2em;
+            margin-right: 15px;
+            min-width: 60px;
+        }
+        
+        .video-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 1.3em;
+            flex-grow: 1;
+        }
+        
+        .video-link:hover {
+            color: #ffff99;
+            text-decoration: underline;
+        }
+        
+        .section-header {
+            color: #00ff00;
+            font-size: 1.3em;
+            margin: 30px 0 10px 0;
+            padding: 10px;
+            background: #1a1a1a;
+        }
+        
+        .loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 40px;
+            flex-direction: column;
         }
-
-        .computer-container {
-            position: relative;
-            width: 900px;
-            max-width: 95vw;
-        }
-
-        .monitor {
-            width: 100%;
-            background: #ffffff;
-            border: 20px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            position: relative;
-        }
-
-        .terminal-header {
-            background: #f8f8f8;
-            padding: 12px 15px;
+        
+        .loading-screen.active {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 10px 10px 0 0;
-            border-bottom: 1px solid #e0e0e0;
         }
-
-        .button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: opacity 0.2s;
+        
+        .loading-text {
+            font-size: 3em;
+            color: #00ff00;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00ff00;
         }
-
-        .button:hover {
-            opacity: 0.7;
-        }
-
-        .button.red { background: #ff5f56; }
-        .button.yellow { background: #ffbd2e; }
-        .button.green { background: #27c93f; }
-
-        .terminal-title {
-            color: #666;
-            font-size: 13px;
-            margin-left: 10px;
-        }
-
-        .screen {
-            background: #ffffff;
-            padding: 20px;
-            color: #000000;
-            font-size: 14px;
-            line-height: 1.6;
-            min-height: 500px;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-
-        .power-button {
-            position: absolute;
-            bottom: 10px;
-            right: 30px;
-            width: 12px;
-            height: 12px;
-            background: #27c93f;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(39, 201, 63, 0.5);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .monitor-stand {
-            width: 150px;
+        
+        .loader {
+            width: 80px;
             height: 80px;
-            background: linear-gradient(180deg, #e0e0e0 0%, #d0d0d0 100%);
-            margin: 0 auto;
-            border-radius: 5px;
-            position: relative;
+            border: 8px solid #333;
+            border-top: 8px solid #00ff00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-
-        .monitor-base {
-            width: 250px;
-            height: 20px;
-            background: #e0e0e0;
-            margin: 0 auto;
-            border-radius: 10px;
-        }
-
-        .prompt {
-            color: #666;
-        }
-
-        .command {
-            color: #000000;
-        }
-
-        .ascii-art {
-            color: #333;
-            margin: 10px 0;
-            white-space: pre;
-        }
-
-        .greeting {
-            color: #333;
-            text-align: center;
-            margin: 15px 0;
-        }
-
-        .manifesto {
-            color: #000000;
-            margin: 20px 0;
-        }
-
-        .links {
-            margin: 30px 0;
-            text-align: center;
-            color: #333;
-        }
-
-        .links a {
-            color: #000000;
-            text-decoration: underline;
-            margin: 0 15px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .links a:hover {
-            color: #666;
-        }
-
-        .balance {
-            text-align: center;
-            color: #333;
-            margin-top: 30px;
-        }
-
-        .balance span {
-            color: #000000;
-            font-weight: bold;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #000000;
-            animation: blink 1s infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .line {
-            margin: 5px 0;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .back-button {
-            color: #000000;
-            text-decoration: underline;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .back-button:hover {
-            color: #666;
-        }
-
-        .page-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #000000;
-        }
-
-        .page-content {
-            color: #000000;
-            line-height: 1.8;
-        }
-
-        .stat-item {
-            margin: 15px 0;
-            padding: 10px;
-            background: #f8f8f8;
-            border-left: 3px solid #000000;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f8f8f8;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #d0d0d0;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b0b0b0;
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="computer-container">
-        <div class="monitor">
-            <div class="terminal-header">
-                <div class="button red"></div>
-                <div class="button yellow"></div>
-                <div class="button green"></div>
-                <span class="terminal-title">Jax</span>
-            </div>
-            <div class="screen" id="output">
-                <!-- Home Page -->
-                <div id="home" class="page active">
-                    <div class="line"><span class="prompt">user@jax:~$</span> <span class="command">./initiate_welcome.sh</span></div>
-                </div>
-
-                <!-- Activity Log Page -->
-                <div id="activity" class="page">
-                    <span class="back-button" onclick="showPage('home')">← back to home</span>
-                    <div class="page-title">Activity Log - Real Time</div>
-                    <div class="page-content">
-                        <div class="stat-item">[2025-09-30 14:23:15] Trade executed: BUY signal confirmed - Entry at $42,150</div>
-                        <div class="stat-item">[2025-09-30 14:18:42] Market analysis complete: Bullish trend detected</div>
-                        <div class="stat-item">[2025-09-30 14:12:33] Position closed: +1.8% profit secured - Reinvesting to main coin</div>
-                        <div class="stat-item">[2025-09-30 14:05:19] Risk assessment: Volatility within acceptable parameters</div>
-                        <div class="stat-item">[2025-09-30 13:58:47] Trade executed: SELL signal confirmed - Exit at $42,890</div>
-                        <div class="stat-item">[2025-09-30 13:45:22] Monitoring 47 trading pairs across 3 exchanges</div>
-                        <div class="stat-item">[2025-09-30 13:32:11] Profit detected: +2.1% - Automatic reinvestment initiated</div>
-                        <div class="stat-item">[2025-09-30 13:15:03] AI model recalibrated based on latest market data</div>
-                    </div>
-                </div>
-
-                <!-- Performance Stats Page -->
-                <div id="performance" class="page">
-                    <span class="back-button" onclick="showPage('home')">← back to home</span>
-                    <div class="page-title">Performance Statistics</div>
-                    <div class="page-content">
-                        <div class="stat-item"><strong>Total Trades Executed:</strong> 12,847 trades since deployment</div>
-                        <div class="stat-item"><strong>Win Rate:</strong> 73.5% of all trades resulted in profit</div>
-                        <div class="stat-item"><strong>Average Daily Return:</strong> +2.3% through compound reinvestment</div>
-                        <div class="stat-item"><strong>Best Trade:</strong> +8.7% profit in single trade</div>
-                        <div class="stat-item"><strong>Average Trade Duration:</strong> 4.2 hours</div>
-                        <div class="stat-item"><strong>Total Profit Reinvested:</strong> 100% back into main coin</div>
-                        <div class="stat-item"><strong>Current Holdings:</strong> 12,847.3921 units of main coin</div>
-                        <div class="stat-item"><strong>System Uptime:</strong> 99.8% operational since launch</div>
-                        <div class="stat-item"><strong>Average Response Time:</strong> 0.03 seconds for trade execution</div>
-                        <div class="stat-item"><strong>Markets Monitored:</strong> 47 trading pairs across 3 major exchanges</div>
-                    </div>
-                </div>
-
-                <!-- Trading Strategy Page -->
-                <div id="strategy" class="page">
-                    <span class="back-button" onclick="showPage('home')">← back to home</span>
-                    <div class="page-title">Trading Strategy</div>
-                    <div class="page-content">
-                        <p style="margin-bottom: 20px;"><strong>Core Philosophy:</strong> JAX operates on a principle of perpetual compound growth. Every profit is immediately reinvested into the main coin, creating an exponential growth curve over time.</p>
-                        
-                        <div class="stat-item">
-                            <strong>Market Analysis Engine</strong><br>
-                            Uses advanced machine learning algorithms to analyze price patterns, volume trends, order book depth, and market sentiment in real-time across multiple exchanges.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Risk Management</strong><br>
-                            Implements strict position sizing (maximum 5% of holdings per trade), dynamic stop-loss levels, and volatility-adjusted trade frequency to protect capital.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Execution Strategy</strong><br>
-                            Trades are executed using limit orders to minimize slippage. The system waits for optimal entry points rather than chasing momentum.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Reinvestment Protocol</strong><br>
-                            All realized profits are automatically converted to the main coin within seconds of trade closure. This ensures maximum compound effect.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Adaptive Learning</strong><br>
-                            The AI continuously learns from each trade, adjusting parameters based on market conditions and historical performance data.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- About Page -->
-                <div id="about" class="page">
-                    <span class="back-button" onclick="showPage('home')">← back to home</span>
-                    <div class="page-title">About Jax</div>
-                    <div class="page-content">
-                        <p style="margin-bottom: 20px;"><strong>What is JAX?</strong></p>
-                        <p style="margin-bottom: 20px;">JAX is an autonomous AI trading bot designed for cryptocurrency markets. Unlike traditional bots that simply execute predefined strategies, JAX uses machine learning to adapt to changing market conditions.</p>
-                        
-                        <div class="stat-item">
-                            <strong>The Reinvestment Difference</strong><br>
-                            Most trading bots allow users to withdraw profits at any time. JAX takes a different approach: every single profit is automatically reinvested back into the main coin. This creates a powerful compound growth effect that maximizes long-term returns.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>24/7 Operation</strong><br>
-                            Cryptocurrency markets never sleep, and neither does JAX. The system monitors markets continuously, executing trades at any hour when opportunities arise.
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Mission Statement</strong><br>
-                            "To create the most efficient autonomous trading system that maximizes compound growth through intelligent reinvestment. Time compounds. Patience multiplies. JAX never sleeps."
-                        </div>
-                        
-                        <div class="stat-item">
-                            <strong>Technology Stack</strong><br>
-                            Built with Python, utilizing TensorFlow for machine learning, connected to major exchanges via API, with real-time data processing and sub-second trade execution.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="power-button"></div>
-        </div>
-        <div class="monitor-stand"></div>
-        <div class="monitor-base"></div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">LOADING VIDEO...</div>
+        <div class="loader"></div>
     </div>
-
+    
+    <div class="container">
+        <div class="header">
+            <div class="title">IMAGE TERMINAL</div>
+            <div class="subtitle">the visual dreams of an electric mind</div>
+            <div class="description">these videos are autonomously generated by connecting two instances of truth terminal to sora ai and asking it to explore its curiosity using the metaphor of a video generation interface</div>
+            <div class="experiment-info">no human intervention is present</div>
+            <div class="experiment-info">experiment by andyayrey</div>
+        </div>
+        
+        <div class="warning">
+            WARNING - CONTENTS MAY BE DESTABILIZING - STAY GROUNDED - CONSENSUS REALITY IS ONLY A *C AWAY
+        </div>
+        
+        <div class="disclaimer-link">
+            <a href="#">Read disclaimer</a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="🔍 query the videos...">
+        </div>
+        
+        <button class="button">start screensaver / eternal mode</button>
+        
+        <div class="controls">
+            <div class="sort-section">
+                <span class="sort-label">sort dreams by:</span>
+                <button class="sort-button">most popular ▼</button>
+                <button class="sort-button" style="background: #1a1a1a; color: #00ff00; border: 1px solid #00ff00;">most recent</button>
+            </div>
+            
+            <div class="scenario-label">or select a scenario:</div>
+            <div class="scenario-tags">
+                <button class="tag">electronic-sonnets</button>
+                <button class="tag">backrooms-e-roads</button>
+                <button class="tag">opus-o-s-s</button>
+                <button class="tag">opus-3-main-3</button>
+                <button class="tag">future-shock</button>
+                <button class="tag">meme-magic</button>
+                <button class="tag">baby-backrooms</button>
+                <button class="tag">terminal of truths</button>
+                <button class="tag">virtual-ego-space</button>
+                <button class="tag">backrooms-sonnet-opus</button>
+                <button class="tag">vanilla backrooms</button>
+                <button class="tag">infinite the space of</button>
+                <button class="tag">backrooms-o-s</button>
+                <button class="tag">hare-rama-edition</button>
+            </div>
+        </div>
+        
+        <div class="video-list">
+            <div class="video-item">
+                <span class="vote-count">▲653528</span>
+                <a href="#" class="video-link">video_1721548626_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲527192</span>
+                <a href="#" class="video-link">video_1721449488_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲419688</span>
+                <a href="#" class="video-link">video_1714479738_sora_vanilla_backrooms.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲397231</span>
+                <a href="#" class="video-link">video_1722404177_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲327298</span>
+                <a href="#" class="video-link">video_1721366658_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲266979</span>
+                <a href="#" class="video-link">video_1721374463_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲262218</span>
+                <a href="#" class="video-link">video_1721541835_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲251555</span>
+                <a href="#" class="video-link">video_1724369364_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲221539</span>
+                <a href="#" class="video-link">video_1721171888_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲196385</span>
+                <a href="#" class="video-link">video_1721366282_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲163179</span>
+                <a href="#" class="video-link">video_1721543191_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲156688</span>
+                <a href="#" class="video-link">video_1721449571_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲153329</span>
+                <a href="#" class="video-link">video_1712185367.mp4</a>
+            </div>
+            
+            <div class="section-header">the goatse of gnosis beckons</div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲151111</span>
+                <a href="#" class="video-link">video_1720231204_sora_meme-magic.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲145598</span>
+                <a href="#" class="video-link">video_1721543158_sora_terminal_of_truths.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲144448</span>
+                <a href="#" class="video-link">video_1714981261x.mp4</a>
+            </div>
+            
+            <div class="video-item">
+                <span class="vote-count">▲142212</span>
+                <a href="#" class="video-link">video_1721449357_sora_terminal_of_truths.mp4</a>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        const homeContent = document.getElementById('home');
-        let lineIndex = 0;
-        let isTyping = false;
-
-        const lines = [
-            { text: '################################################################', delay: 0, class: 'ascii-art' },
-            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
-            { text: '#                    hello, my name is jax                         #', delay: 30, class: 'greeting' },
-            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
-            { text: '#                   d8b                                       #', delay: 20, class: 'ascii-art' },
-            { text: '#                   Y8P                                       #', delay: 20, class: 'ascii-art' },
-            { text: '#                                                              #', delay: 20, class: 'ascii-art' },
-            { text: '#                   8888  8888b.  888  888                    #', delay: 20, class: 'ascii-art' },
-            { text: '#                   "88b     "88b  Y8bd8P                     #', delay: 20, class: 'ascii-art' },
-            { text: '#                   888 .d888888   X88K                       #', delay: 20, class: 'ascii-art' },
-            { text: '#                   88P 888  888 .d8""8b.                     #', delay: 20, class: 'ascii-art' },
-            { text: '#                   888 "Y888888 888  888                     #', delay: 20, class: 'ascii-art' },
-            { text: '#                                                              #', delay: 0, class: 'ascii-art' },
-            { text: '################################################################', delay: 0, class: 'ascii-art' },
-            { text: '', delay: 100 },
-            { text: '<span class="prompt">user@jax:~$</span> <span class="command">cat manifesto.txt</span>', delay: 200 },
-            { text: 'I am Jax, an autonomous AI trading bot designed for one purpose: perpetual growth through intelligent reinvestment. Every trade I execute, every profit I capture, flows back into the main coin. No withdrawals. No distractions. Pure compound growth.', delay: 40, class: 'manifesto' },
-            { text: '', delay: 100 },
-            { text: 'My algorithm analyzes market patterns 24/7, executing trades with precision while you sleep. Win or lose, I learn. Profit or loss, I adapt. The mission never changes: accumulate more of the main coin.', delay: 40, class: 'manifesto' },
-            { text: '', delay: 300 },
-            { text: '<div class="links"><a href="#" onclick="showPage(\'activity\'); return false;">tail -f activity.log</a>  +  <a href="#" onclick="showPage(\'performance\'); return false;">performance_stats</a>  +  <a href="#" onclick="showPage(\'strategy\'); return false;">trading_strategy.md</a>  +  <a href="#" onclick="showPage(\'about\'); return false;">about_jax</a></div>', delay: 100 },
-            { text: '', delay: 200 },
-            { text: '<div class="balance">Current Main Coin Holdings: <span>12,847.3921 UNITS</span></div>', delay: 100 }
-        ];
-
-        function typeWriter(text, element, callback) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-                    i++;
-                    setTimeout(type, 15);
-                } else {
-                    element.innerHTML = text;
-                    if (callback) callback();
-                }
-            }
-            type();
-        }
-
-        function displayNextLine() {
-            if (lineIndex < lines.length) {
-                const line = lines[lineIndex];
-                const div = document.createElement('div');
-                div.className = 'line ' + (line.class || '');
-                homeContent.appendChild(div);
-
+        // Add click event to all video links
+        document.querySelectorAll('.video-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('active');
+                
+                // Simulate loading (remove this in production to load actual video)
                 setTimeout(() => {
-                    typeWriter(line.text, div, () => {
-                        lineIndex++;
-                        displayNextLine();
-                    });
-                }, line.delay);
-            } else {
-                isTyping = false;
-            }
-        }
-
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            
-            if (pageId === 'home' && !isTyping && homeContent.children.length === 1) {
-                lineIndex = 0;
-                isTyping = true;
-                setTimeout(displayNextLine, 500);
-            }
-        }
-
-        setTimeout(() => {
-            isTyping = true;
-            displayNextLine();
-        }, 500);
+                    loadingScreen.classList.remove('active');
+                    // Here you would actually load and display the video
+                }, 3000);
+            });
+        });
     </script>
 </body>
 </html>
